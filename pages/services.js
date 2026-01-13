@@ -1,0 +1,72 @@
+import Head from 'next/head';
+import ServiceCard from '@/components/ServiceCard';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+export default function Services() {
+    const services = [
+        { title: "Web Architecture", description: "Scalable, high-performance web applications tailored to your business.", icon: "💎", image: "/images/services/web.png" },
+        { title: "Mobile Innovation", description: "Native and cross-platform mobile solutions for iOS and Android.", icon: "🚀", image: "/images/services/mobile.jpg" },
+        { title: "Immersive UI/UX", description: "User-centric design that drives engagement and satisfaction.", icon: "✨", image: "/images/services/uiux.png" },
+        { title: "DevOps & Cloud", description: "Reliable support to keep your systems running smoothly 24/7.", icon: "☁️", image: "/images/services/devops.png" },
+        { title: "AI & Automation", description: "Automate and innovate with cutting-edge AI integration.", icon: "🧠", image: "/images/services/ai.jpg" },
+        { title: "Growth Marketing", description: "Data-driven strategies to explode your digital presence.", icon: "📈", image: "/images/services/marketing.jpg" },
+    ];
+
+    return (
+        <>
+            <Head>
+                <title>Codiora Tech | Services</title>
+                <meta name="description" content="Explore our wide range of IT services including Web Development, Mobile Apps, and AI Solutions." />
+            </Head>
+
+            <section className="min-h-screen bg-gray-50 dark:bg-dark pt-32 pb-20 relative transition-colors duration-300">
+                <div className="absolute top-1/4 left-0 w-96 h-96 bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
+
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="text-center mb-24 max-w-4xl mx-auto">
+                        <motion.h1
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-5xl md:text-7xl font-bold mb-8 text-gray-900 dark:text-white transition-colors"
+                        >
+                            Our Expertise
+                        </motion.h1>
+                        <p className="text-xl text-gray-600 dark:text-gray-400 transition-colors">
+                            We don't offer generic services. We provide tailored digital weaponry to help you conquer your market.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+                        {services.map((service, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                <ServiceCard {...service} />
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    <motion.div
+                        whileHover={{ scale: 1.01 }}
+                        className="mt-20 text-center bg-white dark:bg-transparent dark:glass-panel border border-black/5 dark:border-white/10 p-16 rounded-3xl relative overflow-hidden transition-all shadow-xl dark:shadow-none"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-accent/10 to-secondary/10 opacity-50" />
+                        <div className="relative z-10">
+                            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 transition-colors">Have a Wild Idea?</h2>
+                            <p className="text-gray-600 dark:text-gray-300 mb-10 text-lg max-w-2xl mx-auto transition-colors">
+                                The crazier, the better. We thrive on solving "impossible" problems. Let's engineer a solution that defies expectations.
+                            </p>
+                            <Link href="/contact" className="px-10 py-4 bg-black dark:bg-white text-white dark:text-dark font-bold rounded-full hover:bg-gray-800 dark:hover:bg-accent hover:scale-105 transition-all shadow-lg dark:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                                Challenge Us
+                            </Link>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+        </>
+    );
+}

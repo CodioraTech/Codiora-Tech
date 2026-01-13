@@ -1,0 +1,31 @@
+{
+    "name": "codiora-tech",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@react-three/drei": "latest",
+        "@react-three/fiber": "latest",
+        "clsx": "latest",
+        "daisyui": "latest",
+        "framer-motion": "latest",
+        "lucide-react": "latest",
+        "next": "latest",
+        "react": "latest",
+        "react-dom": "latest",
+        "tailwind-merge": "latest",
+        "three": "^0.160.0"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.23",
+        "eslint": "latest",
+        "eslint-config-next": "latest",
+        "postcss": "^8.5.6",
+        "tailwindcss": "^3.4.17"
+    }
+}
