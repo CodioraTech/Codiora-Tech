@@ -3,31 +3,19 @@ import { createContext, useContext, useEffect, useState } from 'react';
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
+    // Always default to 'dark'
     const [theme, setTheme] = useState('dark');
 
     useEffect(() => {
-        // Check local storage or system preference
-        const savedTheme = localStorage.getItem('theme');
-        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
-        if (savedTheme) {
-            setTheme(savedTheme);
-        } else {
-            setTheme(systemTheme);
-        }
+        // Force 'dark' class on mount and never remove it
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        setTheme('dark');
     }, []);
 
-    useEffect(() => {
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-        localStorage.setItem('theme', theme);
-    }, [theme]);
-
+    // Toggle function that does nothing, just in case it's called somewhere
     const toggleTheme = () => {
-        setTheme(curr => curr === 'dark' ? 'light' : 'dark');
+        console.log("Theme is locked to dark mode.");
     };
 
     return (

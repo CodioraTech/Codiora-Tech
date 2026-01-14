@@ -193,9 +193,8 @@ export default function ProjectPage() {
                                         <Image
                                             src={project.image}
                                             alt={project.title}
-                                            layout="fill"
-                                            objectFit="cover"
-                                            className="transition-transform duration-700 hover:scale-105"
+                                            fill
+                                            className="transition-transform duration-700 hover:scale-105 object-cover"
                                         />
                                     ) : (
                                         /* Fallback for safety if image is still text/emoji */

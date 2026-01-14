@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+    @apply bg-dark text-white transition-colors duration-300;
 }
 
 /* Dark Mode Overrides */

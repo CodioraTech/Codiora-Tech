@@ -18,6 +18,7 @@ const Navbar = () => {
     }, []);
 
     const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+    const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
 
     // ... scroll effect ...
 
@@ -125,10 +126,10 @@ const Navbar = () => {
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
-                            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                            className="pointer-events-auto fixed top-28 left-4 right-4 bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-xl rounded-2xl p-6 z-40 shadow-2xl overflow-hidden border border-black/5 dark:border-white/10"
+                            initial={{ opacity: 0, y: -20, scale: 0.95, height: 0 }}
+                            animate={{ opacity: 1, y: 0, scale: 1, height: 'auto' }}
+                            exit={{ opacity: 0, y: -20, scale: 0.95, height: 0 }}
+                            className="pointer-events-auto fixed top-28 left-4 right-4 bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-xl rounded-2xl p-6 z-40 shadow-2xl overflow-y-auto border border-black/5 dark:border-white/10 max-h-[70vh]"
                         >
                             <div className="flex flex-col items-center gap-3">
                                 {['Home', 'Services', 'Portfolio', 'About', 'Contact'].map((item) => {
@@ -148,6 +149,78 @@ const Navbar = () => {
                                         </Link>
                                     );
                                 })}
+
+                                {/* Mobile More Button */}
+                                <button
+                                    onClick={() => setMobileMoreOpen(!mobileMoreOpen)}
+                                    className={`w-full text-center py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2 ${mobileMoreOpen
+                                        ? 'bg-black/5 dark:bg-white/10 text-black dark:text-white'
+                                        : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
+                                        }`}
+                                >
+                                    <span>More</span>
+                                    <motion.svg
+                                        animate={{ rotate: mobileMoreOpen ? 180 : 0 }}
+                                        className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                    </motion.svg>
+                                </button>
+
+                                {/* Mobile More Content */}
+                                <AnimatePresence>
+                                    {mobileMoreOpen && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: 'auto' }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            className="w-full overflow-hidden"
+                                        >
+                                            <div className="pt-4 pb-2 space-y-6 border-t border-gray-200 dark:border-white/10 mt-2">
+                                                {/* Services Section */}
+                                                <div className="text-center">
+                                                    <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Expertise</h4>
+                                                    <ul className="grid grid-cols-1 gap-2">
+                                                        {[
+                                                            { name: "Web Architecture", href: "/services/web-architecture" },
+                                                            { name: "Mobile Innovation", href: "/services/mobile-innovation" },
+                                                            { name: "Immersive UI/UX", href: "/services/immersive-ui-ux" },
+                                                            { name: "AI & Automation", href: "/services/ai-automation" }
+                                                        ].map(link => (
+                                                            <li key={link.href}>
+                                                                <Link href={link.href} onClick={() => setIsOpen(false)} className="block py-1 text-sm text-gray-800 dark:text-gray-300 hover:text-cyan-500">
+                                                                    {link.name}
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+
+                                                {/* Company Section */}
+                                                <div className="text-center">
+                                                    <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Company</h4>
+                                                    <ul className="grid grid-cols-2 gap-2">
+                                                        {[
+                                                            { name: "Process", href: "/process" },
+                                                            { name: "Team", href: "/team" },
+                                                            { name: "Careers", href: "/careers" },
+                                                            { name: "Partners", href: "/partners" },
+                                                            { name: "FAQ", href: "/faq" },
+                                                            { name: "Skills", href: "/skills" }
+                                                        ].map(link => (
+                                                            <li key={link.href}>
+                                                                <Link href={link.href} onClick={() => setIsOpen(false)} className="block py-1 text-sm text-gray-800 dark:text-gray-300 hover:text-purple-500">
+                                                                    {link.name}
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+
                             </div>
                         </motion.div>
                     )}

@@ -16,6 +16,43 @@ export default function Contact() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const formData = new FormData(form.current);
+        const data = Object.fromEntries(formData.entries());
+
+        // 1. Security: Honeypot Check (Bot Prevention)
+        if (data.website_check) {
+            // Silently fail for bots - pretend success
+            setStatus('success');
+            return;
+        }
+
+        // 2. Validation: Strict Input Sanitization
+        // Email Regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(data.email)) {
+            setStatus('error');
+            setErrorMessage('Please enter a valid email address.');
+            return;
+        }
+
+        // Minimum lengths
+        if (data.full_name.length < 2) {
+            setStatus('error');
+            setErrorMessage('Name must be at least 2 characters.');
+            return;
+        }
+        if (data.phone.length < 6) {
+            setStatus('error');
+            setErrorMessage('Please enter a valid phone number.');
+            return;
+        }
+        if (data.message.length < 10) {
+            setStatus('error');
+            setErrorMessage('Message is too short. Please provide more details.');
+            return;
+        }
+
         setStatus('submitting');
         setErrorMessage('');
 
@@ -146,6 +183,15 @@ export default function Contact() {
                                             <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Project Details <span className="text-cyan-500">*</span></label>
                                             <textarea name="message" required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium h-40 resize-none" placeholder="Tell us about your project requirements, goals, and timeline..."></textarea>
                                         </div>
+
+                                        {/* Honeypot Field for Security */}
+                                        <input
+                                            type="text"
+                                            name="website_check"
+                                            style={{ display: 'none', visibility: 'hidden', height: 0, width: 0, position: 'absolute' }}
+                                            tabIndex="-1"
+                                            autoComplete="off"
+                                        />
 
                                         {status === 'error' && (
                                             <div className="text-red-500 text-sm text-center font-bold">

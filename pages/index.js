@@ -286,29 +286,36 @@ export default function Home() {
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5"></div>
 
                 {/* Glowing Orbs */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
 
                 <div className="container mx-auto px-6 text-center relative z-10 max-w-5xl">
-                    <h2 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-500 dark:from-white dark:to-gray-500 mb-8 tracking-tighter leading-[0.9]">
-                        READY TO <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">DISRUPT?</span>
-                    </h2>
-                    <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed transition-colors">
-                        Don't just compete. Dominate. Let's build a digital experience so powerful it can't be ignored.
-                    </p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-5xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-gray-900 via-gray-700 to-gray-500 dark:from-white dark:via-gray-300 dark:to-gray-600 mb-6 md:mb-10 tracking-tighter leading-[0.9] selection:bg-purple-500/30">
+                            READY TO <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x">DISRUPT?</span>
+                        </h2>
+                        <p className="text-lg md:text-3xl text-gray-600 dark:text-gray-400 mb-10 md:mb-16 max-w-3xl mx-auto font-light leading-relaxed transition-colors px-4">
+                            Don't just compete. Dominate. Let's build a digital experience so powerful it can't be ignored.
+                        </p>
 
-                    <Link href="/contact" className="group relative inline-flex items-center justify-center">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full blur-lg opacity-70 group-hover:opacity-100 transition duration-500 group-hover:blur-xl"></div>
-                        <button className="relative px-12 py-5 bg-black dark:bg-black rounded-full text-white font-bold text-lg flex items-center gap-4 border border-white/20 group-hover:bg-gray-900 transition-all">
-                            <span>Start Your Project</span>
-                            <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                                </svg>
-                            </div>
-                        </button>
-                    </Link>
+                        <Link href="/contact" className="group relative inline-flex items-center justify-center transform hover:scale-105 transition-transform duration-300 w-full md:w-auto">
+                            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-full blur-xl opacity-50 group-hover:opacity-100 transition duration-500 group-hover:duration-200"></div>
+                            <button className="relative w-full md:w-auto px-8 md:px-12 py-5 md:py-6 bg-black dark:bg-[#0a0a0a] rounded-full text-white font-bold text-lg md:text-xl flex items-center justify-center gap-4 border border-white/10 group-hover:bg-gray-900 transition-all shadow-2xl">
+                                <span>Start Your Project</span>
+                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white text-black flex items-center justify-center group-hover:rotate-45 transition-transform duration-300 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </Link>
+                    </motion.div>
                 </div>
             </section>
         </>

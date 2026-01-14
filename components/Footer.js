@@ -31,9 +31,9 @@ export default function Footer() {
                                 <Image
                                     src={logopng}
                                     alt="Codiora Tech Logo"
-                                    layout="fill"
-                                    objectFit="contain"
-                                    className="p-2 filter invert drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    className="p-2 filter invert drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] object-contain"
                                 />
                             </div>
                             <div>
@@ -72,11 +72,18 @@ export default function Footer() {
                             <div className="space-y-6">
                                 <h4 className="text-white font-bold tracking-widest text-sm uppercase border-b border-white/10 pb-4 inline-block">WHAT</h4>
                                 <ul className="space-y-3">
-                                    {['Services', 'AI & ML', 'Data Science', 'Cloud', 'Engineering'].map((item, i) => (
+                                    {[
+                                        { name: 'Web Architecture', href: '/services/web-architecture' },
+                                        { name: 'Mobile Innovation', href: '/services/mobile-innovation' },
+                                        { name: 'Immersive UI/UX', href: '/services/immersive-ui-ux' },
+                                        { name: 'DevOps & Cloud', href: '/services/devops-cloud' },
+                                        { name: 'AI & Automation', href: '/services/ai-automation' },
+                                        { name: 'Growth Marketing', href: '/services/growth-marketing' }
+                                    ].map((item, i) => (
                                         <li key={i}>
-                                            <Link href="/services" className="text-gray-400 hover:text-cyan-400 text-sm font-medium transition-all flex items-center gap-2 group/link">
+                                            <Link href={item.href} className="text-gray-400 hover:text-cyan-400 text-sm font-medium transition-all flex items-center gap-2 group/link">
                                                 <span className="w-1 h-1 rounded-full bg-gray-600 group-hover/link:bg-cyan-400 transition-colors"></span>
-                                                <span className="group-hover/link:translate-x-1 transition-transform">{item.replace('-', '')}</span>
+                                                <span className="group-hover/link:translate-x-1 transition-transform">{item.name}</span>
                                             </Link>
                                         </li>
                                     ))}
