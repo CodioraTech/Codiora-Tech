@@ -119,7 +119,7 @@ export default function TechMarquee({ technologies = [] }) {
                         transition={{
                             repeat: Infinity,
                             ease: "linear",
-                            duration: Math.max(40, marqueeItems.length * 2),
+                            duration: Math.max(20, marqueeItems.length * 1.2), // Faster scroll speed
                         }}
                     >
                         {marqueeItems.map((tech, index) => (
@@ -127,21 +127,24 @@ export default function TechMarquee({ technologies = [] }) {
                                 key={`${tech.name}-r1-${index}`}
                                 className="group relative flex flex-col items-center justify-center min-w-[80px] cursor-pointer"
                             >
-                                <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-white/[0.02] backdrop-blur-sm rounded-2xl flex items-center justify-center p-5 border border-white/5 transition-all duration-300 group-hover:-translate-y-2 group-hover:bg-white/[0.05] group-hover:border-cyan-500/30 group-hover:shadow-[0_10px_30px_-10px_rgba(6,182,212,0.3)]">
-                                    {/* Inner Shine Effect */}
-                                    <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                {/* Dark Glass Sticker - Neon Cyan Theme */}
+                                <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-white/5 backdrop-blur-md rounded-[1.5rem] flex items-center justify-center p-4 border border-white/10 transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-110 group-hover:bg-white/10 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_50px_-10px_rgba(6,182,212,0.5)] overflow-hidden">
+
+                                    {/* Animated Gradient Glow */}
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                                     <img
                                         src={tech.logo}
                                         alt={tech.name}
-                                        className="w-full h-full object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-110 relative z-10"
+                                        className="w-full h-full object-contain relative z-10 filter drop-shadow opacity-90 group-hover:opacity-100 transition-all duration-300"
                                         onError={(e) => {
                                             e.target.style.display = 'none';
                                             e.target.nextSibling.style.display = 'flex';
                                         }}
                                     />
+
                                     {/* Fallback Text */}
-                                    <div className="absolute inset-0 hidden items-center justify-center rounded-2xl text-[10px] sm:text-xs font-bold text-center p-2 text-gray-500 group-hover:text-cyan-400 uppercase tracking-wider bg-black/80 backdrop-blur-xl">
+                                    <div className="absolute inset-0 hidden items-center justify-center text-[10px] sm:text-xs font-bold text-center p-2 text-gray-400 group-hover:text-cyan-400 uppercase tracking-wider bg-black/80 backdrop-blur-xl">
                                         {tech.name}
                                     </div>
                                 </div>
@@ -159,7 +162,7 @@ export default function TechMarquee({ technologies = [] }) {
                             transition={{
                                 repeat: Infinity,
                                 ease: "linear",
-                                duration: Math.max(40, marqueeItems.length * 2),
+                                duration: Math.max(20, marqueeItems.length * 1.2), // Faster scroll speed
                             }}
                         >
                             {marqueeItems.map((tech, index) => (
@@ -167,21 +170,24 @@ export default function TechMarquee({ technologies = [] }) {
                                     key={`${tech.name}-r2-${index}`}
                                     className="group relative flex flex-col items-center justify-center min-w-[80px] cursor-pointer"
                                 >
-                                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-white/[0.02] backdrop-blur-sm rounded-2xl flex items-center justify-center p-5 border border-white/5 transition-all duration-300 group-hover:-translate-y-2 group-hover:bg-white/[0.05] group-hover:border-purple-500/30 group-hover:shadow-[0_10px_30px_-10px_rgba(168,85,247,0.3)]">
-                                        {/* Inner Shine Effect */}
-                                        <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                    {/* Dark Glass Sticker - Neon Purple Theme */}
+                                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-white/5 backdrop-blur-md rounded-[1.5rem] flex items-center justify-center p-4 border border-white/10 transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-110 group-hover:bg-white/10 group-hover:border-purple-500/50 group-hover:shadow-[0_0_50px_-10px_rgba(168,85,247,0.5)] overflow-hidden">
+
+                                        {/* Animated Gradient Glow */}
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                                         <img
                                             src={tech.logo}
                                             alt={tech.name}
-                                            className="w-full h-full object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-110 relative z-10"
+                                            className="w-full h-full object-contain relative z-10 filter drop-shadow opacity-90 group-hover:opacity-100 transition-all duration-300"
                                             onError={(e) => {
                                                 e.target.style.display = 'none';
                                                 e.target.nextSibling.style.display = 'flex';
                                             }}
                                         />
+
                                         {/* Fallback Text */}
-                                        <div className="absolute inset-0 hidden items-center justify-center rounded-2xl text-[10px] sm:text-xs font-bold text-center p-2 text-gray-500 group-hover:text-purple-400 uppercase tracking-wider bg-black/80 backdrop-blur-xl">
+                                        <div className="absolute inset-0 hidden items-center justify-center text-[10px] sm:text-xs font-bold text-center p-2 text-gray-400 group-hover:text-purple-400 uppercase tracking-wider bg-black/80 backdrop-blur-xl">
                                             {tech.name}
                                         </div>
                                     </div>

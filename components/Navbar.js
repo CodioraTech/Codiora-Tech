@@ -281,7 +281,7 @@ const Navbar = () => {
                                                 { name: "Expertise", href: "/skills" },
                                                 { name: "About Us", href: "/about" },
                                                 { name: "Our Process", href: "/process" },
-                                                { name: "Leadership", href: "/team" },
+                                                { name: "Leadership", href: "/leadership" },
                                                 { name: "Careers", href: "/careers" }
                                             ].map((link) => (
                                                 <li key={link.name}>

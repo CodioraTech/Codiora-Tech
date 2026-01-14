@@ -36,7 +36,7 @@ const posts = [
         excerpt: "Deploying lightweight clusters to remote IoT devices. A case study in latency reduction and decentralized orchestration.",
         date: "Sep 15, 2025",
         readTime: "10 min read",
-        image: "https://images.unsplash.com/photo-1667372393119-c81c0cda0a29?q=80&w=2000&auto=format&fit=crop",
+        image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?q=80&w=2000&auto=format&fit=crop",
         slug: "k8s-edge"
     },
     {

@@ -68,29 +68,46 @@ export default function Team() {
                                 transition={{ delay: i * 0.1 }}
                                 className="group relative"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-600 to-blue-600 rounded-3xl blur opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
-                                <div className="relative bg-[#0a0a0a] border border-white/5 rounded-3xl overflow-hidden hover:translate-y-[-10px] transition-transform duration-500">
-                                    <div className="h-[350px] overflow-hidden relative">
-                                        <div className="absolute inset-0 bg-[#0a0a0a]/20 group-hover:bg-transparent transition-colors z-10"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-purple-600/50 to-blue-600/50 rounded-3xl blur-[40px] opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+                                <div className="relative bg-[#0a0a0a] border border-white/5 rounded-3xl overflow-hidden hover:translate-y-[-10px] transition-transform duration-500 flex flex-col h-full shadow-2xl">
+                                    <div className="h-[320px] overflow-hidden relative border-b border-white/5">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-10 opacity-60"></div>
                                         {/* Grayscale to Color hover effect */}
                                         <div
                                             className="w-full h-full bg-cover bg-center filter grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
                                             style={{ backgroundImage: `url(${member.img})` }}
                                         ></div>
                                     </div>
-                                    <div className="p-8 relative z-20 bg-[#0a0a0a]">
-                                        <h3 className="text-2xl font-bold text-white mb-1">{member.name}</h3>
-                                        <div className="text-purple-400 text-xs font-bold uppercase tracking-widest mb-4">{member.role}</div>
-                                        <p className="text-gray-400 text-sm leading-relaxed mb-6 border-b border-white/5 pb-6">
-                                            {member.bio}
-                                        </p>
-                                        <div className="flex gap-4">
-                                            {['twitter', 'linkedin', 'github'].map(social => (
-                                                <button key={social} className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-all">
-                                                    <span className="sr-only">{social}</span>
-                                                    <div className="w-3 h-3 bg-current rounded-full"></div>
-                                                </button>
-                                            ))}
+                                    <div className="p-8 flex-1 flex flex-col bg-[#0a0a0a] relative z-20">
+                                        <div className="mb-auto">
+                                            <h3 className="text-2xl font-bold text-white mb-2">{member.name}</h3>
+                                            <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 text-xs font-bold uppercase tracking-widest mb-6">{member.role}</div>
+                                            <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light">
+                                                {member.bio}
+                                            </p>
+                                        </div>
+
+                                        {/* Micro Stats */}
+                                        <div className="grid grid-cols-2 gap-4 border-t border-white/5 pt-6 mb-6">
+                                            <div>
+                                                <div className="text-xl font-bold text-white">10+</div>
+                                                <div className="text-[10px] uppercase tracking-wider text-gray-600 font-bold">Years Exp.</div>
+                                            </div>
+                                            <div>
+                                                <div className="text-xl font-bold text-white">50+</div>
+                                                <div className="text-[10px] uppercase tracking-wider text-gray-600 font-bold">Projects</div>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex gap-3 mt-auto">
+                                            {/* LinkedIn */}
+                                            <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 hover:text-white hover:bg-[#0077b5] hover:border-[#0077b5] transition-all duration-300">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
+                                            </a>
+                                            {/* X / Twitter */}
+                                            <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 hover:text-white hover:bg-black hover:border-gray-500 transition-all duration-300">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

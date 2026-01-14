@@ -95,7 +95,7 @@ export default function CodeCamp() {
 
                     <div className="mt-40 text-center">
                         <p className="text-gray-500 mb-4">Not sure which path is right for you?</p>
-                        <Link href="/contact" className="text-indigo-400 font-bold hover:text-white underline underline-offset-4">Talk to an Admission Counselor</Link>
+                        <Link href="/counseling" className="text-indigo-400 font-bold hover:text-white underline underline-offset-4">Talk to an Admission Counselor</Link>
                     </div>
                 </div>
             </div>
