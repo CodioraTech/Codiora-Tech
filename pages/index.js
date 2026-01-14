@@ -88,7 +88,7 @@ export default function Home() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="text-6xl md:text-8xl font-bold mb-6 tracking-tight leading-tight"
+                            className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 tracking-tight leading-tight"
                         >
                             <span className="text-gray-900 dark:text-white transition-colors">Innovating Your</span>
                             <br />
@@ -296,7 +296,7 @@ export default function Home() {
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-5xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-gray-900 via-gray-700 to-gray-500 dark:from-white dark:via-gray-300 dark:to-gray-600 mb-6 md:mb-10 tracking-tighter leading-[0.9] selection:bg-purple-500/30">
+                        <h2 className="text-4xl sm:text-6xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-gray-900 via-gray-700 to-gray-500 dark:from-white dark:via-gray-300 dark:to-gray-600 mb-6 md:mb-10 tracking-tighter leading-[0.9] selection:bg-purple-500/30">
                             READY TO <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x">DISRUPT?</span>
                         </h2>
