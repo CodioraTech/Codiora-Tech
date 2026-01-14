@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 const Globe3D = dynamic(() => import('@/components/Globe3D'), {
     ssr: false,
@@ -9,15 +10,28 @@ const Globe3D = dynamic(() => import('@/components/Globe3D'), {
 });
 
 export default function Contact() {
-    const [status, setStatus] = useState('idle'); // idle, submitting, success
+    const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+    const [errorMessage, setErrorMessage] = useState('');
+    const form = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setStatus('submitting');
-        // Simulate network request
-        setTimeout(() => {
-            setStatus('success');
-        }, 2000);
+        setErrorMessage('');
+
+        // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS Public Key
+        // You can find this in EmailJS Dashboard -> Account -> API Keys -> Public Key
+        const PUBLIC_KEY = 'r5FRZ6PBbEXsb074d';
+
+        emailjs.sendForm('service_6hxh39r', 'template_6hm18xl', form.current, PUBLIC_KEY)
+            .then((result) => {
+                console.log(result.text);
+                setStatus('success');
+            }, (error) => {
+                console.log(error.text);
+                setStatus('error');
+                setErrorMessage('Failed to send message. Please try again later.');
+            });
     };
 
     return (
@@ -88,6 +102,7 @@ export default function Contact() {
                                     </motion.div>
                                 ) : (
                                     <motion.form
+                                        ref={form}
                                         key="form"
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
@@ -97,31 +112,31 @@ export default function Contact() {
                                     >
                                         <div className="space-y-2">
                                             <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Full Name <span className="text-cyan-500">*</span></label>
-                                            <input type="text" required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="Your full name" />
+                                            <input name="full_name" type="text" required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="Your full name" />
                                         </div>
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="space-y-2">
                                                 <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Email Address <span className="text-cyan-500">*</span></label>
-                                                <input type="email" required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="your@email.com" />
+                                                <input name="email" type="email" required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="your@email.com" />
                                             </div>
                                             <div className="space-y-2">
                                                 <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Phone Number <span className="text-cyan-500">*</span></label>
-                                                <input type="tel" required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="+880 ..." />
+                                                <input name="phone" type="tel" required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="+880 ..." />
                                             </div>
                                         </div>
 
                                         <div className="space-y-2">
                                             <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Project Type <span className="text-cyan-500">*</span></label>
                                             <div className="relative">
-                                                <select className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none appearance-none font-medium cursor-pointer">
-                                                    <option className="bg-[#0a0a0a]">Select project type</option>
-                                                    <option className="bg-[#0a0a0a]">Web Development & Architecture</option>
-                                                    <option className="bg-[#0a0a0a]">Mobile App Innovation</option>
-                                                    <option className="bg-[#0a0a0a]">UI/UX Design</option>
-                                                    <option className="bg-[#0a0a0a]">AI & Automation</option>
-                                                    <option className="bg-[#0a0a0a]">DevOps & Cloud</option>
-                                                    <option className="bg-[#0a0a0a]">Other</option>
+                                                <select name="project_type" className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none appearance-none font-medium cursor-pointer">
+                                                    <option value="" className="bg-[#0a0a0a]">Select project type</option>
+                                                    <option value="Web Development" className="bg-[#0a0a0a]">Web Development & Architecture</option>
+                                                    <option value="Mobile App" className="bg-[#0a0a0a]">Mobile App Innovation</option>
+                                                    <option value="UI/UX Design" className="bg-[#0a0a0a]">UI/UX Design</option>
+                                                    <option value="AI & Automation" className="bg-[#0a0a0a]">AI & Automation</option>
+                                                    <option value="DevOps & Cloud" className="bg-[#0a0a0a]">DevOps & Cloud</option>
+                                                    <option value="Other" className="bg-[#0a0a0a]">Other</option>
                                                 </select>
                                                 <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">▼</div>
                                             </div>
@@ -129,8 +144,14 @@ export default function Contact() {
 
                                         <div className="space-y-2">
                                             <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Project Details <span className="text-cyan-500">*</span></label>
-                                            <textarea required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium h-40 resize-none" placeholder="Tell us about your project requirements, goals, and timeline..."></textarea>
+                                            <textarea name="message" required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium h-40 resize-none" placeholder="Tell us about your project requirements, goals, and timeline..."></textarea>
                                         </div>
+
+                                        {status === 'error' && (
+                                            <div className="text-red-500 text-sm text-center font-bold">
+                                                {errorMessage}
+                                            </div>
+                                        )}
 
                                         <motion.button
                                             whileHover={{ scale: 1.02 }}

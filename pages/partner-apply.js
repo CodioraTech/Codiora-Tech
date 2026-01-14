@@ -1,14 +1,31 @@
 import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 export default function PartnerApply() {
     const [status, setStatus] = useState('idle');
+    const [errorMessage, setErrorMessage] = useState('');
+    const form = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setStatus('submitting');
-        setTimeout(() => setStatus('success'), 2000);
+        setErrorMessage('');
+
+        const PUBLIC_KEY = 'r5FRZ6PBbEXsb074d';
+        const SERVICE_ID = 'service_6hxh39r';
+        const TEMPLATE_ID = 'template_6nzqg1r';
+
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+            .then((result) => {
+                console.log(result.text);
+                setStatus('success');
+            }, (error) => {
+                console.log(error.text);
+                setStatus('error');
+                setErrorMessage('Transmission Failed. Secure connection interrupted.');
+            });
     };
 
     return (
@@ -62,36 +79,55 @@ export default function PartnerApply() {
                                     </button>
                                 </motion.div>
                             ) : (
-                                <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+                                <form ref={form} onSubmit={handleSubmit} className="space-y-8 relative z-10">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                         <div className="space-y-3">
                                             <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Organization Name</label>
-                                            <input type="text" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-6 py-5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all outline-none font-medium placeholder:text-gray-700" placeholder="Acme Corp" />
+                                            <input name="organization_name" type="text" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-6 py-5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all outline-none font-medium placeholder:text-gray-700" placeholder="Acme Corp" />
                                         </div>
                                         <div className="space-y-3">
                                             <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Website / Portfolio</label>
-                                            <input type="url" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-6 py-5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all outline-none font-medium placeholder:text-gray-700" placeholder="https://" />
+                                            <input name="website" type="url" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-6 py-5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all outline-none font-medium placeholder:text-gray-700" placeholder="https://" />
                                         </div>
                                     </div>
 
                                     <div className="space-y-3">
                                         <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Contact Person</label>
-                                        <input type="text" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-6 py-5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all outline-none font-medium placeholder:text-gray-700" placeholder="Your Name & Role" />
+                                        <input name="contact_person" type="text" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-6 py-5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all outline-none font-medium placeholder:text-gray-700" placeholder="Your Name & Role" />
                                     </div>
 
                                     <div className="space-y-3">
                                         <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Alignment Strategy</label>
-                                        <textarea required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-6 py-5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all outline-none font-medium placeholder:text-gray-700 h-40 resize-none" placeholder="Why Codiora? How do you see us dominating the market together?"></textarea>
+                                        <textarea name="strategy" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-6 py-5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all outline-none font-medium placeholder:text-gray-700 h-40 resize-none" placeholder="Why Codiora? How do you see us dominating the market together?"></textarea>
                                     </div>
+
+                                    {status === 'error' && (
+                                        <div className="text-red-500 text-sm text-center font-bold animate-pulse">
+                                            ⚠ {errorMessage}
+                                        </div>
+                                    )}
 
                                     <motion.button
                                         whileHover={{ scale: 1.01 }}
                                         whileTap={{ scale: 0.99 }}
                                         disabled={status === 'submitting'}
                                         type="submit"
-                                        className="w-full py-5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-lg tracking-wide shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(168,85,247,0.6)] transition-all duration-300"
+                                        className="w-full py-5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-lg tracking-wide shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(168,85,247,0.6)] transition-all duration-300 relative overflow-hidden group"
                                     >
-                                        {status === 'submitting' ? 'Processing...' : 'Submit Partnership Application'}
+                                        <span className="relative z-10 flex items-center justify-center gap-3">
+                                            {status === 'submitting' ? (
+                                                <>
+                                                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                                    Transmitting Data...
+                                                </>
+                                            ) : (
+                                                <>
+                                                    Submit Partnership Application
+                                                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                                </>
+                                            )}
+                                        </span>
+                                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none" />
                                     </motion.button>
                                 </form>
                             )}

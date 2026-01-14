@@ -7,29 +7,25 @@ const jobs = [
         title: "Senior Full Stack Engineer",
         dept: "Engineering",
         loc: "Remote",
-        type: "Full-time",
-        link: "/careers-apply"
+        type: "Full-time"
     },
     {
         title: "Product Designer (UI/UX)",
         dept: "Design",
         loc: "Remote (APAC)",
-        type: "Full-time",
-        link: "/careers-apply"
+        type: "Full-time"
     },
     {
         title: "Growth Marketing Lead",
         dept: "Marketing",
         loc: "London / Remote",
-        type: "Contract",
-        link: "/careers-apply"
+        type: "Contract"
     },
     {
         title: "AI Research Scientist",
         dept: "R&D",
         loc: "San Francisco",
-        type: "Full-time",
-        link: "/careers-apply"
+        type: "Full-time"
     }
 ];
 
@@ -90,7 +86,7 @@ export default function Careers() {
                                     <span className="w-24 text-right">{job.type}</span>
                                 </div>
 
-                                <Link href={job.link}>
+                                <Link href={`/careers-apply?role=${encodeURIComponent(job.title)}`}>
                                     <button className="px-8 py-3 rounded-full border border-white/20 hover:bg-green-500 hover:text-black hover:border-green-500 font-bold transition-all whitespace-nowrap">
                                         Apply Now
                                     </button>

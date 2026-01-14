@@ -7,7 +7,9 @@ const faqs = [
         category: "General",
         questions: [
             { q: "What defines Codiora Tech?", a: "We are not a dev shop. We are a product acceleration partner. We combine elite engineering with obsessive design to build software that scales to millions." },
-            { q: "Where are you located?", a: "We are a distributed-first company with roots in San Francisco and London. Our team spans 12 time zones, ensuring 24/7 velocity." }
+            { q: "Where are you located?", a: "We are a distributed-first company with roots in San Francisco and London. Our team spans 12 time zones, ensuring 24/7 velocity." },
+            { q: "How does Codiora Tech handle project timelines?", a: "We operate in strict 2-week sprints. You get demoable software every fortnight. No black boxes, no 3-month disappearing acts. Velocity is our currency." },
+            { q: "Who owns the IP rights?", a: "You do. 100%. Upon final payment, every line of code, design asset, and infrastructure config belongs to you. We are your builders, not your landlords." }
         ]
     },
     {
@@ -15,14 +17,18 @@ const faqs = [
         questions: [
             { q: "Do you work with early-stage startups?", a: "Yes. We love zero-to-one. If you have funding and a vision, we have the engineering firepower to get you to MVP and beyond in record time." },
             { q: "What is your pricing model?", a: "We don't do hourly billing. We operate on value-based retainers or fixed-price project sprints. This aligns our incentives with yours: shipping fast, high-quality code." },
-            { q: "Do you offer post-launch support?", a: "Absolutely. Software is strict maintenance. We offer SLA-backed support packages to ensure your infrastructure never blinks." }
+            { q: "Do you offer post-launch support?", a: "Absolutely. Software is strict maintenance. We offer SLA-backed support packages to ensure your infrastructure never blinks." },
+            { q: "Can you take over an existing codebase?", a: "Yes, but we audit first. We perform a 'Code Health Check' to identify technical debt and security risks before we commit to feature development or refactoring." },
+            { q: "Do you provide design-only services?", a: "While our superpower is end-to-end execution, we do offer standalone Product Design sprints for high-stakes UI/UX overhaul." }
         ]
     },
     {
         category: "Technical",
         questions: [
             { q: "What is your tech stack?", a: "We are opinionated but flexible. Our core stack is Next.js, TypeScript, Node.js/Go, and PostgreSQL. For AI, we leverage Python, PyTorch, and vector databases like Pinecone." },
-            { q: "How do you handle security?", a: "Security is day zero. We implement OWASP best practices, automated dependency scanning, and zero-trust architecture by default." }
+            { q: "How do you handle security?", a: "Security is day zero. We implement OWASP best practices, automated dependency scanning, and zero-trust architecture by default." },
+            { q: "How do you handle scalability?", a: "We architect for scale from day one. Using serverless functions, edge caching, and auto-scaling database clusters, our systems handle traffic spikes without manual intervention." },
+            { q: "What is your QA process?", a: "We believe in automated testing. Unit, integration, and end-to-end tests (Cypress/Playwright) are part of our CI/CD pipeline. No code ships to production without passing the gauntlet." }
         ]
     }
 ];
@@ -77,8 +83,8 @@ export default function FAQ() {
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
                                 className={`px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider transition-all border ${activeCategory === cat
-                                        ? "bg-cyan-500 text-black border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.4)]"
-                                        : "bg-transparent text-gray-400 border-white/10 hover:border-white/30 hover:text-white"
+                                    ? "bg-cyan-500 text-black border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+                                    : "bg-transparent text-gray-400 border-white/10 hover:border-white/30 hover:text-white"
                                     }`}
                             >
                                 {cat}
@@ -101,8 +107,8 @@ export default function FAQ() {
                                     <button
                                         onClick={() => toggleFAQ(i)}
                                         className={`w-full text-left p-8 rounded-[2rem] border transition-all duration-300 relative overflow-hidden ${activeindex === i
-                                                ? "bg-[#0a0a0a] border-cyan-500/50 shadow-[0_0_30px_rgba(6,182,212,0.1)]"
-                                                : "bg-[#050505] border-white/5 hover:border-white/20"
+                                            ? "bg-[#0a0a0a] border-cyan-500/50 shadow-[0_0_30px_rgba(6,182,212,0.1)]"
+                                            : "bg-[#050505] border-white/5 hover:border-white/20"
                                             }`}
                                     >
                                         <div className="flex justify-between items-center relative z-10">
