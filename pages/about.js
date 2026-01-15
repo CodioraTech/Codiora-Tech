@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import TeamCard from '@/components/TeamCard';
+
 import { motion } from 'framer-motion';
 import FounderMessage from '@/components/FounderMessage';
 
@@ -159,36 +159,7 @@ export default function About() {
                     </section>
 
                     {/* 5. The Architects (Team) */}
-                    <section className="py-32 px-6">
-                        <div className="container mx-auto max-w-7xl">
-                            <div className="text-center mb-24">
-                                <motion.span
-                                    initial={{ opacity: 0 }}
-                                    whileInView={{ opacity: 1 }}
-                                    className="text-cyan-400 font-bold tracking-widest uppercase text-sm"
-                                >
-                                    The Squad
-                                </motion.span>
-                                <motion.h2
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    className="text-4xl md:text-6xl font-bold mt-4 mb-8 text-white"
-                                >
-                                    Meet the <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Visionaries</span>
-                                </motion.h2>
-                                <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-                                    A diverse group of polymaths, united by a singular purpose: to build the impossible.
-                                </p>
-                            </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-                                <TeamCard name="Asif Mahamud Shaon" role="Founder & CEO" image="/images/team/founder.jpg" />
-                                <TeamCard name="Sarah Lee" role="CTO & Architect" />
-                                <TeamCard name="Michael Chen" role="Lead Engineer" />
-                                <TeamCard name="Jessica Davis" role="Head of Design" />
-                            </div>
-                        </div>
-                    </section>
 
                     {/* 6. CTA */}
                     <section className="py-40 relative overflow-hidden">
