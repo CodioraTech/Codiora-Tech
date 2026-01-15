@@ -3,150 +3,184 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
 // --- ADVANCED KNOWLEDGE BASE ---
-// Scored system: specific keywords have higher weight
 const KNOWLEDGE_BASE = [
-    // --- GREETINGS & BASICS ---
+    // ================================
+    // 1. WEB DEVELOPMENT ECOSYSTEM
+    // ================================
+    {
+        id: 'web_detailed',
+        patterns: [
+            // Core Tech
+            'mern', 'react', 'next.js', 'node.js', 'express.js', 'postgresql', 'mysql', 'javascript', 'typescript',
+            // App Types
+            'web app', 'saas platform', 'ecommerce website', 'web portal', 'admin dashboard', 'cms development', 'custom website', 'progressive web apps', 'pwa', 'web application', 'web', 'website',
+            // Features & Integrations
+            'api development', 'rest api', 'graphql', 'full stack web', 'payment gateway', 'stripe integration', 'bkash integration', 'web performance', 'api'
+        ],
+        response: "🚀 **Web Architecture**: We build blazing-fast apps using the **MERN Stack** and **Next.js**. We focus on performance, scalability, and security.",
+        action: { label: 'View Web Services', url: '/services/web-architecture' },
+        score: 5
+    },
+
+    // ================================
+    // 2. MOBILE APP ECOSYSTEM
+    // ================================
+    {
+        id: 'mobile_detailed',
+        patterns: [
+            // Tech & Platforms
+            'flutter', 'react native', 'android app', 'ios app', 'cross platform app', 'mobile api',
+            // Features
+            'mobile ui', 'mobile ux', 'firebase', 'push notifications', 'in-app purchase', 'offline support', 'location based app', 'chat app',
+            // Deployment
+            'app store deployment', 'play store deployment',
+            // Industry specific
+            'booking app', 'on demand app', 'fintech app', 'healthcare app', 'edtech app'
+        ],
+        response: "📱 **Mobile Innovation**: Cross-platform apps with native performance using **Flutter** & **React Native**. One codebase, deployed everywhere.",
+        action: { label: 'View Mobile Solutions', url: '/services/mobile-innovation' },
+        score: 5
+    },
+
+    // ================================
+    // 3. UI/UX DESIGN
+    // ================================
+    {
+        id: 'ui_ux_detailed',
+        patterns: [
+            // Core
+            'figma', 'ui design', 'ux design', 'wireframe', 'prototyping', 'design system', 'user flow',
+            // Specific Design Types
+            'landing page design', 'dashboard design', 'mobile ui design', 'web ui design', 'brand identity',
+            // Technical Design
+            'component library', 'dark mode design', 'micro interactions', 'animation ui', 'typography', 'color system', 'responsive design',
+            // Research
+            'usability testing', 'accessibility design'
+        ],
+        response: "🎨 **Immersive UI/UX**: Software should be beautiful. Our design process involves deep user research, wireframing, and **Figma** prototyping.",
+        action: { label: 'View Design', url: '/services/immersive-ui-ux' },
+        score: 5
+    },
+
+    // ================================
+    // 4. DEVOPS & CLOUD
+    // ================================
+    {
+        id: 'devops_detailed',
+        patterns: [
+            // Platforms
+            'aws', 'vercel', 'netlify', 'ec2', 's3', 'digitalocean', 'google cloud',
+            // Tools
+            'docker', 'kubernetes', 'github actions', 'terraform', 'nginx', 'linux server',
+            // Concepts
+            'ci/cd', 'cloud deployment', 'cloud monitoring', 'server scaling', 'load balancer', 'ssl setup', 'domain configuration', 'cloud security', 'devops automation', 'infrastructure as code'
+        ],
+        response: "☁️ **DevOps & Cloud**: We ensure your infrastructure is bulletproof. We specialize in **AWS**, **Docker**, and **Kubernetes** for auto-scaling and security.",
+        action: { label: 'View DevOps', url: '/services/devops-cloud' },
+        score: 5
+    },
+
+    // ================================
+    // 5. AI & AUTOMATION
+    // ================================
+    {
+        id: 'ai_detailed',
+        patterns: [
+            // Core
+            'ai development', 'machine learning', 'chatbot', 'openai integration', 'python ai', 'ai saas', 'ai api',
+            // Domains
+            'computer vision', 'data analysis', 'natural language processing', 'speech recognition', 'face recognition', 'ocr system', 'predictive analytics', 'anomaly detection',
+            // Automation
+            'automation script', 'workflow automation', 'ai dashboard', 'recommendation system', 'smart assistant'
+        ],
+        response: "🤖 **AI & Automation**: We build custom **AI Agents**, **Chatbots**, and automation workflows using **OpenAI** & Python.",
+        action: { label: 'Explore AI', url: '/services/ai-automation' },
+        score: 5
+    },
+
+    // ================================
+    // 6. DIGITAL MARKETING & BRANDING
+    // ================================
+    {
+        id: 'marketing_detailed',
+        patterns: [
+            // SEO
+            'seo', 'landing page seo', 'keyword research', 'on page seo', 'off page seo', 'technical seo',
+            // Ads
+            'google ads', 'facebook ads', 'remarketing', 'pixel tracking',
+            // Strategy
+            'conversion optimization', 'content marketing', 'email marketing', 'marketing automation', 'lead generation', 'sales funnel', 'growth hacking',
+            // Analytics
+            'google analytics', 'tag manager', 'a/b testing', 'conversion tracking'
+        ],
+        response: "📈 **Growth Marketing**: We help you sell through data-driven **SEO**, **Ads**, and **Performance Marketing**.",
+        action: { label: 'View Marketing', url: '/services/growth-marketing' },
+        score: 5
+    },
+
+    // ================================
+    // 7. CAREERS (Internships & Jobs)
+    // ================================
+    {
+        id: 'frontend_intern',
+        patterns: ['frontend intern', 'frontend job', 'react job', 'hiring frontend'],
+        response: "💻 **Frontend Engineering Requirements**:\n\n• **Core:** Mastery of **React.js** & **Next.js** 14+.\n• **Styling:** Deep knowledge of **Tailwind CSS**.\n• **State:** Redux or Zustand.\n\n*Ready to build pixel-perfect interfaces?*",
+        action: { label: 'Apply for Frontend', url: '/careers-apply' },
+        score: 10
+    },
+    {
+        id: 'backend_intern',
+        patterns: ['backend intern', 'backend job', 'node job', 'hiring backend'],
+        response: "⚙️ **Backend Engineering Requirements**:\n\n• **Runtime:** Expert in **Node.js** & Express.\n• **Database:** MongoDB (Aggregations) & PostgreSQL.\n• **Architecture:** Microservices & REST/GraphQL APIs.\n\n*Ready to architect scalable systems?*",
+        action: { label: 'Apply for Backend', url: '/careers-apply' },
+        score: 10
+    },
+    {
+        id: 'ui_ux_intern',
+        patterns: ['ui/ux intern', 'design intern', 'designer job'],
+        response: "🎨 **UI/UX Design Requirements**:\n\n• **Tools:** Mastery of **Figma** (Auto-layout, Components).\n• **Skills:** User Research, Wireframing, & Prototyping.\n• **Bonus:** Basic HTML/CSS understanding.\n\n*Ready to design the future?*",
+        action: { label: 'Apply for Design', url: '/careers-apply' },
+        score: 10
+    },
+    {
+        id: 'careers_general',
+        patterns: ['intern', 'internship', 'job', 'career', 'apply', 'hiring', 'vacancy', 'join team', 'work with you'],
+        response: "🎓 **General Application Roadmap**:\n\n1. **Prepare:** Polish your Portfolio.\n2. **Apply:** Click the button below.\n3. **Challenge:** Complete our coding task.\n\n*Select a specific role (Frontend, Backend) for detailed requirements.*",
+        action: { label: 'Start Application', url: '/careers-apply' },
+        score: 5
+    },
+
+    // ================================
+    // 8. COMPANY INFO
+    // ================================
     {
         id: 'greetings',
         patterns: ['hello', 'hi', 'hey', 'start', 'greetings', 'morning', 'evening', 'yo'],
-        response: "Hello! 👋 I am **Codi**, the intelligent assistant for Codiora Tech. I'm here to help you navigate our services, answer technical questions, or set up a consultation. How can I assist you today?",
+        response: "Hello! 👋 I am **Codi**. I can help you with:\n\n• **Services**\n• **Job Requirements**\n• **Project Quotes**\n\nHow can I assist you today?",
+        action: { label: 'Explore Services', url: '/services' },
         score: 1
     },
     {
-        id: 'identity',
-        patterns: ['who are you', 'what are you', 'your name', 'bot', 'real person', 'human'],
-        response: "I am **Codi**, a custom-built AI agent designed by Codiora Tech. While I'm not human, I have direct access to our company's knowledge base to answer your questions instantly!",
-        score: 2
-    },
-
-    // --- WHAT (Services) ---
-    {
-        id: 'web_architecture',
-        patterns: ['web', 'website', 'react', 'nextjs', 'frontend', 'backend', 'full stack', 'web dev'],
-        response: "🚀 **Web Architecture**: We build blazing-fast, SEO-optimized web applications using the modern **MERN Stack** (MongoDB, Express, React, Node) and **Next.js**. We focus on performance, scalability, and security.",
-        score: 3
-    },
-    {
-        id: 'mobile_innovation',
-        patterns: ['mobile', 'app', 'android', 'ios', 'flutter', 'react native', 'phone'],
-        response: "📱 **Mobile Innovation**: We build cross-platform applications that feel purely native. Using **Flutter**, we deploy to both iOS and Android from a single codebase, saving you time and money without compromising quality.",
-        score: 3
-    },
-    {
-        id: 'ui_ux',
-        patterns: ['design', 'ui', 'ux', 'figma', 'prototype', 'looks', 'interface'],
-        response: "🎨 **Immersive UI/UX**: Software should be beautiful. Our design process involves deep user research, wireframing, and high-fidelity prototyping in **Figma** before a single line of code is written.",
-        score: 3
-    },
-    {
-        id: 'devops_cloud',
-        patterns: ['devops', 'cloud', 'aws', 'docker', 'kubernetes', 'hosting', 'server', 'deploy'],
-        response: "☁️ **DevOps & Cloud**: We ensure your infrastructure is bulletproof. We specialize in **AWS** and **Google Cloud** deployments, using **Docker** & **Kubernetes** for auto-scaling and CI/CD pipelines for automated testing.",
-        score: 3
-    },
-    {
-        id: 'ai_automation',
-        patterns: ['ai', 'artificial intelligence', 'bot', 'chatgpt', 'gemini', 'automation', 'llm', 'machine learning'],
-        response: "🤖 **AI & Automation**: We build intelligent systems just like me! From custom **Customer Support Bots** to internal process automation using **OpenAI** and **Gemini** APIs, we help you save time and reduce costs.",
-        score: 3
-    },
-    {
-        id: 'growth_marketing',
-        patterns: ['marketing', 'seo', 'growth', 'advertising', 'social media', 'ranking', 'google'],
-        response: "📈 **Growth Marketing**: Building a product is half the battle. We help you sell it. Our data-driven SEO, content strategy, and performance marketing ensure your digital product reaches the right audience.",
-        score: 3
-    },
-
-    // --- HOW (Process & Expertise) ---
-    {
-        id: 'process',
-        patterns: ['process', 'how you work', 'steps', 'workflow', 'methodology', 'timeline'],
-        response: "**Our 4-Step Execution Protocol**:\n1. 🔍 **Discovery:** We map out your goals & requirements.\n2. 🏗️ **Architecture:** We design the system & UI.\n3. 💻 **Development:** Agile sprits with bi-weekly updates.\n4. 🚀 **Launch:** Rigorous testing & deployment.",
-        score: 2
-    },
-    {
-        id: 'portfolio',
-        patterns: ['portfolio', 'work', 'projects', 'case study', 'examples', 'done before'],
-        response: "We have shipped over **15+ major projects** globally. From E-commerce platforms to FinTech apps. You can view our detailed case studies in the **[Portfolio Section](/portfolio)**.",
+        id: 'contact',
+        patterns: ['contact', 'email', 'phone', 'call', 'address', 'location', 'office'],
+        response: "You can connect with us directly:\n\n📧 **Email:** hello@codioratech.com\n📍 **HQ:** Dhaka, Bangladesh\n\nOr simply fill out our **Contact Form** for a priority response.",
+        action: { label: 'Contact Us', url: '/contact' },
         score: 2
     },
     {
         id: 'partners',
-        patterns: ['partner', 'client', 'who do you work with', 'customer'],
-        response: "We work with visionaries. From early-stage startups to established enterprises, we act as the **Technical Co-Founder** for our partners, ensuring their long-term success.",
-        score: 2
-    },
-    {
-        id: 'platform',
-        patterns: ['tech stack', 'technology', 'language', 'platform', 'framework', 'tool'],
-        response: "**Our Tech Arsenal**:\n• **Frontend:** Next.js, React, Tailwind\n• **Backend:** Node.js, Python, Go\n• **Mobile:** Flutter, Kotlin\n• **Cloud:** AWS, Vercel, Supabase",
-        score: 2
-    },
-
-    // --- WHO (Company & Culture) ---
-    {
-        id: 'company_info',
-        patterns: ['who is codiora', 'about company', 'what do you do', 'about us', 'codiora tech', 'agency'],
-        response: "We are **Codiora Tech**. \n\n**Mission:** Digital Supremacy for our clients.\n**Vision:** To be the global architects of the digital future.\n\nWe don't just write code; we engineer business growth.",
-        score: 2
-    },
-    {
-        id: 'team',
-        patterns: ['team', 'founder', 'developer', 'engineer', 'people', 'staff', 'ceo'],
-        response: "Our team involves the **'Architects'**—a collective of elite developers, designers, and strategists. We are led by a vision to disrupt the ordinary. You can meet our leadership on the **[About Page](/about)**.",
-        score: 2
-    },
-    {
-        id: 'culture',
-        patterns: ['culture', 'environment', 'values', 'dna', 'vibe'],
-        response: "**Our DNA is Different.** We believe in:\n1. **Relentless Innovation**\n2. **Pixel Perfection**\n3. **User Obsession**\n\nWe operate at the bleeding edge of technology.",
-        score: 2
-    },
-    {
-        id: 'history',
-        patterns: ['history', 'since', 'founded', 'start', 'how long', 'years'],
-        response: "Codiora Tech was established in **2024** in Dhaka, Bangladesh. In a short time, we have rapidly expanded our footprint, serving global clients with high-end digital solutions.",
-        score: 2
-    },
-
-    // --- MORE (Contact & Extras) ---
-    {
-        id: 'contact',
-        patterns: ['contact', 'email', 'phone', 'call', 'reach', 'address', 'location', 'dhaka', 'office'],
-        response: "You can connect with us directly:\n\n📧 **Email:** hello@codioratech.com\n📍 **HQ:** Dhaka, Bangladesh\n\nOr simply fill out our [Contact Form](/contact) for a priority response.",
-        score: 2
-    },
-    {
-        id: 'pricing',
-        patterns: ['price', 'cost', 'rate', 'money', 'charge', 'expensive', 'quote', 'budget', 'cheap'],
-        response: "We don't use fixed packages because your idea is unique. \n\n💬 **Tip:** Tell me a bit about your project features, and I can guide you, or you can request a **[Free Quote](/contact)**.",
-        score: 2
-    },
-    {
-        id: 'careers_internship',
-        patterns: ['job', 'hire', 'career', 'vacancy', 'intern', 'internship', 'join', 'monitor'],
-        response: "We are always looking for exceptional talent! \n\n• **Careers:** Send CV to careers@codioratech.com\n• **Internships:** Check our [CodeCamp](/codecamp) program for upcoming batches.",
-        score: 2
-    },
-    {
-        id: 'codecamp',
-        patterns: ['codecamp', 'training', 'learn', 'course', 'bootcamp', 'teaching'],
-        response: "**CodeCamp** is our initiative to train the next generation of elite engineers. We offer intensive mentorship programs. Stay tuned for our next intake!",
-        score: 3
-    },
-    {
-        id: 'become_partner',
-        patterns: ['partnership', 'reseller', 'affiliate', 'collaborate', 'business'],
-        response: "Interested in a strategic partnership? We love collaborating with other agencies and businesses. Reach out to **partners@codioratech.com** to discuss synergies.",
+        patterns: ['partner', 'collaborate', 'business', 'reseller'],
+        response: "Interested in a strategic partnership? We love collaborating with other agencies and businesses. Reach out to **partners@codioratech.com** to see how we can grow together.",
+        action: { label: 'Partner With Us', url: '/partner-program' },
         score: 3
     }
 ];
 
-// Fallback logic for Professional Handling
+// Fallback logic
 const FALLBACK_RESPONSES = [
-    "That's an interesting topic! While I can't chat about everything, I'm an expert on **Digital Strategy**. How can we help apply technology to your business?",
-    "I'm focusing my processing power on **Engineering & Design** today. Do you have a project in mind where we could help?",
-    "I might not know much about that, but if it involves **Web**, **Mobile**, or **AI**, I'm your best resource! What are you building?"
+    { text: "I specialize in **Tech & Design**. How can we help build your next project?", action: { label: 'View Portfolio', url: '/portfolio' } },
+    { text: "I'm focusing on **Engineering** today. Do you have a project idea?", action: { label: 'Contact Us', url: '/contact' } },
+    { text: "I might not know much about that, but if it involves **Web**, **Mobile**, or **AI**, I'm your best resource!", action: { label: 'Our Services', url: '/services' } }
 ];
 
 export default function LiveChat() {
@@ -162,7 +196,6 @@ export default function LiveChat() {
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
 
-    // Auto-scroll to bottom
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages, isOpen, isTyping]);
@@ -177,7 +210,6 @@ export default function LiveChat() {
             let currentScore = 0;
             item.patterns.forEach(pattern => {
                 if (lowerInput.includes(pattern)) {
-                    // Exact match bonus or length based bonus could go here
                     currentScore += item.score;
                 }
             });
@@ -189,11 +221,12 @@ export default function LiveChat() {
         });
 
         if (highestScore > 0 && bestMatch) {
-            return bestMatch.response;
+            return { text: bestMatch.response, action: bestMatch.action };
         }
 
         // Return random fallback
-        return FALLBACK_RESPONSES[Math.floor(Math.random() * FALLBACK_RESPONSES.length)];
+        const fallback = FALLBACK_RESPONSES[Math.floor(Math.random() * FALLBACK_RESPONSES.length)];
+        return { text: fallback.text, action: fallback.action };
     };
 
     const handleSendMessage = async (e) => {
@@ -201,35 +234,38 @@ export default function LiveChat() {
         if (!inputValue.trim()) return;
 
         const userText = inputValue;
-        setInputValue(""); // Clear immediately
+        setInputValue("");
 
-        // 1. Add User Message
         setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: userText }]);
         setIsTyping(true);
 
-        // 2. Simulate Latency (randomized for realism)
-        const delay = Math.floor(Math.random() * 800) + 1000; // 1s to 1.8s
+        const delay = Math.floor(Math.random() * 800) + 1000;
 
         setTimeout(() => {
-            const responseText = findBestResponse(userText);
-            setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: responseText }]);
+            const match = findBestResponse(userText);
+            setMessages(prev => [...prev, {
+                id: Date.now() + 1,
+                sender: 'bot',
+                text: match.text,
+                action: match.action
+            }]);
             setIsTyping(false);
         }, delay);
     };
 
     // Formatter for bold text and links
     const formatText = (text) => {
-        // Regex to parse [Link Text](/url) and **Bold**
         const parts = text.split(/(\[.*?\]\(.*?\))|(\*\*.*?\*\*)/g).filter(Boolean);
 
         return parts.map((part, i) => {
             if (part.startsWith('**') && part.endsWith('**')) {
+                // Keep keeping bold text purely visual if it's not a link
                 return <strong key={i} className="text-cyan-400 font-bold">{part.slice(2, -2)}</strong>;
             }
             if (part.startsWith('[') && part.includes('](') && part.endsWith(')')) {
                 const [label, url] = part.slice(1, -1).split('](');
                 return (
-                    <Link key={i} href={url} className="text-blue-400 hover:text-blue-300 underline underline-offset-2 decoration-blue-500/30">
+                    <Link key={i} href={url} className="text-blue-400 hover:text-blue-300 underline underline-offset-2 decoration-blue-500/30 font-medium">
                         {label}
                     </Link>
                 );
@@ -238,16 +274,19 @@ export default function LiveChat() {
         });
     };
 
-    // Quick suggestions to jumpstart conversation
     const sendSuggestion = (text) => {
         setInputValue(text);
-
         const userText = text;
         setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: userText }]);
         setIsTyping(true);
         setTimeout(() => {
-            const responseText = findBestResponse(userText);
-            setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: responseText }]);
+            const match = findBestResponse(userText);
+            setMessages(prev => [...prev, {
+                id: Date.now() + 1,
+                sender: 'bot',
+                text: match.text,
+                action: match.action
+            }]);
             setIsTyping(false);
         }, 1200);
     };
@@ -320,7 +359,7 @@ export default function LiveChat() {
                                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         transition={{ duration: 0.3 }}
-                                        className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                                        className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
                                     >
                                         <div
                                             className={`max-w-[85%] px-4 py-3 rounded-2xl text-[14px] leading-relaxed relative group ${msg.sender === 'user'
@@ -330,7 +369,19 @@ export default function LiveChat() {
                                         >
                                             <div className="whitespace-pre-wrap">{formatText(msg.text)}</div>
 
-                                            {/* Timestamp (Optional visual detail) */}
+                                            {/* Action Button */}
+                                            {msg.action && (
+                                                <div className="mt-3 pt-3 border-t border-white/10">
+                                                    <Link href={msg.action.url} className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-cyan-500/30 rounded-lg transition-all group/btn">
+                                                        <span className="text-xs font-semibold text-cyan-400 group-hover/btn:text-cyan-300">{msg.action.label}</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 text-cyan-400 group-hover/btn:translate-x-0.5 transition-transform">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                                                        </svg>
+                                                    </Link>
+                                                </div>
+                                            )}
+
+                                            {/* Timestamp */}
                                             <div className={`text-[9px] mt-1.5 opacity-40 font-medium ${msg.sender === 'user' ? 'text-right text-cyan-100' : 'text-left text-gray-500'}`}>
                                                 {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </div>

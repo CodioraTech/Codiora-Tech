@@ -5,12 +5,12 @@ import { motion } from 'framer-motion';
 
 export default function Services() {
     const services = [
-        { title: "Web Architecture", description: "Scalable, high-performance web applications tailored to your business.", icon: "💎", image: "/images/services/web.png" },
-        { title: "Mobile Innovation", description: "Native and cross-platform mobile solutions for iOS and Android.", icon: "🚀", image: "/images/services/mobile.jpg" },
-        { title: "Immersive UI/UX", description: "User-centric design that drives engagement and satisfaction.", icon: "✨", image: "/images/services/uiux.png" },
-        { title: "DevOps & Cloud", description: "Reliable support to keep your systems running smoothly 24/7.", icon: "☁️", image: "/images/services/devops.png" },
-        { title: "AI & Automation", description: "Automate and innovate with cutting-edge AI integration.", icon: "🧠", image: "/images/services/ai.jpg" },
-        { title: "Growth Marketing", description: "Data-driven strategies to explode your digital presence.", icon: "📈", image: "/images/services/marketing.jpg" },
+        { title: "Web Architecture", description: "Scalable, high-performance web applications tailored to your business.", icon: "💎", image: "/images/services/web.png", slug: "web-architecture" },
+        { title: "Mobile Innovation", description: "Native and cross-platform mobile solutions for iOS and Android.", icon: "🚀", image: "/images/services/mobile.jpg", slug: "mobile-innovation" },
+        { title: "Immersive UI/UX", description: "User-centric design that drives engagement and satisfaction.", icon: "✨", image: "/images/services/uiux.png", slug: "immersive-ui-ux" },
+        { title: "DevOps & Cloud", description: "Reliable support to keep your systems running smoothly 24/7.", icon: "☁️", image: "/images/services/devops.png", slug: "devops-cloud" },
+        { title: "AI & Automation", description: "Automate and innovate with cutting-edge AI integration.", icon: "🧠", image: "/images/services/ai.jpg", slug: "ai-automation" },
+        { title: "Growth Marketing", description: "Data-driven strategies to explode your digital presence.", icon: "📈", image: "/images/services/marketing.jpg", slug: "growth-marketing" },
     ];
 
     return (

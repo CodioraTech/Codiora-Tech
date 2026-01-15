@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-const ServiceCard = ({ title, description, icon, image }) => {
-    // Simple slugify function
-    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+const ServiceCard = ({ title, description, icon, image, slug }) => {
+    // Use provided slug or fallback to auto-generated one
+    const urlSlug = slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
 
     return (
-        <Link href={`/services/${slug}`}>
+        <Link href={`/services/${urlSlug}`}>
             <motion.div
                 className="group relative w-full h-full bg-[#0a0a0a] border border-white/5 rounded-[32px] overflow-hidden cursor-pointer"
                 whileHover={{ y: -10 }}

@@ -4,28 +4,28 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 const servicesData = {
-    'web-architecture': {
+    'web-development': {
         title: "Web Architecture",
         subtitle: "High-performance web applications built for scale.",
         icon: "💎",
         features: ["Next.js & React", "Server Side Rendering", "Progressive Web Apps", "API Integration"],
         content: "Blazing fast, SEO-optimized, and scalable. We architect web solutions using the bleeding edge of the Javascript ecosystem."
     },
-    'mobile-innovation': {
+    'mobile-app-development': {
         title: "Mobile Innovation",
         subtitle: "Native-feel cross-platform apps that dominate markets.",
         icon: "🚀",
         features: ["React Native / Flutter", "iOS & Android", "Offline Capabilities", "Smooth Animations"],
         content: "Don't just build an app; create an experience. We deliver fluid, responsive, and powerful mobile applications that users love."
     },
-    'immersive-ui-ux': {
+    'ui-ux': {
         title: "Immersive UI/UX",
         subtitle: "Award-winning designs that captivate and convert.",
         icon: "✨",
         features: ["User Research", "Wireframing & Prototyping", "Interaction Design", "Design Systems"],
         content: "Beauty meets function. Our design philosophy centers on creating intuitive, delightful, and memorable user journeys."
     },
-    'devops-cloud': {
+    'devops': {
         title: "DevOps & Cloud",
         subtitle: "Borderless infrastructure for the modern enterprise.",
         icon: "☁️",
@@ -39,7 +39,7 @@ const servicesData = {
         features: ["Predictive Analytics", "NLP & Chatbots", "Process Automation", "Computer Vision"],
         content: "We build sentient systems. From autonomous agents to predictive engines, we engineer intelligence that gives you an unfair advantage."
     },
-    'growth-marketing': {
+    'digital-marketing': {
         title: "Growth Marketing",
         subtitle: "Data-driven strategies to explode your user base.",
         icon: "📈",
