@@ -68,52 +68,56 @@ export default function Home() {
             </div>
 
             {/* Hero Content Section */}
-            <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden z-10 pointer-events-none py-20">
-                <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto pointer-events-none w-full">
+            <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden z-10 py-20">
+                <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto w-full pointer-events-none">
                     <motion.div
                         style={{ x: mouseSpringX, y: mouseSpringY }}
-                        className="relative flex flex-col items-center"
+                        className="relative flex flex-col items-center pointer-events-auto"
                     >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 1 }}
-                            className="mb-6 inline-block px-5 py-2 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs sm:text-sm font-bold tracking-[0.2em] uppercase backdrop-blur-md"
-                        >
-                            Welcome to the Future
-                        </motion.div>
+                        {/* Mobile-only backdrop for readability over 3D element */}
+                        <div className="md:contents rounded-3xl bg-black/40 backdrop-blur-md md:bg-transparent md:backdrop-blur-none p-8 md:p-0 border border-white/10 md:border-none shadow-2xl md:shadow-none inline-flex flex-col items-center">
 
-                        <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="text-5xl sm:text-7xl md:text-9xl font-black mb-6 tracking-tighter leading-[0.9] sm:leading-tight"
-                        >
-                            <span className="text-gray-900 dark:text-white transition-colors block mb-2 sm:mb-0">Innovating Your</span>
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-gray-900 to-secondary dark:via-white glow-text block">
-                                Digital Universe
-                            </span>
-                        </motion.h1>
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 1 }}
+                                className="mb-6 inline-block px-5 py-2 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs sm:text-sm font-bold tracking-[0.2em] uppercase backdrop-blur-md"
+                            >
+                                Welcome to the Future
+                            </motion.div>
 
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-base sm:text-lg md:text-2xl text-gray-600 dark:text-gray-400 mb-10 max-w-xl sm:max-w-2xl mx-auto font-light leading-relaxed transition-colors px-2"
-                        >
-                            We build immersive digital experiences that define the next generation of the web.
-                        </motion.p>
+                            <motion.h1
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                className="text-5xl sm:text-7xl md:text-9xl font-black mb-6 tracking-tighter leading-[0.9] sm:leading-tight drop-shadow-2xl md:drop-shadow-none"
+                            >
+                                <span className="text-gray-900 dark:text-white transition-colors block mb-2 sm:mb-0 text-shadow-sm">Innovating Your</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-gray-900 to-secondary dark:via-white glow-text block pb-2">
+                                    Digital Universe
+                                </span>
+                            </motion.h1>
+
+                            <motion.p
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.8, delay: 0.4 }}
+                                className="text-base sm:text-lg md:text-2xl text-gray-200 md:text-gray-600 md:dark:text-gray-400 mb-10 max-w-xl sm:max-w-2xl mx-auto font-light leading-relaxed transition-colors px-2 drop-shadow-md md:drop-shadow-none"
+                            >
+                                We build immersive digital experiences that define the next generation of the web.
+                            </motion.p>
+                        </div>
                     </motion.div>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center pointer-events-auto items-center w-full max-w-sm sm:max-w-none mx-auto"
+                        className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center pointer-events-auto items-center w-full max-w-sm sm:max-w-none mx-auto relative z-30"
                     >
                         {/* Primary Button */}
-                        <Link href="/contact" className="group relative w-full sm:w-auto px-8 py-4 bg-transparent overflow-hidden rounded-full flex justify-center">
-                            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-accent to-secondary opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                        <Link href="/contact" className="group relative w-full sm:w-auto px-8 py-4 bg-transparent overflow-hidden rounded-full flex justify-center shadow-lg shadow-accent/20">
+                            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-accent to-secondary opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
                             <div className="absolute -inset-3 bg-gradient-to-r from-accent to-secondary rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-300 group-hover:duration-200 animate-tilt"></div>
 
                             <div className="relative flex items-center gap-3 text-white dark:text-dark font-black tracking-wider uppercase text-sm">
@@ -125,9 +129,9 @@ export default function Home() {
                         </Link>
 
                         {/* Secondary Button */}
-                        <Link href="/portfolio" className="group relative w-full sm:w-auto px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent/50 transition-all backdrop-blur-md overflow-hidden flex justify-center">
+                        <Link href="/portfolio" className="group relative w-full sm:w-auto px-8 py-4 rounded-full bg-black/40 md:bg-white/5 border border-white/20 md:border-white/10 hover:bg-white/10 hover:border-accent/50 transition-all backdrop-blur-md overflow-hidden flex justify-center">
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                            <span className="relative text-gray-900 dark:text-white font-bold tracking-wider uppercase text-sm flex items-center gap-2">
+                            <span className="relative text-white md:text-gray-900 md:dark:text-white font-bold tracking-wider uppercase text-sm flex items-center gap-2">
                                 View Work
                                 <span className="group-hover:rotate-45 transition-transform duration-300">↗</span>
                             </span>
@@ -137,7 +141,7 @@ export default function Home() {
             </section>
 
             {/* Services Section */}
-            <section className="py-32 relative z-10 bg-gray-50/95 dark:bg-dark/95 backdrop-blur-xl border-t border-black/5 dark:border-white/5 transition-colors">
+            <section className="py-32 relative z-10 bg-gray-50/95 dark:bg-dark/95 backdrop-blur-xl border-t border-black/5 dark:border-white/5 transition-colors overflow-hidden">
                 {/* Background glow */}
                 <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[128px] pointer-events-none" />
                 <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[128px] pointer-events-none" />

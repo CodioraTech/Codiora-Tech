@@ -23,12 +23,20 @@ const ServiceNetwork = () => {
         <section className="py-24 relative overflow-hidden bg-black flex items-center justify-center min-h-[700px]">
 
             {/* Mobile View (Stack) */}
-            <div className="md:hidden flex flex-col gap-4 w-full px-6 relative z-10">
+            <div className="md:hidden flex flex-col gap-4 w-full px-4 relative z-10 overflow-hidden">
                 {[...servicesLeft, ...servicesRight].map((s, i) => (
                     <Link key={i} href={`/services/${s.slug}`}>
-                        <div className="bg-white/5 border-l-4 border-transparent p-4 rounded-r-xl active:border-cyan-500 transition-all">
-                            <h3 className="text-white font-bold text-lg">{s.title}</h3>
-                        </div>
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.05 }}
+                            className="bg-white/5 border-l-4 border-transparent p-5 rounded-r-xl active:border-cyan-500 transition-all hover:bg-white/10"
+                        >
+                            <h3 className="text-white font-bold text-lg flex justify-between items-center">
+                                {s.title}
+                                <span className="text-xs text-gray-500 uppercase tracking-widest">Explore</span>
+                            </h3>
+                        </motion.div>
                     </Link>
                 ))}
             </div>

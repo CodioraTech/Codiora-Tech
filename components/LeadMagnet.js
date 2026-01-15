@@ -40,12 +40,12 @@ export default function LeadMagnet() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="max-w-5xl mx-auto relative group"
+                    className="max-w-5xl mx-auto relative group w-full"
                 >
                     {/* Glowing Border Gradient */}
                     <div className="absolute -inset-[2px] bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-500 rounded-[2.5rem] opacity-30 group-hover:opacity-60 blur-md transition-opacity duration-500" />
 
-                    <div className="relative bg-[#0a0a0a] border border-white/10 p-6 md:p-16 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
+                    <div className="relative bg-[#0a0a0a] border border-white/10 p-6 md:p-16 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden w-full max-w-full">
                         {/* Subtle inner gloss */}
                         <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white/5 to-transparent pointer-events-none" />
 
