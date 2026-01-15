@@ -72,7 +72,7 @@ const ServiceNetwork = () => {
                                 {/* 1. The Large Soft Colored Glow Orb */}
                                 <motion.circle r="8" fill={s.color} filter="url(#soft-glow)" opacity="0.8">
                                     <animateMotion
-                                        dur={`${3 + i * 0.4}s`}
+                                        dur={`${1.5 + i * 0.2}s`}
                                         repeatCount="indefinite"
                                         path={pathString}
                                         keyPoints="0;1"
@@ -84,7 +84,7 @@ const ServiceNetwork = () => {
                                 {/* 2. The Bright White Core (Hot Center) */}
                                 <motion.circle r="3" fill="white">
                                     <animateMotion
-                                        dur={`${3 + i * 0.4}s`}
+                                        dur={`${1.5 + i * 0.2}s`}
                                         repeatCount="indefinite"
                                         path={pathString}
                                         keyPoints="0;1"
@@ -112,7 +112,7 @@ const ServiceNetwork = () => {
                                 />
                                 <motion.circle r="8" fill={s.color} filter="url(#soft-glow)" opacity="0.8">
                                     <animateMotion
-                                        dur={`${3 + i * 0.4}s`}
+                                        dur={`${1.5 + i * 0.2}s`}
                                         repeatCount="indefinite"
                                         path={pathString}
                                         keyPoints="0;1"
@@ -122,7 +122,7 @@ const ServiceNetwork = () => {
                                 </motion.circle>
                                 <motion.circle r="3" fill="white">
                                     <animateMotion
-                                        dur={`${3 + i * 0.4}s`}
+                                        dur={`${1.5 + i * 0.2}s`}
                                         repeatCount="indefinite"
                                         path={pathString}
                                         keyPoints="0;1"
