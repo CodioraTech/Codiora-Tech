@@ -7,28 +7,33 @@ const faqs = [
         category: "General",
         questions: [
             { q: "What defines Codiora Tech?", a: "We are not a dev shop. We are a product acceleration partner. We combine elite engineering with obsessive design to build software that scales to millions." },
-            { q: "Where are you located?", a: "We are a distributed-first company with roots in San Francisco and London. Our team spans 12 time zones, ensuring 24/7 velocity." },
-            { q: "How does Codiora Tech handle project timelines?", a: "We operate in strict 2-week sprints. You get demoable software every fortnight. No black boxes, no 3-month disappearing acts. Velocity is our currency." },
+            { q: "Where are you located?", a: "We are a distributed-first company with our HQ in Dhaka, Bangladesh. Our team spans multiple time zones, ensuring 24/7 velocity." },
+            { q: "How do we collaborate during a project?", a: "Transparnecy is key. We use **Slack** or **Discord** for daily comms, **Linear** or **Trello** for task tracking, and weekly **Google Meet** standups. You are never left in the dark." },
+            { q: "Are you hiring?", a: "We are always hunting for the top 1% of engineering and design talent. If you live in code, check our **Careers** page or drop your CV at careers@codioratech.com." },
+            { q: "Do you have a referral program?", a: "Yes. We offer generous commissions for successful client referrals. Many of our partners are other agencies who trust us with their heavy technical lifting." },
             { q: "Who owns the IP rights?", a: "You do. 100%. Upon final payment, every line of code, design asset, and infrastructure config belongs to you. We are your builders, not your landlords." }
         ]
     },
     {
         category: "Services",
         questions: [
-            { q: "Do you work with early-stage startups?", a: "Yes. We love zero-to-one. If you have funding and a vision, we have the engineering firepower to get you to MVP and beyond in record time." },
-            { q: "What is your pricing model?", a: "We don't do hourly billing. We operate on value-based retainers or fixed-price project sprints. This aligns our incentives with yours: shipping fast, high-quality code." },
+            { q: "Do you work with early-stage startups?", a: "Yes. We love zero-to-one. If you have funding and a vision, we have the engineering firepower to get you to MVP and beyond in record time (typically 4-8 weeks)." },
+            { q: "What is your typical budget range?", a: "We prioritize quality. Our engagement typically starts from **$2,500** for small specific modules and **$5,000+** for full MVPs. We create custom quotes based on complexity, not hours." },
+            { q: "Do you offer white-label services?", a: "Yes. We frequently act as the silent engineering partner for major creative agencies and consultancy firms. We respect NDAs and seamless integration." },
             { q: "Do you offer post-launch support?", a: "Absolutely. Software is strict maintenance. We offer SLA-backed support packages to ensure your infrastructure never blinks." },
             { q: "Can you take over an existing codebase?", a: "Yes, but we audit first. We perform a 'Code Health Check' to identify technical debt and security risks before we commit to feature development or refactoring." },
-            { q: "Do you provide design-only services?", a: "While our superpower is end-to-end execution, we do offer standalone Product Design sprints for high-stakes UI/UX overhaul." }
+            { q: "What is your pricing model?", a: "We don't do hourly billing. We operate on value-based retainers or fixed-price project sprints. This aligns our incentives with yours: shipping fast, high-quality code." }
         ]
     },
     {
         category: "Technical",
         questions: [
-            { q: "What is your tech stack?", a: "We are opinionated but flexible. Our core stack is Next.js, TypeScript, Node.js/Go, and PostgreSQL. For AI, we leverage Python, PyTorch, and vector databases like Pinecone." },
+            { q: "What is your tech stack?", a: "We are opinionated but flexible. Our core stack is Next.js, TypeScript, Node.js/Go, PostgreSQL, MongoDB, and mySQL. For AI, we leverage Python, PyTorch, and vector databases like Pinecone." },
+            { q: "How do you handle Hosting & Domains?", a: "We provide a turnkey solution. We deploy on **Vercel** or **AWS**, configure your **Custom Domain** (e.g., yourcompany.com), and set up **Professional Business Emails** (e.g., hello@yourcompany.com) so your brand is launch-ready." },
+            { q: "Do you build mobile apps?", a: "Yes. We specialize in cross-platform development using **React Native** and **Flutter**. This allows us to ship to both iOS and Android from a single codebase, saving you 40% on costs." },
+            { q: "Do you use WordPress?", a: "Rarely. For content sites, we prefer Headless CMS solutions (like Sanity or Strapi) paired with Next.js. This offers vastly superior performance and security compared to traditional WordPress." },
             { q: "How do you handle security?", a: "Security is day zero. We implement OWASP best practices, automated dependency scanning, and zero-trust architecture by default." },
-            { q: "How do you handle scalability?", a: "We architect for scale from day one. Using serverless functions, edge caching, and auto-scaling database clusters, our systems handle traffic spikes without manual intervention." },
-            { q: "What is your QA process?", a: "We believe in automated testing. Unit, integration, and end-to-end tests (Cypress/Playwright) are part of our CI/CD pipeline. No code ships to production without passing the gauntlet." }
+            { q: "Will you help with App Store submission?", a: "Yes. We handle the entire bureaucratic process of getting your app approved on the Apple App Store and Google Play Store, managing certificates and guidelines." }
         ]
     }
 ];

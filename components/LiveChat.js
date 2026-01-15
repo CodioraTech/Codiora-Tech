@@ -49,7 +49,7 @@ const KNOWLEDGE_BASE = [
         id: 'ui_ux_detailed',
         patterns: [
             // Core
-            'figma', 'ui design', 'ux design', 'wireframe', 'prototyping', 'design system', 'user flow',
+            'figma', 'ui design', 'ux design', 'wireframe', 'prototyping', 'design system', 'user flow', 'uiux', 'desgin', 'design',
             // Specific Design Types
             'landing page design', 'dashboard design', 'mobile ui design', 'web ui design', 'brand identity',
             // Technical Design
@@ -166,6 +166,13 @@ const KNOWLEDGE_BASE = [
         response: "You can connect with us directly:\n\n📧 **Email:** hello@codioratech.com\n📍 **HQ:** Dhaka, Bangladesh\n\nOr simply fill out our **Contact Form** for a priority response.",
         action: { label: 'Contact Us', url: '/contact' },
         score: 2
+    },
+    {
+        id: 'tech_stack',
+        patterns: ['tech stack', 'technology', 'technologies', 'what stack', 'database', 'backend tech', 'frontend tech', 'stack'],
+        response: "💻 **Our Tech Stack**:\n\n• **Frontend:** Next.js, React, Tailwind CSS\n• **Backend:** Node.js, Go\n• **Database:** PostgreSQL, MongoDB, mySQL\n• **AI:** Python, PyTorch, Pinecone",
+        action: { label: 'View Expertise', url: '/services' },
+        score: 8
     },
     {
         id: 'partners',

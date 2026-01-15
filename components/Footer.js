@@ -148,7 +148,8 @@ export default function Footer() {
                                         { name: 'Become Partner', link: '/partners' },
                                         { name: 'Blog', link: '/blog' },
                                         { name: 'CodeCamp', link: '/codecamp' },
-                                        { name: 'Internship', link: '/internship' }
+                                        { name: 'Internship', link: '/internship' },
+                                        { name: 'FAQ', link: '/faq' }
                                     ].map((item, i) => (
                                         <li key={i}>
                                             <Link href={item.link} className="text-gray-400 hover:text-emerald-400 text-sm font-medium transition-all flex items-center gap-2 group/link">

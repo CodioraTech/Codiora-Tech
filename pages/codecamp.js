@@ -95,7 +95,13 @@ export default function CodeCamp() {
 
                     <div className="mt-40 text-center">
                         <p className="text-gray-500 mb-4">Not sure which path is right for you?</p>
-                        <Link href="/counseling" className="text-indigo-400 font-bold hover:text-white underline underline-offset-4">Talk to an Admission Counselor</Link>
+                        <Link href="/counseling" className="group relative inline-flex items-center gap-3 px-10 py-5 rounded-full bg-indigo-900/20 border border-indigo-500/30 text-indigo-300 font-bold overflow-hidden transition-all hover:scale-105 hover:bg-indigo-600 hover:text-white hover:border-indigo-400 hover:shadow-[0_0_50px_rgba(79,70,229,0.6)]">
+                            <span className="relative z-10 text-lg">Talk to an Admission Counselor</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                            </svg>
+                            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </Link>
                     </div>
                 </div>
             </div>
