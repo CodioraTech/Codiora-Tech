@@ -151,6 +151,91 @@ export default function About() {
                         </div>
                     </section>
 
+                    {/* 3.5. Mission & Vision */}
+                    <section className="py-20 px-6 relative">
+                        <div className="container mx-auto max-w-6xl">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {/* Mission Card */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    className="group relative p-10 rounded-3xl bg-[#080808] border border-white/10 overflow-hidden min-h-[400px] flex flex-col justify-between"
+                                >
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-cyan-500/20 transition-all duration-700"></div>
+
+                                    <div className="relative z-10 flex-grow">
+                                        <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-cyan-400">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-4xl font-black text-white mb-6 tracking-tight">OUR MISSION</h3>
+                                        <ul className="space-y-4 text-gray-400">
+                                            <li className="flex gap-3 items-start">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] flex-shrink-0"></span>
+                                                <span><strong className="text-white">Digital Supremacy:</strong> Empowering businesses to dominate their industries through superior technology.</span>
+                                            </li>
+                                            <li className="flex gap-3 items-start">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] flex-shrink-0"></span>
+                                                <span><strong className="text-white">Growth Engineering:</strong> Building engines of growth, not just static software, to drive tangible ROI.</span>
+                                            </li>
+                                            <li className="flex gap-3 items-start">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] flex-shrink-0"></span>
+                                                <span><strong className="text-white">Complex Problem Solving:</strong> Transforming the most difficult business challenges into elegant, scalable solutions.</span>
+                                            </li>
+                                            <li className="flex gap-3 items-start">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] flex-shrink-0"></span>
+                                                <span><strong className="text-white">Strategic Partnership:</strong> Acting as a dedicated co-pilot in our clients' journey to success.</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="w-full h-1 bg-gradient-to-r from-cyan-500/50 to-transparent mt-8"></div>
+                                </motion.div>
+
+                                {/* Vision Card */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.2 }}
+                                    className="group relative p-10 rounded-3xl bg-[#080808] border border-white/10 overflow-hidden min-h-[400px] flex flex-col justify-between"
+                                >
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-500/20 transition-all duration-700"></div>
+
+                                    <div className="relative z-10 flex-grow">
+                                        <div className="w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-purple-400">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-4xl font-black text-white mb-6 tracking-tight">OUR VISION</h3>
+                                        <ul className="space-y-4 text-gray-400">
+                                            <li className="flex gap-3 items-start">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)] flex-shrink-0"></span>
+                                                <span><strong className="text-white">Global Architecture:</strong> To become the primary architects of the digital future, setting new global standards.</span>
+                                            </li>
+                                            <li className="flex gap-3 items-start">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)] flex-shrink-0"></span>
+                                                <span><strong className="text-white">Technological Artistry:</strong> Creating a world where the line between advanced engineering and functional art is invisible.</span>
+                                            </li>
+                                            <li className="flex gap-3 items-start">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)] flex-shrink-0"></span>
+                                                <span><strong className="text-white">Innovation Catalyst:</strong> Inspiring a new wave of digital creativity that transcends borders and industries.</span>
+                                            </li>
+                                            <li className="flex gap-3 items-start">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)] flex-shrink-0"></span>
+                                                <span><strong className="text-white">Limitless Ecosystem:</strong> Fostering an ecosystem where businesses can scale without technological limitations.</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="w-full h-1 bg-gradient-to-r from-purple-500/50 to-transparent mt-8"></div>
+                                </motion.div>
+                            </div>
+                        </div>
+                    </section>
+
                     {/* 4. Founder's Message */}
                     <section className="py-20 bg-gradient-to-b from-transparent to-black/50">
                         <div className="container mx-auto px-6">
