@@ -155,7 +155,7 @@ export default function LiveChat() {
         {
             id: 1,
             sender: 'bot',
-            text: "Hi there! 👋 I'm **Codi**. I can give you instant answers about our services, pricing, or tech stack. Try asking:\n\n*\"What services do you offer?\"*"
+            text: "Welcome to **Codiora Tech**. I am **Codi**, your AI Assistant. 🤖\n\nI can provide insights on our **Engineering Services**, **Case Studies**, and **Development Process**.\n\nHow can we assist in accelerating your digital growth today?"
         }
     ]);
     const [inputValue, setInputValue] = useState("");
@@ -258,7 +258,7 @@ export default function LiveChat() {
             {
                 id: 1,
                 sender: 'bot',
-                text: "Hi there! 👋 I'm **Codi**. I can give you instant answers about our services, pricing, or tech stack. Try asking:\n\n*\"What services do you offer?\"*"
+                text: "Welcome to **Codiora Tech**. I am **Codi**, your AI Assistant. 🤖\n\nI can provide insights on our **Engineering Services**, **Case Studies**, and **Development Process**.\n\nHow can we assist in accelerating your digital growth today?"
             }
         ]);
         setInputValue("");
