@@ -23,10 +23,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const service = servicesData[params.slug];
     const subService = service.subServices.find(s => s.id === params.subSlug);
-    return { props: { service, subService } };
+    return { props: { service, subService, slug: params.slug } };
 }
 
-export default function SubServicePage({ service, subService }) {
+export default function SubServicePage({ service, subService, slug }) {
     if (!subService) return <div>Loading...</div>;
 
     const { details } = subService;
@@ -55,7 +55,7 @@ export default function SubServicePage({ service, subService }) {
                         <span>/</span>
                         <Link href="/services" className="hover:text-accent transition-colors">SERVICES</Link>
                         <span>/</span>
-                        <Link href={`/services/${Object.keys(servicesData).find(key => servicesData[key] === service)}`} className="hover:text-accent transition-colors">
+                        <Link href={`/services/${slug}`} className="hover:text-accent transition-colors">
                             {service.title.toUpperCase()}
                         </Link>
                         <span>/</span>
