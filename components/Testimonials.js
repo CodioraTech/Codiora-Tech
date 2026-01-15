@@ -1,95 +1,143 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useRef } from 'react';
+import { useScroll, useTransform, motion } from 'framer-motion';
 
 const testimonials = [
     {
-        id: 1,
-        text: "Codiora Tech transformed our digital presence. Incredible attention to detail!",
-        author: "Jane Doe",
-        role: "CEO, TechCorp",
-        image: "https://i.pravatar.cc/150?u=a042581f4e29026024d"
+        quote: "The 3D innovation on our site is mind-blowing. Our engagement increased by 200%.",
+        author: "Alex Rivera",
+        role: "CTO, FinTech Global",
+        logo: "AR",
+        src: "https://randomuser.me/api/portraits/men/32.jpg",
+        color: "from-blue-500 to-cyan-500",
+        shadow: "shadow-cyan-500/20"
     },
     {
-        id: 2,
-        text: "The 3D innovation on our site is mind-blowing. Our engagement increased by 200%.",
-        author: "John Smith",
-        role: "Marketing Director, FutureScale",
-        image: "https://i.pravatar.cc/150?u=a042581f4e29026704d"
+        quote: "Professional, reliable, and cutting-edge. Highly recommend for enterprise solutions.",
+        author: "Sarah Wu",
+        role: "Director of Product, Nexus AI",
+        logo: "SW",
+        src: "https://randomuser.me/api/portraits/women/44.jpg",
+        color: "from-purple-500 to-pink-500",
+        shadow: "shadow-purple-500/20"
     },
     {
-        id: 3,
-        text: "Professional, reliable, and cutting-edge. Highly recommend for enterprise solutions.",
-        author: "Robert Brown",
-        role: "CTO, GlobalSystems",
-        image: "https://i.pravatar.cc/150?u=a04258114e29026302d"
+        quote: "No matter what situation I'm in, they're always there for me! Truly a partner, not a vendor.",
+        author: "James Peterson",
+        role: "CEO, LogiChain",
+        logo: "JP",
+        src: "https://randomuser.me/api/portraits/men/86.jpg",
+        color: "from-orange-500 to-yellow-500",
+        shadow: "shadow-orange-500/20"
+    },
+    {
+        quote: "They are fast, efficient, completely resourceful and most importantly, trustworthy!",
+        author: "Maria Gonzalez",
+        role: "VP Engineering, HealthPlus",
+        logo: "MG",
+        src: "https://randomuser.me/api/portraits/women/68.jpg",
+        color: "from-green-500 to-emerald-500",
+        shadow: "shadow-green-500/20"
+    },
+    {
+        quote: "The redesign completely transformed our brand perception. We look like a billion dollar company now.",
+        author: "David Chen",
+        role: "Founder, Stealth Startup",
+        logo: "DC",
+        src: "https://randomuser.me/api/portraits/men/11.jpg",
+        color: "from-red-500 to-rose-500",
+        shadow: "shadow-red-500/20"
     }
 ];
 
-const Testimonials = () => {
-    const [current, setCurrent] = useState(0);
+const Card = ({ i, title, description, src, role, color, shadow, progress, range, targetScale }) => {
+    const container = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: container,
+        offset: ['start end', 'start start']
+    });
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrent(c => (c + 1) % testimonials.length);
-        }, 5000);
-        return () => clearInterval(timer);
-    }, []);
+    const scale = useTransform(progress, range, [1, targetScale]);
 
     return (
-        <div className="w-full max-w-6xl mx-auto relative px-4 flex flex-col items-center">
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between w-full max-w-7xl px-4 pointer-events-none z-0 opacity-20">
-                <div className="text-9xl font-serif text-gray-300 dark:text-white/10 hidden md:block">“</div>
-                <div className="text-9xl font-serif text-gray-300 dark:text-white/10 hidden md:block">”</div>
-            </div>
+        <div ref={container} className="h-screen flex items-center justify-center sticky top-0 font-sans">
+            <motion.div
+                style={{
+                    scale,
+                    backgroundColor: '#050505',
+                    top: `calc(-5vh + ${i * 25}px)`
+                }}
+                className={`flex flex-col items-center justify-center relative w-[90vw] md:w-[900px] h-[500px] rounded-[2.5rem] p-8 md:p-16 border border-white/10 origin-top shadow-2xl ${shadow}`}
+            >
+                {/* Background Ambient Glow */}
+                <div className={`absolute top-[-50%] left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-gradient-to-b ${color} opacity-10 blur-[100px] pointer-events-none`} />
 
-            <div className="relative w-full overflow-hidden h-[400px] flex items-center justify-center">
-                <AnimatePresence mode='wait'>
-                    <motion.div
-                        key={current}
-                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                        transition={{ duration: 0.5 }}
-                        className="relative z-10 max-w-4xl w-full bg-white dark:bg-white/5 backdrop-blur-md border border-gray-100 dark:border-white/10 rounded-3xl p-8 md:p-12 text-center shadow-xl dark:shadow-2xl shadow-gray-200/50 dark:shadow-black/50"
-                    >
-                        {/* Decorative Quote Icon */}
-                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-purple-600 w-12 h-12 rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/30">
-                            <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.896 14.321 16.062 14.929 15.5C15.537 14.938 16.488 14.656 17.783 14.656L19.517 14.656L19.517 9.844L17.783 9.844C15.751 9.844 14.735 9.006 14.735 7.328L14.735 3L22.017 3L22.017 12.188C22.017 13.91 21.688 15.394 21.031 16.641C20.374 17.887 19.462 18.847 18.295 19.523C17.129 20.2 15.703 20.693 14.017 21ZM4.017 21L4.017 18C4.017 16.896 4.321 16.062 4.929 15.5C5.537 14.938 6.488 14.656 7.783 14.656L9.517 14.656L9.517 9.844L7.783 9.844C5.751 9.844 4.735 9.006 4.735 7.328L4.735 3L12.017 3L12.017 12.188C12.017 13.91 11.688 15.394 11.031 16.641C10.374 17.887 9.462 18.847 8.295 19.523C7.129 20.2 5.703 20.693 4.017 21Z" /></svg>
-                        </div>
+                {/* Floating Quote Icon */}
+                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${color} flex items-center justify-center mb-10 shadow-lg shadow-black/50 relative z-10`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" className="opacity-90">
+                        <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z"></path>
+                    </svg>
+                </div>
 
-                        <p className="text-2xl md:text-4xl font-light text-gray-700 dark:text-white leading-relaxed mb-8 mt-4">
-                            "{testimonials[current].text}"
-                        </p>
+                {/* Quote Text */}
+                <h2 className="text-2xl md:text-4xl font-medium leading-normal text-white/90 text-center mb-12 max-w-2xl relative z-10 tracking-tight">
+                    "{title}"
+                </h2>
 
-                        <div className="flex flex-col items-center gap-3">
-                            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-cyan-500/50 p-1">
-                                <img src={testimonials[current].image} alt={testimonials[current].author} className="w-full h-full object-cover rounded-full" />
+                {/* Author Info */}
+                <div className="flex flex-col items-center gap-3 relative z-10">
+                    <div className="relative">
+                        <div className={`w-14 h-14 rounded-full p-0.5 bg-gradient-to-br ${color}`}>
+                            <div className="w-full h-full rounded-full bg-black overflow-hidden relative">
+                                {/* Use src for image or fallback to initials */}
+                                {src.includes('http') ? (
+                                    <img src={src} alt={description} className="w-full h-full object-cover" />
+                                ) : (
+                                    <div className="w-full h-full bg-white/10 flex items-center justify-center text-white font-bold">{src}</div>
+                                )}
                             </div>
-                            <div>
-                                <h4 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400">
-                                    {testimonials[current].author}
-                                </h4>
-                                <p className="text-cyan-400 text-sm font-medium tracking-wide">
-                                    {testimonials[current].role}
-                                </p>
-                            </div>
                         </div>
-                    </motion.div>
-                </AnimatePresence>
-            </div>
-
-            <div className="flex gap-2 mt-8">
-                {testimonials.map((_, idx) => (
-                    <button
-                        key={idx}
-                        onClick={() => setCurrent(idx)}
-                        className={`transition-all duration-300 rounded-full ${idx === current ? 'w-8 h-2 bg-cyan-500' : 'w-2 h-2 bg-gray-600 hover:bg-gray-500'
-                            }`}
-                    />
-                ))}
-            </div>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-lg font-bold text-white tracking-wide">{description}</div>
+                        <div className={`text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r ${color} uppercase tracking-widest mt-0.5`}>
+                            {role}
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
         </div>
     );
 };
 
-export default Testimonials;
+export default function Testimonials() {
+    const container = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: container,
+        offset: ['start start', 'end end']
+    });
+
+    return (
+        <div ref={container} className="bg-[#020202] relative min-h-[300vh]">
+            {/* Stacking Cards Container */}
+            <div className="relative z-10">
+                {testimonials.map((project, i) => {
+                    const targetScale = 1 - ((testimonials.length - i) * 0.05);
+                    return (
+                        <Card
+                            key={i}
+                            i={i}
+                            {...project}
+                            title={project.quote}
+                            description={project.author}
+                            src={project.src || project.logo}
+                            role={project.role}
+                            progress={scrollYProgress}
+                            range={[i * .25, 1]}
+                            targetScale={targetScale}
+                        />
+                    );
+                })}
+            </div>
+        </div>
+    );
+}

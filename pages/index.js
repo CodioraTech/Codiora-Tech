@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import TechMarquee from '@/components/TechMarquee';
 
 // New Components
-// New Components
 import LeadMagnet from '@/components/LeadMagnet';
 import ServiceNetwork from '@/components/ServiceNetwork';
 import TrustBadges from '@/components/TrustBadges';
@@ -265,9 +264,9 @@ export default function Home() {
             </section>
 
             {/* Testimonials */}
-            <section className="py-32 bg-gray-50 dark:bg-dark relative overflow-hidden transition-colors duration-300">
+            <section className="py-32 bg-[#020202] relative transition-colors duration-300">
                 <div className="container mx-auto px-6 relative z-10">
-                    <h2 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-500 mb-16">Trusted by Visionaries</h2>
+                    <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-24 tracking-tight">Trusted by Visionaries</h2>
                     <Testimonials />
                 </div>
             </section>

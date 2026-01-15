@@ -1,99 +1,178 @@
 import Head from 'next/head';
-import { motion } from 'framer-motion';
+import { useScroll, useTransform, motion } from 'framer-motion';
+import { useRef } from 'react';
 
 const testimonials = [
     {
-        quote: "Codiora didn't just build our platform; they architected our entire digital future. Their engineering velocity is unmatched.",
+        quote: "The 3D innovation on our site is mind-blowing. Our engagement increased by 200%.",
         author: "Alex Rivera",
         role: "CTO, FinTech Global",
-        logo: "🏦"
+        logo: "AR",
+        src: "https://randomuser.me/api/portraits/men/32.jpg",
+        color: "from-blue-500 to-cyan-500",
+        shadow: "shadow-cyan-500/20"
     },
     {
-        quote: "We threw complex AI requirements at them, and they delivered a seamless, scalable solution in weeks, not months.",
+        quote: "Professional, reliable, and cutting-edge. Highly recommend for enterprise solutions.",
         author: "Sarah Wu",
         role: "Director of Product, Nexus AI",
-        logo: "🤖"
+        logo: "SW",
+        src: "https://randomuser.me/api/portraits/women/44.jpg",
+        color: "from-purple-500 to-pink-500",
+        shadow: "shadow-purple-500/20"
     },
     {
-        quote: "The design team at Codiora operates on another level. They turned our clunky enterprise app into a consumer-grade experience.",
+        quote: "No matter what situation I'm in, they're always there for me! Truly a partner, not a vendor.",
         author: "James Peterson",
         role: "CEO, LogiChain",
-        logo: "🚚"
+        logo: "JP",
+        src: "https://randomuser.me/api/portraits/men/86.jpg",
+        color: "from-orange-500 to-yellow-500",
+        shadow: "shadow-orange-500/20"
     },
     {
-        quote: "Reliability was our #1 concern. Codiora's infrastructure hasn't flinched under millions of daily requests.",
+        quote: "They are fast, efficient, completely resourceful and most importantly, trustworthy!",
         author: "Maria Gonzalez",
         role: "VP Engineering, HealthPlus",
-        logo: "🩺"
+        logo: "MG",
+        src: "https://randomuser.me/api/portraits/women/68.jpg",
+        color: "from-green-500 to-emerald-500",
+        shadow: "shadow-green-500/20"
+    },
+    {
+        quote: "The redesign completely transformed our brand perception. We look like a billion dollar company now.",
+        author: "David Chen",
+        role: "Founder, Stealth Startup",
+        logo: "DC",
+        src: "https://randomuser.me/api/portraits/men/11.jpg",
+        color: "from-red-500 to-rose-500",
+        shadow: "shadow-red-500/20"
     }
 ];
 
-export default function Testimonials() {
-    return (
-        <>
-            <Head>
-                <title>Codiora Tech | Testimonials</title>
-            </Head>
+const Card = ({ i, title, description, src, role, color, shadow, progress, range, targetScale }) => {
+    const container = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: container,
+        offset: ['start end', 'start start']
+    });
 
-            <div className="bg-[#020202] min-h-screen text-white overflow-hidden selection:bg-yellow-500/30">
-                <div className="fixed inset-0 pointer-events-none">
-                    <div className="absolute top-[30%] left-[50%] -translate-x-1/2 w-[800px] h-[800px] bg-yellow-900/10 rounded-full blur-[150px] animate-pulse-slow" />
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+    const scale = useTransform(progress, range, [1, targetScale]);
+
+    return (
+        <div ref={container} className="h-screen flex items-center justify-center sticky top-0 font-sans">
+            <motion.div
+                style={{
+                    scale,
+                    backgroundColor: '#050505',
+                    top: `calc(-5vh + ${i * 25}px)`
+                }}
+                className={`flex flex-col items-center justify-center relative w-[90vw] md:w-[900px] h-[500px] rounded-[2.5rem] p-8 md:p-16 border border-white/10 origin-top shadow-2xl ${shadow}`}
+            >
+                {/* Background Ambient Glow */}
+                <div className={`absolute top-[-50%] left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-gradient-to-b ${color} opacity-10 blur-[100px] pointer-events-none`} />
+
+                {/* Floating Quote Icon */}
+                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${color} flex items-center justify-center mb-10 shadow-lg shadow-black/50 relative z-10`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" className="opacity-90">
+                        <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z"></path>
+                    </svg>
                 </div>
 
-                <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
-                    <div className="text-center mb-32">
-                        <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl md:text-8xl font-black tracking-tighter mb-8"
-                        >
-                            CLIENT <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">VICTORIES</span>
-                        </motion.h1>
-                        <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                            We don't chase satisfaction; we chase success. Here is what happens when vision meets execution.
-                        </p>
-                    </div>
+                {/* Quote Text */}
+                <h2 className="text-2xl md:text-4xl font-medium leading-normal text-white/90 text-center mb-12 max-w-2xl relative z-10 tracking-tight">
+                    "{title}"
+                </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-40">
-                        {testimonials.map((t, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                className="bg-[#0a0a0a] border border-white/5 p-12 rounded-[2rem] hover:border-yellow-500/30 transition-all group relative overflow-hidden"
-                            >
-                                <div className="absolute top-0 right-0 p-8 text-8xl text-white/5 font-serif select-none">"</div>
-                                <div className="text-6xl mb-8 filter grayscale group-hover:grayscale-0 transition-all duration-500">{t.logo}</div>
-                                <p className="text-xl md:text-2xl text-gray-200 leading-relaxed mb-10 font-medium relative z-10">
-                                    "{t.quote}"
-                                </p>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center font-bold text-yellow-500">
-                                        {t.author.charAt(0)}
-                                    </div>
-                                    <div>
-                                        <div className="font-bold text-white">{t.author}</div>
-                                        <div className="text-yellow-500 text-xs font-bold uppercase tracking-widest">{t.role}</div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
+                {/* Author Info */}
+                <div className="flex flex-col items-center gap-3 relative z-10">
+                    <div className="relative">
+                        <div className={`w-14 h-14 rounded-full p-0.5 bg-gradient-to-br ${color}`}>
+                            <div className="w-full h-full rounded-full bg-black overflow-hidden relative">
+                                {/* Use src for image or fallback to initials */}
+                                {src.includes('http') ? (
+                                    <img src={src} alt={description} className="w-full h-full object-cover" />
+                                ) : (
+                                    <div className="w-full h-full bg-white/10 flex items-center justify-center text-white font-bold">{src}</div>
+                                )}
+                            </div>
+                        </div>
                     </div>
-
-                    {/* Logo Wall */}
-                    <div className="border-t border-white/10 pt-20">
-                        <p className="text-center text-gray-500 text-xs font-bold uppercase tracking-widest mb-12">Trusted By Industry Leaders</p>
-                        <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
-                            {/* Placeholder Logos */}
-                            {['Stripe', 'Vercel', 'Linear', 'Raycast', 'OpenAI'].map((logo) => (
-                                <span key={logo} className="text-2xl font-black text-white">{logo}</span>
-                            ))}
+                    <div className="text-center">
+                        <div className="text-lg font-bold text-white tracking-wide">{description}</div>
+                        <div className={`text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r ${color} uppercase tracking-widest mt-0.5`}>
+                            {role}
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
+        </div>
+    );
+};
+
+export default function Testimonials() {
+    const container = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: container,
+        offset: ['start start', 'end end']
+    });
+
+    return (
+        <>
+            <Head>
+                <title>Codiora Tech | Client Stories</title>
+            </Head>
+
+            <main ref={container} className="bg-[#020202] relative min-h-[300vh]">
+
+                {/* Header Section */}
+                <div className="h-[70vh] flex flex-col items-center justify-center sticky top-0 bg-[#020202] z-0 px-6">
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-center"
+                    >
+                        <h3 className="text-gray-500 font-bold uppercase tracking-[0.3em] text-sm mb-6">Trusted by Visionaries</h3>
+                        <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 text-white">
+                            STORIES
+                        </h1>
+                    </motion.div>
+                </div>
+
+                {/* Stacking Cards Container */}
+                <div className="relative z-10 pb-[20vh]">
+                    {testimonials.map((project, i) => {
+                        const targetScale = 1 - ((testimonials.length - i) * 0.05);
+                        return (
+                            <Card
+                                key={i}
+                                i={i}
+                                {...project}
+                                title={project.quote}
+                                description={project.author}
+                                src={project.src || project.logo}
+                                role={project.role}
+                                progress={scrollYProgress}
+                                range={[i * .25, 1]}
+                                targetScale={targetScale}
+                            />
+                        );
+                    })}
+                </div>
+
+                {/* Call To Action Footer */}
+                <div className="h-[80vh] flex flex-col items-center justify-center bg-[#050505] relative z-20 border-t border-white/10">
+                    <div className="text-center px-6">
+                        <p className="text-gray-500 mb-6 uppercase tracking-widest text-sm font-bold">Ready to Scale?</p>
+                        <h2 className="text-5xl md:text-7xl font-bold text-white mb-10">Your Story <br /> Starts Here.</h2>
+                        <a href="/contact" className="inline-block px-12 py-5 bg-white text-black text-lg font-bold rounded-full hover:scale-105 transition-transform shadow-[0_0_40px_rgba(255,255,255,0.15)]">
+                            Start Project
+                        </a>
+                    </div>
+                </div>
+
+            </main>
         </>
     );
 }

@@ -1,27 +1,92 @@
+import { motion } from 'framer-motion';
+
 export default function TrustBadges() {
     const badges = [
-        { text: "SSL Secured", icon: "🔒" },
-        { text: "GDPR Ready", icon: "🇪🇺" },
-        { text: "24/7 Support", icon: "🕒" },
-        { text: "Data Privacy Compliant", icon: "🛡️" }
+        {
+            text: "SSL Secured",
+            color: "text-amber-400",
+            shadow: "group-hover:shadow-amber-400/20",
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+            )
+        },
+        {
+            text: "GDPR Ready",
+            color: "text-indigo-400",
+            shadow: "group-hover:shadow-indigo-400/20",
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                    <path d="m9 12 2 2 4-4" />
+                </svg>
+            )
+        },
+        {
+            text: "24/7 Support",
+            color: "text-cyan-400",
+            shadow: "group-hover:shadow-cyan-400/20",
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+            )
+        },
+        {
+            text: "Privacy Compliant",
+            color: "text-emerald-400",
+            shadow: "group-hover:shadow-emerald-400/20",
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                    <path d="M12 8v4" />
+                    <path d="M12 16h.01" />
+                </svg>
+            )
+        }
     ];
 
     return (
-        <section className="py-12 border-t border-black/5 dark:border-white/5 bg-gray-50 dark:bg-black relative overflow-hidden">
-            {/* Glossy Background Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/5 to-transparent opacity-50 pointer-events-none" />
-
+        <section className="py-24 bg-[#020202] border-t border-white/5 relative overflow-hidden">
             <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-wrap justify-center gap-6 md:gap-12">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, staggerChildren: 0.1 }}
+                    className="flex flex-wrap justify-center gap-6"
+                >
                     {badges.map((badge, i) => (
-                        <div key={i} className="group flex items-center gap-3 px-6 py-3 rounded-full border border-black/10 dark:border-white/10 bg-white/50 dark:bg-white/5 backdrop-blur-md hover:border-cyan-500/50 hover:bg-white/80 dark:hover:bg-white/10 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] transition-all duration-300 cursor-default">
-                            <span className="text-xl group-hover:scale-110 transition-transform duration-300 filter drop-shadow-md">{badge.icon}</span>
-                            <span className="font-bold text-xs uppercase tracking-[0.15em] text-gray-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-                                {badge.text}
-                            </span>
-                        </div>
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            viewport={{ once: true }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                            className={`group flex items-center gap-4 px-8 py-5 rounded-2xl bg-[#080808] border border-white/5 hover:border-white/20 transition-all duration-300 shadow-lg ${badge.shadow} cursor-default relative overflow-hidden`}
+                        >
+                            {/* Inner Glow Gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
+
+                            <div className={`relative z-10 p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors ${badge.color}`}>
+                                {badge.icon}
+                            </div>
+
+                            <div className="flex flex-col">
+                                <span className="font-bold text-sm uppercase tracking-[0.1em] text-gray-400 group-hover:text-white transition-colors">
+                                    {badge.text}
+                                </span>
+                                <span className="text-[10px] text-gray-600 group-hover:text-gray-500 font-medium tracking-wide">
+                                    Verified & Secure
+                                </span>
+                            </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
