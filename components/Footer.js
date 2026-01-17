@@ -181,6 +181,10 @@ export default function Footer() {
                             Terms & Conditions
                             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>
                         </Link>
+                        <Link href="/refund-policy" className="hover:text-white transition-colors relative group">
+                            Refund Policy
+                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>
+                        </Link>
                         <Link href="/sitemap" className="hover:text-white transition-colors relative group">
                             Sitemap
                             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>

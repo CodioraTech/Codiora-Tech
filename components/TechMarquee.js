@@ -193,8 +193,12 @@ export default function TechMarquee({ technologies = [] }) {
     );
 }
 
-function MarqueeRow({ items, direction = "left", speed = 40 }) {
+function MarqueeRow({ items, direction = "left" }) {
     const content = [...items, ...items];
+
+    // Constant speed logic: Time = Distance / Speed
+    // Factor 1.5 provides a balanced, "normal" cruising speed.
+    const duration = items.length * 1.5;
 
     return (
         <div className="relative flex w-full overflow-hidden">
@@ -204,7 +208,7 @@ function MarqueeRow({ items, direction = "left", speed = 40 }) {
                 animate={{ x: direction === "left" ? "-50%" : "0%" }}
                 transition={{
                     ease: "linear",
-                    duration: speed + (items.length * 1.0),
+                    duration: duration,
                     repeat: Infinity,
                 }}
             >

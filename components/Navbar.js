@@ -6,6 +6,82 @@ import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../public/Codiora Tech logo.png';
 
 
+
+const FEATURED_PROJECTS = [
+    { title: "NeonMarket", category: "Next-gen Crypto Exchange", image: "/images/portfolio/neonmarket.png", href: "/portfolio/neonmarket" },
+    { title: "MediBot AI", category: "AI Diagnostic Assistant", image: "/images/portfolio/medibot-ai.png", href: "/portfolio/medibot-ai" },
+    { title: "Explorer Nature", category: "Premium Tourism Platform", image: "/images/portfolio/explorer-nature.png", href: "/portfolio/explorer-nature" },
+    { title: "Orbital Agency", category: "3D Immersive Portfolio", image: "/images/portfolio/orbital-agency.png", href: "/portfolio/orbital-agency" }
+];
+
+const FeaturedProjectCarousel = ({ setIsMegaMenuOpen }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % FEATURED_PROJECTS.length);
+        }, 3500); // Change every 3.5 seconds
+        return () => clearInterval(timer);
+    }, []);
+
+    return (
+        <div className="relative w-full h-48 rounded-xl overflow-hidden border border-white/10 group bg-gray-900">
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={currentIndex}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="absolute inset-0"
+                >
+                    <img
+                        src={FEATURED_PROJECTS[currentIndex].image}
+                        alt={FEATURED_PROJECTS[currentIndex].title}
+                        className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                </motion.div>
+            </AnimatePresence>
+
+            <div className="absolute bottom-0 left-0 w-full p-5 z-10">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={currentIndex}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                        <h4 className="text-xl font-bold text-white mb-1 drop-shadow-lg">{FEATURED_PROJECTS[currentIndex].title}</h4>
+                        <p className="text-xs font-medium text-cyan-300 uppercase tracking-wider mb-3 drop-shadow-md">{FEATURED_PROJECTS[currentIndex].category}</p>
+                    </motion.div>
+                </AnimatePresence>
+
+                <Link
+                    href={FEATURED_PROJECTS[currentIndex].href}
+                    onClick={() => setIsMegaMenuOpen(false)}
+                    className="inline-flex items-center gap-2 text-xs font-bold text-white bg-white/10 hover:bg-white/20 pl-3 pr-2 py-1.5 rounded-full backdrop-blur-md border border-white/10 transition-all hover:scale-105"
+                >
+                    View Case Study
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </Link>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="absolute top-0 left-0 h-1 bg-white/10 w-full z-20">
+                <motion.div
+                    key={currentIndex}
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 3.5, ease: "linear" }}
+                    className="h-full bg-cyan-500"
+                />
+            </div>
+        </div>
+    );
+};
+
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false); // Mobile menu
@@ -320,13 +396,7 @@ const Navbar = () => {
                                 <div>
                                     <h3 className="text-sm font-bold tracking-widest text-gray-400 uppercase mb-6 border-b border-white/10 pb-2">Featured Work</h3>
                                     <div className="space-y-4">
-                                        <Link href="/portfolio/neonmarket" onClick={() => setIsMegaMenuOpen(false)} className="group block relative overflow-hidden rounded-xl h-40 border border-white/10">
-                                            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 to-black/50 group-hover:scale-105 transition-transform duration-700"></div>
-                                            <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                                                <h4 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">NeonMarket</h4>
-                                                <p className="text-sm text-gray-400">Next-gen Crypto Exchange</p>
-                                            </div>
-                                        </Link>
+                                        <FeaturedProjectCarousel setIsMegaMenuOpen={setIsMegaMenuOpen} />
                                     </div>
                                     <Link href="/portfolio" onClick={() => setIsMegaMenuOpen(false)} className="mt-4 inline-flex items-center text-sm font-bold text-cyan-400 hover:text-white transition-colors">
                                         View All Projects →

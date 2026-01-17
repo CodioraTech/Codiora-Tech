@@ -56,14 +56,14 @@ function Earth() {
 
     useFrame(({ clock }) => {
         const elapsedTime = clock.getElapsedTime();
-        earthRef.current.rotation.y = elapsedTime / 15; // Slower rotation
-        cloudsRef.current.rotation.y = elapsedTime / 12;
+        // earthRef.current.rotation.y = elapsedTime / 15; // STOPPED ROTATION
+        cloudsRef.current.rotation.y = elapsedTime / 20;
     });
 
     return (
         <group>
             {/* Earth Sphere */}
-            <mesh ref={earthRef} scale={[2.5, 2.5, 2.5]}>
+            <mesh ref={earthRef} scale={[2.5, 2.5, 2.5]} rotation={[0.2, 3.8, 0]}>
                 <sphereGeometry args={[1, 64, 64]} />
                 <meshPhongMaterial
                     map={colorMap}
@@ -85,7 +85,7 @@ function Earth() {
                 */}
             </mesh>
 
-            {/* Cloud Layer */}
+            {/* ... clouds ... */}
             <mesh ref={cloudsRef} scale={[2.53, 2.53, 2.53]}>
                 <sphereGeometry args={[1, 64, 64]} />
                 <meshStandardMaterial
@@ -131,8 +131,7 @@ const Globe3D = () => {
                     maxDistance={15}
                     enablePan={false}
                     enableRotate={true}
-                    autoRotate
-                    autoRotateSpeed={0.5}
+                    autoRotate={false} // Disable Auto Rotate
                 />
             </Canvas>
         </div>
