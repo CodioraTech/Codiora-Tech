@@ -147,9 +147,9 @@ export default function CareerApply() {
             return;
         }
 
-        const PUBLIC_KEY = 'r5FRZ6PBbEXsb074d';
-        const SERVICE_ID = 'service_6hxh39r';
-        const TEMPLATE_ID = 'template_6nzqg1r';
+        const PUBLIC_KEY = 'Hc7PljQ3BUkZ1oPy7';
+        const SERVICE_ID = 'service_ugzuqn3';
+        const TEMPLATE_ID = 'template_e0abhoq';
 
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
             .then((result) => {

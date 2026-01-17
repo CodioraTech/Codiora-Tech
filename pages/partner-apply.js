@@ -1,17 +1,29 @@
 import Head from 'next/head';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 export default function PartnerApply() {
     const [status, setStatus] = useState('idle');
+    const form = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setStatus('submitting');
-        // Simulate submission
-        setTimeout(() => {
-            setStatus('success');
-        }, 1500);
+
+        const PUBLIC_KEY = 'r5FRZ6PBbEXsb074d';
+        const SERVICE_ID = 'service_6hxh39r';
+        const TEMPLATE_ID = 'template_6hm18xl';
+
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+            .then((result) => {
+                console.log(result.text);
+                setStatus('success');
+            }, (error) => {
+                console.log(error.text);
+                alert("Submission failed. Please try again or contact us directly.");
+                setStatus('idle');
+            });
     };
 
     return (
@@ -72,13 +84,14 @@ export default function PartnerApply() {
                                 <p className="text-gray-400">Your application has been successfully logged in our secure archives.</p>
                             </motion.div>
                         ) : (
-                            <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+                            <form ref={form} onSubmit={handleSubmit} className="space-y-8 relative z-10">
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-3">
                                         <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1">Organization Name</label>
                                         <input
                                             type="text"
+                                            name="organization_name"
                                             required
                                             placeholder="Acme Corp"
                                             className="w-full bg-[#111] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-pink-500 focus:bg-[#161616] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-gray-700 font-medium"
@@ -88,6 +101,7 @@ export default function PartnerApply() {
                                         <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1">Website / Portfolio</label>
                                         <input
                                             type="url"
+                                            name="website_link"
                                             required
                                             placeholder="https://"
                                             className="w-full bg-[#111] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-pink-500 focus:bg-[#161616] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-gray-700 font-medium"
@@ -99,6 +113,7 @@ export default function PartnerApply() {
                                     <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1">Contact Person</label>
                                     <input
                                         type="text"
+                                        name="contact_person"
                                         required
                                         placeholder="Your Name & Role"
                                         className="w-full bg-[#111] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-pink-500 focus:bg-[#161616] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-gray-700 font-medium"
@@ -108,9 +123,20 @@ export default function PartnerApply() {
                                 <div className="space-y-3">
                                     <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1">Alignment Strategy</label>
                                     <textarea
+                                        name="alignment_strategy"
+                                        required
+                                        placeholder="What is your core proposal for this alliance?"
+                                        className="w-full bg-[#111] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-pink-500 focus:bg-[#161616] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-gray-700 font-medium h-32 resize-none"
+                                    ></textarea>
+                                </div>
+
+                                <div className="space-y-3">
+                                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1">Market Vision</label>
+                                    <textarea
+                                        name="market_vision"
                                         required
                                         placeholder="Why Codiora? How do you see us dominating the market together?"
-                                        className="w-full bg-[#111] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-pink-500 focus:bg-[#161616] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-gray-700 font-medium h-40 resize-none"
+                                        className="w-full bg-[#111] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-pink-500 focus:bg-[#161616] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-gray-700 font-medium h-32 resize-none"
                                     ></textarea>
                                 </div>
 

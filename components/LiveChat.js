@@ -33,7 +33,7 @@ const KNOWLEDGE_BASE = [
             // Features
             'mobile ui', 'mobile ux', 'firebase', 'push notifications', 'in-app purchase', 'offline support', 'location based app', 'chat app',
             // Deployment
-            'app store deployment', 'play store deployment',
+            'app store deployment', 'play store deployment', '📱 Mobile Apps',
             // Industry specific
             'booking app', 'on demand app', 'fintech app', 'healthcare app', 'edtech app'
         ],

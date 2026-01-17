@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import TechMarquee from '@/components/TechMarquee';
 
 const servicesData = {
     'web-development': {
@@ -9,6 +10,7 @@ const servicesData = {
         subtitle: "High-performance web applications built for scale.",
         icon: "💎",
         features: ["Next.js & React", "Server Side Rendering", "Progressive Web Apps", "API Integration"],
+        techStack: ["React", "Next.js", "Node.js", "Tailwind", "TypeScript", "GraphQL", "MongoDB", "PostgreSQL"],
         content: "Blazing fast, SEO-optimized, and scalable. We architect web solutions using the bleeding edge of the Javascript ecosystem."
     },
     'mobile-app-development': {
@@ -16,6 +18,7 @@ const servicesData = {
         subtitle: "Native-feel cross-platform apps that dominate markets.",
         icon: "🚀",
         features: ["React Native / Flutter", "iOS & Android", "Offline Capabilities", "Smooth Animations"],
+        techStack: ["Flutter", "React Native", "Swift", "Kotlin", "Android Studio", "Xcode", "Firebase"],
         content: "Don't just build an app; create an experience. We deliver fluid, responsive, and powerful mobile applications that users love."
     },
     'ui-ux': {
@@ -23,6 +26,7 @@ const servicesData = {
         subtitle: "Award-winning designs that captivate and convert.",
         icon: "✨",
         features: ["User Research", "Wireframing & Prototyping", "Interaction Design", "Design Systems"],
+        techStack: ["Figma", "Adobe XD", "Sketch", "Framer", "Blender", "Three.js"],
         content: "Beauty meets function. Our design philosophy centers on creating intuitive, delightful, and memorable user journeys."
     },
     'devops': {
@@ -30,6 +34,7 @@ const servicesData = {
         subtitle: "Borderless infrastructure for the modern enterprise.",
         icon: "☁️",
         features: ["AWS/Azure/GCP", "Serverless Architecture", "CI/CD Pipelines", "Cloud Security"],
+        techStack: ["AWS", "Docker", "Kubernetes", "Terraform", "Jenkins", "Google Cloud", "Azure"],
         content: "Scale without limits. Our cloud-native solutions ensure your infrastructure is invisible, resilient, and infinitely scalable."
     },
     'ai-automation': {
@@ -37,6 +42,7 @@ const servicesData = {
         subtitle: "Cognitive computing that redefines possibility.",
         icon: "🧠",
         features: ["Predictive Analytics", "NLP & Chatbots", "Process Automation", "Computer Vision"],
+        techStack: ["Python", "TensorFlow", "PyTorch", "OpenAI API", "Pandas"],
         content: "We build sentient systems. From autonomous agents to predictive engines, we engineer intelligence that gives you an unfair advantage."
     },
     'digital-marketing': {
@@ -44,6 +50,7 @@ const servicesData = {
         subtitle: "Data-driven strategies to explode your user base.",
         icon: "📈",
         features: ["SEO & SEM", "Conversion Optimization", "Social Media Strategy", "Data Analytics"],
+        techStack: ["Google Analytics", "SEMrush", "Ahrefs", "HubSpot", "Hotjar"],
         content: "Building a great product is half the battle. We help you find your audience and turn them into loyal advocates through rigorous experimentation."
     }
 };
@@ -60,16 +67,23 @@ export default function ServiceDetail() {
             <Head>
                 <title>Codiora Tech | {service.title}</title>
             </Head>
-            <section className="min-h-screen bg-black text-white pt-32 pb-20 relative overflow-hidden">
+            <section className="min-h-screen bg-black text-white pt-80 pb-20 relative overflow-hidden">
                 {/* Background FX */}
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none mix-blend-overlay"></div>
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-900/20 rounded-full blur-[150px] pointer-events-none animate-pulse" />
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[150px] pointer-events-none animate-pulse delay-700" />
 
                 <div className="container mx-auto px-6 relative z-10">
-                    <Link href="/services" className="text-gray-400 hover:text-white mb-8 inline-block transition-colors">← Back to Services</Link>
+                    {/* Breadcrumbs */}
+                    <div className="flex items-center gap-3 text-xs md:text-sm font-mono text-cyan-500 mb-8 uppercase tracking-widest">
+                        <Link href="/" className="hover:text-white transition-colors">HOME</Link>
+                        <span className="text-gray-600">/</span>
+                        <Link href="/services" className="hover:text-white transition-colors">SERVICES</Link>
+                        <span className="text-gray-600">/</span>
+                        <span className="text-gray-300">{service.title}</span>
+                    </div>
 
-                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                    <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -114,6 +128,15 @@ export default function ServiceDetail() {
                             </ul>
                         </motion.div>
                     </div>
+                </div>
+
+                {/* Dedicated Tech Stack for this Service */}
+                <div className="border-t border-white/10 pt-16">
+                    <div className="container mx-auto px-6 mb-10 text-center">
+                        <h3 className="text-2xl font-bold text-gray-400 uppercase tracking-widest mb-2">Powering Technology</h3>
+                        <div className="w-16 h-1 bg-cyan-500 mx-auto rounded-full"></div>
+                    </div>
+                    <TechMarquee technologies={service.techStack} />
                 </div>
             </section>
         </>

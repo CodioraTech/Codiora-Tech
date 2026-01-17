@@ -42,7 +42,7 @@ export default function Careers() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
+                <div className="container mx-auto px-6 pt-44 pb-40 relative z-10">
                     <div className="text-center mb-24">
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}

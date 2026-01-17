@@ -42,7 +42,7 @@ export default function Team() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
+                <div className="container mx-auto px-6 pt-44 pb-40 relative z-10">
                     <div className="text-center mb-32">
                         <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="inline-block mb-4 px-4 py-1.5 rounded-full border border-gray-700 bg-gray-800/50 text-gray-300 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
                             Behind The Code

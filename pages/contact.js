@@ -58,9 +58,9 @@ export default function Contact() {
 
         // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS Public Key
         // You can find this in EmailJS Dashboard -> Account -> API Keys -> Public Key
-        const PUBLIC_KEY = 'r5FRZ6PBbEXsb074d';
+        const PUBLIC_KEY = 'Hc7PljQ3BUkZ1oPy7';
 
-        emailjs.sendForm('service_6hxh39r', 'template_6hm18xl', form.current, PUBLIC_KEY)
+        emailjs.sendForm('service_ugzuqn3', 'template_epvde7n', form.current, PUBLIC_KEY)
             .then((result) => {
                 console.log(result.text);
                 setStatus('success');
@@ -86,7 +86,7 @@ export default function Contact() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
+                <div className="container mx-auto px-6 pt-44 pb-20 relative z-10">
                     <div className="text-center mb-16">
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
@@ -99,10 +99,21 @@ export default function Contact() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2 }}
-                            className="text-xl text-gray-400"
+                            className="text-xl text-gray-400 mb-8"
                         >
                             Turn your vision into a digital masterpiece.
                         </motion.p>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                            className="inline-block"
+                        >
+                            <span className="px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 text-cyan-400 font-bold uppercase tracking-[0.2em] text-sm shadow-[0_0_20px_rgba(34,211,238,0.15)] backdrop-blur-md">
+                                Premium Web & Mobile Development Services
+                            </span>
+                        </motion.div>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
@@ -172,6 +183,7 @@ export default function Contact() {
                                                     <option value="Mobile App" className="bg-[#0a0a0a]">Mobile App Innovation</option>
                                                     <option value="UI/UX Design" className="bg-[#0a0a0a]">UI/UX Design</option>
                                                     <option value="AI & Automation" className="bg-[#0a0a0a]">AI & Automation</option>
+                                                    <option value="Growth Marketing" className="bg-[#0a0a0a]">Growth Marketing</option>
                                                     <option value="DevOps & Cloud" className="bg-[#0a0a0a]">DevOps & Cloud</option>
                                                     <option value="Other" className="bg-[#0a0a0a]">Other</option>
                                                 </select>
@@ -255,7 +267,7 @@ export default function Contact() {
                                         <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                     </div>
                                     <h3 className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Our Location</h3>
-                                    <p className="text-white font-bold text-lg">123 Innovation Drive, Tech City, Dhaka, Bangladesh</p>
+                                    <p className="text-white font-bold text-lg">Gulshan Lake Drive Road, Dhaka, Bangladesh, 1212</p>
                                 </div>
                             </motion.div>
 

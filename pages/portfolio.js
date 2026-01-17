@@ -24,7 +24,7 @@ export default function Portfolio() {
                 <meta name="description" content="Check out our latest projects and success stories." />
             </Head>
 
-            <section className="min-h-screen bg-gray-50 dark:bg-dark pt-32 pb-20 relative transition-colors duration-300">
+            <section className="min-h-screen bg-gray-50 dark:bg-dark pt-44 pb-20 relative transition-colors duration-300">
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[150px] pointer-events-none" />
 
                 <div className="container mx-auto px-6 relative z-10">

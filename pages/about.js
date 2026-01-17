@@ -21,7 +21,7 @@ export default function About() {
 
                 <div className="relative z-10">
                     {/* 1. Hero Manifesto */}
-                    <section className="pt-40 pb-32 px-6">
+                    <section className="pt-44 pb-32 px-6">
                         <div className="container mx-auto max-w-5xl text-center">
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.9 }}
