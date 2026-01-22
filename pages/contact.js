@@ -170,7 +170,7 @@ export default function Contact() {
                                             </div>
                                             <div className="space-y-2">
                                                 <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Phone Number <span className="text-cyan-500">*</span></label>
-                                                <input name="phone" type="tel" required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="+880 ..." />
+                                                <input name="phone" type="tel" required className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-cyan-500 focus:bg-black/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="+880 9611 317 892" />
                                             </div>
                                         </div>
 
@@ -259,7 +259,7 @@ export default function Contact() {
                                         <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                                     </div>
                                     <h3 className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Call Us</h3>
-                                    <p className="text-white font-bold text-lg">+880 123 456 7890</p>
+                                    <p className="text-white font-bold text-lg">+880 9611 317 892</p>
                                 </div>
 
                                 <div className="col-span-1 sm:col-span-2 bg-[#0a0a0a] border border-white/5 p-8 rounded-3xl hover:border-white/10 transition-colors group">

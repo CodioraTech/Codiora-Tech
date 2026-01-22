@@ -18,7 +18,7 @@ const faqs = [
         category: "Services",
         questions: [
             { q: "Do you work with early-stage startups?", a: "Yes. We love zero-to-one. If you have funding and a vision, we have the engineering firepower to get you to MVP and beyond in record time (typically 4-8 weeks)." },
-            { q: "What is your typical budget range?", a: "We prioritize quality. Our engagement typically starts from **$2,500** for small specific modules and **$5,000+** for full MVPs. We create custom quotes based on complexity, not hours." },
+            { q: "What is your typical budget range?", a: "We don't have a fixed budget range. Whatever your budget is, **contact us**! We will analyze your needs and provide the best possible solution tailored to your investment. Our goal is to provide value, regardless of the project size." },
             { q: "Do you offer white-label services?", a: "Yes. We frequently act as the silent engineering partner for major creative agencies and consultancy firms. We respect NDAs and seamless integration." },
             { q: "Do you offer post-launch support?", a: "Absolutely. Software is strict maintenance. We offer SLA-backed support packages to ensure your infrastructure never blinks." },
             { q: "Can you take over an existing codebase?", a: "Yes, but we audit first. We perform a 'Code Health Check' to identify technical debt and security risks before we commit to feature development or refactoring." },

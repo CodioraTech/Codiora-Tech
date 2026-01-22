@@ -161,9 +161,16 @@ const KNOWLEDGE_BASE = [
         score: 1
     },
     {
+        id: 'budget_flexible',
+        patterns: ['budget', 'price', 'cost', 'pricing', 'rate', 'how much', 'quote', 'money', 'expensive', 'cheap'],
+        response: "💰 **Flexible Pricing**: We don't have a fixed budget range. Whatever your budget is, **contact us**! We will analyze your needs and provide the best possible solution tailored to your investment.",
+        action: { label: 'Get a Quote', url: '/contact' },
+        score: 5
+    },
+    {
         id: 'contact',
         patterns: ['contact', 'email', 'phone', 'call', 'address', 'location', 'office'],
-        response: "You can connect with us directly:\n\n📧 **Email:** hello@codioratech.com\n📍 **HQ:** Dhaka, Bangladesh\n\nOr simply fill out our **Contact Form** for a priority response.",
+        response: "You can connect with us directly:\n\n📧 **Email:** hello@codioratech.com\n📞 **Phone:** +880 9611 317 892\n📍 **HQ:** Dhaka, Bangladesh\n\nOr simply fill out our **Contact Form** for a priority response.",
         action: { label: 'Contact Us', url: '/contact' },
         score: 2
     },
@@ -428,7 +435,7 @@ export default function LiveChat() {
                         {/* Suggestions */}
                         {!isTyping && messages.length < 3 && (
                             <div className="px-4 pb-2 bg-[#050505] flex gap-2 overflow-x-auto scrollbar-none snap-x">
-                                {['💰 Pricing?', '🚀 Web Dev', '📱 Mobile Apps', '📧 Contact'].map((tag, i) => (
+                                {['💰 Budget?', '🚀 Web Dev', '📱 Mobile Apps', '📧 Contact'].map((tag, i) => (
                                     <button
                                         key={i}
                                         onClick={() => sendSuggestion(tag)}
