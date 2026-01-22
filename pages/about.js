@@ -1,5 +1,5 @@
 import Head from 'next/head';
-
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import FounderMessage from '@/components/FounderMessage';
 
@@ -256,9 +256,9 @@ export default function About() {
                             <p className="text-2xl text-gray-400 mb-12 max-w-2xl mx-auto font-light">
                                 The future is waiting for no one. Let's build it together, today.
                             </p>
-                            <button className="px-12 py-5 rounded-full bg-white text-black font-bold text-lg hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all duration-300">
+                            <Link href="/contact" className="px-12 py-5 rounded-full bg-white text-black font-bold text-lg hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all duration-300 inline-block">
                                 Start Your Journey
-                            </button>
+                            </Link>
                         </div>
                     </section>
                 </div>
