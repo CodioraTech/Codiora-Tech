@@ -170,7 +170,7 @@ const KNOWLEDGE_BASE = [
     {
         id: 'contact',
         patterns: ['contact', 'email', 'phone', 'call', 'address', 'location', 'office'],
-        response: "You can connect with us directly:\n\n📧 **Email:** contact@codioratech.com\n📞 **Phone:** +880 9611 317 892\n📍 **HQ:** Dhaka, Bangladesh\n\nOr simply fill out our **Contact Form** for a priority response.",
+        response: "You can connect with us directly:\n\n📧 **Email:** contact@codioratech.com\n📞 **Phone:** +880 9611 317 892\n💬 **WhatsApp:** [+880 1772-445954](https://wa.me/8801772445954)\n📍 **HQ:** Dhaka, Bangladesh\n\nOr simply fill out our **Contact Form** for a priority response.",
         action: { label: 'Contact Us', url: '/contact' },
         score: 2
     },
