@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const teamMembers = [
     {
-        name: "Asif Mahamud Shaon",
+        name: "Alexander Sterling",
         role: "Founder & CEO",
         img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop", // Placeholder
         bio: "Visionary architect behind the Codiora ecosystem. Obsessed with scalable systems and pixel-perfect UIs."
