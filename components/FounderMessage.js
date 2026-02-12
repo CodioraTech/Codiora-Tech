@@ -32,7 +32,7 @@ export default function FounderMessage() {
                             <div className="relative w-16 h-16 rounded-full p-1 bg-gradient-to-br from-gray-700 to-black border border-white/10">
                                 <img
                                     src="/images/team/founder.jpg"
-                                    alt="Alexander Sterling"
+                                    alt="Hasan Mahmud"
                                     className="w-full h-full rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
                                     onError={(e) => {
                                         e.target.style.display = 'none';
@@ -41,7 +41,7 @@ export default function FounderMessage() {
                                 />
                             </div>
                             <div className="text-center">
-                                <h4 className="text-lg font-bold text-white">Alexander Sterling</h4>
+                                <h4 className="text-lg font-bold text-white">Hasan Mahmud</h4>
                                 <p className="text-xs font-bold text-cyan-500 uppercase tracking-widest mt-1">Founder & CEO</p>
                             </div>
                         </div>

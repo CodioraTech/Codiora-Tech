@@ -22,9 +22,9 @@ const philosophy = [
 
 const leaders = [
     {
-        name: "Alexander Sterling",
+        name: "Hasan Mahmud",
         role: "Founder & CEO",
-        bio: "The visionary architect of the Codiora ecosystem. Alexander combines deep technical prowess with a relentless drive for perfection. He leads by code, ensuring every system is scalable, secure, and aesthetic.",
+        bio: "The visionary architect of the Codiora ecosystem. Hasan combines deep technical prowess with a relentless drive for perfection. He leads by code, ensuring every system is scalable, secure, and aesthetic.",
         superpower: "System Architecture",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop",
         socials: { linkedin: "#", twitter: "#" }
