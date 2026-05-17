@@ -57,7 +57,7 @@ export default function Blog() {
                 <title>Codiora Tech | Engineering Blog</title>
             </Head>
 
-            <div className="bg-[#020202] min-h-screen text-white overflow-hidden selection:bg-orange-500/30">
+            <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-orange-500/30">
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[-10%] right-[0%] w-[800px] h-[800px] bg-orange-900/10 rounded-full blur-[150px] animate-pulse-slow" />
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
@@ -75,7 +75,7 @@ export default function Blog() {
                         >
                             ENGINEERING <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">SIGNAL</span>
                         </motion.h1>
-                        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                        <p className="text-xl text-slate-500 max-w-3xl mx-auto">
                             No fluff. No marketing jargon. Just deep dives into the problems we solve and the technologies we bet on.
                         </p>
                     </div>
@@ -86,16 +86,16 @@ export default function Blog() {
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
-                                className="group relative rounded-[2.5rem] overflow-hidden bg-[#0a0a0a] border border-white/10 aspect-[16/9] md:aspect-[21/9] cursor-pointer"
+                                className="group relative rounded-[2.5rem] overflow-hidden bg-white border border-[#122a46]/10 aspect-[16/9] md:aspect-[21/9] cursor-pointer"
                             >
                                 <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${posts[0].image})` }}>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#f8fafc] via-black/50 to-transparent"></div>
                                 </div>
                                 <div className="absolute bottom-0 left-0 p-8 md:p-16 w-full md:w-2/3">
                                     <div className="text-orange-400 font-bold uppercase tracking-widest mb-4 text-sm">{posts[0].category}</div>
                                     <h2 className="text-3xl md:text-5xl font-bold mb-6 hover:underline decoration-orange-500 underline-offset-8 decoration-2">{posts[0].title}</h2>
-                                    <p className="text-gray-300 text-lg md:text-xl line-clamp-2 md:line-clamp-none mb-8">{posts[0].excerpt}</p>
-                                    <div className="flex items-center gap-6 text-sm font-mono text-gray-400">
+                                    <p className="text-slate-600 text-lg md:text-xl line-clamp-2 md:line-clamp-none mb-8">{posts[0].excerpt}</p>
+                                    <div className="flex items-center gap-6 text-sm font-mono text-slate-500">
                                         <span>{posts[0].date}</span>
                                         <span>•</span>
                                         <span>{posts[0].readTime}</span>
@@ -115,9 +115,9 @@ export default function Blog() {
                                     transition={{ delay: i * 0.1 }}
                                     className="group cursor-pointer"
                                 >
-                                    <div className="rounded-[2rem] overflow-hidden mb-8 border border-white/10 relative aspect-[4/3]">
+                                    <div className="rounded-[2rem] overflow-hidden mb-8 border border-[#122a46]/10 relative aspect-[4/3]">
                                         <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${post.image})` }}>
-                                            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                                            <div className="absolute inset-0 bg-[#f8fafc]/20 group-hover:bg-transparent transition-colors"></div>
                                         </div>
                                     </div>
                                     <div className="space-y-4">
@@ -126,7 +126,7 @@ export default function Blog() {
                                             <span className="text-gray-600 text-xs font-mono">{post.readTime}</span>
                                         </div>
                                         <h3 className="text-2xl md:text-3xl font-bold group-hover:text-orange-500 transition-colors">{post.title}</h3>
-                                        <p className="text-gray-400 leading-relaxed">{post.excerpt}</p>
+                                        <p className="text-slate-500 leading-relaxed">{post.excerpt}</p>
                                     </div>
                                 </motion.div>
                             </Link>
@@ -134,12 +134,12 @@ export default function Blog() {
                     </div>
 
                     {/* Newsletter */}
-                    <div className="mt-40 p-12 bg-white/5 border border-white/5 rounded-[2.5rem] text-center">
+                    <div className="mt-40 p-12 bg-[#122a46]/5 border border-[#122a46]/5 rounded-[2.5rem] text-center">
                         <h3 className="text-3xl font-bold mb-4">Stay in the Loop</h3>
-                        <p className="text-gray-400 mb-8">Get the latest engineering deep dives delivered to your inbox.</p>
+                        <p className="text-slate-500 mb-8">Get the latest engineering deep dives delivered to your inbox.</p>
                         <form className="max-w-md mx-auto flex gap-4">
-                            <input type="email" placeholder="email@address.com" className="flex-1 bg-black border border-white/20 rounded-full px-6 py-4 text-white outline-none focus:border-orange-500 transition-colors" />
-                            <button className="bg-orange-600 text-white font-bold px-8 py-4 rounded-full hover:bg-orange-500 transition-colors">Subscribe</button>
+                            <input type="email" placeholder="email@address.com" className="flex-1 bg-[#f8fafc] border border-[#122a46]/20 rounded-full px-6 py-4 text-[#122a46] outline-none focus:border-orange-500 transition-colors" />
+                            <button className="bg-orange-600 text-[#122a46] font-bold px-8 py-4 rounded-full hover:bg-orange-500 transition-colors">Subscribe</button>
                         </form>
                     </div>
                 </div>

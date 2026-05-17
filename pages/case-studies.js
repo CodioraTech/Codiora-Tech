@@ -61,17 +61,17 @@ export default function CaseStudies() {
                 <meta name="description" content="See how we've transformed businesses with technology." />
             </Head>
 
-            <section className="min-h-screen bg-gray-50 dark:bg-dark pt-32 pb-20 transition-colors duration-300">
+            <section className="min-h-screen bg-gray-50 dark:bg-[#f8fafc] pt-32 pb-20 transition-colors duration-300">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16">
                         <motion.h1
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl md:text-7xl font-bold mb-6 text-gray-900 dark:text-white"
+                            className="text-5xl md:text-7xl font-bold mb-6 text-gray-900 dark:text-[#122a46]"
                         >
                             Success <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Stories</span>
                         </motion.h1>
-                        <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                        <p className="text-xl text-gray-600 dark:text-slate-500 max-w-2xl mx-auto">
                             Real problems. Real solutions. Real results.
                         </p>
                     </div>
@@ -83,8 +83,8 @@ export default function CaseStudies() {
                                 key={cat}
                                 onClick={() => setFilter(cat)}
                                 className={`px-6 py-2 rounded-full border text-sm font-bold transition-all ${filter === cat
-                                        ? 'bg-black dark:bg-white text-white dark:text-black border-transparent scale-105'
-                                        : 'bg-transparent border-gray-300 dark:border-white/20 text-gray-600 dark:text-gray-400 hover:border-gray-900 dark:hover:border-white'
+                                        ? 'bg-[#f8fafc] dark:bg-white text-[#122a46] dark:text-black border-transparent scale-105'
+                                        : 'bg-transparent border-gray-300 dark:border-[#122a46]/20 text-gray-600 dark:text-slate-500 hover:border-gray-900 dark:hover:border-white'
                                     }`}
                             >
                                 {cat}

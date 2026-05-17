@@ -64,10 +64,10 @@ const Card = ({ i, title, description, src, role, color, shadow, progress, range
             <motion.div
                 style={{
                     scale,
-                    backgroundColor: '#050505',
+                    backgroundColor: '#ffffff',
                     top: `calc(-5vh + ${i * 25}px)`
                 }}
-                className={`flex flex-col items-center justify-center relative w-[90vw] md:w-[900px] h-[500px] rounded-[2.5rem] p-8 md:p-16 border border-white/10 origin-top shadow-2xl ${shadow}`}
+                className={`flex flex-col items-center justify-center relative w-[90vw] md:w-[900px] h-[500px] rounded-[2.5rem] p-8 md:p-16 border border-[#122a46]/10 origin-top shadow-2xl ${shadow}`}
             >
                 {/* Background Ambient Glow */}
                 <div className={`absolute top-[-50%] left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-gradient-to-b ${color} opacity-10 blur-[100px] pointer-events-none`} />
@@ -80,7 +80,7 @@ const Card = ({ i, title, description, src, role, color, shadow, progress, range
                 </div>
 
                 {/* Quote Text */}
-                <h2 className="text-2xl md:text-4xl font-medium leading-normal text-white/90 text-center mb-12 max-w-2xl relative z-10 tracking-tight">
+                <h2 className="text-2xl md:text-4xl font-medium leading-normal text-[#122a46]/90 text-center mb-12 max-w-2xl relative z-10 tracking-tight">
                     "{title}"
                 </h2>
 
@@ -88,18 +88,18 @@ const Card = ({ i, title, description, src, role, color, shadow, progress, range
                 <div className="flex flex-col items-center gap-3 relative z-10">
                     <div className="relative">
                         <div className={`w-14 h-14 rounded-full p-0.5 bg-gradient-to-br ${color}`}>
-                            <div className="w-full h-full rounded-full bg-black overflow-hidden relative">
+                            <div className="w-full h-full rounded-full bg-[#f8fafc] overflow-hidden relative">
                                 {/* Use src for image or fallback to initials */}
                                 {src.includes('http') ? (
                                     <img src={src} alt={description} className="w-full h-full object-cover" />
                                 ) : (
-                                    <div className="w-full h-full bg-white/10 flex items-center justify-center text-white font-bold">{src}</div>
+                                    <div className="w-full h-full bg-[#122a46]/10 flex items-center justify-center text-[#122a46] font-bold">{src}</div>
                                 )}
                             </div>
                         </div>
                     </div>
                     <div className="text-center">
-                        <div className="text-lg font-bold text-white tracking-wide">{description}</div>
+                        <div className="text-lg font-bold text-[#122a46] tracking-wide">{description}</div>
                         <div className={`text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r ${color} uppercase tracking-widest mt-0.5`}>
                             {role}
                         </div>
@@ -123,18 +123,18 @@ export default function Testimonials() {
                 <title>Codiora Tech | Client Stories</title>
             </Head>
 
-            <main ref={container} className="bg-[#020202] relative min-h-[300vh]">
+            <main ref={container} className="bg-[#f8fafc] relative min-h-[300vh]">
 
                 {/* Header Section */}
-                <div className="h-[70vh] flex flex-col items-center justify-center sticky top-0 bg-[#020202] z-0 px-6">
+                <div className="h-[70vh] flex flex-col items-center justify-center sticky top-0 bg-[#f8fafc] z-0 px-6">
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="text-center"
                     >
-                        <h3 className="text-gray-500 font-bold uppercase tracking-[0.3em] text-sm mb-6">Trusted by Visionaries</h3>
-                        <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 text-white">
+                        <h3 className="text-slate-500 font-bold uppercase tracking-[0.3em] text-sm mb-6">Trusted by Visionaries</h3>
+                        <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 text-[#122a46]">
                             STORIES
                         </h1>
                     </motion.div>
@@ -162,11 +162,11 @@ export default function Testimonials() {
                 </div>
 
                 {/* Call To Action Footer */}
-                <div className="h-[80vh] flex flex-col items-center justify-center bg-[#050505] relative z-20 border-t border-white/10">
+                <div className="h-[80vh] flex flex-col items-center justify-center bg-[#f8fafc] relative z-20 border-t border-[#122a46]/10">
                     <div className="text-center px-6">
-                        <p className="text-gray-500 mb-6 uppercase tracking-widest text-sm font-bold">Ready to Scale?</p>
-                        <h2 className="text-5xl md:text-7xl font-bold text-white mb-10">Your Story <br /> Starts Here.</h2>
-                        <a href="/contact" className="inline-block px-12 py-5 bg-white text-black text-lg font-bold rounded-full hover:scale-105 transition-transform shadow-[0_0_40px_rgba(255,255,255,0.15)]">
+                        <p className="text-slate-500 mb-6 uppercase tracking-widest text-sm font-bold">Ready to Scale?</p>
+                        <h2 className="text-5xl md:text-7xl font-bold text-[#122a46] mb-10">Your Story <br /> Starts Here.</h2>
+                        <a href="/contact" className="inline-block px-12 py-5 bg-[#122a46] text-white text-lg font-bold rounded-full hover:bg-teal-500 hover:scale-105 transition-all shadow-[0_0_40px_rgba(18,42,70,0.2)]">
                             Start Project
                         </a>
                     </div>

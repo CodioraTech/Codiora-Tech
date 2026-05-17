@@ -8,7 +8,7 @@ export default function WhyUs() {
                 <title>Codiora Tech | Why Choose Us</title>
                 <meta name="description" content="Why Codiora Tech is the right partner for your digital transformation." />
             </Head>
-            <div className="pt-24 min-h-screen bg-white dark:bg-dark">
+            <div className="pt-24 min-h-screen bg-white dark:bg-[#f8fafc]">
                 <WhyCodiora />
             </div>
         </>

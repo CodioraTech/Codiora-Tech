@@ -26,7 +26,7 @@ export default function TrustBadges() {
         },
         {
             text: "24/7 Support",
-            color: "text-cyan-400",
+            color: "text-teal-600",
             shadow: "group-hover:shadow-cyan-400/20",
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -50,7 +50,7 @@ export default function TrustBadges() {
     ];
 
     return (
-        <section className="py-24 bg-[#020202] border-t border-white/5 relative overflow-hidden">
+        <section className="py-24 bg-[#f8fafc] border-t border-[#122a46]/5 relative overflow-hidden">
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -67,20 +67,20 @@ export default function TrustBadges() {
                             whileHover={{ scale: 1.05, y: -2 }}
                             viewport={{ once: true }}
                             transition={{ type: "spring", stiffness: 300 }}
-                            className={`group flex items-center gap-4 px-8 py-5 rounded-2xl bg-[#080808] border border-white/5 hover:border-white/20 transition-all duration-300 shadow-lg ${badge.shadow} cursor-default relative overflow-hidden`}
+                            className={`group flex items-center gap-4 px-8 py-5 rounded-2xl bg-white border border-[#122a46]/5 hover:border-[#122a46]/20 transition-all duration-300 shadow-lg ${badge.shadow} cursor-default relative overflow-hidden`}
                         >
                             {/* Inner Glow Gradient */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
 
-                            <div className={`relative z-10 p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors ${badge.color}`}>
+                            <div className={`relative z-10 p-2 rounded-lg bg-[#122a46]/5 group-hover:bg-[#122a46]/10 transition-colors ${badge.color}`}>
                                 {badge.icon}
                             </div>
 
                             <div className="flex flex-col">
-                                <span className="font-bold text-sm uppercase tracking-[0.1em] text-gray-400 group-hover:text-white transition-colors">
+                                <span className="font-bold text-sm uppercase tracking-[0.1em] text-slate-500 group-hover:text-[#122a46] transition-colors">
                                     {badge.text}
                                 </span>
-                                <span className="text-[10px] text-gray-600 group-hover:text-gray-500 font-medium tracking-wide">
+                                <span className="text-[10px] text-gray-600 group-hover:text-slate-500 font-medium tracking-wide">
                                     Verified & Secure
                                 </span>
                             </div>

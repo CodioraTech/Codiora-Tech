@@ -10,7 +10,7 @@ const reasons = [
 
 export default function WhyCodiora() {
     return (
-        <section className="py-24 bg-white dark:bg-dark relative transition-colors duration-300">
+        <section className="py-24 bg-white dark:bg-[#f8fafc] relative transition-colors duration-300">
             <div className="container mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -21,7 +21,7 @@ export default function WhyCodiora() {
                     <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600 mb-4">
                         Why Codiora Tech?
                     </h2>
-                    <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <p className="text-gray-600 dark:text-slate-500 max-w-2xl mx-auto">
                         We define excellence in digital engineering.
                     </p>
                 </motion.div>
@@ -35,14 +35,14 @@ export default function WhyCodiora() {
                             whileHover={{ scale: 1.05, y: -5 }}
                             transition={{ delay: idx * 0.1 }}
                             viewport={{ once: true }}
-                            className="card bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300"
+                            className="card bg-gray-50 dark:bg-[#122a46]/5 border border-black/5 dark:border-[#122a46]/10 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300"
                         >
                             <div className="card-body items-center text-center p-6">
-                                <div className="text-4xl mb-4 bg-white dark:bg-white/10 p-4 rounded-full shadow-sm">
+                                <div className="text-4xl mb-4 bg-white dark:bg-[#122a46]/10 p-4 rounded-full shadow-sm">
                                     {item.icon}
                                 </div>
-                                <h3 className="card-title text-gray-900 dark:text-white text-lg">{item.title}</h3>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">{item.desc}</p>
+                                <h3 className="card-title text-gray-900 dark:text-[#122a46] text-lg">{item.title}</h3>
+                                <p className="text-sm text-slate-500 dark:text-slate-500">{item.desc}</p>
                             </div>
                         </motion.div>
                     ))}

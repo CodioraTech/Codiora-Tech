@@ -9,13 +9,13 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: '#0F172A', // Deep Slate
-                accent: '#00E5FF',  // Neon Cyan
-                highlight: '#FF2E63', // Neon Pink/Red for bold accents
-                secondary: '#6C63FF', // Soft Purple
-                dark: '#050505',
-                glass: 'rgba(255, 255, 255, 0.05)',
-                'glass-hover': 'rgba(255, 255, 255, 0.1)',
+                primary: '#122a46', // Navy
+                accent: '#14b8a6',  // Teal
+                highlight: '#f59e0b', // Amber
+                secondary: '#475569', // Slate
+                dark: '#f8fafc', // Mapped to Light Slate for bg-dark
+                glass: 'rgba(18, 42, 70, 0.05)',
+                'glass-hover': 'rgba(18, 42, 70, 0.1)',
             },
             fontFamily: {
                 sans: ['Poppins', 'sans-serif'],
@@ -28,6 +28,6 @@ module.exports = {
     },
     plugins: [require("daisyui")],
     daisyui: {
-        themes: ["dark", "luxury"],
+        themes: ["light"],
     },
 }

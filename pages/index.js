@@ -1,348 +1,611 @@
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
-import ServiceCard from '@/components/ServiceCard';
-import Testimonials from '@/components/Testimonials';
 import Link from 'next/link';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import TechMarquee from '@/components/TechMarquee';
+import { motion, useInView } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
 
-// New Components
-import LeadMagnet from '@/components/LeadMagnet';
-import ServiceNetwork from '@/components/ServiceNetwork';
-import TrustBadges from '@/components/TrustBadges';
+const FAQItem = ({ q, a, isOpen, onToggle }) => {
+    return (
+        <div className={`faq-item ${isOpen ? 'open' : ''}`}>
+            <button className="faq-q" onClick={onToggle}>
+                <span>{q}</span><div className="faq-icon">+</div>
+            </button>
+            {isOpen && <div className="faq-a">{a}</div>}
+        </div>
+    );
+};
 
-// Lazy Loaded Components
-const Hero3D = dynamic(() => import('@/components/Hero3D'), {
-    ssr: false,
-    loading: () => <div className="fixed inset-0 bg-white dark:bg-dark z-0 transition-colors duration-300" />
-});
-
-export default function Home() {
-    const services = [
-        { title: "Web Architecture", description: "High-performance web applications built with Next.js and React for ultimate scalability.", icon: "💎" },
-        { title: "Mobile Innovation", description: "Native-feel cross-platform apps that dominate the App Store and Play Store.", icon: "🚀" },
-        { title: "Immersive UI/UX", description: "Award-winning designs that captivate users and drive engagement.", icon: "✨" },
-        { title: "Enterprise AI", description: "Custom AI models and chatbots to automate and optimize your business flows.", icon: "🧠" },
-        { title: "Cloud Infrastructure", description: "Secure, scalable server solutions ensuring 99.99% uptime for your critical apps.", icon: "☁️" },
-        { title: "Cyber Security", description: "Advanced protection protocols to safeguard your digital assets.", icon: "🛡️" },
-    ];
-
-    // Mouse position state for parallax text
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    // Smooth spring for the parallax effect
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const mouseSpringX = useSpring(x, { stiffness: 100, damping: 20 });
-    const mouseSpringY = useSpring(y, { stiffness: 100, damping: 20 });
+const CountUpAnimation = ({ start = 0, end, suffix = "", prefix = "", duration = 4, isKilo = false }) => {
+    const [count, setCount] = useState(start);
+    const ref = useRef(null);
+    const inView = useInView(ref, { once: true });
 
     useEffect(() => {
-        // Only enable parallax on desktop to save battery and reduce jitter on mobile
-        if (typeof window !== 'undefined' && window.innerWidth > 768) {
-            const handleMouseMove = (e) => {
-                const normalizedX = (e.clientX / window.innerWidth) * 2 - 1;
-                const normalizedY = (e.clientY / window.innerHeight) * 2 - 1;
-
-                x.set(normalizedX * 20); // Reduced movement for subtlety
-                y.set(normalizedY * 20);
+        if (inView) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+                
+                // easeOutQuad
+                const easeOut = progress * (2 - progress);
+                const currentVal = start + (end - start) * easeOut;
+                setCount(Math.floor(currentVal));
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
             };
-
-            window.addEventListener('mousemove', handleMouseMove);
-            return () => window.removeEventListener('mousemove', handleMouseMove);
+            window.requestAnimationFrame(step);
         }
-    }, [x, y]);
+    }, [inView, start, end, duration]);
 
+    let displayStr = count;
+    if (isKilo) {
+        if (count >= 1000) displayStr = `1M`;
+        else displayStr = `${count}k`;
+    }
+
+    return (
+        <span ref={ref}>
+            {prefix}{displayStr}{suffix}
+        </span>
+    );
+};
+
+export default function Home() {
+    const [openFaq, setOpenFaq] = useState(0);
+    const [activeProcess, setActiveProcess] = useState(1);
 
     return (
         <>
             <Head>
-                <title>Codiora Tech | Future of Digital</title>
-                <meta name="description" content="Codiora Tech - Innovating Your Digital Future. Premium IT Solutions." />
+                <title>Codiora Tech | Innovating Your Digital Future</title>
+                <meta name="description" content="Codiora Tech partners with startups & businesses to engineer high-performance web apps, mobile platforms, and AI-powered solutions." />
             </Head>
 
-            {/* Fixed Animated Background */}
-            <div className="fixed inset-0 z-0 pointer-events-none">
-                <Hero3D />
-                <div className="absolute inset-0 bg-white/20 dark:bg-dark/20 z-10 pointer-events-none" />
-            </div>
+            <div className="landing-wrapper">
+                
+                {/* HERO */}
+                <section className="hero">
+                    <div className="hero-mesh">
+                        <motion.div initial={{opacity:0, scale:0.8}} animate={{opacity:0.45, scale:1}} transition={{duration:1}} className="mesh-blob blob1"></motion.div>
+                        <motion.div initial={{opacity:0, scale:0.8}} animate={{opacity:0.45, scale:1}} transition={{duration:1, delay:0.2}} className="mesh-blob blob2"></motion.div>
+                        <motion.div initial={{opacity:0, scale:0.8}} animate={{opacity:0.45, scale:1}} transition={{duration:1, delay:0.4}} className="mesh-blob blob3"></motion.div>
+                    </div>
+                    <div className="hero-grid"></div>
+                    <div className="hero-inner">
+                        <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.5, delay:0.1}} className="hero-badge">
+                            <span className="badge-dot"></span>
+                            <span className="badge-text">Currently accepting new clients for Q3 2026</span>
+                        </motion.div>
+                        <motion.h1 initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.2}}>
+                            We Build<br/><span className="hl">Scalable Products</span><br/>Clients Love.
+                        </motion.h1>
+                        <motion.p initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.35}} className="hero-sub">
+                            Codiora Tech partners with startups & businesses to engineer <strong>high-performance web apps, mobile platforms, and AI-powered solutions</strong>, on time, on budget, no surprises.
+                        </motion.p>
+                        <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.5}} className="hero-actions">
+                            <Link href="/contact" className="cta-main">Start Your Project <span style={{opacity:0.8}}>→</span></Link>
+                            <Link href="/portfolio" className="cta-sec">See Our Work <span style={{color:'var(--text3)'}}>↗</span></Link>
+                        </motion.div>
+                        <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.65}} className="hero-trust">
+                            <div className="trust-avatars">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client 1" className="avatar" />
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client 2" className="avatar" />
+                                <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="Client 3" className="avatar" />
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client 4" className="avatar" />
+                            </div>
+                            <div className="trust-text"><strong>Trusted by 60+ clients</strong>across 12 countries</div>
+                            <div className="trust-sep"></div>
+                            <div className="rating">
+                                <span style={{fontSize:'13px',color:'var(--text2)',fontWeight:500}}>4.9/5 Average Rating</span>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
 
-            {/* Hero Content Section */}
-            <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden z-10 py-20">
-                <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto w-full pointer-events-none">
-                    <motion.div
-                        style={{ x: mouseSpringX, y: mouseSpringY }}
-                        className="relative flex flex-col items-center pointer-events-auto"
-                    >
-                        {/* Mobile-only backdrop for readability over 3D element */}
-                        <div className="md:contents rounded-3xl bg-black/40 backdrop-blur-md md:bg-transparent md:backdrop-blur-none p-8 md:p-0 border border-white/10 md:border-none shadow-2xl md:shadow-none inline-flex flex-col items-center">
-
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 1 }}
-                                className="mb-6 inline-block px-5 py-2 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs sm:text-sm font-bold tracking-[0.2em] uppercase backdrop-blur-md"
-                            >
-                                Welcome to the Future
-                            </motion.div>
-
-                            <motion.h1
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.2 }}
-                                className="text-5xl sm:text-7xl md:text-9xl font-black mb-6 tracking-tighter leading-[0.9] sm:leading-tight drop-shadow-2xl md:drop-shadow-none"
-                            >
-                                <span className="text-gray-900 dark:text-white transition-colors block mb-2 sm:mb-0 text-shadow-sm">Innovating Your</span>
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-gray-900 to-secondary dark:via-white glow-text block pb-2">
-                                    Digital Universe
-                                </span>
-                            </motion.h1>
-
-                            <motion.p
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.8, delay: 0.4 }}
-                                className="text-base sm:text-lg md:text-2xl text-gray-200 md:text-gray-600 md:dark:text-gray-400 mb-10 max-w-xl sm:max-w-2xl mx-auto font-light leading-relaxed transition-colors px-2 drop-shadow-md md:drop-shadow-none"
-                            >
-                                We build immersive digital experiences that define the next generation of the web.
-                            </motion.p>
+                {/* LOGO BAR */}
+                <div className="logo-bar">
+                    <div className="logo-bar-inner">
+                        <div className="logo-bar-label">Trusted by teams at</div>
+                        <div className="client-logos">
+                            <div className="client-logo">NexaCorp</div>
+                            <div className="client-logo">BrightMed</div>
+                            <div className="client-logo">UrbanCart</div>
+                            <div className="client-logo">Finvault</div>
+                            <div className="client-logo">HealthOS</div>
+                            <div className="client-logo">LogiTrack</div>
+                            <div className="client-logo">AeroBase</div>
                         </div>
+                    </div>
+                </div>
+
+                {/* STATS */}
+                <div className="stats-strip">
+                    <div className="stats-inner">
+                        <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.1}} className="stat-cell">
+                            <div className="stat-num"><CountUpAnimation end={60} suffix="+" duration={4} /></div>
+                            <div className="stat-label">Projects successfully delivered</div>
+                        </motion.div>
+                        <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.2}} className="stat-cell">
+                            <div className="stat-num"><CountUpAnimation end={98} suffix="%" duration={4} /></div>
+                            <div className="stat-label">Client satisfaction rate</div>
+                        </motion.div>
+                        <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.3}} className="stat-cell">
+                            <div className="stat-num"><CountUpAnimation start={100} end={1000} isKilo={true} suffix="+" duration={4} /></div>
+                            <div className="stat-label">Lines of production code</div>
+                        </motion.div>
+                        <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.4}} className="stat-cell">
+                            <div className="stat-num"><CountUpAnimation end={24} suffix="h" duration={4} /></div>
+                            <div className="stat-label">Guaranteed first response</div>
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* SERVICES */}
+                <section className="services-section section">
+                    <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.6}} className="services-head">
+                        <div>
+                            <div className="chip">What We Build</div>
+                            <h2 className="s-title">End-to-End Digital<br/>Engineering Services</h2>
+                        </div>
+                        <p className="s-sub" style={{maxWidth:'380px',fontSize:'15px'}}>From a single feature to a full product, we cover every layer of your tech stack.</p>
                     </motion.div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 relative z-10">
+                        {/* Service 1 */}
+                        <Link href="/services/web-architecture" className="block outline-none">
+                            <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
+                                <div className="flex justify-between items-start mb-10">
+                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">01</div>
+                                    <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Web Architecture</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">Scalable SPAs, SSR apps, and enterprise platforms. We architect systems that grow with your business without tech debt.</p>
+                            </motion.div>
+                        </Link>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.6 }}
-                        className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center pointer-events-auto items-center w-full max-w-sm sm:max-w-none mx-auto relative z-30"
-                    >
-                        {/* Primary Button */}
-                        <Link href="/contact" className="group relative w-full sm:w-auto px-8 py-4 bg-transparent overflow-hidden rounded-full flex justify-center shadow-lg shadow-accent/20">
-                            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-accent to-secondary opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
-                            <div className="absolute -inset-3 bg-gradient-to-r from-accent to-secondary rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-300 group-hover:duration-200 animate-tilt"></div>
+                        {/* Service 2 */}
+                        <Link href="/services/mobile-innovation" className="block outline-none">
+                            <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
+                                <div className="flex justify-between items-start mb-10">
+                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">02</div>
+                                    <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Mobile Development</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">Cross-platform and native apps that feel native. Smooth UX, offline-first architecture, and AppStore-ready delivery.</p>
+                            </motion.div>
+                        </Link>
 
-                            <div className="relative flex items-center gap-3 text-white dark:text-dark font-black tracking-wider uppercase text-sm">
-                                <span>Start Project</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                                </svg>
+                        {/* Service 3 */}
+                        <Link href="/services/immersive-ui-ux" className="block outline-none">
+                            <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
+                                <div className="flex justify-between items-start mb-10">
+                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">03</div>
+                                    <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">UI/UX Design</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">Research-led design that converts. From wireframes to pixel-perfect Figma files, every interaction is intentional.</p>
+                            </motion.div>
+                        </Link>
+
+                        {/* Service 4 */}
+                        <Link href="/services/devops-cloud" className="block outline-none">
+                            <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
+                                <div className="flex justify-between items-start mb-10">
+                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">04</div>
+                                    <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">DevOps & Cloud</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">CI/CD pipelines, Kubernetes, and auto-scaling infrastructure on AWS, GCP, or Azure. Zero-downtime deployments.</p>
+                            </motion.div>
+                        </Link>
+
+                        {/* Service 5 */}
+                        <Link href="/services/ai-automation" className="block outline-none">
+                            <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
+                                <div className="flex justify-between items-start mb-10">
+                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">05</div>
+                                    <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">AI & Automation</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">LLM integrations, custom ML pipelines, intelligent chatbots. Real AI that solves real business problems, not just demos.</p>
+                            </motion.div>
+                        </Link>
+
+                        {/* Service 6 */}
+                        <Link href="/services/growth-marketing" className="block outline-none">
+                            <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
+                                <div className="flex justify-between items-start mb-10">
+                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">06</div>
+                                    <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Growth Marketing</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">Technical SEO, analytics infra, A/B testing, and conversion optimization. Growth engineered on data, not guesswork.</p>
+                            </motion.div>
+                        </Link>
+                    </div>
+                </section>
+
+                {/* WHY US */}
+                <div className="why-section-wrap">
+                    <section className="why-section section">
+                        <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.6}}>
+                            <div className="chip">Why Codiora</div>
+                            <h2 className="s-title">What Sets Us Apart</h2>
+                        </motion.div>
+                        <div className="why-grid">
+                            <motion.div initial={{opacity:0, scale:0.95}} whileInView={{opacity:1, scale:1}} viewport={{once:true}} transition={{duration:0.5}} className="why-card featured">
+                                <div>
+                                    <div className="why-metric">38%</div>
+                                    <div className="why-metric-label">Faster delivery than industry average</div>
+                                    <div className="why-metric-sub">Our battle-tested workflows, reusable component systems, and dedicated project managers mean you get to market faster without cutting corners on quality.</div>
+                                </div>
+                                <div>
+                                    <div className="why-title">Speed Without Compromise</div>
+                                    <div className="why-desc">We've refined our dev process across 60+ projects. Agile sprints, daily standups, and weekly demos keep everyone aligned and shipping consistently.</div>
+                                    <div style={{display:'flex',gap:'10px',marginTop:'20px',flexWrap:'wrap'}}>
+                                        <div style={{fontSize:'12px',padding:'4px 12px',borderRadius:'4px',background:'rgba(79,142,247,0.08)',border:'1px solid rgba(79,142,247,0.15)',color:'var(--blue)'}}>Agile methodology</div>
+                                        <div style={{fontSize:'12px',padding:'4px 12px',borderRadius:'4px',background:'rgba(79,142,247,0.08)',border:'1px solid rgba(79,142,247,0.15)',color:'var(--blue)'}}>Weekly demos</div>
+                                        <div style={{fontSize:'12px',padding:'4px 12px',borderRadius:'4px',background:'rgba(79,142,247,0.08)',border:'1px solid rgba(79,142,247,0.15)',color:'var(--blue)'}}>Dedicated PM</div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                            <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.1}} className="why-card">
+                                <div className="why-title">Transparent Communication</div>
+                                <div className="why-desc">No black boxes. You get a live project dashboard, daily progress updates, and a direct line to your dev team, not just a sales rep.</div>
+                            </motion.div>
+                            <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.2}} className="why-card">
+                                <div className="why-title">Built to Scale</div>
+                                <div className="why-desc">We architect for tomorrow, not just today. Every codebase follows SOLID principles with full documentation and test coverage handoff.</div>
+                            </motion.div>
+                            <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.3}} className="why-card">
+                                <div className="why-title">Global Quality, Local Pricing</div>
+                                <div className="why-desc">Enterprise-grade engineering at a fraction of Western agency costs. Our Dhaka-based team delivers world-class output, your budget goes further.</div>
+                            </motion.div>
+                            <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.4}} className="why-card">
+                                <div className="why-title">Post-Launch Support</div>
+                                <div className="why-desc">We don't disappear after go-live. Every project includes 30-day post-launch monitoring and bug fixing included, no extra charge.</div>
+                            </motion.div>
+                        </div>
+                    </section>
+                </div>
+
+                {/* PORTFOLIO */}
+                <section className="portfolio-section section">
+                    <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.6}} className="pf-head">
+                        <div>
+                            <div className="chip">Selected Work</div>
+                            <h2 className="s-title">Projects That<br/>Delivered Results</h2>
+                        </div>
+                        <Link href="/portfolio" className="cta-sec" style={{fontSize:'13.5px'}}>Browse all projects ↗</Link>
+                    </motion.div>
+                    <div className="pf-grid">
+                        <Link href="/portfolio/medibot-ai" className="pf-card pf-main">
+                            <div className="pf-thumb" style={{background:'linear-gradient(135deg,#070d1a,#0a1828)'}}>
+                                <img src="/images/portfolio/medibot-ai.png" alt="MediBot AI" className="pf-image-overlay" />
+                                <div className="pf-thumb-label">Healthcare · SaaS · AI</div>
+                                <div className="pf-thumb-center">
+                                    <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'38px',fontWeight:800,color:'rgba(79,142,247,0.7)',letterSpacing:'-0.03em'}}>MediBot AI</div>
+                                    <div style={{fontSize:'12px',color:'var(--text3)',marginTop:'8px',letterSpacing:'.15em'}}>AI DIAGNOSTIC ASSISTANT</div>
+                                </div>
+                            </div>
+                            <div className="pf-body">
+                                <div className="pf-cats"><span className="pf-cat">Next.js</span><span className="pf-cat">Python</span><span className="pf-cat">TensorFlow</span><span className="pf-cat">OpenAI</span></div>
+                                <div className="pf-name">MediBot AI: AI Diagnostic Assistant</div>
+                                <div className="pf-desc">Advanced AI diagnostic assistant designed to support healthcare professionals with real-time medical insights and intelligent patient data analysis.</div>
+                                <div className="pf-link">View full case study ↗</div>
                             </div>
                         </Link>
-
-                        {/* Secondary Button */}
-                        <Link href="/portfolio" className="group relative w-full sm:w-auto px-8 py-4 rounded-full bg-black/40 md:bg-white/5 border border-white/20 md:border-white/10 hover:bg-white/10 hover:border-accent/50 transition-all backdrop-blur-md overflow-hidden flex justify-center">
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                            <span className="relative text-white md:text-gray-900 md:dark:text-white font-bold tracking-wider uppercase text-sm flex items-center gap-2">
-                                View Work
-                                <span className="group-hover:rotate-45 transition-transform duration-300">↗</span>
-                            </span>
-                        </Link>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Services Section */}
-            <section className="py-32 relative z-10 bg-gray-50/95 dark:bg-dark/95 backdrop-blur-xl border-t border-black/5 dark:border-white/5 transition-colors overflow-hidden">
-                {/* Background glow */}
-                <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[128px] pointer-events-none" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[128px] pointer-events-none" />
-
-                <div className="container mx-auto px-6 relative z-10">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 transition-colors">Mastering the Digital Realm</h2>
-                        <div className="h-1 w-24 bg-gradient-to-r from-accent to-secondary mx-auto rounded-full"></div>
-                        <p className="mt-6 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg transition-colors">
-                            We blend technical expertise with artistic vision to deliver solutions that are as powerful as they are beautiful.
-                        </p>
-                    </div>
-                </div>
-
-                <div className="container mx-auto px-6 relative z-10">
-                    <ServiceNetwork />
-                </div>
-
-                {/* Tech Stack Marquee (Moved After Diagram) */}
-                <div className="mt-24 relative z-10">
-                    <TechMarquee />
-                </div>
-            </section>
-
-            <section className="py-32 bg-white dark:bg-black relative border-t border-black/5 dark:border-white/5 transition-colors duration-300">
-                <div className="container mx-auto px-6">
-                    <div className="flex justify-between items-end mb-16">
-                        <div>
-                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2 transition-colors">Selected Works</h2>
-                            <p className="text-gray-500">Innovation in action.</p>
-                        </div>
-                        <Link href="/portfolio" className="hidden md:block text-accent hover:text-secondary dark:hover:text-white transition-colors">
-                            View All Projects →
-                        </Link>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            {
-                                id: 1,
-                                title: "NeonMarket",
-                                slug: "neonmarket",
-                                category: "Solutions",
-                                image: "/images/portfolio/neonmarket.png",
-                                description: "Next-gen crypto marketplace with real-time trading engines."
-                            },
-                            {
-                                id: 2,
-                                title: "MediBot AI",
-                                slug: "medibot-ai",
-                                category: "AI",
-                                image: "/images/portfolio/medibot-ai.png",
-                                description: "AI diagnostic assistant revolutionizing preliminary triage."
-                            },
-                            {
-                                id: 3,
-                                title: "Explorer Nature",
-                                slug: "explorer-nature",
-                                category: "Solutions",
-                                image: "/images/portfolio/explorer-nature.png",
-                                description: "Premium tourism platform connecting travelers with nature."
-                            }
-                        ].map((project, index) => (
-                            <Link href={`/portfolio/${project.slug}`} key={project.id}>
-                                <motion.div
-                                    whileHover={{ y: -10 }}
-                                    className="group relative overflow-hidden rounded-3xl aspect-[4/3] bg-gray-900 border border-black/5 dark:border-white/10 cursor-pointer shadow-xl dark:shadow-2xl transition-all duration-500 hover:shadow-cyan-500/20"
-                                >
-                                    {/* Background Image */}
-                                    <div className="absolute inset-0 transition-all duration-700 group-hover:scale-110">
-                                        <div className="relative w-full h-full">
-                                            {/* Fallback gradient if image fails or loading */}
-                                            <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black z-0" />
-
-                                            <img
-                                                src={project.image}
-                                                alt={project.title}
-                                                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
-                                                onError={(e) => {
-                                                    e.target.style.display = 'none'; // Hide if missing
-                                                    e.target.parentElement.firstChild.style.display = 'block'; // Show gradient
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    {/* Gradient Overlay for Text Readability */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 z-10" />
-
-                                    {/* Noise Texture Overlay */}
-                                    <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay z-20 pointer-events-none"></div>
-
-                                    {/* Content */}
-                                    <div className="absolute inset-0 p-8 flex flex-col justify-between z-30">
-                                        <div className="flex justify-between items-start">
-                                            <span className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-bold text-white uppercase tracking-wider">
-                                                {project.category}
-                                            </span>
-                                            <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5L19.5 4.5M19.5 4.5H8.25M19.5 4.5V15.75" />
-                                                </svg>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h3 className="text-3xl font-bold text-white mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                                {project.title}
-                                            </h3>
-                                            <p className="text-gray-300 line-clamp-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
-                                                {project.description}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            </Link>
-                        ))}
-                    </div>
-
-                    <div className="mt-12 text-center md:hidden">
-                        <Link href="/portfolio" className="btn btn-outline border-accent text-accent w-full rounded-full">Explore All</Link>
-                    </div>
-                </div>
-            </section>
-
-            {/* Testimonials */}
-            <section className="py-32 bg-[#020202] relative transition-colors duration-300">
-                <div className="container mx-auto px-6 relative z-10">
-                    <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-24 tracking-tight">Trusted by Visionaries</h2>
-                    <Testimonials />
-                </div>
-            </section>
-
-            {/* Trust Badges */}
-            <TrustBadges />
-
-            {/* Lead Magnet */}
-            <LeadMagnet />
-
-            {/* CTA Section */}
-            <section className="py-40 relative flex items-center justify-center overflow-hidden bg-white dark:bg-[#050505] border-t border-black/5 dark:border-white/5 transition-colors duration-300">
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5"></div>
-
-                {/* Glowing Orbs */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
-
-                <div className="container mx-auto px-6 text-center relative z-10 max-w-5xl">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                    >
-                        <h2 className="text-4xl sm:text-6xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-gray-900 via-gray-700 to-gray-500 dark:from-white dark:via-gray-300 dark:to-gray-600 mb-6 md:mb-10 tracking-tighter leading-[0.9] selection:bg-purple-500/30">
-                            READY TO <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x">DISRUPT?</span>
-                        </h2>
-                        <p className="text-lg md:text-3xl text-gray-600 dark:text-gray-400 mb-10 md:mb-16 max-w-3xl mx-auto font-light leading-relaxed transition-colors px-4">
-                            Don't just compete. Dominate. Let's build a digital experience so powerful it can't be ignored.
-                        </p>
-
-                        <Link href="/contact" className="group relative inline-flex items-center justify-center transform hover:scale-105 transition-transform duration-300 w-full md:w-auto">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-full blur-xl opacity-50 group-hover:opacity-100 transition duration-500 group-hover:duration-200"></div>
-                            <button className="relative w-full md:w-auto px-8 md:px-12 py-5 md:py-6 bg-black dark:bg-[#0a0a0a] rounded-full text-white font-bold text-lg md:text-xl flex items-center justify-center gap-4 border border-white/10 group-hover:bg-gray-900 transition-all shadow-2xl">
-                                <span>Start Your Project</span>
-                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white text-black flex items-center justify-center group-hover:rotate-45 transition-transform duration-300 shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                                    </svg>
+                        <Link href="/portfolio/explorer-nature" className="pf-card">
+                            <div className="pf-thumb" style={{background:'linear-gradient(135deg,#110d07,#1a1207)'}}>
+                                <img src="/images/portfolio/explorer-nature.png" alt="Explorer Nature" className="pf-image-overlay" />
+                                <div className="pf-thumb-label">Tourism · Platform</div>
+                                <div className="pf-thumb-center">
+                                    <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'28px',fontWeight:800,color:'rgba(245,158,11,0.65)',letterSpacing:'.12em'}}>Explorer Nature</div>
+                                    <div style={{fontSize:'11px',color:'var(--text3)',marginTop:'8px',letterSpacing:'.15em'}}>PREMIUM TOURISM PLATFORM</div>
                                 </div>
-                            </button>
+                            </div>
+                            <div className="pf-body">
+                                <div className="pf-cats"><span className="pf-cat">Next.js</span><span className="pf-cat">Three.js</span><span className="pf-cat">TailwindCSS</span></div>
+                                <div className="pf-name">Explorer Nature: Premium Tourism Platform</div>
+                                <div className="pf-desc">Premium tourism platform connecting travelers with nature through immersive 3D experiences, custom booking flows, and curated destination guides.</div>
+                                <div className="pf-link">View case study ↗</div>
+                            </div>
                         </Link>
-                    </motion.div>
+                        <Link href="/portfolio/neonmarket" className="pf-card">
+                            <div className="pf-thumb" style={{background:'linear-gradient(135deg,#0a0a18,#0e0e22)'}}>
+                                <img src="/images/portfolio/neonmarket.png" alt="NeonMarket" className="pf-image-overlay" />
+                                <div className="pf-thumb-label">Web3 · Marketplace</div>
+                                <div className="pf-thumb-center">
+                                    <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'24px',fontWeight:800,color:'rgba(167,139,250,0.65)',letterSpacing:'.08em'}}>NeonMarket</div>
+                                    <div style={{fontSize:'11px',color:'var(--text3)',marginTop:'8px',letterSpacing:'.15em'}}>NEXT-GEN CRYPTO MARKETPLACE</div>
+                                </div>
+                            </div>
+                            <div className="pf-body">
+                                <div className="pf-cats"><span className="pf-cat">Next.js</span><span className="pf-cat">Solidity</span><span className="pf-cat">Web3.js</span><span className="pf-cat">TailwindCSS</span></div>
+                                <div className="pf-name">NeonMarket: Next-gen Crypto Marketplace</div>
+                                <div className="pf-desc">Next-gen crypto marketplace offering real-time token tracking, secure wallet integration, and a seamless decentralized trading experience.</div>
+                                <div className="pf-link">View case study ↗</div>
+                            </div>
+                        </Link>
+                    </div>
+                </section>
+
+                {/* TESTIMONIALS */}
+                <div className="testimonials-wrap">
+                    <section className="testimonials">
+                        <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.6}}>
+                            <div className="chip">Client Stories</div>
+                            <h2 className="s-title">What Our Clients Say</h2>
+                        </motion.div>
+                        <div className="testi-grid">
+                            <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.1}} className="testi-card">
+                                <div className="testi-quote">"</div>
+                                <div className="testi-text">Codiora delivered our MVP in 6 weeks when other agencies quoted 4 months. The code quality was production-ready from day one.</div>
+                                <div className="testi-divider"></div>
+                                <div className="testi-author">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rafiq A." className="testi-avatar" />
+                                    <div><div className="testi-name">Rafiq A.</div><div className="testi-role">CTO, HealthOS</div></div>
+                                </div>
+                            </motion.div>
+                            <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.2}} className="testi-card">
+                                <div className="testi-quote">"</div>
+                                <div className="testi-text">We tried 3 agencies before Codiora. The difference? They actually understood our business, not just the tech requirements.</div>
+                                <div className="testi-divider"></div>
+                                <div className="testi-author">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophia L." className="testi-avatar" />
+                                    <div><div className="testi-name">Sophia L.</div><div className="testi-role">Founder, UrbanCart</div></div>
+                                </div>
+                            </motion.div>
+                            <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.3}} className="testi-card">
+                                <div className="testi-quote">"</div>
+                                <div className="testi-text">Communication was flawless. Daily updates, weekly demos, zero surprises at launch. Will definitely work with them again.</div>
+                                <div className="testi-divider"></div>
+                                <div className="testi-author">
+                                    <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="Mohammed K." className="testi-avatar" />
+                                    <div><div className="testi-name">Mohammed K.</div><div className="testi-role">CEO, Finvault</div></div>
+                                </div>
+                            </motion.div>
+                        </div>
+                    </section>
                 </div>
-            </section>
+
+                {/* PROCESS */}
+                <section className="process-section">
+                    <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.6}} className="process-head">
+                        <div>
+                            <div className="chip">How We Work</div>
+                            <h2 className="s-title">Simple 4-Step Process,<br/>Zero Surprises</h2>
+                        </div>
+                        <p className="s-sub" style={{maxWidth:'360px',fontSize:'15px'}}>We've refined this process across 60+ projects. It works.</p>
+                    </motion.div>
+                    <div className="process-timeline">
+                        <div className="process-line"></div>
+                        <div className="process-steps">
+                            <div className="process-step" onMouseEnter={() => setActiveProcess(1)}>
+                                <div className={`step-bubble ${activeProcess === 1 ? 'active' : ''}`}>01</div>
+                                <div className="step-duration">Week 1</div>
+                                <div className="step-title">Discovery</div>
+                                <div className="step-desc">We deep-dive into your goals, constraints, and market. You get a detailed scope doc and timeline before we write a single line of code.</div>
+                            </div>
+                            <div className="process-step" onMouseEnter={() => setActiveProcess(2)}>
+                                <div className={`step-bubble ${activeProcess === 2 ? 'active' : ''}`}>02</div>
+                                <div className="step-duration">Week 1-2</div>
+                                <div className="step-title">Design & Plan</div>
+                                <div className="step-desc">Wireframes, system architecture, and interactive prototypes. Your full approval before engineering begins, no surprises.</div>
+                            </div>
+                            <div className="process-step" onMouseEnter={() => setActiveProcess(3)}>
+                                <div className={`step-bubble ${activeProcess === 3 ? 'active' : ''}`}>03</div>
+                                <div className="step-duration">Week 2-N</div>
+                                <div className="step-title">Build & Iterate</div>
+                                <div className="step-desc">2-week agile sprints with working demos every cycle. Live project dashboard so you always know exactly where things stand.</div>
+                            </div>
+                            <div className="process-step" onMouseEnter={() => setActiveProcess(4)}>
+                                <div className={`step-bubble ${activeProcess === 4 ? 'active' : ''}`}>04</div>
+                                <div className="step-duration">Launch + 30 days</div>
+                                <div className="step-title">Launch & Support</div>
+                                <div className="step-desc">Zero-downtime deployment, performance monitoring, and 30 days of included post-launch support. We don't disappear.</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ENGAGEMENT MODELS */}
+                <div className="pricing-section-wrap">
+                    <section className="pricing-section">
+                        <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.6}} style={{textAlign:'center',marginBottom:'52px'}}>
+                            <div className="chip" style={{justifyContent:'center',marginBottom:'14px'}}>Engagement Models</div>
+                            <h2 className="s-title" style={{margin:'0 auto 12px'}}>Flexible Ways to Work Together</h2>
+                            <p className="s-sub" style={{margin:'0 auto',textAlign:'center',maxWidth:'480px'}}>No hidden fees. No surprise invoices. Pick the model that fits your project best.</p>
+                        </motion.div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-16 px-4 pb-12">
+                            {/* Card 1 */}
+                            <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.1}} className="bg-white rounded-[2.5rem] p-10 border border-[#122a46]/5 hover:shadow-2xl hover:shadow-teal-500/5 transition-all duration-300 flex flex-col h-full relative group">
+                                <div className="w-12 h-12 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center mb-8 border border-teal-100">
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                </div>
+                                <div className="flex items-baseline gap-2 mb-1">
+                                    <h3 className="text-4xl font-black text-[#0f172a] tracking-tight">Project</h3>
+                                    <span className="text-[10px] font-bold text-teal-600 tracking-widest uppercase">Based</span>
+                                </div>
+                                <div className="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-6">Fixed Price & MVP</div>
+                                <p className="text-slate-500 text-sm leading-relaxed mb-10 flex-grow pr-4">Ideal for clear scopes and defined timelines. Rapid deployment for high-growth MVPs.</p>
+                                
+                                <ul className="space-y-4 mb-10">
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">UI/UX Systems</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Tech Architecture</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Frontend & Backend</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Core API Hub</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">QA & Weekly Demos</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">IP & Source Code</span></li>
+                                </ul>
+                                
+                                <Link href="/contact" className="mt-auto block">
+                                    <button className="w-full bg-white border border-slate-200 hover:bg-teal-500 hover:border-teal-500 text-[#0f172a] hover:text-white font-bold text-[11px] tracking-widest uppercase py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-teal-500/20">
+                                        Engage Tier <span className="text-lg leading-none transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                </Link>
+                            </motion.div>
+
+                            {/* Card 2 */}
+                            <motion.div initial={{opacity:0, scale:0.95}} whileInView={{opacity:1, scale:1}} viewport={{once:true}} transition={{duration:0.5, delay:0.2}} className="rounded-[2.5rem] p-10 border border-teal-400/20 shadow-2xl shadow-teal-500/20 transition-all duration-300 flex flex-col relative group -my-4" style={{background: 'linear-gradient(145deg, #2dd4bf 0%, #14b8a6 40%, #0d9488 100%)'}}>
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-white text-teal-600 text-[9px] font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-b-xl shadow-sm">Most Popular</div>
+                                <div className="w-12 h-12 bg-white/20 text-white rounded-2xl flex items-center justify-center mb-8 border border-white/20 mt-2">
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                </div>
+                                <div className="flex items-baseline gap-2 mb-1">
+                                    <h3 className="text-4xl font-black text-white tracking-tight">Monthly</h3>
+                                    <span className="text-[10px] font-bold text-teal-200 tracking-widest uppercase">Plan</span>
+                                </div>
+                                <div className="text-[10px] font-bold text-teal-200/80 tracking-widest uppercase mb-6">Dedicated Team</div>
+                                <p className="text-teal-100/90 text-sm leading-relaxed mb-10 flex-grow pr-4">Seamless extension of your in-house team. Advanced ecosystem with agile scaling.</p>
+                                
+                                <ul className="space-y-4 mb-10">
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-white uppercase">Senior Engineers</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-white uppercase">Agentic AI & ML</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-white uppercase">Multi-Platform</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-white uppercase">Microservices</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-white uppercase">Agile Sprints</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-white uppercase">CI/CD & Data Ops</span></li>
+                                </ul>
+                                
+                                <Link href="/contact" className="mt-auto block">
+                                    <button className="w-full bg-white hover:bg-teal-50 text-teal-600 font-bold text-[11px] tracking-widest uppercase py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-black/10">
+                                        Engage Tier <span className="text-lg leading-none transition-transform hover:translate-x-1">→</span>
+                                    </button>
+                                </Link>
+                            </motion.div>
+
+                            {/* Card 3 */}
+                            <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.3}} className="bg-white rounded-[2.5rem] p-10 border border-[#122a46]/5 hover:shadow-2xl hover:shadow-teal-500/5 transition-all duration-300 flex flex-col h-full relative group">
+                                <div className="w-12 h-12 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center mb-8 border border-teal-100">
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                                </div>
+                                <div className="flex items-baseline gap-2 mb-1">
+                                    <h3 className="text-4xl font-black text-[#0f172a] tracking-tight">Retainer</h3>
+                                    <span className="text-[10px] font-bold text-teal-600 tracking-widest uppercase">Model</span>
+                                </div>
+                                <div className="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-6">Strategic Partner</div>
+                                <p className="text-slate-500 text-sm leading-relaxed mb-10 flex-grow pr-4">Mission-critical architectural sovereignty and full lifecycle product ownership.</p>
+                                
+                                <ul className="space-y-4 mb-10">
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Autonomous Squad</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Custom LLMs</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">H-F Infrastructure</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Enterprise Sec</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Global Compliance</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">24/7 SLA Support</span></li>
+                                </ul>
+                                
+                                <Link href="/contact" className="mt-auto block">
+                                    <button className="w-full bg-white border border-slate-200 hover:bg-teal-500 hover:border-teal-500 text-[#0f172a] hover:text-white font-bold text-[11px] tracking-widest uppercase py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-teal-500/20">
+                                        Engage Tier <span className="text-lg leading-none transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                </Link>
+                            </motion.div>
+                        </div>
+                    </section>
+                </div>
+
+                {/* FAQ */}
+                <section className="faq-section">
+                    <div className="faq-inner">
+                        <motion.div initial={{opacity:0, x:-20}} whileInView={{opacity:1, x:0}} viewport={{once:true}} transition={{duration:0.6}}>
+                            <div className="chip">FAQ</div>
+                            <h2 className="s-title" style={{fontSize:'clamp(28px,3.5vw,38px)'}}>Questions?<br/>We've Got<br/>Answers.</h2>
+                            <p className="s-sub" style={{fontSize:'14px',marginTop:'14px'}}>Can't find what you need? Book a free 30-min call. No pressure, no pitch.</p>
+                            <div className="faq-contact" style={{marginTop:'28px'}}>
+                                <div className="faq-contact-title">Still have questions?</div>
+                                <div className="faq-contact-sub">Book a free 30-minute discovery call. We'll answer everything and give you an honest assessment, even if we're not the right fit.</div>
+                                <Link href="/contact"><button className="cta-main" style={{fontSize:'13.5px',padding:'11px 20px'}}>Book a Free Call →</button></Link>
+                            </div>
+                        </motion.div>
+                        <div className="faq-list">
+                            <FAQItem isOpen={openFaq === 0} onToggle={() => setOpenFaq(openFaq === 0 ? null : 0)} q="How long does a typical project take?" a="Most web projects take 4-12 weeks depending on scope. A simple landing page or MVP can be ready in 2-3 weeks. Enterprise platforms take 2-6 months. During discovery, we give you a precise timeline. We don't pad estimates." />
+                            <FAQItem isOpen={openFaq === 1} onToggle={() => setOpenFaq(openFaq === 1 ? null : 1)} q="What happens if we're not happy with the work?" a="We have a structured revision process built into every project. If something isn't right, we fix it, included. We also offer a satisfaction guarantee: if you're not happy after the first sprint, you can cancel with a full refund of any unused prepayment." />
+                            <FAQItem isOpen={openFaq === 2} onToggle={() => setOpenFaq(openFaq === 2 ? null : 2)} q="Do you sign NDAs?" a="Yes, absolutely. We sign NDAs before any detailed project discussion for all clients. Confidentiality is a baseline expectation, not an add-on. We also offer IP assignment agreements where all code belongs entirely to you." />
+                            <FAQItem isOpen={openFaq === 3} onToggle={() => setOpenFaq(openFaq === 3 ? null : 3)} q="We have an existing codebase, can you work with it?" a="Yes, and this is one of our strengths. We do thorough code audits before joining any existing project. We'll give you an honest technical assessment and a clear plan for extending or refactoring. No sugarcoating." />
+                            <FAQItem isOpen={openFaq === 4} onToggle={() => setOpenFaq(openFaq === 4 ? null : 4)} q="What's your timezone and communication style?" a="We're based in Dhaka (GMT+6) but work overlap hours with EU and US clients. You get daily Slack/email updates, weekly video demos, and a live Notion/Linear board showing every task in real-time. No chasing required." />
+                            <FAQItem isOpen={openFaq === 5} onToggle={() => setOpenFaq(openFaq === 5 ? null : 5)} q="Who owns the code after the project?" a="You do. 100%. On final payment, all IP, code, assets, and documentation transfer to you. We provide full Git repository access and thorough handover documentation so your team can continue independently." />
+                        </div>
+                    </div>
+                </section>
+
+                {/* FINAL CTA */}
+                <div className="final-cta-wrap">
+                    <section className="relative overflow-hidden py-32 px-6 bg-white">
+                        {/* Decorative blobs */}
+                        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-10 blur-[120px] pointer-events-none" style={{background:'#2dd4bf'}}></div>
+                        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-8 blur-[100px] pointer-events-none" style={{background:'#14b8a6'}}></div>
+
+                        <motion.div initial={{opacity:0, y:30}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.8}} className="relative z-10 max-w-3xl mx-auto text-center">
+                            {/* Status badge */}
+                            <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-100 text-teal-600 text-xs font-bold tracking-widest uppercase px-5 py-2.5 rounded-full mb-10">
+                                <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
+                                Currently Taking New Projects
+                            </div>
+
+                            {/* Heading */}
+                            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-[#0f172a] leading-[1.05] tracking-tight mb-8">
+                                Ready to Build<br/>
+                                Something{' '}
+                                <span className="relative inline-block">
+                                    <span style={{background:'linear-gradient(90deg, #0d9488, #14b8a6)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent'}}>Great?</span>
+                                </span>
+                            </h2>
+
+                            {/* Subtext */}
+                            <p className="text-slate-500 text-lg leading-relaxed mb-12 max-w-xl mx-auto">
+                                Book a free 30-minute call. We'll discuss your project, give honest feedback, and outline exactly how we'd approach it.
+                            </p>
+
+                            {/* CTA Buttons */}
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                                <Link href="/contact">
+                                    <button className="group flex items-center gap-3 bg-teal-400 hover:bg-teal-300 text-[#0f172a] font-black text-sm tracking-widest uppercase px-8 py-4 rounded-2xl transition-all duration-300 shadow-2xl shadow-teal-500/30 hover:shadow-teal-400/40 hover:-translate-y-0.5">
+                                        Book a Free Consultation
+                                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                                    </button>
+                                </Link>
+                                <Link href="/portfolio">
+                                    <button className="flex items-center gap-2 bg-white border border-slate-200 hover:border-teal-400 hover:bg-teal-50 text-[#0f172a] font-bold text-sm tracking-widest uppercase px-8 py-4 rounded-2xl transition-all duration-300">
+                                        View Portfolio ↗
+                                    </button>
+                                </Link>
+                            </div>
+
+                            {/* Trust pills */}
+                            <div className="flex flex-wrap justify-center gap-6 text-slate-500 text-xs font-semibold tracking-wide">
+                                <span className="flex items-center gap-2">
+                                    <span className="w-4 h-4 rounded-full bg-teal-100 border border-teal-200 text-teal-600 flex items-center justify-center text-[9px]">✓</span>
+                                    No commitment required
+                                </span>
+                                <span className="flex items-center gap-2">
+                                    <span className="w-4 h-4 rounded-full bg-teal-100 border border-teal-200 text-teal-600 flex items-center justify-center text-[9px]">✓</span>
+                                    Response within 24 hours
+                                </span>
+                                <span className="flex items-center gap-2">
+                                    <span className="w-4 h-4 rounded-full bg-teal-100 border border-teal-200 text-teal-600 flex items-center justify-center text-[9px]">✓</span>
+                                    Free project assessment
+                                </span>
+                            </div>
+                        </motion.div>
+                    </section>
+                </div>
+
+            </div>
         </>
     );
 }
-
-// Helper Component for Auto Scroll
-const AutoScrollController = () => {
-    useEffect(() => {
-        const container = document.getElementById('service-container');
-
-        // Check if container exists to avoid errors on page shift
-        if (!container) return;
-
-        const scrollInterval = setInterval(() => {
-            const currentContainer = document.getElementById('service-container');
-            if (currentContainer && !currentContainer.classList.contains('paused')) {
-                // Check if we've reached the end
-                if (currentContainer.scrollLeft + currentContainer.clientWidth >= currentContainer.scrollWidth - 10) {
-                    currentContainer.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    currentContainer.scrollBy({ left: 400, behavior: 'smooth' });
-                }
-            }
-        }, 3000);
-
-        return () => clearInterval(scrollInterval);
-    }, []);
-    return null;
-};

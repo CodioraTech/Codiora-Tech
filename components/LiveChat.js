@@ -17,7 +17,7 @@ const KNOWLEDGE_BASE = [
             // Features & Integrations
             'api development', 'rest api', 'graphql', 'full stack web', 'payment gateway', 'stripe integration', 'bkash integration', 'web performance', 'api'
         ],
-        response: "🚀 **Web Architecture**: We build blazing-fast apps using the **MERN Stack** and **Next.js**. We focus on performance, scalability, and security.",
+        response: "🚀 **Enterprise Web Architecture**: We engineer high-performance, scalable web applications utilizing the robust **MERN Stack** and **Next.js**. Our solutions prioritize global scalability and uncompromised security.",
         action: { label: 'View Web Services', url: '/services/web-architecture' },
         score: 5
     },
@@ -37,7 +37,7 @@ const KNOWLEDGE_BASE = [
             // Industry specific
             'booking app', 'on demand app', 'fintech app', 'healthcare app', 'edtech app'
         ],
-        response: "📱 **Mobile Innovation**: Cross-platform apps with native performance using **Flutter** & **React Native**. One codebase, deployed everywhere.",
+        response: "📱 **Mobile Innovation**: We craft flawless, cross-platform mobile experiences with native-level performance leveraging **Flutter** & **React Native**. One sophisticated codebase, deployed globally.",
         action: { label: 'View Mobile Solutions', url: '/services/mobile-innovation' },
         score: 5
     },
@@ -57,7 +57,7 @@ const KNOWLEDGE_BASE = [
             // Research
             'usability testing', 'accessibility design'
         ],
-        response: "🎨 **Immersive UI/UX**: Software should be beautiful. Our design process involves deep user research, wireframing, and **Figma** prototyping.",
+        response: "🎨 **Immersive UI/UX**: Exceptional software demands award-winning design. Our methodical approach encompasses deep user research, wireframing, and interactive **Figma** prototyping to ensure a pixel-perfect aesthetic.",
         action: { label: 'View Design', url: '/services/immersive-ui-ux' },
         score: 5
     },
@@ -75,7 +75,7 @@ const KNOWLEDGE_BASE = [
             // Concepts
             'ci/cd', 'cloud deployment', 'cloud monitoring', 'server scaling', 'load balancer', 'ssl setup', 'domain configuration', 'cloud security', 'devops automation', 'infrastructure as code'
         ],
-        response: "☁️ **DevOps & Cloud**: We ensure your infrastructure is bulletproof. We specialize in **AWS**, **Docker**, and **Kubernetes** for auto-scaling and security.",
+        response: "☁️ **DevOps & Cloud Operations**: We architect bulletproof, enterprise-grade infrastructures. Utilizing **AWS**, **Docker**, and **Kubernetes**, we guarantee seamless auto-scaling and unparalleled security.",
         action: { label: 'View DevOps', url: '/services/devops-cloud' },
         score: 5
     },
@@ -93,7 +93,7 @@ const KNOWLEDGE_BASE = [
             // Automation
             'automation script', 'workflow automation', 'ai dashboard', 'recommendation system', 'smart assistant'
         ],
-        response: "🤖 **AI & Automation**: We build custom **AI Agents**, **Chatbots**, and automation workflows using **OpenAI** & Python.",
+        response: "🤖 **AI & Intelligent Automation**: We integrate state-of-the-art **AI Agents**, intelligent **Chatbots**, and automated corporate workflows powered by **OpenAI** & advanced Python technologies.",
         action: { label: 'Explore AI', url: '/services/ai-automation' },
         score: 5
     },
@@ -113,7 +113,7 @@ const KNOWLEDGE_BASE = [
             // Analytics
             'google analytics', 'tag manager', 'a/b testing', 'conversion tracking'
         ],
-        response: "📈 **Growth Marketing**: We help you sell through data-driven **SEO**, **Ads**, and **Performance Marketing**.",
+        response: "📈 **Growth & Performance Marketing**: We drive exponential business growth through meticulous, data-driven **SEO**, strategic **Ad Campaigns**, and premium Performance Marketing.",
         action: { label: 'View Marketing', url: '/services/growth-marketing' },
         score: 5
     },
@@ -156,14 +156,14 @@ const KNOWLEDGE_BASE = [
     {
         id: 'greetings',
         patterns: ['hello', 'hi', 'hey', 'start', 'greetings', 'morning', 'evening', 'yo'],
-        response: "Hello! 👋 I am **Codi**. I can help you with:\n\n• **Services**\n• **Job Requirements**\n• **Project Quotes**\n\nHow can I assist you today?",
-        action: { label: 'Explore Services', url: '/services' },
+        response: "Greetings. 👋 I am **Codi**, the premier AI Assistant for Codiora Tech.\n\nI am equipped to provide detailed consultations on:\n\n• **Enterprise Engineering Services**\n• **Strategic Partnerships & Quotes**\n• **Career Opportunities**\n\nHow may I facilitate your digital transformation today?",
+        action: { label: 'Explore Our Expertise', url: '/services' },
         score: 1
     },
     {
         id: 'budget_flexible',
         patterns: ['budget', 'price', 'cost', 'pricing', 'rate', 'how much', 'quote', 'money', 'expensive', 'cheap'],
-        response: "💰 **Flexible Pricing**: We don't have a fixed budget range. Whatever your budget is, **contact us**! We will analyze your needs and provide the best possible solution tailored to your investment.",
+        response: "💰 **Premium Consulting & Pricing**: We do not operate within rigid budget constraints. We invite you to **contact our consulting team**. We will meticulously analyze your strategic objectives and architect a bespoke solution tailored to maximize your investment ROI.",
         action: { label: 'Get a Quote', url: '/contact' },
         score: 5
     },
@@ -192,9 +192,9 @@ const KNOWLEDGE_BASE = [
 
 // Fallback logic
 const FALLBACK_RESPONSES = [
-    { text: "I specialize in **Tech & Design**. How can we help build your next project?", action: { label: 'View Portfolio', url: '/portfolio' } },
-    { text: "I'm focusing on **Engineering** today. Do you have a project idea?", action: { label: 'Contact Us', url: '/contact' } },
-    { text: "I might not know much about that, but if it involves **Web**, **Mobile**, or **AI**, I'm your best resource!", action: { label: 'Our Services', url: '/services' } }
+    { text: "My expertise centers around **Enterprise Engineering & Premium Design**. How may we assist in architecting your next visionary project?", action: { label: 'View Portfolio', url: '/portfolio' } },
+    { text: "I am currently focused on **Strategic Technological Solutions**. Would you like to schedule a consultation regarding a specific initiative?", action: { label: 'Contact Consulting Team', url: '/contact' } },
+    { text: "While that falls outside my immediate scope, if your inquiry involves **Enterprise Web Architecture**, **Mobile Solutions**, or **Advanced AI**, I am fully equipped to assist.", action: { label: 'Our Expertise', url: '/services' } }
 ];
 
 export default function LiveChat() {
@@ -203,7 +203,7 @@ export default function LiveChat() {
         {
             id: 1,
             sender: 'bot',
-            text: "Welcome to **Codiora Tech**. I am **Codi**, your AI Assistant. 🤖\n\nI can provide insights on our **Engineering Services**, **Case Studies**, and **Development Process**.\n\nHow can we assist in accelerating your digital growth today?"
+            text: "Welcome to **Codiora Tech**. I am **Codi**, your Executive AI Assistant. 🤖\n\nI am here to provide strategic insights regarding our **Enterprise Engineering Services**, **Case Studies**, and **Development Architecture**.\n\nHow may we facilitate your digital transformation today?"
         }
     ]);
     const [inputValue, setInputValue] = useState("");
@@ -250,21 +250,32 @@ export default function LiveChat() {
         const userText = inputValue;
         setInputValue("");
 
-        setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: userText }]);
+        const currentMessages = [...messages, { id: Date.now(), sender: 'user', text: userText }];
+        setMessages(currentMessages);
         setIsTyping(true);
 
-        const delay = Math.floor(Math.random() * 800) + 1000;
-
-        setTimeout(() => {
-            const match = findBestResponse(userText);
+        try {
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: currentMessages })
+            });
+            const data = await res.json();
+            
             setMessages(prev => [...prev, {
                 id: Date.now() + 1,
                 sender: 'bot',
-                text: match.text,
-                action: match.action
+                text: data.text
             }]);
+        } catch (error) {
+            setMessages(prev => [...prev, {
+                id: Date.now() + 1,
+                sender: 'bot',
+                text: "My connection seems to be interrupted. Please try again later."
+            }]);
+        } finally {
             setIsTyping(false);
-        }, delay);
+        }
     };
 
     // Formatter for bold text and links
@@ -274,7 +285,7 @@ export default function LiveChat() {
         return parts.map((part, i) => {
             if (part.startsWith('**') && part.endsWith('**')) {
                 // Keep keeping bold text purely visual if it's not a link
-                return <strong key={i} className="text-cyan-400 font-bold">{part.slice(2, -2)}</strong>;
+                return <strong key={i} className="text-teal-600 font-bold">{part.slice(2, -2)}</strong>;
             }
             if (part.startsWith('[') && part.includes('](') && part.endsWith(')')) {
                 const [label, url] = part.slice(1, -1).split('](');
@@ -288,21 +299,35 @@ export default function LiveChat() {
         });
     };
 
-    const sendSuggestion = (text) => {
-        setInputValue(text);
+    const sendSuggestion = async (text) => {
+        setInputValue(""); // Clear input when suggestion is sent
         const userText = text;
-        setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: userText }]);
+        const currentMessages = [...messages, { id: Date.now(), sender: 'user', text: userText }];
+        setMessages(currentMessages);
         setIsTyping(true);
-        setTimeout(() => {
-            const match = findBestResponse(userText);
+
+        try {
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: currentMessages })
+            });
+            const data = await res.json();
+            
             setMessages(prev => [...prev, {
                 id: Date.now() + 1,
                 sender: 'bot',
-                text: match.text,
-                action: match.action
+                text: data.text
             }]);
+        } catch (error) {
+            setMessages(prev => [...prev, {
+                id: Date.now() + 1,
+                sender: 'bot',
+                text: "My connection seems to be interrupted. Please try again later."
+            }]);
+        } finally {
             setIsTyping(false);
-        }, 1200);
+        }
     };
 
     // Reset Chat Logic
@@ -311,7 +336,7 @@ export default function LiveChat() {
             {
                 id: 1,
                 sender: 'bot',
-                text: "Welcome to **Codiora Tech**. I am **Codi**, your AI Assistant. 🤖\n\nI can provide insights on our **Engineering Services**, **Case Studies**, and **Development Process**.\n\nHow can we assist in accelerating your digital growth today?"
+                text: "Welcome to **Codiora Tech**. I am **Codi**, your Executive AI Assistant. 🤖\n\nI am here to provide strategic insights regarding our **Enterprise Engineering Services**, **Case Studies**, and **Development Architecture**.\n\nHow may we facilitate your digital transformation today?"
             }
         ]);
         setInputValue("");
@@ -325,24 +350,24 @@ export default function LiveChat() {
                         initial={{ opacity: 0, y: 30, scale: 0.9, transformOrigin: "bottom right" }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 30, scale: 0.9 }}
-                        className="pointer-events-auto bg-[#0a0a0a]/95 backdrop-blur-xl w-[340px] sm:w-[380px] h-[600px] max-h-[80vh] rounded-3xl shadow-2xl overflow-hidden border border-white/10 flex flex-col ring-1 ring-white/10"
+                        className="pointer-events-auto bg-white/95 backdrop-blur-xl w-[340px] sm:w-[380px] h-[600px] max-h-[80vh] rounded-3xl shadow-2xl overflow-hidden border border-[#122a46]/10 flex flex-col ring-1 ring-white/10"
                     >
                         {/* Header */}
-                        <div className="bg-gradient-to-r from-[#0f172a] to-[#1e1b4b] p-5 flex justify-between items-center border-b border-white/5 relative overflow-hidden shrink-0">
-                            <div className="absolute inset-0 bg-cyan-500/5 mix-blend-overlay"></div>
+                        <div className="bg-gradient-to-r from-white to-[#f1f5f9] p-5 flex justify-between items-center border-b border-[#122a46]/5 relative overflow-hidden shrink-0">
+                            <div className="absolute inset-0 bg-teal-500/5 mix-blend-overlay"></div>
 
                             <div className="flex items-center gap-3.5 relative z-10">
                                 <div className="relative">
-                                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center border border-white/10 shadow-lg">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-white">
+                                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center border border-[#122a46]/10 shadow-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-[#122a46]">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z" />
                                         </svg>
                                     </div>
                                     <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#0f172a]"></div>
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-white text-base tracking-tight">Codi AI</h3>
-                                    <span className="text-[11px] text-cyan-200/70 font-medium tracking-wide flex items-center gap-1.5">
+                                    <h3 className="font-bold text-[#0f172a] text-base tracking-tight">Codi AI</h3>
+                                    <span className="text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-1.5">
                                         Support Agent
                                     </span>
                                 </div>
@@ -350,7 +375,7 @@ export default function LiveChat() {
 
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all relative z-10"
+                                className="w-8 h-8 flex items-center justify-center rounded-full bg-[#122a46]/5 hover:bg-[#122a46]/10 text-[#122a46]/60 hover:text-[#122a46] transition-all relative z-10"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -359,7 +384,7 @@ export default function LiveChat() {
                         </div>
 
                         {/* Chat Area */}
-                        <div className="flex-grow p-4 overflow-y-auto overflow-x-hidden bg-[#050505] scrollbar scrollbar-w-1 scrollbar-thumb-gray-800 scrollbar-track-transparent">
+                        <div className="flex-grow p-4 overflow-y-auto overflow-x-hidden bg-[#f8fafc] scrollbar scrollbar-w-1 scrollbar-thumb-slate-300 scrollbar-track-transparent">
 
                             {/* Intro/Cleanup */}
                             <div className="text-center mb-6 mt-2">
@@ -378,17 +403,17 @@ export default function LiveChat() {
                                         <div
                                             className={`max-w-[85%] px-4 py-3 rounded-2xl text-[14px] leading-relaxed relative group ${msg.sender === 'user'
                                                 ? 'bg-gradient-to-br from-cyan-600 to-blue-600 text-white rounded-tr-sm shadow-xl shadow-cyan-900/10'
-                                                : 'bg-[#18181b] border border-white/5 text-gray-200 rounded-tl-sm'
+                                                : 'bg-white border border-[#122a46]/10 text-[#0f172a] rounded-tl-sm shadow-sm'
                                                 }`}
                                         >
                                             <div className="whitespace-pre-wrap">{formatText(msg.text)}</div>
 
                                             {/* Action Button */}
                                             {msg.action && (
-                                                <div className="mt-3 pt-3 border-t border-white/10">
-                                                    <Link href={msg.action.url} className="flex items-center justify-center gap-2 w-full py-2 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-cyan-500/30 rounded-lg transition-all group/btn">
-                                                        <span className="text-xs font-semibold text-cyan-400 group-hover/btn:text-cyan-300">{msg.action.label}</span>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 text-cyan-400 group-hover/btn:translate-x-0.5 transition-transform">
+                                                <div className="mt-3 pt-3 border-t border-[#122a46]/10">
+                                                    <Link href={msg.action.url} className="flex items-center justify-center gap-2 w-full py-2 bg-[#122a46]/5 hover:bg-[#122a46]/10 border border-[#122a46]/5 hover:border-teal-500/30 rounded-lg transition-all group/btn">
+                                                        <span className="text-xs font-semibold text-teal-600 group-hover/btn:text-cyan-300">{msg.action.label}</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 text-teal-600 group-hover/btn:translate-x-0.5 transition-transform">
                                                             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                                                         </svg>
                                                     </Link>
@@ -396,7 +421,7 @@ export default function LiveChat() {
                                             )}
 
                                             {/* Timestamp */}
-                                            <div className={`text-[9px] mt-1.5 opacity-40 font-medium ${msg.sender === 'user' ? 'text-right text-cyan-100' : 'text-left text-gray-500'}`}>
+                                            <div className={`text-[9px] mt-1.5 opacity-40 font-medium ${msg.sender === 'user' ? 'text-right text-cyan-100' : 'text-left text-slate-500'}`}>
                                                 {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </div>
                                         </div>
@@ -409,21 +434,21 @@ export default function LiveChat() {
                                         animate={{ opacity: 1, y: 0 }}
                                         className="flex justify-start"
                                     >
-                                        <div className="bg-[#18181b] border border-white/5 px-4 py-3 rounded-2xl rounded-tl-sm flex gap-1.5 items-center h-10 w-16 justify-center">
+                                        <div className="bg-white border border-[#122a46]/10 shadow-sm px-4 py-3 rounded-2xl rounded-tl-sm flex gap-1.5 items-center h-10 w-16 justify-center">
                                             <motion.span
                                                 animate={{ y: [0, -4, 0] }}
                                                 transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
-                                                className="w-1.5 h-1.5 bg-gray-500 rounded-full"
+                                                className="w-1.5 h-1.5 bg-slate-400 rounded-full"
                                             ></motion.span>
                                             <motion.span
                                                 animate={{ y: [0, -4, 0] }}
                                                 transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
-                                                className="w-1.5 h-1.5 bg-gray-500 rounded-full"
+                                                className="w-1.5 h-1.5 bg-slate-400 rounded-full"
                                             ></motion.span>
                                             <motion.span
                                                 animate={{ y: [0, -4, 0] }}
                                                 transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
-                                                className="w-1.5 h-1.5 bg-gray-500 rounded-full"
+                                                className="w-1.5 h-1.5 bg-slate-400 rounded-full"
                                             ></motion.span>
                                         </div>
                                     </motion.div>
@@ -434,12 +459,12 @@ export default function LiveChat() {
 
                         {/* Suggestions */}
                         {!isTyping && messages.length < 3 && (
-                            <div className="px-4 pb-2 bg-[#050505] flex gap-2 overflow-x-auto scrollbar-none snap-x">
+                            <div className="px-4 pb-2 bg-[#f8fafc] flex gap-2 overflow-x-auto scrollbar-none snap-x">
                                 {['💰 Budget?', '🚀 Web Dev', '📱 Mobile Apps', '📧 Contact'].map((tag, i) => (
                                     <button
                                         key={i}
                                         onClick={() => sendSuggestion(tag)}
-                                        className="flex-shrink-0 snap-start text-xs bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-500/50 text-gray-400 hover:text-cyan-400 px-3 py-1.5 rounded-full transition-all whitespace-nowrap"
+                                        className="flex-shrink-0 snap-start text-xs bg-[#122a46]/5 hover:bg-[#122a46]/10 border border-[#122a46]/10 hover:border-teal-500/50 text-slate-500 hover:text-teal-600 px-3 py-1.5 rounded-full transition-all whitespace-nowrap"
                                     >
                                         {tag}
                                     </button>
@@ -448,12 +473,12 @@ export default function LiveChat() {
                         )}
 
                         {/* Input Area */}
-                        <div className="p-4 bg-[#0a0a0a] border-t border-white/5 relative z-20">
+                        <div className="p-4 bg-white border-t border-[#122a46]/5 relative z-20">
                             <div className="relative flex items-end gap-2">
                                 {/* Reset Button */}
                                 <button
                                     onClick={resetChat}
-                                    className="h-[46px] w-[46px] flex items-center justify-center rounded-xl bg-[#151515] border border-white/10 hover:bg-[#202020] text-gray-400 hover:text-white transition-all hover:rotate-180"
+                                    className="h-[46px] w-[46px] flex items-center justify-center rounded-xl bg-white border border-[#122a46]/10 hover:bg-slate-50 text-slate-500 hover:text-[#122a46] transition-all hover:rotate-180 shadow-sm"
                                     title="Start New Chat"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
@@ -468,7 +493,7 @@ export default function LiveChat() {
                                             value={inputValue}
                                             onChange={(e) => setInputValue(e.target.value)}
                                             placeholder="Ask Codi..."
-                                            className="w-full bg-[#151515] border border-white/10 rounded-xl pl-4 pr-4 py-3 text-sm text-white focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 outline-none transition-all placeholder:text-gray-600 resize-none h-[46px]"
+                                            className="w-full bg-white border border-[#122a46]/20 rounded-xl pl-4 pr-4 py-3 text-sm text-[#0f172a] focus:border-teal-500/50 focus:ring-1 focus:ring-cyan-500/20 outline-none transition-all placeholder:text-slate-500 resize-none h-[46px] shadow-sm font-medium"
                                         />
                                     </div>
 
@@ -485,7 +510,7 @@ export default function LiveChat() {
                             </div>
                             <div className="text-center mt-3 flex items-center justify-center gap-1.5 opacity-30 hover:opacity-100 transition-opacity">
                                 <span className="w-1 h-1 bg-green-500 rounded-full"></span>
-                                <p className="text-[9px] text-gray-500 font-medium tracking-wide">SECURE CHAT WITH CODI</p>
+                                <p className="text-[9px] text-slate-500 font-medium tracking-wide">SECURE CHAT WITH CODI</p>
                             </div>
                         </div>
                     </motion.div>
@@ -497,13 +522,13 @@ export default function LiveChat() {
                 className="relative group z-50"
             >
                 {/* Ambient Glow */}
-                <div className="absolute inset-0 rounded-full bg-cyan-500/20 blur-xl group-hover:bg-cyan-500/40 transition-all duration-500"></div>
+                <div className="absolute inset-0 rounded-full bg-teal-500/20 blur-xl group-hover:bg-teal-500/40 transition-all duration-500"></div>
 
                 <motion.button
                     onClick={() => setIsOpen(!isOpen)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="pointer-events-auto w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#0a0a0a] border border-cyan-500/50 text-cyan-400 shadow-2xl flex items-center justify-center relative z-20 overflow-hidden group-hover:border-cyan-400 transition-colors"
+                    className="pointer-events-auto w-14 h-14 md:w-16 md:h-16 rounded-full bg-white border border-teal-500/50 text-teal-600 shadow-2xl flex items-center justify-center relative z-20 overflow-hidden group-hover:border-cyan-400 transition-colors"
                 >
                     {/* Inner Gradient Shine */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>

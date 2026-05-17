@@ -17,7 +17,7 @@ const ThemeToggle = () => {
             `}
         >
             {/* Text Label */}
-            <span className={`absolute left-4 text-xs font-black tracking-widest transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-400'}`}>
+            <span className={`absolute left-4 text-xs font-black tracking-widest transition-colors duration-300 ${isDark ? 'text-[#122a46]' : 'text-slate-500'}`}>
                 {isDark ? 'NIGHT' : 'DAY'}
             </span>
 

@@ -20,7 +20,7 @@ const ServiceNetwork = () => {
     const hexagonClip = "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)";
 
     return (
-        <section className="py-24 relative overflow-hidden bg-black flex items-center justify-center min-h-[700px]">
+        <section className="py-24 relative overflow-hidden bg-[#f8fafc] flex items-center justify-center min-h-[700px]">
 
             {/* Mobile View (Stack) */}
             <div className="md:hidden flex flex-col gap-4 w-full px-4 relative z-10 overflow-hidden">
@@ -30,11 +30,11 @@ const ServiceNetwork = () => {
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ delay: i * 0.05 }}
-                            className="bg-white/5 border-l-4 border-transparent p-5 rounded-r-xl active:border-cyan-500 transition-all hover:bg-white/10"
+                            className="bg-[#122a46]/5 border-l-4 border-transparent p-5 rounded-r-xl active:border-teal-500 transition-all hover:bg-[#122a46]/10"
                         >
-                            <h3 className="text-white font-bold text-lg flex justify-between items-center">
+                            <h3 className="text-[#122a46] font-bold text-lg flex justify-between items-center">
                                 {s.title}
-                                <span className="text-xs text-gray-500 uppercase tracking-widest">Explore</span>
+                                <span className="text-xs text-slate-500 uppercase tracking-widest">Explore</span>
                             </h3>
                         </motion.div>
                     </Link>
@@ -144,8 +144,8 @@ const ServiceNetwork = () => {
                 </svg>
 
                 {/* 2. Central Core (The CPU) */}
-                <div className="absolute z-20 w-48 h-48 bg-black/50 backdrop-blur-md rounded-full border border-white/10 flex items-center justify-center group shadow-[0_0_50px_rgba(255,255,255,0.05)]">
-                    <div className="absolute inset-0 rounded-full border border-cyan-500/30 border-dashed animate-spin-slow pointer-events-none"></div>
+                <div className="absolute z-20 w-48 h-48 bg-[#f8fafc]/50 backdrop-blur-md rounded-full border border-[#122a46]/10 flex items-center justify-center group shadow-[0_0_50px_rgba(255,255,255,0.05)]">
+                    <div className="absolute inset-0 rounded-full border border-teal-500/30 border-dashed animate-spin-slow pointer-events-none"></div>
                     <div className="relative w-32 h-32 hover:scale-110 transition-transform duration-500">
                         <Image src={logo} alt="Core" layout="fill" objectFit="contain" className="filter invert drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
                     </div>
@@ -166,7 +166,7 @@ const ServiceNetwork = () => {
                                     className="w-16 h-16 bg-[#111] flex items-center justify-center transition-all duration-300 group-hover:bg-[#222]"
                                     style={{ clipPath: hexagonClip, border: `1px solid ${s.color}` }}
                                 >
-                                    <div className="absolute inset-0.5 bg-black" style={{ clipPath: hexagonClip }}></div>
+                                    <div className="absolute inset-0.5 bg-[#f8fafc]" style={{ clipPath: hexagonClip }}></div>
                                     <div className="absolute inset-0 bg-gradient-to-br from-transparent to-white/10 z-10" style={{ clipPath: hexagonClip }}></div>
                                     {/* Small Dot */}
                                     <div className="w-2 h-2 rounded-full z-20" style={{ backgroundColor: s.color, boxShadow: `0 0 10px ${s.color}` }}></div>
@@ -174,10 +174,10 @@ const ServiceNetwork = () => {
 
                                 {/* Text */}
                                 <div className="flex flex-col">
-                                    <span className="text-2xl font-bold text-gray-400 group-hover:text-white transition-colors tracking-tighter" style={{ textShadow: '0 0 20px rgba(0,0,0,1)' }}>
+                                    <span className="text-2xl font-bold text-slate-500 group-hover:text-[#122a46] transition-colors tracking-tighter" style={{ textShadow: '0 0 20px rgba(0,0,0,1)' }}>
                                         {s.title}
                                     </span>
-                                    <span className="text-[10px] uppercase tracking-[0.2em] text-cyan-900 group-hover:text-cyan-400 transition-colors">Explore Module</span>
+                                    <span className="text-[10px] uppercase tracking-[0.2em] text-cyan-900 group-hover:text-teal-600 transition-colors">Explore Module</span>
                                 </div>
                             </motion.div>
                         </Link>
@@ -199,17 +199,17 @@ const ServiceNetwork = () => {
                                     className="w-16 h-16 bg-[#111] flex items-center justify-center transition-all duration-300 group-hover:bg-[#222]"
                                     style={{ clipPath: hexagonClip }}
                                 >
-                                    <div className="absolute inset-0.5 bg-black" style={{ clipPath: hexagonClip }}></div>
+                                    <div className="absolute inset-0.5 bg-[#f8fafc]" style={{ clipPath: hexagonClip }}></div>
                                     <div className="absolute inset-0 bg-gradient-to-bl from-transparent to-white/10 z-10" style={{ clipPath: hexagonClip }}></div>
                                     <div className="w-2 h-2 rounded-full z-20" style={{ backgroundColor: s.color, boxShadow: `0 0 10px ${s.color}` }}></div>
                                 </div>
 
                                 {/* Text */}
                                 <div className="flex flex-col">
-                                    <span className="text-2xl font-bold text-gray-400 group-hover:text-white transition-colors tracking-tighter">
+                                    <span className="text-2xl font-bold text-slate-500 group-hover:text-[#122a46] transition-colors tracking-tighter">
                                         {s.title}
                                     </span>
-                                    <span className="text-[10px] uppercase tracking-[0.2em] text-cyan-900 group-hover:text-cyan-400 transition-colors">Explore Module</span>
+                                    <span className="text-[10px] uppercase tracking-[0.2em] text-cyan-900 group-hover:text-teal-600 transition-colors">Explore Module</span>
                                 </div>
                             </motion.div>
                         </Link>

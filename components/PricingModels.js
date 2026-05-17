@@ -20,11 +20,11 @@ const plans = [
 
 export default function PricingModels() {
     return (
-        <section className="py-24 bg-white dark:bg-dark relative">
+        <section className="py-24 bg-white dark:bg-[#f8fafc] relative">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Flexible Pricing Models</h2>
-                    <p className="text-gray-600 dark:text-gray-400">Choose the engagement model that fits your business needs.</p>
+                    <h2 className="text-4xl font-bold text-gray-900 dark:text-[#122a46] mb-4">Flexible Pricing Models</h2>
+                    <p className="text-gray-600 dark:text-slate-500">Choose the engagement model that fits your business needs.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -35,16 +35,16 @@ export default function PricingModels() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
                             viewport={{ once: true }}
-                            className={`p-8 rounded-3xl border border-black/5 dark:border-white/10 bg-gray-50 dark:bg-white/5 hover:border-cyan-500/50 transition-all duration-300 group
-                                ${i === 1 ? 'md:-translate-y-4 shadow-2xl shadow-cyan-500/10 border-cyan-500/30' : ''}`}
+                            className={`p-8 rounded-3xl border border-black/5 dark:border-[#122a46]/10 bg-gray-50 dark:bg-[#122a46]/5 hover:border-teal-500/50 transition-all duration-300 group
+                                ${i === 1 ? 'md:-translate-y-4 shadow-2xl shadow-cyan-500/10 border-teal-500/30' : ''}`}
                         >
-                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{plan.title}</h3>
-                            <p className="text-gray-600 dark:text-gray-300 mb-8 text-sm leading-relaxed">{plan.desc}</p>
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-[#122a46] mb-4">{plan.title}</h3>
+                            <p className="text-gray-600 dark:text-slate-600 mb-8 text-sm leading-relaxed">{plan.desc}</p>
 
                             <ul className="space-y-4">
                                 {plan.features.map((feature, idx) => (
-                                    <li key={idx} className="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-400">
-                                        <span className="text-cyan-500">✓</span>
+                                    <li key={idx} className="flex items-center gap-3 text-sm text-gray-700 dark:text-slate-500">
+                                        <span className="text-teal-600">✓</span>
                                         {feature}
                                     </li>
                                 ))}

@@ -66,7 +66,7 @@ const Card = ({ i, title, description, src, role, color, shadow, progress, range
                     backgroundColor: '#050505',
                     top: `calc(-5vh + ${i * 25}px)`
                 }}
-                className={`flex flex-col items-center justify-center relative w-[90vw] md:w-[900px] h-[500px] rounded-[2.5rem] p-8 md:p-16 border border-white/10 origin-top shadow-2xl ${shadow}`}
+                className={`flex flex-col items-center justify-center relative w-[90vw] md:w-[900px] h-[500px] rounded-[2.5rem] p-8 md:p-16 border border-[#122a46]/10 origin-top shadow-2xl ${shadow}`}
             >
                 {/* Background Ambient Glow */}
                 <div className={`absolute top-[-50%] left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-gradient-to-b ${color} opacity-10 blur-[100px] pointer-events-none`} />
@@ -79,7 +79,7 @@ const Card = ({ i, title, description, src, role, color, shadow, progress, range
                 </div>
 
                 {/* Quote Text */}
-                <h2 className="text-2xl md:text-4xl font-medium leading-normal text-white/90 text-center mb-12 max-w-2xl relative z-10 tracking-tight">
+                <h2 className="text-2xl md:text-4xl font-medium leading-normal text-[#122a46]/90 text-center mb-12 max-w-2xl relative z-10 tracking-tight">
                     "{title}"
                 </h2>
 
@@ -87,18 +87,18 @@ const Card = ({ i, title, description, src, role, color, shadow, progress, range
                 <div className="flex flex-col items-center gap-3 relative z-10">
                     <div className="relative">
                         <div className={`w-14 h-14 rounded-full p-0.5 bg-gradient-to-br ${color}`}>
-                            <div className="w-full h-full rounded-full bg-black overflow-hidden relative">
+                            <div className="w-full h-full rounded-full bg-[#f8fafc] overflow-hidden relative">
                                 {/* Use src for image or fallback to initials */}
                                 {src.includes('http') ? (
                                     <img src={src} alt={description} className="w-full h-full object-cover" />
                                 ) : (
-                                    <div className="w-full h-full bg-white/10 flex items-center justify-center text-white font-bold">{src}</div>
+                                    <div className="w-full h-full bg-[#122a46]/10 flex items-center justify-center text-[#122a46] font-bold">{src}</div>
                                 )}
                             </div>
                         </div>
                     </div>
                     <div className="text-center">
-                        <div className="text-lg font-bold text-white tracking-wide">{description}</div>
+                        <div className="text-lg font-bold text-[#122a46] tracking-wide">{description}</div>
                         <div className={`text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r ${color} uppercase tracking-widest mt-0.5`}>
                             {role}
                         </div>
@@ -117,7 +117,7 @@ export default function Testimonials() {
     });
 
     return (
-        <div ref={container} className="bg-[#020202] relative min-h-[300vh]">
+        <div ref={container} className="bg-[#f8fafc] relative min-h-[300vh]">
             {/* Stacking Cards Container */}
             <div className="relative z-10">
                 {testimonials.map((project, i) => {

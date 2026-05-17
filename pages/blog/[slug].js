@@ -13,16 +13,16 @@ const blogContent = {
         readTime: "8 min read",
         image: "https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=2000&auto=format&fit=crop",
         content: `
-            <h3 class="text-2xl font-bold text-white mb-4">The Challenge</h3>
+            <h3 class="text-2xl font-bold text-[#122a46] mb-4">The Challenge</h3>
             <p class="mb-8">When we started building out our real-time notification engine, we hit a wall at 50k concurrent connections. The Node.js event loop was getting blocked, and memory usage was spiking unpredictably.</p>
             
-            <h3 class="text-2xl font-bold text-white mb-4">Kernel Tuning</h3>
+            <h3 class="text-2xl font-bold text-[#122a46] mb-4">Kernel Tuning</h3>
             <p class="mb-8">The first step was to tune the Linux kernel. We increased the maximum number of open file descriptors (ulimit -n) and tweaked the TCP keepalive settings. This allowed a single server to maintain many more idle connections without crashing.</p>
 
-            <h3 class="text-2xl font-bold text-white mb-4">Cluster Mode & Redis Adapter</h3>
+            <h3 class="text-2xl font-bold text-[#122a46] mb-4">Cluster Mode & Redis Adapter</h3>
             <p class="mb-8">We moved to a clustered architecture using the Redis adapter for Socket.io. This allowed us to scale horizontally across multiple nodes. Messages published to one node were propagated to all others via Redis Pub/Sub.</p>
             
-            <h3 class="text-2xl font-bold text-white mb-4">The Result</h3>
+            <h3 class="text-2xl font-bold text-[#122a46] mb-4">The Result</h3>
             <p class="mb-8">With these changes, we successfully benchmarked 1M+ concurrent connections with sub-100ms latency on a cluster of just 3 standard instances.</p>
         `
     },
@@ -62,7 +62,7 @@ export default function BlogPost() {
                 <title>{post.title} | Codiora Tech</title>
             </Head>
 
-            <div className="bg-[#020202] min-h-screen text-gray-300 selection:bg-orange-500/30 font-sans">
+            <div className="bg-[#f8fafc] min-h-screen text-slate-600 selection:bg-orange-500/30 font-sans">
                 {/* Progress Bar */}
                 <motion.div style={{ scaleX: useScroll().scrollYProgress }} className="fixed top-0 left-0 right-0 h-1 bg-orange-500 origin-left z-50"></motion.div>
 
@@ -72,7 +72,7 @@ export default function BlogPost() {
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-40 relative z-10 max-w-4xl">
-                    <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-orange-500 transition-colors mb-12 uppercase tracking-widest font-bold">
+                    <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-orange-500 transition-colors mb-12 uppercase tracking-widest font-bold">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
                         Back to Blog
                     </Link>
@@ -81,40 +81,40 @@ export default function BlogPost() {
                         <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest mb-6 text-orange-500">
                             <span>{post.category}</span>
                             <span className="text-gray-600">•</span>
-                            <span className="text-gray-500">{post.readTime}</span>
+                            <span className="text-slate-500">{post.readTime}</span>
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8">{post.title}</h1>
-                        <div className="flex items-center gap-4 mb-16 border-b border-white/10 pb-8">
+                        <h1 className="text-4xl md:text-6xl font-black text-[#122a46] leading-tight mb-8">{post.title}</h1>
+                        <div className="flex items-center gap-4 mb-16 border-b border-[#122a46]/10 pb-8">
                             <div className="w-12 h-12 bg-gray-800 rounded-full"></div>
                             <div>
-                                <div className="text-white font-bold">Codiora Engineering Team</div>
-                                <div className="text-xs text-gray-500">{post.date}</div>
+                                <div className="text-[#122a46] font-bold">Codiora Engineering Team</div>
+                                <div className="text-xs text-slate-500">{post.date}</div>
                             </div>
                         </div>
                     </motion.div>
 
-                    <div className="prose prose-invert prose-lg max-w-none text-gray-300 leading-relaxed mb-24">
-                        <img src={post.image} alt={post.title} className="w-full rounded-3xl mb-12 border border-white/10" />
+                    <div className="prose prose-invert prose-lg max-w-none text-slate-600 leading-relaxed mb-24">
+                        <img src={post.image} alt={post.title} className="w-full rounded-3xl mb-12 border border-[#122a46]/10" />
                         <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
                     </div>
 
                     {/* Comments Section */}
-                    <div className="bg-[#0a0a0a] border border-white/5 p-10 md:p-14 rounded-[2.5rem]">
-                        <h3 className="text-2xl font-bold text-white mb-10">Discussion ({comments.length})</h3>
+                    <div className="bg-white border border-[#122a46]/5 p-10 md:p-14 rounded-[2.5rem]">
+                        <h3 className="text-2xl font-bold text-[#122a46] mb-10">Discussion ({comments.length})</h3>
 
                         <div className="space-y-8 mb-12">
                             {comments.map((c, i) => (
                                 <div key={i} className="flex gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-orange-500 flex-shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-[#122a46]/10 flex items-center justify-center font-bold text-orange-500 flex-shrink-0">
                                         {c.author.charAt(0)}
                                     </div>
                                     <div>
                                         <div className="flex items-baseline gap-3 mb-1">
-                                            <span className="text-white font-bold">{c.author}</span>
+                                            <span className="text-[#122a46] font-bold">{c.author}</span>
                                             <span className="text-xs text-orange-500 uppercase tracking-wider font-bold border border-orange-500/20 px-2 rounded-full">{c.role}</span>
                                             <span className="text-xs text-gray-600 ml-auto md:ml-0">{c.date}</span>
                                         </div>
-                                        <p className="text-gray-400 text-sm leading-relaxed">{c.text}</p>
+                                        <p className="text-slate-500 text-sm leading-relaxed">{c.text}</p>
                                     </div>
                                 </div>
                             ))}
@@ -124,10 +124,10 @@ export default function BlogPost() {
                             <textarea
                                 value={newComment}
                                 onChange={(e) => setNewComment(e.target.value)}
-                                className="w-full bg-[#111] border border-white/10 rounded-2xl p-6 text-white focus:border-orange-500 outline-none transition-colors min-h-[150px] resize-none"
+                                className="w-full bg-[#111] border border-[#122a46]/10 rounded-2xl p-6 text-[#122a46] focus:border-orange-500 outline-none transition-colors min-h-[150px] resize-none"
                                 placeholder="Share your thoughts..."
                             ></textarea>
-                            <button className="absolute bottom-4 right-4 bg-orange-600 text-white px-6 py-2 rounded-xl font-bold text-sm hover:bg-orange-500 transition-colors">
+                            <button className="absolute bottom-4 right-4 bg-orange-600 text-[#122a46] px-6 py-2 rounded-xl font-bold text-sm hover:bg-orange-500 transition-colors">
                                 Post Comment
                             </button>
                         </form>

@@ -51,7 +51,7 @@ export default function Sitemap() {
                 <title>Codiora Tech | Sitemap</title>
             </Head>
 
-            <div className="bg-[#020202] min-h-screen text-white overflow-hidden selection:bg-emerald-500/30">
+            <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-emerald-500/30">
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute bottom-[0%] left-[50%] -translate-x-1/2 w-[800px] h-[800px] bg-emerald-900/10 rounded-full blur-[150px] animate-pulse-slow" />
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
@@ -80,11 +80,11 @@ export default function Sitemap() {
                                 transition={{ delay: i * 0.1 }}
                                 className="space-y-6"
                             >
-                                <h2 className="text-sm font-bold uppercase tracking-widest text-gray-500 border-b border-white/10 pb-4">{section.category}</h2>
+                                <h2 className="text-sm font-bold uppercase tracking-widest text-slate-500 border-b border-[#122a46]/10 pb-4">{section.category}</h2>
                                 <ul className="space-y-4">
                                     {section.links.map((link, j) => (
                                         <li key={j}>
-                                            <Link href={link.href} className="text-xl font-bold text-gray-300 hover:text-emerald-500 transition-colors flex items-center gap-2 group">
+                                            <Link href={link.href} className="text-xl font-bold text-slate-600 hover:text-emerald-500 transition-colors flex items-center gap-2 group">
                                                 <span className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-emerald-500">→</span>
                                                 {link.name}
                                             </Link>

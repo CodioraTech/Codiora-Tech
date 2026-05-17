@@ -36,7 +36,7 @@ export default function Expertise() {
                 <title>Codiora Tech | Expertise</title>
             </Head>
 
-            <div className="bg-[#020202] min-h-screen text-white overflow-hidden selection:bg-purple-500/30">
+            <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/10">
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[-10%] opacity-30 left-[-10%] w-[800px] h-[800px] bg-gradient-to-r from-blue-900 via-purple-900 to-pink-900 rounded-full blur-[150px] animate-pulse-slow" />
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
@@ -49,9 +49,9 @@ export default function Expertise() {
                             animate={{ opacity: 1, y: 0 }}
                             className="text-5xl md:text-8xl font-black tracking-tighter mb-8"
                         >
-                            TECHNICAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">MASTERY</span>
+                            TECHNICAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#122a46] to-gray-500">MASTERY</span>
                         </motion.h1>
-                        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                        <p className="text-xl text-slate-500 max-w-3xl mx-auto">
                             We don't just use tools; we master them. Our stack is curated for speed, security, and scalability.
                         </p>
                     </div>
@@ -64,17 +64,17 @@ export default function Expertise() {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: i * 0.1 }}
                                 whileHover={{ scale: 1.02 }}
-                                className="bg-white/5 border border-white/5 p-10 rounded-[2rem] hover:bg-white/10 transition-all group relative overflow-hidden"
+                                className="bg-[#122a46]/5 border border-[#122a46]/5 p-10 rounded-[2rem] hover:bg-[#122a46]/10 transition-all group relative overflow-hidden"
                             >
                                 <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${domain.gradient}`}></div>
                                 <div className={`absolute -right-20 -top-20 w-60 h-60 bg-gradient-to-r ${domain.gradient} opacity-20 blur-[80px] group-hover:opacity-30 transition-opacity`}></div>
 
-                                <h3 className="text-3xl font-bold mb-4 text-white relative z-10">{domain.title}</h3>
-                                <p className="text-gray-400 text-lg mb-8 relative z-10 min-h-[60px]">{domain.desc}</p>
+                                <h3 className="text-3xl font-bold mb-4 text-[#122a46] relative z-10">{domain.title}</h3>
+                                <p className="text-slate-500 text-lg mb-8 relative z-10 min-h-[60px]">{domain.desc}</p>
 
                                 <div className="flex flex-wrap gap-3 relative z-10">
                                     {domain.stack.map((tech, j) => (
-                                        <span key={j} className="px-4 py-2 bg-black/50 border border-white/10 rounded-full text-sm font-bold text-gray-300 hover:text-white hover:border-white/30 transition-colors">
+                                        <span key={j} className="px-4 py-2 bg-[#f8fafc]/50 border border-[#122a46]/10 rounded-full text-sm font-bold text-slate-600 hover:text-[#122a46] hover:border-white/30 transition-colors">
                                             {tech}
                                         </span>
                                     ))}
@@ -83,14 +83,14 @@ export default function Expertise() {
                         ))}
                     </div>
 
-                    <div className="mt-32 p-12 bg-gradient-to-r from-gray-900 to-black rounded-3xl border border-white/10 text-center relative overflow-hidden">
+                    <div className="mt-32 p-12 bg-gradient-to-r from-[#122a46] to-teal-900 rounded-3xl border border-[#122a46]/10 text-center relative overflow-hidden shadow-xl">
                         <div className="absolute inset-0 bg-[url('/img/grid.svg')] opacity-20"></div>
-                        <h2 className="text-3xl font-bold mb-6 relative z-10">Don't See Your Tech?</h2>
-                        <p className="text-gray-400 mb-8 max-w-2xl mx-auto relative z-10">
+                        <h2 className="text-3xl font-bold mb-6 relative z-10 text-white">Don't See Your Tech?</h2>
+                        <p className="text-teal-100 mb-8 max-w-2xl mx-auto relative z-10 font-medium">
                             We are polyglot engineers. We adapt to the best tool for the job. Challenge us with your requirements.
                         </p>
                         <Link href="/contact">
-                            <button className="px-10 py-4 border border-white/30 rounded-full font-bold hover:bg-white hover:text-black transition-all relative z-10">
+                            <button className="px-10 py-4 border border-teal-500/50 rounded-full font-bold text-white hover:bg-teal-500 hover:border-teal-500 hover:shadow-[0_0_20px_rgba(20,184,166,0.4)] transition-all relative z-10">
                                 Discuss Custom Requirements
                             </button>
                         </Link>

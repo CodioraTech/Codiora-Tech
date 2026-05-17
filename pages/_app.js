@@ -1,4 +1,5 @@
 import '@/styles/globals.css';
+import '@/styles/landing.css';
 import Layout from '@/components/Layout';
 import Head from 'next/head';
 import { ThemeProvider } from '@/context/ThemeContext';

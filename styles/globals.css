@@ -6,12 +6,12 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    @apply bg-dark text-white transition-colors duration-300;
+    @apply bg-dark text-primary transition-colors duration-300;
 }
 
-/* Dark Mode Overrides */
+/* Dark Mode Overrides - Forced to Light Theme logic */
 html.dark body {
-    @apply bg-dark text-white;
+    @apply bg-dark text-primary;
 }
 
 /* Glassmorphism Utilities */

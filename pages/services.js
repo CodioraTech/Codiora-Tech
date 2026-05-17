@@ -20,7 +20,7 @@ export default function Services() {
                 <meta name="description" content="Explore our wide range of IT services including Web Development, Mobile Apps, and AI Solutions." />
             </Head>
 
-            <section className="min-h-screen bg-gray-50 dark:bg-dark pt-44 pb-20 relative transition-colors duration-300">
+            <section className="min-h-screen bg-gray-50 dark:bg-[#f8fafc] pt-44 pb-20 relative transition-colors duration-300">
                 <div className="absolute top-1/4 left-0 w-96 h-96 bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
 
                 <div className="container mx-auto px-6 relative z-10">
@@ -28,11 +28,11 @@ export default function Services() {
                         <motion.h1
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl md:text-7xl font-bold mb-8 text-gray-900 dark:text-white transition-colors"
+                            className="text-5xl md:text-7xl font-bold mb-8 text-gray-900 dark:text-[#122a46] transition-colors"
                         >
                             Our Expertise
                         </motion.h1>
-                        <p className="text-xl text-gray-600 dark:text-gray-400 transition-colors">
+                        <p className="text-xl text-gray-600 dark:text-slate-500 transition-colors">
                             We don't offer generic services. We provide tailored digital weaponry to help you conquer your market.
                         </p>
                     </div>
@@ -52,15 +52,15 @@ export default function Services() {
 
                     <motion.div
                         whileHover={{ scale: 1.01 }}
-                        className="mt-20 text-center bg-white dark:bg-transparent dark:glass-panel border border-black/5 dark:border-white/10 p-16 rounded-3xl relative overflow-hidden transition-all shadow-xl dark:shadow-none"
+                        className="mt-20 text-center bg-white dark:bg-transparent dark:glass-panel border border-black/5 dark:border-[#122a46]/10 p-16 rounded-3xl relative overflow-hidden transition-all shadow-xl dark:shadow-none"
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-accent/10 to-secondary/10 opacity-50" />
                         <div className="relative z-10">
-                            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 transition-colors">Have a Wild Idea?</h2>
-                            <p className="text-gray-600 dark:text-gray-300 mb-10 text-lg max-w-2xl mx-auto transition-colors">
+                            <h2 className="text-4xl font-bold text-gray-900 dark:text-[#122a46] mb-6 transition-colors">Have a Wild Idea?</h2>
+                            <p className="text-gray-600 dark:text-slate-600 mb-10 text-lg max-w-2xl mx-auto transition-colors">
                                 The crazier, the better. We thrive on solving "impossible" problems. Let's engineer a solution that defies expectations.
                             </p>
-                            <Link href="/contact" className="px-10 py-4 bg-black dark:bg-white text-white dark:text-dark font-bold rounded-full hover:bg-gray-800 dark:hover:bg-accent hover:scale-105 transition-all shadow-lg dark:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                            <Link href="/contact" className="px-10 py-4 bg-[#f8fafc] dark:bg-white text-[#122a46] dark:text-dark font-bold rounded-full hover:bg-gray-800 dark:hover:bg-accent hover:scale-105 transition-all shadow-lg dark:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
                                 Challenge Us
                             </Link>
                         </div>

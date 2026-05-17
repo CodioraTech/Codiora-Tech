@@ -168,7 +168,7 @@ export default function CareerApply() {
                 <title>Codiora Tech | Apply Now</title>
             </Head>
 
-            <div className="bg-[#020202] min-h-screen text-white overflow-hidden selection:bg-green-500/30">
+            <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-green-500/30">
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[-20%] left-[50%] -translate-x-1/2 w-[800px] h-[800px] bg-green-900/10 rounded-full blur-[150px] animate-pulse-slow" />
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
@@ -196,19 +196,19 @@ export default function CareerApply() {
                                             <div className="inline-block px-4 py-1.5 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-widest mb-6">
                                                 Selected Role
                                             </div>
-                                            <h1 className="text-3xl md:text-5xl font-black tracking-tighter mb-6 text-white">
+                                            <h1 className="text-3xl md:text-5xl font-black tracking-tighter mb-6 text-[#122a46]">
                                                 {role}
                                             </h1>
-                                            <p className="text-gray-300 text-lg leading-relaxed">
+                                            <p className="text-slate-600 text-lg leading-relaxed">
                                                 {details.description}
                                             </p>
                                         </div>
 
                                         <div className="space-y-6">
-                                            <h3 className="text-xl font-bold text-white border-b border-white/10 pb-2">Responsibilities</h3>
+                                            <h3 className="text-xl font-bold text-[#122a46] border-b border-[#122a46]/10 pb-2">Responsibilities</h3>
                                             <ul className="space-y-3">
                                                 {details.responsibilities.map((res, i) => (
-                                                    <li key={i} className="flex gap-3 text-gray-400">
+                                                    <li key={i} className="flex gap-3 text-slate-500">
                                                         <span className="text-green-500 mt-1">▹</span>
                                                         {res}
                                                     </li>
@@ -217,10 +217,10 @@ export default function CareerApply() {
                                         </div>
 
                                         <div className="space-y-6">
-                                            <h3 className="text-xl font-bold text-white border-b border-white/10 pb-2">Requirements</h3>
+                                            <h3 className="text-xl font-bold text-[#122a46] border-b border-[#122a46]/10 pb-2">Requirements</h3>
                                             <ul className="space-y-3">
                                                 {details.requirements.map((req, i) => (
-                                                    <li key={i} className="flex gap-3 text-gray-400">
+                                                    <li key={i} className="flex gap-3 text-slate-500">
                                                         <span className="text-green-500 mt-1">▹</span>
                                                         {req}
                                                     </li>
@@ -238,34 +238,34 @@ export default function CareerApply() {
                                             <div className="inline-block px-4 py-1.5 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-widest mb-6">
                                                 Join The Vanguard
                                             </div>
-                                            <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
+                                            <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 bg-gradient-to-r from-[#122a46] to-gray-500 bg-clip-text text-transparent">
                                                 Your Next Chapter Starts Here.
                                             </h1>
-                                            <p className="text-gray-400 text-lg leading-relaxed max-w-lg">
+                                            <p className="text-slate-500 text-lg leading-relaxed max-w-lg">
                                                 We don't care about your pedigree. We care about your output. Show us what you've built, and why you want to build with us.
                                             </p>
                                         </div>
 
                                         <div className="space-y-6 mt-12">
                                             <div className="flex items-start gap-4">
-                                                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-green-500 font-bold border border-white/10 mt-1">1</div>
+                                                <div className="w-10 h-10 rounded-full bg-[#122a46]/5 flex items-center justify-center text-green-500 font-bold border border-[#122a46]/10 mt-1">1</div>
                                                 <div>
-                                                    <h3 className="text-white font-bold text-lg">Application Review</h3>
-                                                    <p className="text-gray-500 text-sm">Our engineering leads review every code sample manually. No automated filters.</p>
+                                                    <h3 className="text-[#122a46] font-bold text-lg">Application Review</h3>
+                                                    <p className="text-slate-500 text-sm">Our engineering leads review every code sample manually. No automated filters.</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-start gap-4">
-                                                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-green-500 font-bold border border-white/10 mt-1">2</div>
+                                                <div className="w-10 h-10 rounded-full bg-[#122a46]/5 flex items-center justify-center text-green-500 font-bold border border-[#122a46]/10 mt-1">2</div>
                                                 <div>
-                                                    <h3 className="text-white font-bold text-lg">Technical Deep Dive</h3>
-                                                    <p className="text-gray-500 text-sm">A 60-minute session where we architect a system together. No whiteboard inversions.</p>
+                                                    <h3 className="text-[#122a46] font-bold text-lg">Technical Deep Dive</h3>
+                                                    <p className="text-slate-500 text-sm">A 60-minute session where we architect a system together. No whiteboard inversions.</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-start gap-4">
-                                                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-green-500 font-bold border border-white/10 mt-1">3</div>
+                                                <div className="w-10 h-10 rounded-full bg-[#122a46]/5 flex items-center justify-center text-green-500 font-bold border border-[#122a46]/10 mt-1">3</div>
                                                 <div>
-                                                    <h3 className="text-white font-bold text-lg">Culture Fit & Offer</h3>
-                                                    <p className="text-gray-500 text-sm">Meet the founders and discuss the vision. Offers are extended same-day.</p>
+                                                    <h3 className="text-[#122a46] font-bold text-lg">Culture Fit & Offer</h3>
+                                                    <p className="text-slate-500 text-sm">Meet the founders and discuss the vision. Offers are extended same-day.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -279,8 +279,8 @@ export default function CareerApply() {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.2 }}
                             >
-                                <div className="bg-[#111] border border-white/5 p-8 md:p-10 rounded-[2rem] shadow-2xl relative overflow-hidden">
-                                    <h3 className="text-2xl font-bold text-white mb-8">Role Application</h3>
+                                <div className="bg-[#111] border border-[#122a46]/5 p-8 md:p-10 rounded-[2rem] shadow-2xl relative overflow-hidden">
+                                    <h3 className="text-2xl font-bold text-[#122a46] mb-8">Role Application</h3>
 
                                     <AnimatePresence mode='wait'>
                                         {status === 'success' ? (
@@ -291,13 +291,13 @@ export default function CareerApply() {
                                                 className="text-center py-20"
                                             >
                                                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-700 rounded-full mx-auto flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(34,197,94,0.5)]">
-                                                    <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                                                    <svg className="w-10 h-10 text-[#122a46]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
                                                 </div>
-                                                <h3 className="text-2xl font-bold text-white mb-4">Application Sent</h3>
-                                                <p className="text-gray-400 mb-8 max-w-xs mx-auto">
+                                                <h3 className="text-2xl font-bold text-[#122a46] mb-4">Application Sent</h3>
+                                                <p className="text-slate-500 mb-8 max-w-xs mx-auto">
                                                     Your resume is now in our secure pipeline.
                                                 </p>
-                                                <button onClick={() => window.location.href = '/careers'} className="text-green-500 font-bold hover:text-white transition-colors uppercase tracking-widest text-xs">
+                                                <button onClick={() => window.location.href = '/careers'} className="text-green-500 font-bold hover:text-[#122a46] transition-colors uppercase tracking-widest text-xs">
                                                     Back to Careers
                                                 </button>
                                             </motion.div>
@@ -311,14 +311,14 @@ export default function CareerApply() {
                                                             name="position"
                                                             value={role}
                                                             onChange={handleRoleChange}
-                                                            className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium text-sm appearance-none cursor-pointer"
+                                                            className="w-full bg-white border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium text-sm appearance-none cursor-pointer"
                                                         >
                                                             <option value="" disabled>Select a role...</option>
                                                             {positions.map((p, i) => (
                                                                 <option key={i} value={p}>{p}</option>
                                                             ))}
                                                         </select>
-                                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
                                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                                         </div>
                                                     </div>
@@ -326,33 +326,33 @@ export default function CareerApply() {
 
                                                 <div className="grid grid-cols-2 gap-5">
                                                     <div className="space-y-2">
-                                                        <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">First Name</label>
-                                                        <input name="first_name" type="text" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium text-sm" />
+                                                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">First Name</label>
+                                                        <input name="first_name" type="text" required className="w-full bg-white border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium text-sm" />
                                                     </div>
                                                     <div className="space-y-2">
-                                                        <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Last Name</label>
-                                                        <input name="last_name" type="text" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium text-sm" />
+                                                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Last Name</label>
+                                                        <input name="last_name" type="text" required className="w-full bg-white border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium text-sm" />
                                                     </div>
                                                 </div>
 
                                                 <div className="space-y-2">
-                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Email Address</label>
-                                                    <input name="email" type="email" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium text-sm" />
+                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Email Address</label>
+                                                    <input name="email" type="email" required className="w-full bg-white border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium text-sm" />
                                                 </div>
 
                                                 <div className="space-y-2">
-                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">CV / Resume (URL)</label>
-                                                    <input name="cv_link" type="url" required className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium placeholder:text-gray-800 text-sm" placeholder="Dropbox / Google Drive Link" />
+                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">CV / Resume (URL)</label>
+                                                    <input name="cv_link" type="url" required className="w-full bg-white border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium placeholder:text-gray-800 text-sm" placeholder="Dropbox / Google Drive Link" />
                                                 </div>
 
                                                 <div className="space-y-2">
-                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Portfolio / Github</label>
-                                                    <input name="portfolio" type="url" className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium text-sm" />
+                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Portfolio / Github</label>
+                                                    <input name="portfolio" type="url" className="w-full bg-white border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium text-sm" />
                                                 </div>
 
                                                 <div className="space-y-2">
-                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Why You?</label>
-                                                    <textarea name="about" className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium h-24 resize-none text-sm" placeholder="Briefly introduce yourself..."></textarea>
+                                                    <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Why You?</label>
+                                                    <textarea name="about" className="w-full bg-white border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all outline-none font-medium h-24 resize-none text-sm" placeholder="Briefly introduce yourself..."></textarea>
                                                 </div>
 
                                                 {status === 'error' && (
@@ -364,7 +364,7 @@ export default function CareerApply() {
                                                 <button
                                                     disabled={status === 'submitting'}
                                                     type="submit"
-                                                    className="w-full py-4 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-base tracking-wide shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:shadow-[0_0_50px_rgba(34,197,94,0.5)] hover:scale-[1.01] transition-all duration-300"
+                                                    className="w-full py-4 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-[#122a46] font-bold text-base tracking-wide shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:shadow-[0_0_50px_rgba(34,197,94,0.5)] hover:scale-[1.01] transition-all duration-300"
                                                 >
                                                     {status === 'submitting' ? 'Sending Application...' : 'Submit Application'}
                                                 </button>

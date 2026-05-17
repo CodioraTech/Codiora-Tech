@@ -95,10 +95,10 @@ export default function ProjectPage() {
     const content = () => {
         if (!slug) return <div className="min-h-screen bg-[#050505]" />;
         if (!project) return (
-            <div className="min-h-screen bg-[#050505] flex items-center justify-center text-white">
+            <div className="min-h-screen bg-[#050505] flex items-center justify-center text-[#122a46]">
                 <div className="text-center">
                     <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
-                    <button onClick={() => router.push('/portfolio')} className="text-cyan-400 hover:underline">Back to Portfolio</button>
+                    <button onClick={() => router.push('/portfolio')} className="text-teal-600 hover:underline">Back to Portfolio</button>
                 </div>
             </div>
         );
@@ -112,17 +112,17 @@ export default function ProjectPage() {
 
                 {/* Hero Section */}
                 <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 bg-[#020202] z-0">
+                    <div className="absolute inset-0 bg-[#f8fafc] z-0">
                         {/* Background Noise & Gradient */}
                         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none"></div>
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px]" />
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/10 rounded-full blur-[120px]" />
                     </div>
 
                     <div className="container mx-auto px-6 relative z-10 text-center">
                         <motion.span
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="inline-block py-1 px-3 rounded-full border border-white/10 bg-white/5 text-cyan-400 text-sm font-bold tracking-widest uppercase mb-6"
+                            className="inline-block py-1 px-3 rounded-full border border-[#122a46]/10 bg-[#122a46]/5 text-teal-600 text-sm font-bold tracking-widest uppercase mb-6"
                         >
                             {project.category}
                         </motion.span>
@@ -130,7 +130,7 @@ export default function ProjectPage() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.1, duration: 0.8 }}
-                            className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-200 to-gray-600"
+                            className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-br from-[#122a46] via-slate-500 to-teal-500"
                         >
                             {project.title}
                         </motion.h1>
@@ -138,7 +138,7 @@ export default function ProjectPage() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.3 }}
-                            className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto"
+                            className="text-xl md:text-2xl text-slate-500 max-w-2xl mx-auto"
                         >
                             {project.tagline}
                         </motion.p>
@@ -146,15 +146,15 @@ export default function ProjectPage() {
                 </section>
 
                 {/* Stats & Overview */}
-                <section className="py-20 border-y border-white/5 bg-white/[0.02]">
+                <section className="py-20 border-y border-[#122a46]/5 bg-white/[0.02]">
                     <div className="container mx-auto px-6">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                             {/* Technologies */}
                             <div>
-                                <h3 className="text-sm font-bold text-gray-500 tracking-widest uppercase mb-4">Tech Stack</h3>
+                                <h3 className="text-sm font-bold text-slate-500 tracking-widest uppercase mb-4">Tech Stack</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {project.technologies.map(tech => (
-                                        <span key={tech} className="bg-white/10 px-3 py-1 rounded-md text-sm border border-white/5 hover:border-purple-500/50 transition-colors cursor-default">
+                                        <span key={tech} className="bg-[#122a46]/10 px-3 py-1 rounded-md text-sm border border-[#122a46]/5 hover:border-purple-500/50 transition-colors cursor-default">
                                             {tech}
                                         </span>
                                     ))}
@@ -162,12 +162,12 @@ export default function ProjectPage() {
                             </div>
                             {/* Stat 1 */}
                             <div className="text-center md:text-left">
-                                <h3 className="text-sm font-bold text-gray-500 tracking-widest uppercase mb-2">{project.stat1Label}</h3>
-                                <p className="text-5xl font-mono font-bold text-cyan-400">{project.stat1}</p>
+                                <h3 className="text-sm font-bold text-slate-500 tracking-widest uppercase mb-2">{project.stat1Label}</h3>
+                                <p className="text-5xl font-mono font-bold text-teal-600">{project.stat1}</p>
                             </div>
                             {/* Stat 2 */}
                             <div className="text-center md:text-left">
-                                <h3 className="text-sm font-bold text-gray-500 tracking-widest uppercase mb-2">{project.stat2Label}</h3>
+                                <h3 className="text-sm font-bold text-slate-500 tracking-widest uppercase mb-2">{project.stat2Label}</h3>
                                 <p className="text-5xl font-mono font-bold text-purple-400">{project.stat2}</p>
                             </div>
                         </div>
@@ -185,7 +185,7 @@ export default function ProjectPage() {
                             className="space-y-20"
                         >
                             {/* Image Placeholder */}
-                            <div className="aspect-video w-full bg-[#111] rounded-3xl border border-white/10 relative overflow-hidden group shadow-[0_0_50px_rgba(168,85,247,0.15)]">
+                            <div className="aspect-video w-full bg-[#111] rounded-3xl border border-[#122a46]/10 relative overflow-hidden group shadow-[0_0_50px_rgba(168,85,247,0.15)]">
                                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay z-10 pointer-events-none"></div>
 
                                 <motion.div style={{ scale }} className="relative w-full h-full">
@@ -203,28 +203,28 @@ export default function ProjectPage() {
                                 </motion.div>
 
                                 {/* Glare effect */}
-                                <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-20"></div>
+                                <div className="absolute inset-0 bg-gradient-to-tr from-[#122a46]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-20"></div>
                             </div>
 
                             {/* Description */}
                             <div>
-                                <h2 className="text-3xl font-bold mb-6 text-white">The Vision</h2>
-                                <p className="text-lg text-gray-400 leading-relaxed">
+                                <h2 className="text-3xl font-bold mb-6 text-[#122a46]">The Vision</h2>
+                                <p className="text-lg text-slate-500 leading-relaxed">
                                     {project.description}
                                 </p>
                             </div>
 
                             {/* Challenges & Solutions */}
                             <div className="grid md:grid-cols-2 gap-12">
-                                <div className="bg-[#0a0a0a] p-8 rounded-2xl border border-white/5 hover:border-red-500/30 transition-colors duration-500 group">
+                                <div className="bg-white p-8 rounded-2xl border border-[#122a46]/5 hover:border-red-500/30 transition-colors duration-500 group">
                                     <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">⚠️</div>
-                                    <h3 className="text-xl font-bold mb-4 text-white">The Challenge</h3>
-                                    <p className="text-gray-400">{project.challenges}</p>
+                                    <h3 className="text-xl font-bold mb-4 text-[#122a46]">The Challenge</h3>
+                                    <p className="text-slate-500">{project.challenges}</p>
                                 </div>
-                                <div className="bg-[#0a0a0a] p-8 rounded-2xl border border-white/5 hover:border-emerald-500/30 transition-colors duration-500 group">
+                                <div className="bg-white p-8 rounded-2xl border border-[#122a46]/5 hover:border-emerald-500/30 transition-colors duration-500 group">
                                     <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-6 group-hover:scale-110 transition-transform">💡</div>
-                                    <h3 className="text-xl font-bold mb-4 text-white">The Solution</h3>
-                                    <p className="text-gray-400">{project.solution}</p>
+                                    <h3 className="text-xl font-bold mb-4 text-[#122a46]">The Solution</h3>
+                                    <p className="text-slate-500">{project.solution}</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -242,7 +242,7 @@ export default function ProjectPage() {
     };
 
     return (
-        <div className="bg-[#020202] text-white min-h-screen selection:bg-purple-500/30 selection:text-white" ref={containerRef}>
+        <div className="bg-[#f8fafc] text-[#122a46] min-h-screen selection:bg-teal-500/10 selection:text-[#122a46]" ref={containerRef}>
             {content()}
         </div>
     );

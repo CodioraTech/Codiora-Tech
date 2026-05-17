@@ -30,7 +30,7 @@ export default function Internship() {
                 <title>Codiora Tech | Intership Program</title>
             </Head>
 
-            <div className="bg-[#020202] min-h-screen text-white overflow-hidden selection:bg-teal-500/30">
+            <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30">
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-teal-900/10 rounded-full blur-[150px] animate-pulse-slow" />
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
@@ -49,7 +49,7 @@ export default function Internship() {
                             >
                                 THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-500">INCUBATOR</span>
                             </motion.h1>
-                            <p className="text-xl text-gray-400">
+                            <p className="text-xl text-slate-500">
                                 This is not a coffee-fetcher internship. You will push production code, break things (in dev), and learn from the best engineers in the industry.
                             </p>
                         </div>
@@ -66,13 +66,13 @@ export default function Internship() {
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="bg-[#0a0a0a] border border-white/5 p-10 rounded-[2.5rem] hover:bg-white/5 transition-colors group cursor-pointer"
+                                    className="bg-white border border-[#122a46]/5 p-10 rounded-[2.5rem] hover:bg-[#122a46]/5 transition-colors group cursor-pointer"
                                 >
                                     <div className="text-6xl mb-6 group-hover:scale-110 transition-transform">{track.icon}</div>
-                                    <h3 className="text-2xl font-bold text-white mb-4">{track.title}</h3>
-                                    <div className="flex flex-wrap gap-2 text-sm text-gray-400">
+                                    <h3 className="text-2xl font-bold text-[#122a46] mb-4">{track.title}</h3>
+                                    <div className="flex flex-wrap gap-2 text-sm text-slate-500">
                                         {track.skills.map(skill => (
-                                            <span key={skill} className="px-3 py-1 bg-white/5 rounded-full border border-white/5">{skill}</span>
+                                            <span key={skill} className="px-3 py-1 bg-[#122a46]/5 rounded-full border border-[#122a46]/5">{skill}</span>
                                         ))}
                                     </div>
                                     <div className="mt-8 flex items-center gap-2 text-teal-500 font-bold text-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
@@ -84,10 +84,10 @@ export default function Internship() {
                     </div>
 
                     {/* Why Apply */}
-                    <div className="bg-gradient-to-br from-teal-900/20 to-black border border-teal-500/20 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
+                    <div className="bg-gradient-to-br from-teal-900/20 to-[#f8fafc] border border-teal-500/20 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
                         <h2 className="text-4xl font-bold mb-8">Ready to Accelerate Your Career?</h2>
-                        <p className="text-gray-300 max-w-2xl mx-auto mb-12 text-lg">
+                        <p className="text-slate-600 max-w-2xl mx-auto mb-12 text-lg">
                             We accept less than 2% of applicants. If you have the hunger to learn and the grit to solve hard problems, we want to hear from you.
                         </p>
                         <Link href="/careers-apply">
