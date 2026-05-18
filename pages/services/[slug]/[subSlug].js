@@ -155,7 +155,7 @@ export default function SubServicePage({ service, subService, slug }) {
 
                         {/* CTA */}
                         <div className="text-center mt-32">
-                            <Link href="/contact" className="inline-block px-12 py-5 bg-[#122a46] text-white font-bold text-lg rounded-full hover:bg-teal-500 hover:scale-105 transition-all shadow-[0_0_40px_rgba(18,42,70,0.2)]">
+                            <Link href={`/contact?service=${encodeURIComponent(service.title)}`} className="inline-block px-12 py-5 bg-[#122a46] text-white font-bold text-lg rounded-full hover:bg-teal-500 hover:scale-105 transition-all shadow-[0_0_40px_rgba(18,42,70,0.2)]">
                                 Discuss Your {subService.name} Project
                             </Link>
                         </div>

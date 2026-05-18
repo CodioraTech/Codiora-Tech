@@ -60,7 +60,7 @@ export default function Services() {
                             <p className="text-gray-600 dark:text-slate-600 mb-10 text-lg max-w-2xl mx-auto transition-colors">
                                 The crazier, the better. We thrive on solving "impossible" problems. Let's engineer a solution that defies expectations.
                             </p>
-                            <Link href="/contact" className="px-10 py-4 bg-[#f8fafc] dark:bg-white text-[#122a46] dark:text-dark font-bold rounded-full hover:bg-gray-800 dark:hover:bg-accent hover:scale-105 transition-all shadow-lg dark:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                            <Link href="/contact" className="inline-block px-10 py-4 bg-[#122a46] text-white font-bold rounded-full hover:bg-teal-500 hover:shadow-lg hover:shadow-teal-500/30 hover:-translate-y-1 transition-all duration-300">
                                 Challenge Us
                             </Link>
                         </div>

@@ -256,7 +256,7 @@ const Navbar = () => {
                                             <div className="pt-4 pb-2 space-y-6 border-t border-gray-200 dark:border-white/10 mt-2">
                                                 {/* Services Section */}
                                                 <div className="text-center">
-                                                    <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Expertise</h4>
+                                                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Expertise</h4>
                                                     <ul className="grid grid-cols-1 gap-2">
                                                         {[
                                                             { name: "Web Architecture", href: "/services/web-architecture" },
@@ -265,7 +265,7 @@ const Navbar = () => {
                                                             { name: "AI & Automation", href: "/services/ai-automation" }
                                                         ].map(link => (
                                                             <li key={link.href}>
-                                                                <Link href={link.href} onClick={() => setIsOpen(false)} className="block py-1 text-sm text-gray-800 dark:text-gray-300 hover:text-cyan-500">
+                                                                <Link href={link.href} onClick={() => setIsOpen(false)} className="block py-1.5 text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors">
                                                                     {link.name}
                                                                 </Link>
                                                             </li>
@@ -275,7 +275,7 @@ const Navbar = () => {
 
                                                 {/* Company Section */}
                                                 <div className="text-center">
-                                                    <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Company</h4>
+                                                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Company</h4>
                                                     <ul className="grid grid-cols-2 gap-2">
                                                         {[
                                                             { name: "Process", href: "/process" },
@@ -286,7 +286,7 @@ const Navbar = () => {
                                                             { name: "Skills", href: "/skills" }
                                                         ].map(link => (
                                                             <li key={link.href}>
-                                                                <Link href={link.href} onClick={() => setIsOpen(false)} className="block py-1 text-sm text-gray-800 dark:text-gray-300 hover:text-purple-500">
+                                                                <Link href={link.href} onClick={() => setIsOpen(false)} className="block py-1.5 text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors">
                                                                     {link.name}
                                                                 </Link>
                                                             </li>

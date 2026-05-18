@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import emailjs from '@emailjs/browser';
 
 const Globe3D = dynamic(() => import('@/components/Globe3D'), {
@@ -10,12 +11,30 @@ const Globe3D = dynamic(() => import('@/components/Globe3D'), {
 });
 
 export default function Contact() {
+    const router = useRouter();
     const [status, setStatus] = useState('idle'); // idle, clicking, submitting, success, error
     const [errorMessage, setErrorMessage] = useState('');
     const [ripple, setRipple] = useState(null);
     const [btnHovered, setBtnHovered] = useState(false);
+    const [selectedService, setSelectedService] = useState('');
     const form = useRef();
     const btnRef = useRef();
+
+    const serviceMapping = {
+        'Web Architecture': 'Web Development',
+        'Mobile Innovation': 'Mobile App',
+        'Immersive UI/UX': 'UI/UX Design',
+        'AI & Automation': 'AI & Automation',
+        'Growth Marketing': 'Growth Marketing',
+        'DevOps & Cloud': 'DevOps & Cloud',
+    };
+
+    useEffect(() => {
+        if (router.isReady && router.query.service) {
+            const raw = decodeURIComponent(router.query.service);
+            setSelectedService(serviceMapping[raw] || raw);
+        }
+    }, [router.isReady, router.query]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -261,7 +280,7 @@ export default function Contact() {
                                         <div className="space-y-2">
                                             <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Project Type <span className="text-teal-600">*</span></label>
                                             <div className="relative">
-                                                <select name="project_type" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none appearance-none font-medium cursor-pointer">
+                                                <select name="project_type" value={selectedService} onChange={(e) => setSelectedService(e.target.value)} className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none appearance-none font-medium cursor-pointer">
                                                     <option value="" className="bg-white">Select project type</option>
                                                     <option value="Web Development" className="bg-white">Web Development & Architecture</option>
                                                     <option value="Mobile App" className="bg-white">Mobile App Innovation</option>
