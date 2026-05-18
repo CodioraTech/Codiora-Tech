@@ -248,7 +248,7 @@
 
 @media (max-width: 768px) {
   .landing-wrapper .section, .landing-wrapper .section-sm { padding: 60px 24px; }
-  .landing-wrapper .hero { padding: 120px 24px 60px; }
+  .landing-wrapper .hero { padding: 140px 24px 60px; }
   .landing-wrapper .svc-grid { grid-template-columns: 1fr; }
   .landing-wrapper .testi-grid { grid-template-columns: 1fr; }
   .landing-wrapper .process-steps { grid-template-columns: 1fr; }

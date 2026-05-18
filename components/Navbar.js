@@ -114,7 +114,7 @@ const Navbar = () => {
                 <div className={`
                 relative pointer-events-auto flex items-center justify-between 
                 bg-white/95 backdrop-blur-2xl border border-[#122a46]/10 
-                rounded-2xl px-2 py-2 shadow-xl shadow-[#122a46]/5 
+                rounded-2xl px-3 py-2 sm:px-4 sm:py-3 shadow-xl shadow-[#122a46]/5 
                 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
                 group hover:border-teal-500/30 hover:shadow-teal-500/10
                 ${scrolled ? 'w-[98%] max-w-6xl' : 'w-[95%] max-w-7xl'}
@@ -130,9 +130,9 @@ const Navbar = () => {
                         <div className="overflow-hidden rounded-md flex items-center justify-center bg-transparent w-12 h-12">
                             <img src={logo.src} alt="Codiora Tech Logo" className="h-full w-full object-contain scale-[1.3] transform origin-center transition-transform group-hover/logo:scale-[1.4]" />
                         </div>
-                        <div className="font-serif font-black tracking-widest text-2xl uppercase hidden sm:block">
+                        <div className="font-serif font-black tracking-widest text-xl sm:text-2xl uppercase">
                             <span className="text-[#122a46]">CODIORA</span>
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500 ml-2">TECH</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500 ml-1 sm:ml-2">TECH</span>
                         </div>
                     </Link>
 

@@ -384,7 +384,7 @@ export default function LiveChat() {
                         </div>
 
                         {/* Chat Area */}
-                        <div className="flex-grow p-4 overflow-y-auto overflow-x-hidden bg-[#f8fafc] scrollbar scrollbar-w-1 scrollbar-thumb-slate-300 scrollbar-track-transparent">
+                        <div className="flex-grow p-4 overflow-y-auto overflow-x-hidden bg-[#f8fafc] chat-scrollbar">
 
                             {/* Intro/Cleanup */}
                             <div className="text-center mb-6 mt-2">
