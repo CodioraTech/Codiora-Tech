@@ -10,12 +10,22 @@ const Globe3D = dynamic(() => import('@/components/Globe3D'), {
 });
 
 export default function Contact() {
-    const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+    const [status, setStatus] = useState('idle'); // idle, clicking, submitting, success, error
     const [errorMessage, setErrorMessage] = useState('');
+    const [ripple, setRipple] = useState(null);
+    const [btnHovered, setBtnHovered] = useState(false);
     const form = useRef();
+    const btnRef = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Ripple animation on click
+        if (btnRef.current) {
+            const rect = btnRef.current.getBoundingClientRect();
+            setRipple({ x: rect.width / 2, y: rect.height / 2 });
+            setTimeout(() => setRipple(null), 700);
+        }
 
         const formData = new FormData(form.current);
         const data = Object.fromEntries(formData.entries());
@@ -131,22 +141,96 @@ export default function Contact() {
                                 {status === 'success' ? (
                                     <motion.div
                                         key="success"
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        className="text-center py-10"
+                                        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.9 }}
+                                        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+                                        className="text-center py-8 px-4 relative"
                                     >
-                                        <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full mx-auto flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(74,222,128,0.5)]">
-                                            <svg className="w-12 h-12 text-[#122a46]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                                        {/* Sparkle dots */}
+                                        {[...Array(6)].map((_, i) => (
+                                            <motion.span
+                                                key={i}
+                                                className="absolute w-2 h-2 rounded-full bg-teal-400"
+                                                initial={{ opacity: 0, scale: 0 }}
+                                                animate={{
+                                                    opacity: [0, 1, 0],
+                                                    scale: [0, 1.5, 0],
+                                                    x: [0, (i % 2 === 0 ? 1 : -1) * (30 + i * 15)],
+                                                    y: [0, -(40 + i * 10)],
+                                                }}
+                                                transition={{ delay: i * 0.08, duration: 0.8 }}
+                                                style={{ left: '50%', top: '15%' }}
+                                            />
+                                        ))}
+
+                                        {/* Animated icon */}
+                                        <div className="relative mx-auto mb-8 w-28 h-28">
+                                            {/* Outer glow rings */}
+                                            <motion.div
+                                                animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0, 0.4] }}
+                                                transition={{ duration: 2, repeat: Infinity }}
+                                                className="absolute inset-0 rounded-full"
+                                                style={{ background: 'radial-gradient(circle, rgba(20,184,166,0.4) 0%, transparent 70%)' }}
+                                            />
+                                            <motion.div
+                                                animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0, 0.2] }}
+                                                transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                                                className="absolute inset-0 rounded-full"
+                                                style={{ background: 'radial-gradient(circle, rgba(20,184,166,0.3) 0%, transparent 70%)' }}
+                                            />
+                                            {/* Icon circle */}
+                                            <motion.div
+                                                initial={{ scale: 0, rotate: -180 }}
+                                                animate={{ scale: 1, rotate: 0 }}
+                                                transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.1 }}
+                                                className="absolute inset-2 rounded-full flex items-center justify-center shadow-2xl shadow-teal-500/40"
+                                                style={{ background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)' }}
+                                            >
+                                                <motion.svg
+                                                    initial={{ pathLength: 0, opacity: 0 }}
+                                                    animate={{ pathLength: 1, opacity: 1 }}
+                                                    transition={{ duration: 0.5, delay: 0.4 }}
+                                                    className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                >
+                                                    <motion.path
+                                                        initial={{ pathLength: 0 }}
+                                                        animate={{ pathLength: 1 }}
+                                                        transition={{ duration: 0.5, delay: 0.4 }}
+                                                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"
+                                                    />
+                                                </motion.svg>
+                                            </motion.div>
                                         </div>
-                                        <h3 className="text-3xl font-bold text-[#122a46] mb-2">Message Sent Successfully!</h3>
-                                        <p className="text-slate-500 text-lg">Thank you for reaching out. We'll be in touch shortly.</p>
-                                        <button
-                                            onClick={() => setStatus('idle')}
-                                            className="mt-8 text-teal-600 font-bold hover:text-cyan-300 transition-colors uppercase tracking-widest text-sm"
+
+                                        {/* Text */}
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 15 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.4 }}
                                         >
+                                            <h3 className="text-3xl font-black text-[#0f172a] mb-3 tracking-tight">
+                                                Message Sent! 🎉
+                                            </h3>
+                                            <p className="text-slate-500 text-base leading-relaxed mb-2">
+                                                Thank you for reaching out.
+                                            </p>
+                                            <p className="text-teal-600 font-bold text-sm tracking-wide">
+                                                We'll respond within 24 hours.
+                                            </p>
+                                        </motion.div>
+
+                                        {/* Send another button */}
+                                        <motion.button
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.6 }}
+                                            onClick={() => setStatus('idle')}
+                                            className="mt-8 group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-teal-200 bg-teal-50 hover:bg-teal-500 text-teal-600 hover:text-white font-bold text-xs tracking-[0.2em] uppercase transition-all duration-300"
+                                        >
+                                            <svg className="w-3.5 h-3.5 rotate-180 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
                                             Send Another Message
-                                        </button>
+                                        </motion.button>
                                     </motion.div>
                                 ) : (
                                     <motion.form
@@ -211,27 +295,60 @@ export default function Contact() {
                                             </div>
                                         )}
 
-                                        <motion.button
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            disabled={status === 'submitting'}
-                                            type="submit"
-                                            className="w-full py-5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-[#122a46] font-bold text-lg tracking-wide shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all duration-300 group"
-                                        >
-                                            <span className="flex items-center justify-center gap-2">
-                                                {status === 'submitting' ? (
-                                                    <>
-                                                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-[#122a46]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                                        Sending...
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        Send Message
-                                                        <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-                                                    </>
-                                                )}
-                                            </span>
-                                        </motion.button>
+                                        <div className="relative">
+                                            {/* Ripple burst */}
+                                            {ripple && (
+                                                <span
+                                                    className="absolute rounded-full animate-ping pointer-events-none z-30"
+                                                    style={{
+                                                        width: 60, height: 60,
+                                                        left: ripple.x - 30,
+                                                        top: ripple.y - 30,
+                                                        background: 'radial-gradient(circle, rgba(20,184,166,0.6) 0%, transparent 70%)',
+                                                    }}
+                                                />
+                                            )}
+                                            <motion.button
+                                                ref={btnRef}
+                                                onMouseEnter={() => setBtnHovered(true)}
+                                                onMouseLeave={() => setBtnHovered(false)}
+                                                whileHover={{ scale: 1.01, y: -1 }}
+                                                whileTap={{ scale: 0.97 }}
+                                                disabled={status === 'submitting'}
+                                                type="submit"
+                                                className="relative w-full py-5 rounded-2xl overflow-hidden font-black text-sm tracking-[0.2em] uppercase transition-all duration-500 disabled:opacity-70"
+                                                style={{
+                                                    background: 'white',
+                                                    border: btnHovered ? '1px solid #14b8a6' : '1px solid #e2e8f0',
+                                                    boxShadow: btnHovered ? '0 20px 40px rgba(20,184,166,0.25)' : '0 2px 8px rgba(0,0,0,0.06)',
+                                                }}
+                                            >
+                                                {/* Teal fill on hover */}
+                                                <span className="absolute inset-0 transition-opacity duration-500 pointer-events-none" style={{background:'linear-gradient(135deg, #14b8a6 0%, #0d9488 60%, #0f766e 100%)', opacity: btnHovered ? 1 : 0}} />
+                                                {/* Shimmer sweep on hover */}
+                                                <span className="absolute inset-0 transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent z-10 pointer-events-none" style={{transform: btnHovered ? 'translateX(100%)' : 'translateX(-100%)'}} />
+
+                                                <span className="relative z-20 flex items-center justify-center gap-3 transition-colors duration-300" style={{color: btnHovered ? 'white' : '#0f172a'}}>
+                                                    {status === 'submitting' ? (
+                                                        <span className="flex items-center gap-3">
+                                                            {/* Fancy pulsing rings */}
+                                                            <span className="relative flex h-5 w-5">
+                                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                                                <span className="relative inline-flex rounded-full h-5 w-5 bg-white/90"></span>
+                                                            </span>
+                                                            <span className="text-white">Sending your message...</span>
+                                                        </span>
+                                                    ) : (
+                                                        <>
+                                                            <span>Send Message</span>
+                                                            <div className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300" style={{background: btnHovered ? 'rgba(255,255,255,0.2)' : '#f8fafc', border: btnHovered ? '1px solid rgba(255,255,255,0.3)' : '1px solid #e2e8f0', transform: btnHovered ? 'scale(1.1) rotate(-45deg)' : 'scale(1) rotate(0deg)'}}>
+                                                                <svg className="w-4 h-4 transition-colors duration-300" style={{color: btnHovered ? 'white' : '#14b8a6'}} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                </span>
+                                            </motion.button>
+                                        </div>
                                     </motion.form>
                                 )}
                             </AnimatePresence>

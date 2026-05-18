@@ -50,7 +50,7 @@ export default function SubServicePage({ service, subService, slug }) {
 
                 <div className="container mx-auto px-6 relative z-10">
                     {/* Breadcrumb */}
-                    <div className="text-sm text-slate-500 mb-8 font-mono flex items-center flex-wrap gap-2">
+                    <div className="text-sm text-slate-500 mb-8 font-mono flex items-center flex-wrap gap-2 pt-8">
                         <Link href="/" className="hover:text-accent transition-colors">HOME</Link>
                         <span>/</span>
                         <Link href="/services" className="hover:text-accent transition-colors">SERVICES</Link>

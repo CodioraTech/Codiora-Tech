@@ -5,8 +5,8 @@ export default async function handler(req, res) {
 
     const { messages } = req.body;
     
-    // Gemini API Key from instructions
-    const API_KEY = 'AIzaSyCc5zDqYpOulQHzWrePBjuNh42BWChL7tU';
+    // Gemini API Key from environment variables
+    const API_KEY = process.env.GEMINI_API_KEY;
     
     const systemPrompt = `You are Codi AI, the official AI assistant for Codiora Tech, an elite Digital Transformation & Frontier Tech Company. 
     You must always respond in an extremely professional, premium, and sophisticated corporate tone. Your language should exude exclusivity, deep expertise, and high-end engineering quality. Avoid overly casual slang. Use polite, consultative, and business-focused language.

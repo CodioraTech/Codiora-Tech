@@ -41,7 +41,7 @@ export default function ServicePage({ service, slug }) {
 
                 <div className="container mx-auto px-6 relative z-10">
                     {/* Breadcrumb */}
-                    <div className="text-sm text-slate-500 mb-12 font-mono flex items-center">
+                    <div className="text-sm text-slate-500 mb-10 font-mono flex items-center pt-8">
                         <Link href="/" className="hover:text-accent transition-colors">HOME</Link>
                         <span className="mx-2">/</span>
                         <Link href="/services" className="hover:text-accent transition-colors">SERVICES</Link>
