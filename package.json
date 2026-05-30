@@ -12,6 +12,7 @@
         "@emailjs/browser": "^4.4.1",
         "@react-three/drei": "latest",
         "@react-three/fiber": "latest",
+        "@vercel/speed-insights": "^2.0.0",
         "clsx": "latest",
         "daisyui": "latest",
         "framer-motion": "latest",
