@@ -3,6 +3,7 @@ import '@/styles/landing.css';
 import Layout from '@/components/Layout';
 import Head from 'next/head';
 import { ThemeProvider } from '@/context/ThemeContext';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export default function App({ Component, pageProps }) {
     return (
@@ -14,6 +15,7 @@ export default function App({ Component, pageProps }) {
                     <link rel="icon" href="/Codiora Tech logo.png" />
                 </Head>
                 <Component {...pageProps} />
+                <SpeedInsights />
             </Layout>
         </ThemeProvider>
     );
