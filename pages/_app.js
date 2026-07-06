@@ -4,8 +4,14 @@ import Layout from '@/components/Layout';
 import Head from 'next/head';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { useEffect, useState } from 'react';
 
 export default function App({ Component, pageProps }) {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     return (
         <ThemeProvider>
             <Layout>
@@ -15,7 +21,7 @@ export default function App({ Component, pageProps }) {
                     <link rel="icon" href="/Codiora Tech logo.png" />
                 </Head>
                 <Component {...pageProps} />
-                <SpeedInsights />
+                {mounted && <SpeedInsights />}
             </Layout>
         </ThemeProvider>
     );

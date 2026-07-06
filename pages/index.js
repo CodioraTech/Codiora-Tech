@@ -106,7 +106,7 @@ export default function Home() {
                                 <span className="hl">AI Automation</span>
                             ) : (
                                 <span className="hl inline-flex flex-col relative overflow-hidden" style={{ verticalAlign: "bottom" }}>
-                                    <span className="opacity-0 pointer-events-none select-none h-0 overflow-hidden">
+                                    <span className="opacity-0 pointer-events-none select-none">
                                         Enterprise Apps
                                     </span>
                                     <AnimatePresence mode="wait">
