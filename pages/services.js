@@ -5,19 +5,21 @@ import { motion } from 'framer-motion';
 
 export default function Services() {
     const services = [
-        { title: "Web Architecture", description: "Scalable, high-performance web applications tailored to your business.", icon: "💎", image: "/images/services/web.png", slug: "web-architecture" },
+        { title: "AI Automation & Intelligent Agents", description: "Reduce support tickets by 80% and automate repetitive workflows with custom knowledge-base bots and autonomous AI agents.", icon: "🧠", image: "/images/services/ai.jpg", slug: "ai-automation" },
+        { title: "Full-Stack Enterprise Applications", description: "Secure, multi-tenant SaaS platforms and real-time interactive analytics dashboards designed to scale without tech debt.", icon: "💎", image: "/images/services/web.png", slug: "enterprise-apps" },
+        { title: "Web Architecture", description: "Scalable, high-performance web architectures tailored to your business.", icon: "🌐", image: "/images/services/web-architecture.png", slug: "web-architecture" },
         { title: "Mobile Innovation", description: "Native and cross-platform mobile solutions for iOS and Android.", icon: "🚀", image: "/images/services/mobile.jpg", slug: "mobile-innovation" },
         { title: "Immersive UI/UX", description: "User-centric design that drives engagement and satisfaction.", icon: "✨", image: "/images/services/uiux.png", slug: "immersive-ui-ux" },
         { title: "DevOps & Cloud", description: "Reliable support to keep your systems running smoothly 24/7.", icon: "☁️", image: "/images/services/devops.png", slug: "devops-cloud" },
-        { title: "AI & Automation", description: "Automate and innovate with cutting-edge AI integration.", icon: "🧠", image: "/images/services/ai.jpg", slug: "ai-automation" },
-        { title: "Growth Marketing", description: "Data-driven strategies to explode your digital presence.", icon: "📈", image: "/images/services/marketing.jpg", slug: "growth-marketing" },
+        { title: "Data Extraction & Web Scraping", description: "Bypass anti-bots and Cloudflare to extract millions of B2B leads and competitor intelligence points directly to your database.", icon: "📊", image: "/images/services/marketing.jpg", slug: "web-scraping" },
+        { title: "Growth Marketing", description: "Data-driven marketing strategies ensuring real ROI.", icon: "📈", image: "/images/services/growth-marketing.png", slug: "growth-marketing" }
     ];
 
     return (
         <>
             <Head>
-                <title>Codiora Tech | Services</title>
-                <meta name="description" content="Explore our wide range of IT services including Web Development, Mobile Apps, and AI Solutions." />
+                <title>Enterprise Technology Services & AI Automation | Codiora Tech</title>
+                <meta name="description" content="Explore Codiora Tech's enterprise-grade services: custom AI agents, high-scale web scraping crawlers, and full-stack SaaS platform engineering built to drive ROI." />
             </Head>
 
             <section className="min-h-screen bg-gray-50 dark:bg-[#f8fafc] pt-44 pb-20 relative transition-colors duration-300">

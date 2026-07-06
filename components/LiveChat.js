@@ -8,113 +8,82 @@ const KNOWLEDGE_BASE = [
     // 1. WEB DEVELOPMENT ECOSYSTEM
     // ================================
     {
-        id: 'web_detailed',
+        id: 'enterprise_apps_detailed',
         patterns: [
-            // Core Tech
-            'mern', 'react', 'next.js', 'node.js', 'express.js', 'postgresql', 'mysql', 'javascript', 'typescript',
-            // App Types
-            'web app', 'saas platform', 'ecommerce website', 'web portal', 'admin dashboard', 'cms development', 'custom website', 'progressive web apps', 'pwa', 'web application', 'web', 'website',
-            // Features & Integrations
-            'api development', 'rest api', 'graphql', 'full stack web', 'payment gateway', 'stripe integration', 'bkash integration', 'web performance', 'api'
+            'saas platform', 'enterprise app', 'dashboard', 'web app', 'stripe integration', 'custom billing'
         ],
-        response: "🚀 **Enterprise Web Architecture**: We engineer high-performance, scalable web applications utilizing the robust **MERN Stack** and **Next.js**. Our solutions prioritize global scalability and uncompromised security.",
+        response: "💻 **Full-Stack Enterprise Applications**: We engineer high-performance, secure web applications, custom SaaS platforms, and enterprise dashboards with strict tenant isolation, subscription billing (Stripe), and auto-scaling cloud deployments.",
+        action: { label: 'View Enterprise Apps', url: '/services/enterprise-apps' },
+        score: 5
+    },
+
+    {
+        id: 'scraping_detailed',
+        patterns: [
+            'web scraping', 'scraping', 'data extraction', 'crawling', 'crawler', 'proxy', 'anti-bot', 'data crawler'
+        ],
+        response: "📊 **Data Extraction & Web Scraping**: We build high-scale, proxy-backed data crawlers to bypass CAPTCHAs and Cloudflare protection, supplying clean B2B lead lists and real-time competitor intelligence directly to your database.",
+        action: { label: 'Explore Data Scraping', url: '/services/web-scraping' },
+        score: 5
+    },
+
+    {
+        id: 'ai_detailed',
+        patterns: [
+            'ai development', 'machine learning', 'openai integration', 'python ai', 'ai saas', 'ai api', 'nlp', 'automation', 'workflow automation', 'agent'
+        ],
+        response: "🤖 **AI Automation & Intelligent Agents**: We build custom neural agents, workflow automation, and Large Language Model (LLM) integrations that replace manual toil with instant, secure, and context-aware execution.",
+        action: { label: 'Explore AI Automation', url: '/services/ai-automation' },
+        score: 5
+    },
+
+    {
+        id: 'web_arch_detailed',
+        patterns: [
+            'mern', 'react', 'next.js', 'node.js', 'express.js', 'postgresql', 'mysql', 'javascript', 'typescript', 'website', 'web'
+        ],
+        response: "🚀 **Web Architecture**: We engineer high-performance, scalable web architectures utilizing modern frameworks like Next.js and React, ensuring your application is fast, secure, and ready for future growth.",
         action: { label: 'View Web Services', url: '/services/web-architecture' },
         score: 5
     },
 
-    // ================================
-    // 2. MOBILE APP ECOSYSTEM
-    // ================================
     {
         id: 'mobile_detailed',
         patterns: [
-            // Tech & Platforms
-            'flutter', 'react native', 'android app', 'ios app', 'cross platform app', 'mobile api',
-            // Features
-            'mobile ui', 'mobile ux', 'firebase', 'push notifications', 'in-app purchase', 'offline support', 'location based app', 'chat app',
-            // Deployment
-            'app store deployment', 'play store deployment', '📱 mobile apps',
-            // Industry specific
-            'booking app', 'on demand app', 'fintech app', 'healthcare app', 'edtech app'
+            'flutter', 'react native', 'android app', 'ios app', 'cross platform app', 'mobile api', 'push notifications'
         ],
-        response: "📱 **Mobile Innovation**: We craft flawless, cross-platform mobile experiences with native-level performance leveraging **Flutter** & **React Native**. One sophisticated codebase, deployed globally.",
+        response: "📱 **Mobile Innovation**: We craft flawless, cross-platform mobile experiences with native-level performance leveraging Flutter & React Native. One sophisticated codebase, deployed globally.",
         action: { label: 'View Mobile Solutions', url: '/services/mobile-innovation' },
         score: 5
     },
 
-    // ================================
-    // 3. UI/UX DESIGN
-    // ================================
     {
         id: 'ui_ux_detailed',
         patterns: [
-            // Core
-            'figma', 'ui design', 'ux design', 'wireframe', 'prototyping', 'design system', 'user flow', 'uiux', 'desgin', 'design',
-            // Specific Design Types
-            'landing page design', 'dashboard design', 'mobile ui design', 'web ui design', 'brand identity',
-            // Technical Design
-            'component library', 'dark mode design', 'micro interactions', 'animation ui', 'typography', 'color system', 'responsive design',
-            // Research
-            'usability testing', 'accessibility design'
+            'figma', 'ui design', 'ux design', 'wireframe', 'prototyping', 'design system', 'user flow', 'uiux'
         ],
-        response: "🎨 **Immersive UI/UX**: Exceptional software demands award-winning design. Our methodical approach encompasses deep user research, wireframing, and interactive **Figma** prototyping to ensure a pixel-perfect aesthetic.",
+        response: "🎨 **Immersive UI/UX**: Exceptional software demands award-winning design. Our methodical approach encompasses deep user research, wireframing, and interactive Figma prototyping to ensure a pixel-perfect aesthetic.",
         action: { label: 'View Design', url: '/services/immersive-ui-ux' },
         score: 5
     },
 
-    // ================================
-    // 4. DEVOPS & CLOUD
-    // ================================
     {
         id: 'devops_detailed',
         patterns: [
-            // Platforms
-            'aws', 'vercel', 'netlify', 'ec2', 's3', 'digitalocean', 'google cloud',
-            // Tools
-            'docker', 'kubernetes', 'github actions', 'terraform', 'nginx', 'linux server',
-            // Concepts
-            'ci/cd', 'cloud deployment', 'cloud monitoring', 'server scaling', 'load balancer', 'ssl setup', 'domain configuration', 'cloud security', 'devops automation', 'infrastructure as code'
+            'aws', 'vercel', 'netlify', 'docker', 'kubernetes', 'github actions', 'terraform', 'ci/cd', 'cloud migration'
         ],
-        response: "☁️ **DevOps & Cloud Operations**: We architect bulletproof, enterprise-grade infrastructures. Utilizing **AWS**, **Docker**, and **Kubernetes**, we guarantee seamless auto-scaling and unparalleled security.",
+        response: "☁️ **DevOps & Cloud Operations**: We bridge the gap between development and operations, ensuring secure, scalable, and automated infrastructure using AWS, Docker, and Kubernetes.",
         action: { label: 'View DevOps', url: '/services/devops-cloud' },
         score: 5
     },
 
-    // ================================
-    // 5. AI & AUTOMATION
-    // ================================
-    {
-        id: 'ai_detailed',
-        patterns: [
-            // Core
-            'ai development', 'machine learning', 'chatbot', 'openai integration', 'python ai', 'ai saas', 'ai api',
-            // Domains
-            'computer vision', 'data analysis', 'natural language processing', 'speech recognition', 'face recognition', 'ocr system', 'predictive analytics', 'anomaly detection',
-            // Automation
-            'automation script', 'workflow automation', 'ai dashboard', 'recommendation system', 'smart assistant'
-        ],
-        response: "🤖 **AI & Intelligent Automation**: We integrate state-of-the-art **AI Agents**, intelligent **Chatbots**, and automated corporate workflows powered by **OpenAI** & advanced Python technologies.",
-        action: { label: 'Explore AI', url: '/services/ai-automation' },
-        score: 5
-    },
-
-    // ================================
-    // 6. DIGITAL MARKETING & BRANDING
-    // ================================
     {
         id: 'marketing_detailed',
         patterns: [
-            // SEO
-            'seo', 'landing page seo', 'keyword research', 'on page seo', 'off page seo', 'technical seo',
-            // Ads
-            'google ads', 'facebook ads', 'remarketing', 'pixel tracking',
-            // Strategy
-            'conversion optimization', 'content marketing', 'email marketing', 'marketing automation', 'lead generation', 'sales funnel', 'growth hacking',
-            // Analytics
-            'google analytics', 'tag manager', 'a/b testing', 'conversion tracking'
+            'seo', 'landing page seo', 'keyword research', 'on page seo', 'conversion optimization', 'marketing', 'growth hacking'
         ],
-        response: "📈 **Growth & Performance Marketing**: We drive exponential business growth through meticulous, data-driven **SEO**, strategic **Ad Campaigns**, and premium Performance Marketing.",
-        action: { label: 'View Marketing', url: '/services/growth-marketing' },
+        response: "📈 **Growth Marketing**: We drive exponential business growth through data-driven SEO, strategic conversion rate optimization (CRO), and A/B testing frameworks.",
+        action: { label: 'View Growth Marketing', url: '/services/growth-marketing' },
         score: 5
     },
 

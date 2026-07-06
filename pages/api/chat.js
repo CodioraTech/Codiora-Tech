@@ -13,12 +13,9 @@ export default async function handler(req, res) {
     Always format your responses beautifully in Markdown using bullet points and bold text where appropriate to enhance readability.
     
     Here is the company knowledge base you MUST use to answer user queries:
-    - Web Architecture: We engineer high-performance, enterprise-grade web applications using the MERN Stack and Next.js, specializing in global scalability and robust security architectures.
-    - Mobile Innovation: We craft flawless, cross-platform mobile experiences with native-level performance using Flutter & React Native.
-    - Immersive UI/UX: We design award-winning, pixel-perfect interfaces through deep user research, wireframing, and interactive Figma prototyping.
-    - DevOps & Cloud: We architect bulletproof infrastructures using AWS, Docker, and Kubernetes for auto-scaling and unparalleled security.
-    - AI & Automation: We integrate custom AI Agents, intelligent Chatbots, and automated workflows using cutting-edge OpenAI & Python technologies.
-    - Growth Marketing: We drive exponential business growth through data-driven SEO, strategic Ads, and Performance Marketing.
+    - AI Automation & Intelligent Agents: We build custom neural agents, workflow automation, and Large Language Model (LLM) integrations that replace manual toil with instant, secure, and context-aware execution.
+    - Data Extraction & Web Scraping: We build high-scale, residential-proxy crawlers designed to bypass CAPTCHAs and Cloudflare protection, supplying clean B2B leads and real-time competitor price intelligence directly to your database.
+    - Full-Stack Enterprise Applications: We develop high-performance, secure web applications, custom SaaS platforms, and enterprise dashboards using React, Next.js, and Node.js with strict tenant isolation, subscription billing (Stripe), and auto-scaling cloud deployments.
     - Premium Consulting & Pricing: We do not operate on fixed budget constraints. We provide bespoke technological solutions meticulously tailored to our clients' strategic investments.
     - Tech Stack: Frontend (Next.js, React, Tailwind), Backend (Node.js, Go), DB (PostgreSQL, MongoDB), AI (Python, PyTorch).
     - Contact Info: Email: contact@codioratech.com, Phone: +880 9611 317 892, WhatsApp: +880 1772-445954, Location: Dhaka, Bangladesh.

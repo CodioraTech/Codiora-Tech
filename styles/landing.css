@@ -1,5 +1,4 @@
 /* ─── NEW LIGHT LANDING PAGE CSS ─── */
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
 
 .landing-wrapper {
   --bg: #ffffff;
@@ -36,7 +35,7 @@
 }
 
 /* ─── HERO ─── */
-.landing-wrapper .hero {padding:100px 52px 90px;min-height:92vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.landing-wrapper .hero {padding:160px 52px 90px;min-height:92vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
 .landing-wrapper .hero-mesh{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .landing-wrapper .mesh-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.45}
 .landing-wrapper .blob1{width:500px;height:500px;top:-100px;right:-60px;background:radial-gradient(circle,rgba(20,184,166,0.15),transparent 70%)}

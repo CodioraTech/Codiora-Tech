@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 
 const reasons = [
-    { title: "Fast Delivery", icon: "⚡", desc: "Rapid prototyping and agile sprints to get you to market faster." },
-    { title: "Scalable Solutions", icon: "📈", desc: "Architecture designed to grow seamlessly with your user base." },
-    { title: "Dedicated Support", icon: "🤝", desc: "We are your long-term partners, not just a one-off vendor." },
-    { title: "Global Standards", icon: "🌍", desc: "World-class code quality and best practices compliant globally." },
-    { title: "Secure & Reliable", icon: "🛡️", desc: "Enterprise-grade security protocols to protect your data." },
+    { title: "38% Faster Launch", icon: "⚡", desc: "Agile sprints, daily standups, and weekly demos to deploy production-ready code 38% faster than the industry average." },
+    { title: "Auto-Scaling Build", icon: "📈", desc: "Optimized architectures engineered to scale from initial prototype to millions of API requests with zero downtime." },
+    { title: "80% Ticket Reduction", icon: "🤖", desc: "Intelligent knowledge-base chatbots trained on your databases that resolve up to 80% of routine customer support tickets." },
+    { title: "99.9% Crawler Uptime", icon: "📊", desc: "Resilient web scraping pipelines with dynamic proxy rotation and captcha bypassing built for non-stop execution." },
+    { title: "Enterprise Compliance", icon: "🛡️", desc: "Strict data isolation, secure encryption, and role-based access controls (RBAC) protecting your business data." },
 ];
 
 export default function WhyCodiora() {

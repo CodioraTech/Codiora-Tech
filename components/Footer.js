@@ -81,11 +81,13 @@ export default function Footer() {
                                 <h4 className="text-[#122a46] font-bold tracking-widest text-sm uppercase border-b border-[#122a46]/10 pb-4 inline-block">WHAT</h4>
                                 <ul className="space-y-3">
                                     {[
+                                        { name: 'AI Automation & Intelligent Agents', href: '/services/ai-automation' },
+                                        { name: 'Full-Stack Enterprise Applications', href: '/services/enterprise-apps' },
                                         { name: 'Web Architecture', href: '/services/web-architecture' },
                                         { name: 'Mobile Innovation', href: '/services/mobile-innovation' },
                                         { name: 'Immersive UI/UX', href: '/services/immersive-ui-ux' },
                                         { name: 'DevOps & Cloud', href: '/services/devops-cloud' },
-                                        { name: 'AI & Automation', href: '/services/ai-automation' },
+                                        { name: 'Data Extraction & Web Scraping', href: '/services/web-scraping' },
                                         { name: 'Growth Marketing', href: '/services/growth-marketing' }
                                     ].map((item, i) => (
                                         <li key={i}>

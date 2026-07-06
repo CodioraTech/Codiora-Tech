@@ -6,38 +6,31 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 const steps = [
     {
         id: "01",
-        title: "Discovery & Blueprint",
-        desc: "We don't guess; we map. Every project starts with a deep-dive workshop to deconstruct your vision, analyze market fit, and architect the path to dominance.",
+        title: "Deep-Dive & Discovery",
+        desc: "Day 1-2. We analyze your current manual workflows and data architecture to identify operational leakage points and bottleneck stages.",
         icon: "🧭",
-        color: "from-blue-400 to-cyan-500"
+        color: "from-blue-500 to-cyan-400"
     },
     {
         id: "02",
-        title: "UX/UI Architecture",
-        desc: "Function meets seduction. We craft interfaces that are not just usable, but addictive. Wireframes turn into high-fidelity prototypes that define the user's emotional journey.",
+        title: "Architectural Blueprint",
+        desc: "Day 3-5. We map out a custom database schema, proxy rotation layout, or LLM system prompt blueprint before writing any production code.",
         icon: "📐",
-        color: "from-purple-400 to-pink-500"
+        color: "from-purple-500 to-pink-400"
     },
     {
         id: "03",
-        title: "Agile Development",
-        desc: "Code as art. Our engineering sprints are synchronized and lethal. We build modular, scalable, and clean systems using the latest tech stack (Next.js, Node, AI).",
+        title: "Agile Development & Testing",
+        desc: "Sprint-based. Fast and secure iterations using Next.js/Python, integrated with regression testing and real-world high-volume load testing.",
         icon: "⚡",
-        color: "from-yellow-400 to-orange-500"
+        color: "from-yellow-500 to-orange-400"
     },
     {
         id: "04",
-        title: "Quality Assurance",
-        desc: "Zero tolerance for bugs. We stress-test, security-audit, and optimize until the product performs flawlessly under pressure.",
-        icon: "🛡️",
-        color: "from-green-400 to-emerald-500"
-    },
-    {
-        id: "05",
-        title: "Launch & Scale",
-        desc: "The ignition point. We deploy to global CDNs, monitor realtime metrics, and iterate instantly based on user feedback. Your growth is our metric.",
+        title: "Deployment & Maintenance",
+        desc: "Post-Launch. Complete cloud infrastructure integration with automated performance monitoring, error logging, and 24/7 crawler/bot maintenance.",
         icon: "🚀",
-        color: "from-red-400 to-rose-500"
+        color: "from-green-500 to-emerald-400"
     }
 ];
 
@@ -49,7 +42,8 @@ export default function Process() {
     return (
         <>
             <Head>
-                <title>Codiora Tech | Our Process</title>
+                <title>Our Engineering Methodology & Delivery Process | Codiora Tech</title>
+                <meta name="description" content="Discover our 4-step agile methodology: Deep-Dive Discovery, Architectural Blueprint, Agile Development, and cloud-automated Deployment & Maintenance." />
             </Head>
 
             <div ref={containerRef} className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30">

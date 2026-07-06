@@ -259,10 +259,14 @@ const Navbar = () => {
                                                     <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Expertise</h4>
                                                     <ul className="grid grid-cols-1 gap-2">
                                                         {[
+                                                            { name: "AI Automation & Intelligent Agents", href: "/services/ai-automation" },
+                                                            { name: "Full-Stack Enterprise Applications", href: "/services/enterprise-apps" },
                                                             { name: "Web Architecture", href: "/services/web-architecture" },
                                                             { name: "Mobile Innovation", href: "/services/mobile-innovation" },
                                                             { name: "Immersive UI/UX", href: "/services/immersive-ui-ux" },
-                                                            { name: "AI & Automation", href: "/services/ai-automation" }
+                                                            { name: "DevOps & Cloud", href: "/services/devops-cloud" },
+                                                            { name: "Data Extraction & Web Scraping", href: "/services/web-scraping" },
+                                                            { name: "Growth Marketing", href: "/services/growth-marketing" }
                                                         ].map(link => (
                                                             <li key={link.href}>
                                                                 <Link href={link.href} onClick={() => setIsOpen(false)} className="block py-1.5 text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors">
@@ -329,11 +333,13 @@ const Navbar = () => {
                                     <h3 className="text-sm font-bold tracking-widest text-slate-400 uppercase mb-6 border-b border-[#122a46]/10 pb-2">Services</h3>
                                     <ul className="space-y-4">
                                         {[
+                                            { name: "AI Automation & Intelligent Agents", href: "/services/ai-automation" },
+                                            { name: "Full-Stack Enterprise Applications", href: "/services/enterprise-apps" },
                                             { name: "Web Architecture", href: "/services/web-architecture" },
                                             { name: "Mobile Innovation", href: "/services/mobile-innovation" },
                                             { name: "Immersive UI/UX", href: "/services/immersive-ui-ux" },
                                             { name: "DevOps & Cloud", href: "/services/devops-cloud" },
-                                            { name: "AI & Automation", href: "/services/ai-automation" },
+                                            { name: "Data Extraction & Web Scraping", href: "/services/web-scraping" },
                                             { name: "Growth Marketing", href: "/services/growth-marketing" }
                                         ].map((link) => (
                                             <li key={link.name}>

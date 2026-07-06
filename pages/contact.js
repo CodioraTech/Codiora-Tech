@@ -103,8 +103,8 @@ export default function Contact() {
     return (
         <>
             <Head>
-                <title>Codiora Tech | Contact</title>
-                <meta name="description" content="Start your digital transformation with Codiora Tech." />
+                <title>Book a Free Consultation & Technical Audit | Codiora Tech</title>
+                <meta name="description" content="Request a consultation with our technology team. Discuss your AI automation, custom scraping, or enterprise SaaS engineering needs today." />
             </Head>
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30">
@@ -282,12 +282,14 @@ export default function Contact() {
                                             <div className="relative">
                                                 <select name="project_type" value={selectedService} onChange={(e) => setSelectedService(e.target.value)} className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none appearance-none font-medium cursor-pointer">
                                                     <option value="" className="bg-white">Select project type</option>
-                                                    <option value="Web Development" className="bg-white">Web Development & Architecture</option>
-                                                    <option value="Mobile App" className="bg-white">Mobile App Innovation</option>
+                                                    <option value="AI Automation & Intelligent Agents" className="bg-white">AI Automation & Intelligent Agents</option>
+                                                    <option value="Full-Stack Enterprise Applications" className="bg-white">Full-Stack Enterprise Applications</option>
+                                                    <option value="Web Architecture" className="bg-white">Web Development & Architecture</option>
+                                                    <option value="Mobile App Innovation" className="bg-white">Mobile App Innovation</option>
                                                     <option value="UI/UX Design" className="bg-white">UI/UX Design</option>
-                                                    <option value="AI & Automation" className="bg-white">AI & Automation</option>
-                                                    <option value="Growth Marketing" className="bg-white">Growth Marketing</option>
                                                     <option value="DevOps & Cloud" className="bg-white">DevOps & Cloud</option>
+                                                    <option value="Data Extraction & Web Scraping" className="bg-white">Data Extraction & Web Scraping</option>
+                                                    <option value="Growth Marketing" className="bg-white">Growth Marketing</option>
                                                     <option value="Other" className="bg-white">Other</option>
                                                 </select>
                                                 <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">▼</div>

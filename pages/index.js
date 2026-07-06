@@ -1,7 +1,17 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
+import ElasticStack from '@/components/ElasticStack';
+
+const trustItems = [
+    { id: 1, image: "https://randomuser.me/api/portraits/men/32.jpg", name: "Client 1" },
+    { id: 2, image: "https://randomuser.me/api/portraits/women/44.jpg", name: "Client 2" },
+    { id: 3, image: "https://randomuser.me/api/portraits/men/86.jpg", name: "Client 3" },
+    { id: 4, image: "https://randomuser.me/api/portraits/women/68.jpg", name: "Client 4" },
+    { id: 5, image: "https://randomuser.me/api/portraits/men/22.jpg", name: "Client 5" },
+    { id: 6, image: "https://randomuser.me/api/portraits/women/12.jpg", name: "Client 6" }
+];
 
 const FAQItem = ({ q, a, isOpen, onToggle }) => {
     return (
@@ -52,15 +62,27 @@ const CountUpAnimation = ({ start = 0, end, suffix = "", prefix = "", duration =
     );
 };
 
+const HERO_WORDS = ["AI Automation", "Web Scraping", "SaaS Platforms", "Enterprise Apps"];
+
 export default function Home() {
     const [openFaq, setOpenFaq] = useState(0);
     const [activeProcess, setActiveProcess] = useState(1);
+    const [wordIdx, setWordIdx] = useState(0);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        const interval = setInterval(() => {
+            setWordIdx((prev) => (prev + 1) % HERO_WORDS.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <>
             <Head>
-                <title>Codiora Tech | Innovating Your Digital Future</title>
-                <meta name="description" content="Codiora Tech partners with startups & businesses to engineer high-performance web apps, mobile platforms, and AI-powered solutions." />
+                <title>Codiora Tech | Custom AI Automation & System Engineering</title>
+                <meta name="description" content="From intelligent knowledge-base chatbots to high-scale web scraping solutions, Codiora Tech automates your workflows so your business can scale without the headcount." />
             </Head>
 
             <div className="landing-wrapper">
@@ -79,22 +101,40 @@ export default function Home() {
                             <span className="badge-text">Currently accepting new clients for Q3 2026</span>
                         </motion.div>
                         <motion.h1 initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.2}}>
-                            We Build<br/><span className="hl">Scalable Products</span><br/>Clients Love.
+                            We Build Custom<br/>
+                            {!mounted ? (
+                                <span className="hl">AI Automation</span>
+                            ) : (
+                                <span className="hl inline-flex flex-col relative overflow-hidden" style={{ verticalAlign: "bottom" }}>
+                                    <span className="opacity-0 pointer-events-none select-none h-0 overflow-hidden">
+                                        Enterprise Apps
+                                    </span>
+                                    <AnimatePresence mode="wait">
+                                        <motion.span
+                                            key={wordIdx}
+                                            initial={{ y: 25, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            exit={{ y: -25, opacity: 0 }}
+                                            transition={{ duration: 0.35, ease: "easeOut" }}
+                                            className="absolute inset-0"
+                                            style={{ whiteSpace: "nowrap" }}
+                                        >
+                                            {HERO_WORDS[wordIdx]}
+                                        </motion.span>
+                                    </AnimatePresence>
+                                </span>
+                            )}
+                            <br/>& System Engineering.
                         </motion.h1>
                         <motion.p initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.35}} className="hero-sub">
-                            Codiora Tech partners with startups & businesses to engineer <strong>high-performance web apps, mobile platforms, and AI-powered solutions</strong>, on time, on budget, no surprises.
+                            From intelligent knowledge-base chatbots to high-scale web scraping solutions, <strong>Codiora Tech automates your workflows</strong> so your business can scale without the headcount.
                         </motion.p>
                         <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.5}} className="hero-actions">
-                            <Link href="/contact" className="cta-main">Start Your Project <span style={{opacity:0.8}}>→</span></Link>
+                            <Link href="/contact?subject=Automation%20Audit" className="cta-main">Book a Free Automation Audit <span style={{opacity:0.8}}>→</span></Link>
                             <Link href="/portfolio" className="cta-sec">See Our Work <span style={{color:'var(--text3)'}}>↗</span></Link>
                         </motion.div>
                         <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.65}} className="hero-trust">
-                            <div className="trust-avatars">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client 1" className="avatar" />
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client 2" className="avatar" />
-                                <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="Client 3" className="avatar" />
-                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client 4" className="avatar" />
-                            </div>
+                            <ElasticStack items={trustItems} itemSize={32} overlap={8} pushForce={8} className="trust-avatars" />
                             <div className="trust-text"><strong>Trusted by 60+ clients</strong>across 12 countries</div>
                             <div className="trust-sep"></div>
                             <div className="rating">
@@ -146,14 +186,14 @@ export default function Home() {
                 <section className="services-section section">
                     <motion.div initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.6}} className="services-head">
                         <div>
-                            <div className="chip">What We Build</div>
-                            <h2 className="s-title">End-to-End Digital<br/>Engineering Services</h2>
+                            <div className="chip">What We Do</div>
+                            <h2 className="s-title">Core Systems &<br/>Automation Services</h2>
                         </div>
-                        <p className="s-sub" style={{maxWidth:'380px',fontSize:'15px'}}>From a single feature to a full product, we cover every layer of your tech stack.</p>
+                        <p className="s-sub" style={{maxWidth:'380px',fontSize:'15px'}}>We build custom solutions designed to scale your business operations and data acquisition.</p>
                     </motion.div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 relative z-10">
                         {/* Service 1 */}
-                        <Link href="/services/web-architecture" className="block outline-none">
+                        <Link href="/services/ai-automation" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
                                     <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">01</div>
@@ -161,13 +201,13 @@ export default function Home() {
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Web Architecture</h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">Scalable SPAs, SSR apps, and enterprise platforms. We architect systems that grow with your business without tech debt.</p>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">AI Automation & Intelligent Agents</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">Custom knowledge-base chatbots and autonomous workflow agents that connect your CRM and communication channels, cutting support tickets by 80%.</p>
                             </motion.div>
                         </Link>
 
                         {/* Service 2 */}
-                        <Link href="/services/mobile-innovation" className="block outline-none">
+                        <Link href="/services/enterprise-apps" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
                                     <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">02</div>
@@ -175,13 +215,13 @@ export default function Home() {
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Mobile Development</h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">Cross-platform and native apps that feel native. Smooth UX, offline-first architecture, and AppStore-ready delivery.</p>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Full-Stack Enterprise Applications</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">Secure multi-tenant SaaS architectures, complex pricing integrations, and interactive real-time dashboards that scale without tech debt.</p>
                             </motion.div>
                         </Link>
 
                         {/* Service 3 */}
-                        <Link href="/services/immersive-ui-ux" className="block outline-none">
+                        <Link href="/services/web-architecture" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
                                     <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">03</div>
@@ -189,13 +229,13 @@ export default function Home() {
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">UI/UX Design</h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">Research-led design that converts. From wireframes to pixel-perfect Figma files, every interaction is intentional.</p>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Web Architecture</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">Scalable, high-performance web systems utilizing Next.js and modern serverless infrastructures designed for global traffic demands.</p>
                             </motion.div>
                         </Link>
 
                         {/* Service 4 */}
-                        <Link href="/services/devops-cloud" className="block outline-none">
+                        <Link href="/services/mobile-innovation" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
                                     <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">04</div>
@@ -203,13 +243,13 @@ export default function Home() {
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">DevOps & Cloud</h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">CI/CD pipelines, Kubernetes, and auto-scaling infrastructure on AWS, GCP, or Azure. Zero-downtime deployments.</p>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Mobile Innovation</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">Cross-platform iOS and Android apps with native modules, biometric authentication, and offline-first architectures.</p>
                             </motion.div>
                         </Link>
 
                         {/* Service 5 */}
-                        <Link href="/services/ai-automation" className="block outline-none">
+                        <Link href="/services/immersive-ui-ux" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
                                     <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">05</div>
@@ -217,13 +257,13 @@ export default function Home() {
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">AI & Automation</h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">LLM integrations, custom ML pipelines, intelligent chatbots. Real AI that solves real business problems, not just demos.</p>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Immersive UI/UX</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">User journey mapping, wireframing, motion design systems, and WCAG accessibility compliance validated by interactive prototypes.</p>
                             </motion.div>
                         </Link>
 
                         {/* Service 6 */}
-                        <Link href="/services/growth-marketing" className="block outline-none">
+                        <Link href="/services/devops-cloud" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
                                     <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">06</div>
@@ -231,13 +271,40 @@ export default function Home() {
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
                                 </div>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">DevOps & Cloud</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">CI/CD pipelines, Kubernetes container orchestration, auto-scaling setups, and 24/7 infrastructure performance monitoring.</p>
+                            </motion.div>
+                        </Link>
+
+                        {/* Service 7 */}
+                        <Link href="/services/web-scraping" className="block outline-none">
+                            <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
+                                <div className="flex justify-between items-start mb-10">
+                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">07</div>
+                                    <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Data Extraction & Web Scraping</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">High-scale residential-proxy crawlers designed to bypass CAPTCHAs and anti-bots, yielding millions of B2B leads and pricing data points daily.</p>
+                            </motion.div>
+                        </Link>
+
+                        {/* Service 8 */}
+                        <Link href="/services/growth-marketing" className="block outline-none">
+                            <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
+                                <div className="flex justify-between items-start mb-10">
+                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">08</div>
+                                    <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                    </div>
+                                </div>
                                 <h3 className="text-xl font-bold text-[#122a46] mb-3 group-hover/svc:text-teal-600 transition-colors">Growth Marketing</h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">Technical SEO, analytics infra, A/B testing, and conversion optimization. Growth engineered on data, not guesswork.</p>
+                                <p className="text-slate-500 text-sm leading-relaxed">Technical SEO audits, schema markup implementation, conversion rate optimization (CRO), and statistical A/B testing models.</p>
                             </motion.div>
                         </Link>
                     </div>
                 </section>
-
                 {/* WHY US */}
                 <div className="why-section-wrap">
                     <section className="why-section section">
@@ -304,6 +371,9 @@ export default function Home() {
                             <div className="pf-body">
                                 <div className="pf-cats"><span className="pf-cat">Next.js</span><span className="pf-cat">Python</span><span className="pf-cat">TensorFlow</span><span className="pf-cat">OpenAI</span></div>
                                 <div className="pf-name">MediBot AI: AI Diagnostic Assistant</div>
+                                <div className="text-emerald-600 font-bold text-sm mb-3 flex items-center gap-1.5 bg-emerald-500/5 border border-emerald-500/10 px-3 py-1.5 rounded-lg w-fit">
+                                    <span>📈</span> <strong>Outcome: 12 hrs/week saved for clinicians | 94% diagnostic accuracy</strong>
+                                </div>
                                 <div className="pf-desc">Advanced AI diagnostic assistant designed to support healthcare professionals with real-time medical insights and intelligent patient data analysis.</div>
                                 <div className="pf-link">View full case study ↗</div>
                             </div>
@@ -320,6 +390,9 @@ export default function Home() {
                             <div className="pf-body">
                                 <div className="pf-cats"><span className="pf-cat">Next.js</span><span className="pf-cat">Three.js</span><span className="pf-cat">TailwindCSS</span></div>
                                 <div className="pf-name">Explorer Nature: Premium Tourism Platform</div>
+                                <div className="text-emerald-600 font-bold text-sm mb-3 flex items-center gap-1.5 bg-emerald-500/5 border border-emerald-500/10 px-3 py-1.5 rounded-lg w-fit">
+                                    <span>📈</span> <strong>Outcome: 42% increase in booking conversions | 3D Immersive Tours</strong>
+                                </div>
                                 <div className="pf-desc">Premium tourism platform connecting travelers with nature through immersive 3D experiences, custom booking flows, and curated destination guides.</div>
                                 <div className="pf-link">View case study ↗</div>
                             </div>
@@ -336,6 +409,9 @@ export default function Home() {
                             <div className="pf-body">
                                 <div className="pf-cats"><span className="pf-cat">Next.js</span><span className="pf-cat">Solidity</span><span className="pf-cat">Web3.js</span><span className="pf-cat">TailwindCSS</span></div>
                                 <div className="pf-name">NeonMarket: Next-gen Crypto Marketplace</div>
+                                <div className="text-emerald-600 font-bold text-sm mb-3 flex items-center gap-1.5 bg-emerald-500/5 border border-emerald-500/10 px-3 py-1.5 rounded-lg w-fit">
+                                    <span>📈</span> <strong>Outcome: 15,000+ active concurrent traders | 99.99% system uptime</strong>
+                                </div>
                                 <div className="pf-desc">Next-gen crypto marketplace offering real-time token tracking, secure wallet integration, and a seamless decentralized trading experience.</div>
                                 <div className="pf-link">View case study ↗</div>
                             </div>
@@ -396,27 +472,27 @@ export default function Home() {
                         <div className="process-steps">
                             <div className="process-step" onMouseEnter={() => setActiveProcess(1)}>
                                 <div className={`step-bubble ${activeProcess === 1 ? 'active' : ''}`}>01</div>
-                                <div className="step-duration">Week 1</div>
-                                <div className="step-title">Discovery</div>
-                                <div className="step-desc">We deep-dive into your goals, constraints, and market. You get a detailed scope doc and timeline before we write a single line of code.</div>
+                                <div className="step-duration">Day 1-2</div>
+                                <div className="step-title">Deep-Dive & Discovery</div>
+                                <div className="step-desc">We analyze your current manual workflows and data architecture to identify operational leakage points and bottleneck stages.</div>
                             </div>
                             <div className="process-step" onMouseEnter={() => setActiveProcess(2)}>
                                 <div className={`step-bubble ${activeProcess === 2 ? 'active' : ''}`}>02</div>
-                                <div className="step-duration">Week 1-2</div>
-                                <div className="step-title">Design & Plan</div>
-                                <div className="step-desc">Wireframes, system architecture, and interactive prototypes. Your full approval before engineering begins, no surprises.</div>
+                                <div className="step-duration">Day 3-5</div>
+                                <div className="step-title">Architectural Blueprint</div>
+                                <div className="step-desc">We map out a custom database schema, proxy rotation layout, or LLM system prompt blueprint before writing any production code.</div>
                             </div>
                             <div className="process-step" onMouseEnter={() => setActiveProcess(3)}>
                                 <div className={`step-bubble ${activeProcess === 3 ? 'active' : ''}`}>03</div>
-                                <div className="step-duration">Week 2-N</div>
-                                <div className="step-title">Build & Iterate</div>
-                                <div className="step-desc">2-week agile sprints with working demos every cycle. Live project dashboard so you always know exactly where things stand.</div>
+                                <div className="step-duration">Sprint-Based</div>
+                                <div className="step-title">Agile Dev & Testing</div>
+                                <div className="step-desc">Fast and secure iterations using Next.js/Python, integrated with regression testing and real-world high-volume load testing.</div>
                             </div>
                             <div className="process-step" onMouseEnter={() => setActiveProcess(4)}>
                                 <div className={`step-bubble ${activeProcess === 4 ? 'active' : ''}`}>04</div>
-                                <div className="step-duration">Launch + 30 days</div>
-                                <div className="step-title">Launch & Support</div>
-                                <div className="step-desc">Zero-downtime deployment, performance monitoring, and 30 days of included post-launch support. We don't disappear.</div>
+                                <div className="step-duration">Post-Launch</div>
+                                <div className="step-title">Deployment & SLA</div>
+                                <div className="step-desc">Complete cloud infrastructure integration with automated performance monitoring, error logging, and 24/7 crawler/bot maintenance.</div>
                             </div>
                         </div>
                     </div>
