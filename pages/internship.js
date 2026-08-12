@@ -76,26 +76,30 @@ export default function Internship() {
                     {/* Tracks */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
                         {tracks.map((track, i) => (
-                            <Link key={i} href={`/internship/${track.slug}`}>
-                                <motion.div
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className="bg-white border border-[#122a46]/5 p-10 rounded-[2.5rem] hover:bg-[#122a46]/5 transition-colors group cursor-pointer"
-                                >
-                                    <div className="mb-6 bg-teal-500/10 w-16 h-16 rounded-2xl flex items-center justify-center group-hover:bg-teal-500/20 transition-colors">
-                                        {track.svg}
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-[#122a46] mb-4">{track.title}</h3>
-                                    <div className="flex flex-wrap gap-2 text-sm text-slate-500">
-                                        {track.skills.map(skill => (
-                                            <span key={skill} className="px-3 py-1 bg-[#122a46]/5 rounded-full border border-[#122a46]/5">{skill}</span>
-                                        ))}
-                                    </div>
-                                    <div className="mt-8 flex items-center gap-2 text-teal-500 font-bold text-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                                        View Details <span>→</span>
-                                    </div>
-                                </motion.div>
+                            <Link key={i} href={`/internship/${track.slug}`} legacyBehavior>
+                                <a className="block">
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 30 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: i * 0.1 }}
+                                        className="bg-white border border-[#122a46]/5 p-10 rounded-[2.5rem] hover:bg-[#122a46]/5 transition-colors group cursor-pointer h-full flex flex-col justify-between"
+                                    >
+                                        <div>
+                                            <div className="mb-6 bg-teal-500/10 w-16 h-16 rounded-2xl flex items-center justify-center group-hover:bg-teal-500/20 transition-colors">
+                                                {track.svg}
+                                            </div>
+                                            <h3 className="text-2xl font-bold text-[#122a46] mb-4">{track.title}</h3>
+                                            <div className="flex flex-wrap gap-2 text-sm text-slate-500">
+                                                {track.skills.map(skill => (
+                                                    <span key={skill} className="px-3 py-1 bg-[#122a46]/5 rounded-full border border-[#122a46]/5">{skill}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className="mt-8 flex items-center gap-2 text-teal-500 font-bold text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform">
+                                            Apply for Track <span>→</span>
+                                        </div>
+                                    </motion.div>
+                                </a>
                             </Link>
                         ))}
                     </div>
@@ -107,10 +111,10 @@ export default function Internship() {
                         <p className="text-slate-600 max-w-2xl mx-auto mb-12 text-lg">
                             We accept less than 2% of applicants. If you have the hunger to learn and the grit to solve hard problems, we want to hear from you.
                         </p>
-                        <Link href="/careers">
-                            <button className="inline-block px-10 py-4 bg-teal-500 text-white font-bold text-lg rounded-full hover:bg-teal-400 hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] hover:-translate-y-1 transition-all duration-300">
+                        <Link href="/internship/frontend-engineering" legacyBehavior>
+                            <a className="inline-block px-10 py-4 bg-teal-500 text-white font-bold text-lg rounded-full hover:bg-teal-400 hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] hover:-translate-y-1 transition-all duration-300">
                                 Apply for Next Cohort
-                            </button>
+                            </a>
                         </Link>
                     </div>
 
