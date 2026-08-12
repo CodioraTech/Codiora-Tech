@@ -107,7 +107,7 @@ export default function Internship() {
                         <p className="text-slate-600 max-w-2xl mx-auto mb-12 text-lg">
                             We accept less than 2% of applicants. If you have the hunger to learn and the grit to solve hard problems, we want to hear from you.
                         </p>
-                        <Link href="/careers-apply">
+                        <Link href="/careers">
                             <button className="inline-block px-10 py-4 bg-teal-500 text-white font-bold text-lg rounded-full hover:bg-teal-400 hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] hover:-translate-y-1 transition-all duration-300">
                                 Apply for Next Cohort
                             </button>

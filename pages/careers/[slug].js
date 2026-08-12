@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import emailjs from '@emailjs/browser';
 
@@ -122,29 +121,45 @@ const jobDetails = {
     }
 };
 
-export default function CareerApply() {
-    const router = useRouter();
-    const [role, setRole] = useState('');
-    const [details, setDetails] = useState(null);
-    const [mounted, setMounted] = useState(false);
-    const [copied, setCopied] = useState(false);
+const slugMap = {
+    "ai-integrated-full-stack-engineer": "AI-Integrated Full-Stack Engineer",
+    "senior-full-stack-engineer": "Senior Full Stack Engineer",
+    "product-designer": "Product Designer (UI/UX)",
+    "product-designer-ui-ux": "Product Designer (UI/UX)",
+    "growth-marketing-lead": "Growth Marketing Lead",
+    "ai-research-scientist": "AI Research Scientist"
+};
 
-    const positions = Object.keys(jobDetails);
+export async function getStaticPaths() {
+    const paths = Object.keys(slugMap).map((slug) => ({
+        params: { slug }
+    }));
+    return {
+        paths,
+        fallback: false
+    };
+}
+
+export async function getStaticProps({ params }) {
+    const slug = params.slug || '';
+    const roleName = slugMap[slug] || (slug ? slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') : '');
+    const details = jobDetails[roleName] || null;
+    return {
+        props: {
+            slug,
+            roleName,
+            details
+        }
+    };
+}
+
+export default function CareerJobPage({ slug, roleName, details }) {
+    const [copied, setCopied] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
-        if (router.isReady && router.query.role) {
-            const decodedRole = decodeURIComponent(router.query.role);
-            const slug = decodedRole.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-            router.replace(`/careers/${slug}`);
-        }
-    }, [router.isReady, router.query]);
-
-    const handleRoleChange = (e) => {
-        const selectedRole = e.target.value;
-        setRole(selectedRole);
-        setDetails(jobDetails[selectedRole] || null);
-    };
+    }, []);
 
     const handleCopyEmail = () => {
         if (navigator.clipboard) {
@@ -157,7 +172,7 @@ export default function CareerApply() {
     return (
         <>
             <Head>
-                <title>Apply for Careers | Codiora Tech</title>
+                <title>{`Codiora Tech | ${roleName || 'Job Detail'}`}</title>
             </Head>
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30">
@@ -168,6 +183,7 @@ export default function CareerApply() {
 
                 <div className="container mx-auto px-6 pt-32 pb-20 relative z-10 transition-all duration-500">
                     <div className="max-w-7xl mx-auto">
+                        {/* Back Button */}
                         <div className="mb-8">
                             <Link href="/careers" legacyBehavior>
                                 <a className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-600 hover:text-teal-700 transition-colors">
@@ -194,9 +210,10 @@ export default function CareerApply() {
                                                 Selected Role
                                             </div>
                                             <h1 className="text-3xl md:text-5xl font-black tracking-tighter mb-4 text-[#122a46]">
-                                                {role}
+                                                {roleName}
                                             </h1>
 
+                                            {/* Job Metadata Chips */}
                                             {(details.location || details.employmentType || details.level || details.department) && (
                                                 <div className="grid grid-cols-2 gap-3 mb-6 p-4 bg-slate-50 border border-[#122a46]/10 rounded-2xl">
                                                     {details.level && (
@@ -230,24 +247,75 @@ export default function CareerApply() {
                                                 {details.description}
                                             </p>
                                         </div>
+
+                                        {details.responsibilities && (
+                                            <div className="space-y-6">
+                                                <h3 className="text-xl font-bold text-[#122a46] border-b border-[#122a46]/10 pb-2">Key Responsibilities</h3>
+                                                <ul className="space-y-3">
+                                                    {details.responsibilities.map((res, i) => (
+                                                        <li key={i} className="flex gap-3 text-slate-600 text-base">
+                                                            <span className="text-teal-500 mt-0.5">▹</span>
+                                                            <span>{res}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+
+                                        {details.requirements && (
+                                            <div className="space-y-6">
+                                                <h3 className="text-xl font-bold text-[#122a46] border-b border-[#122a46]/10 pb-2">Required Technical Skills & Qualifications</h3>
+                                                <ul className="space-y-3">
+                                                    {details.requirements.map((req, i) => (
+                                                        <li key={i} className="flex gap-3 text-slate-600 text-base">
+                                                            <span className="text-teal-500 mt-0.5">▹</span>
+                                                            <span>{req}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+
+                                        {details.bonusSkills && (
+                                            <div className="space-y-6">
+                                                <h3 className="text-xl font-bold text-[#122a46] border-b border-[#122a46]/10 pb-2">Bonus Skills (Nice To Have)</h3>
+                                                <ul className="space-y-3">
+                                                    {details.bonusSkills.map((bonus, i) => (
+                                                        <li key={i} className="flex gap-3 text-slate-600 text-base">
+                                                            <span className="text-amber-500 mt-0.5">★</span>
+                                                            <span>{bonus}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+
+                                        {details.whatWeOffer && (
+                                            <div className="space-y-6">
+                                                <h3 className="text-xl font-bold text-[#122a46] border-b border-[#122a46]/10 pb-2">What We Offer</h3>
+                                                <ul className="space-y-3">
+                                                    {details.whatWeOffer.map((offer, i) => (
+                                                        <li key={i} className="flex gap-3 text-slate-600 text-base">
+                                                            <span className="text-emerald-500 mt-0.5">✓</span>
+                                                            <span>{offer}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
                                     </motion.div>
                                 ) : (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                    >
-                                        <div>
-                                            <div className="inline-block px-4 py-1.5 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-600 text-xs font-bold uppercase tracking-widest mb-6">
-                                                Join The Vanguard
-                                            </div>
-                                            <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 bg-gradient-to-r from-[#122a46] to-gray-500 bg-clip-text text-transparent">
-                                                Your Next Chapter Starts Here.
-                                            </h1>
-                                            <p className="text-slate-500 text-lg leading-relaxed max-w-lg">
-                                                We don't care about your pedigree. We care about your output. Show us what you've built, and why you want to build with us.
-                                            </p>
+                                    <div>
+                                        <div className="inline-block px-4 py-1.5 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-600 text-xs font-bold uppercase tracking-widest mb-6">
+                                            Join The Vanguard
                                         </div>
-                                    </motion.div>
+                                        <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 bg-gradient-to-r from-[#122a46] to-gray-500 bg-clip-text text-transparent">
+                                            Your Next Chapter Starts Here.
+                                        </h1>
+                                        <p className="text-slate-500 text-lg leading-relaxed max-w-lg">
+                                            We don't care about your pedigree. We care about your output. Show us what you've built, and why you want to build with us.
+                                        </p>
+                                    </div>
                                 )}
                             </motion.div>
 
@@ -268,38 +336,19 @@ export default function CareerApply() {
                                         </div>
                                         <h3 className="text-3xl font-extrabold text-[#122a46] tracking-tight">How to Apply</h3>
                                         <p className="text-slate-500 text-sm mt-2 leading-relaxed">
-                                            Select your position and click below to send your application directly via email.
+                                            Send your application directly to our talent acquisition team via email.
                                         </p>
                                     </div>
 
-                                    {/* Role Selector */}
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-bold uppercase tracking-widest text-teal-600">Select Position</label>
-
-                                        {role ? (
-                                            <div className="w-full bg-slate-50 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] font-bold text-sm shadow-sm select-none truncate">
-                                                {role}
-                                            </div>
-                                        ) : mounted ? (
-                                            <div className="relative">
-                                                <select
-                                                    name="position"
-                                                    value={role}
-                                                    onChange={handleRoleChange}
-                                                    className="w-full bg-white border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all outline-none font-medium text-sm appearance-none cursor-pointer"
-                                                >
-                                                    <option value="" disabled>Select a role...</option>
-                                                    {positions.map((p) => (
-                                                        <option key={p} value={p}>{p}</option>
-                                                    ))}
-                                                </select>
-                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className="w-full bg-white border border-[#122a46]/10 rounded-xl px-4 py-3 h-11" />
-                                        )}
+                                    {/* Selected Position Indicator */}
+                                    <div className="p-5 bg-gradient-to-br from-slate-50 to-teal-50/40 border border-teal-500/20 rounded-2xl flex items-center justify-between gap-4">
+                                        <div>
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Applying For Position</span>
+                                            <span className="text-base font-extrabold text-[#122a46] block mt-0.5">{roleName || 'Open Position'}</span>
+                                        </div>
+                                        <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-600 flex items-center justify-center font-bold text-lg shrink-0">
+                                            💼
+                                        </div>
                                     </div>
 
                                     {/* Application Checklist */}
@@ -342,7 +391,7 @@ export default function CareerApply() {
                                     {/* Actions */}
                                     <div className="space-y-3 pt-2">
                                         <a
-                                            href={`mailto:career@codioratech.com?subject=${encodeURIComponent(`Application for ${role || 'Open Position'}`)}`}
+                                            href={`mailto:career@codioratech.com?subject=${encodeURIComponent(`Application for ${roleName || 'Open Position'}`)}`}
                                             className="w-full py-4 rounded-2xl bg-teal-500 text-white hover:bg-teal-400 font-bold text-base tracking-wide shadow-[0_10px_25px_rgba(20,184,166,0.35)] hover:shadow-[0_15px_35px_rgba(20,184,166,0.5)] hover:scale-[1.01] transition-all duration-300 flex items-center justify-center gap-3"
                                         >
                                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>

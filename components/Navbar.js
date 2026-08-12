@@ -85,9 +85,11 @@ const FeaturedProjectCarousel = ({ setIsMegaMenuOpen }) => {
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false); // Mobile menu
+    const [mounted, setMounted] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
+        setMounted(true);
         const handleScroll = () => setScrolled(window.scrollY > 50);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
@@ -96,9 +98,7 @@ const Navbar = () => {
     const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
     const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
 
-    // ... scroll effect ...
-
-    const isActive = (path) => router.pathname === path;
+    const isActive = (path) => mounted && router.pathname === path;
 
     // Toggle Mega Menu
     const toggleMegaMenu = () => setIsMegaMenuOpen(!isMegaMenuOpen);
@@ -113,11 +113,13 @@ const Navbar = () => {
             >
                 <div className={`
                 relative pointer-events-auto flex items-center justify-between 
-                bg-white/95 backdrop-blur-2xl border border-[#122a46]/10 
-                rounded-2xl px-3 py-2 sm:px-4 sm:py-3 shadow-xl shadow-[#122a46]/5 
-                transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
-                group hover:border-teal-500/30 hover:shadow-teal-500/10
-                ${scrolled ? 'w-[98%] max-w-6xl' : 'w-[95%] max-w-7xl'}
+                bg-white/95 backdrop-blur-2xl border 
+                rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+                group hover:border-teal-500/40 hover:shadow-teal-500/15
+                ${scrolled 
+                    ? 'w-[90%] sm:w-[92%] max-w-6xl py-1.5 sm:py-2 px-3 sm:px-4 border-teal-500/30 shadow-2xl shadow-teal-900/10 bg-white/98' 
+                    : 'w-[95%] max-w-7xl py-2.5 sm:py-3.5 px-4 sm:px-5 border-[#122a46]/10 shadow-xl shadow-[#122a46]/5'
+                }
             `}>
                     {/* Glowing Background Blob */}
                     <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
@@ -137,9 +139,9 @@ const Navbar = () => {
                     </Link>
 
                     {/* Center: Menu Items — inside bordered pill */}
-                    <div className="hidden lg:flex items-center">
+                    <div className="hidden lg:flex items-center shrink-0">
                         <div className="flex items-center gap-1 bg-slate-50/80 border border-[#122a46]/10 rounded-full px-4 py-2 shadow-sm">
-                            {['Home', 'Services', 'Portfolio', 'About', 'Contact'].map((item) => {
+                            {['Home', 'Services', 'Portfolio', 'Contact'].map((item) => {
                                 const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
                                 const active = isActive(path);
                                 return (
@@ -147,11 +149,8 @@ const Navbar = () => {
                                         key={item}
                                         href={path}
                                         onClick={() => setIsMegaMenuOpen(false)}
-                                        className={`relative px-4 py-1.5 text-sm font-bold tracking-wide transition-all duration-300 rounded-full overflow-hidden group/item ${active ? 'text-[#0f172a] bg-white shadow-sm border border-[#122a46]/8' : 'text-[#0f172a]/60 hover:text-[#0f172a] hover:bg-white/70'}`}
+                                        className={`relative px-4 py-1.5 text-sm font-bold tracking-wide transition-all duration-300 rounded-full overflow-hidden group/item after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-[50%] after:h-[2px] after:bg-gradient-to-r after:from-teal-500 after:to-cyan-500 after:rounded-t-full after:transition-all after:duration-300 ${active ? 'text-[#0f172a] bg-white shadow-sm border border-[#122a46]/8 after:opacity-100 after:scale-x-100' : 'text-[#0f172a]/60 hover:text-[#0f172a] hover:bg-white/70 after:opacity-0 after:scale-x-0'}`}
                                     >
-                                        {active && (
-                                            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[50%] h-[2px] bg-gradient-to-r from-teal-500 to-cyan-500 rounded-t-full"></span>
-                                        )}
                                         <span className="relative z-10">{item}</span>
                                     </Link>
                                 );
@@ -173,8 +172,8 @@ const Navbar = () => {
                     </div>
 
                     {/* Right: CTA */}
-                    <div className="hidden md:flex items-center gap-4 pl-2">
-                        <Link href="/contact" className="group relative inline-flex items-center justify-center gap-3 px-6 py-3 text-sm font-bold text-white transition-all duration-300 bg-[#122a46] border border-[#122a46] rounded-full hover:bg-teal-500 hover:border-teal-500 hover:shadow-[0_0_20px_rgba(20,184,166,0.3)] overflow-hidden">
+                    <div className="hidden md:flex items-center gap-4 pl-2 shrink-0">
+                        <Link href="/contact" className="group relative inline-flex items-center justify-center gap-3 px-6 py-3 text-sm font-bold text-white transition-all duration-300 bg-[#122a46] border border-[#122a46] rounded-full hover:bg-teal-500 hover:border-teal-500 hover:shadow-[0_0_20px_rgba(20,184,166,0.3)] overflow-hidden shrink-0">
                             {/* Shine Sweep */}
                             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent z-10 ease-in-out"></div>
 
@@ -183,7 +182,7 @@ const Navbar = () => {
                             </span>
 
                             {/* Arrow Icon */}
-                            <div className="relative z-20 flex items-center justify-center w-8 h-8 rounded-full bg-white/10 group-hover:bg-white/20 transition-all duration-300 group-hover:scale-110 shadow-sm text-white">
+                            <div className="relative z-20 flex items-center justify-center w-8 h-8 rounded-full bg-white/10 group-hover:bg-white/20 transition-all duration-300 group-hover:scale-110 shadow-sm text-white shrink-0">
                                 <svg className="w-4 h-4 transition-transform duration-300 group-hover:-rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
                                 </svg>
@@ -209,7 +208,7 @@ const Navbar = () => {
                             className="pointer-events-auto fixed top-28 left-4 right-4 bg-white/95 backdrop-blur-xl rounded-2xl p-6 z-40 shadow-2xl overflow-y-auto border border-[#122a46]/10 max-h-[70vh]"
                         >
                             <div className="flex flex-col items-center gap-3">
-                                {['Home', 'Services', 'Portfolio', 'About', 'Contact'].map((item) => {
+                                {['Home', 'Services', 'Portfolio', 'Contact'].map((item) => {
                                     const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
                                     const active = isActive(path);
                                     return (
@@ -217,6 +216,7 @@ const Navbar = () => {
                                             key={item}
                                             href={path}
                                             onClick={() => setIsOpen(false)}
+                                            suppressHydrationWarning
                                             className={`w-full text-center py-3 rounded-xl font-bold transition-all ${active
                                                 ? 'bg-[#122a46]/5 text-[#122a46]'
                                                 : 'text-slate-600 hover:text-[#122a46] hover:bg-[#122a46]/5'
@@ -361,7 +361,6 @@ const Navbar = () => {
                                     <div className="grid grid-cols-2 gap-8">
                                         <ul className="space-y-4">
                                             {[
-                                                { name: "Expertise", href: "/skills" },
                                                 { name: "About Us", href: "/about" },
                                                 { name: "Our Process", href: "/process" },
                                                 { name: "Leadership", href: "/leadership" },
@@ -371,9 +370,9 @@ const Navbar = () => {
                                                     <Link
                                                         href={link.href}
                                                         onClick={() => setIsMegaMenuOpen(false)}
-                                                        className={`text-lg hover:translate-x-1 transition-all inline-block font-medium ${link.name === 'Expertise' ? 'text-teal-500 font-bold' : 'text-slate-600 hover:text-teal-500'}`}
+                                                        className="text-lg text-slate-600 hover:text-teal-500 hover:translate-x-1 transition-all inline-block font-medium"
                                                     >
-                                                        {link.name} {link.name === 'Expertise' && '✨'}
+                                                        {link.name}
                                                     </Link>
                                                 </li>
                                             ))}

@@ -85,18 +85,52 @@ export default function Contact() {
         setStatus('submitting');
         setErrorMessage('');
 
-        // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS Public Key
-        // You can find this in EmailJS Dashboard -> Account -> API Keys -> Public Key
-        const PUBLIC_KEY = 'Hc7PljQ3BUkZ1oPy7';
+        const PUBLIC_KEY = 'hZTzq_6Nf7MBfsPYt';
+        const SERVICE_ID = 'service_0d54igh';
+        const TEMPLATE_ID = 'template_v3zts87';
 
-        emailjs.sendForm('service_ugzuqn3', 'template_epvde7n', form.current, PUBLIC_KEY)
+        // Inject template alias fields for EmailJS template variable compatibility
+        const templateParams = {
+            full_name: data.full_name,
+            from_name: data.full_name,
+            name: data.full_name,
+            user_name: data.full_name,
+            email: data.email,
+            from_email: data.email,
+            user_email: data.email,
+            phone: data.phone,
+            phone_number: data.phone,
+            project_type: data.project_type || 'General Inquiry',
+            service: data.project_type || 'General Inquiry',
+            message: data.message,
+            project_details: data.message,
+            details: data.message
+        };
+
+        Object.entries(templateParams).forEach(([key, val]) => {
+            let input = form.current.querySelector(`input[name="${key}"]`);
+            if (!input) {
+                input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                form.current.appendChild(input);
+            }
+            input.value = val;
+        });
+
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
             .then((result) => {
                 console.log(result.text);
                 setStatus('success');
             }, (error) => {
-                console.log(error.text);
-                setStatus('error');
-                setErrorMessage('Failed to send message. Please try again later.');
+                console.log("sendForm error, attempting fallback send():", error);
+                emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+                    .then(() => setStatus('success'))
+                    .catch((err2) => {
+                        console.log(err2);
+                        setStatus('error');
+                        setErrorMessage('Failed to send message. Please try again later.');
+                    });
             });
     };
 

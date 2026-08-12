@@ -1,13 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    experimental: {
-        turbopack: {
-            // Silence warn about multiple lockfiles
-            root: __dirname,
-        },
+    turbopack: {
+        root: __dirname,
     },
-    poweredByHeader: false, // Hide X-Powered-By: Next.js for security obscuxrity
+    poweredByHeader: false, // Hide X-Powered-By: Next.js for security obscurity
     async headers() {
         return [
             {

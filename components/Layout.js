@@ -1,6 +1,8 @@
-import Navbar from './Navbar';
+import dynamic from 'next/dynamic';
 import Footer from './Footer';
 import LiveChat from './LiveChat';
+
+const Navbar = dynamic(() => import('./Navbar'), { ssr: false });
 
 const Layout = ({ children }) => {
     return (

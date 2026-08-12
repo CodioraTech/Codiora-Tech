@@ -75,7 +75,7 @@ export default function CodeCamp() {
                                 whileHover={{ y: -10 }}
                                 className={`relative p-10 rounded-[2rem] border ${plan.popular ? 'border-indigo-500 bg-indigo-900/10 shadow-[0_0_50px_rgba(99,102,241,0.2)]' : 'border-[#122a46]/10 bg-white'}`}
                             >
-                                {plan.popular && <div className="absolute top-0 right-0 bg-indigo-500 text-[#122a46] text-xs font-bold px-4 py-1 rounded-bl-xl rounded-tr-[1.9rem]">POPULAR</div>}
+                                {plan.popular && <div className="absolute top-0 right-0 bg-indigo-600 text-white text-xs font-bold px-4 py-1 rounded-bl-xl rounded-tr-[1.9rem]">POPULAR</div>}
                                 <h3 className="text-xl font-bold text-[#122a46] mb-2">{plan.name}</h3>
                                 <div className="text-4xl font-black text-[#122a46] mb-8">{plan.price}</div>
                                 <ul className="space-y-4 mb-10">
@@ -86,7 +86,7 @@ export default function CodeCamp() {
                                         </li>
                                     ))}
                                 </ul>
-                                <button className={`w-full py-4 rounded-xl font-bold transition-all ${plan.popular ? 'bg-indigo-600 hover:bg-indigo-500 text-[#122a46]' : 'bg-[#122a46]/10 hover:bg-white text-[#122a46] hover:text-black'}`}>
+                                <button className={`w-full py-4 rounded-xl font-bold transition-all ${plan.popular ? 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-600/20' : 'bg-[#122a46]/10 hover:bg-[#122a46] text-[#122a46] hover:text-white'}`}>
                                     Join Cohort
                                 </button>
                             </motion.div>
@@ -95,12 +95,11 @@ export default function CodeCamp() {
 
                     <div className="mt-40 text-center">
                         <p className="text-slate-500 mb-4">Not sure which path is right for you?</p>
-                        <Link href="/counseling" className="group relative inline-flex items-center gap-3 px-10 py-5 rounded-full bg-indigo-900/20 border border-indigo-500/30 text-indigo-300 font-bold overflow-hidden transition-all hover:scale-105 hover:bg-indigo-600 hover:text-[#122a46] hover:border-indigo-400 hover:shadow-[0_0_50px_rgba(79,70,229,0.6)]">
+                        <Link href="/counseling" className="group relative inline-flex items-center gap-3 px-10 py-5 rounded-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-bold shadow-xl shadow-indigo-600/25 hover:shadow-indigo-600/40 hover:scale-105 transition-all duration-300">
                             <span className="relative z-10 text-lg">Talk to an Admission Counselor</span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                             </svg>
-                            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </Link>
                     </div>
                 </div>

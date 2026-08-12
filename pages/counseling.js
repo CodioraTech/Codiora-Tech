@@ -9,7 +9,7 @@ export default function Counseling() {
     const [bookingDate, setBookingDate] = useState('');
     const form = useRef();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Basic Security Check
@@ -19,19 +19,71 @@ export default function Counseling() {
 
         setStatus('submitting');
 
-        // Reusing the same public key/service as contact for now, user can swap if needed
-        const PUBLIC_KEY = 'r5FRZ6PBbEXsb074d';
+        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'bxENHLdnTzL4xGOEr';
+        const SERVICE_ID = 'service_h0rja9o';
+        const TEMPLATE_ID = 'template_cxzgkj3';
 
-        // Sending as a standard message but with specific context
-        // In a real app, we'd map 'booking_date' to a template variable or use a Calendly embed.
-        // For now, we simulate a premium form submission.
-        emailjs.sendForm('service_6hxh39r', 'template_6hm18xl', form.current, PUBLIC_KEY)
-            .then(() => {
+        // Dynamically inject form field aliases into HTML form so emailjs.sendForm succeeds with all template variable names
+        const aliases = {
+            full_name: data.full_name || '',
+            from_name: data.full_name || '',
+            user_name: data.full_name || '',
+            name: data.full_name || '',
+
+            email: data.email || '',
+            from_email: data.email || '',
+            user_email: data.email || '',
+            reply_to: data.email || '',
+
+            phone: data.phone || '',
+            phone_number: data.phone || '',
+            user_phone: data.phone || '',
+
+            status: data.status || '',
+            current_status: data.status || '',
+
+            time_slot: data.time_slot || '',
+            preferred_time: data.time_slot || '',
+            time: data.time_slot || '',
+
+            message: data.message || '',
+            questions_goals: data.message || '',
+            questions_or_goals: data.message || '',
+            question_goal: data.message || '',
+            questions: data.message || '',
+            goals: data.message || '',
+            query: data.message || '',
+            details: data.message || '',
+
+            date: new Date().toLocaleDateString('en-US', { dateStyle: 'full' })
+        };
+
+        Object.entries(aliases).forEach(([key, val]) => {
+            let input = form.current.querySelector(`input[name="${key}"]`);
+            if (!input) {
+                input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                form.current.appendChild(input);
+            }
+            input.value = val;
+        });
+
+        try {
+            const result = await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY);
+            console.log('Counseling form sent successfully via sendForm:', result.text);
+            setStatus('success');
+        } catch (err) {
+            console.warn('sendForm failed, attempting fallback to emailjs.send:', err);
+            try {
+                const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, aliases, PUBLIC_KEY);
+                console.log('Counseling form sent successfully via send fallback:', result.text);
                 setStatus('success');
-            }, (err) => {
-                console.error(err);
+            } catch (fallbackErr) {
+                console.error('All EmailJS submission attempts failed:', fallbackErr);
                 setStatus('error');
-            });
+            }
+        }
     };
 
     return (
@@ -141,9 +193,10 @@ export default function Counseling() {
                                         <form ref={form} onSubmit={handleSubmit} className="space-y-6 relative z-10">
                                             <div className="space-y-2">
                                                 <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Your Details</label>
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                     <input name="full_name" type="text" required placeholder="Full Name" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-indigo-500 focus:bg-[#f8fafc]/60 transition-all outline-none" />
                                                     <input name="email" type="email" required placeholder="Email Address" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-indigo-500 focus:bg-[#f8fafc]/60 transition-all outline-none" />
+                                                    <input name="phone" type="tel" required placeholder="Phone Number" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-indigo-500 focus:bg-[#f8fafc]/60 transition-all outline-none" />
                                                 </div>
                                             </div>
 
@@ -159,11 +212,11 @@ export default function Counseling() {
 
                                             <div className="space-y-2">
                                                 <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Preferred Time Check</label>
-                                                <div className="grid grid-cols-2 gap-3">
+                                                <div className="grid grid-cols-3 gap-3">
                                                     {['Morning (9am-12pm)', 'Afternoon (1pm-5pm)', 'Evening (6pm-9pm)'].map((slot) => (
                                                         <label key={slot} className="cursor-pointer">
                                                             <input type="radio" name="time_slot" value={slot} className="peer sr-only" required />
-                                                            <div className="border border-[#122a46]/10 rounded-xl px-4 py-3 text-sm text-slate-500 text-center hover:bg-[#122a46]/5 peer-checked:bg-indigo-600 peer-checked:text-[#122a46] peer-checked:border-indigo-500 transition-all">
+                                                            <div className="border border-[#122a46]/10 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 text-center hover:bg-[#122a46]/5 peer-checked:bg-indigo-600 peer-checked:text-white peer-checked:border-indigo-600 shadow-sm transition-all">
                                                                 {slot.split(' ')[0]}
                                                             </div>
                                                         </label>
@@ -179,9 +232,15 @@ export default function Counseling() {
                                             {/* Honeypot */}
                                             <input type="text" name="bot_check" style={{ display: 'none' }} autoComplete="off" />
 
+                                            {status === 'error' && (
+                                                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 text-sm font-medium text-center">
+                                                    Submission failed. Please try again or email us directly at <a href="mailto:contact@codioratech.com" className="font-bold underline">contact@codioratech.com</a>.
+                                                </div>
+                                            )}
+
                                             <button
                                                 disabled={status === 'submitting'}
-                                                className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 text-[#122a46] font-bold text-lg tracking-wide shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all"
+                                                className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-bold text-lg tracking-wide shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/40 transition-all"
                                             >
                                                 {status === 'submitting' ? 'Scheduling...' : 'Schedule Call'}
                                             </button>

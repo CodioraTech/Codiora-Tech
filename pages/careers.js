@@ -4,25 +4,36 @@ import Link from 'next/link';
 
 const jobs = [
     {
+        title: "AI-Integrated Full-Stack Engineer",
+        slug: "ai-integrated-full-stack-engineer",
+        dept: "Engineering & AI Labs",
+        loc: "Dhaka, Bangladesh (Hybrid)",
+        type: "Full-time"
+    },
+    {
         title: "Senior Full Stack Engineer",
+        slug: "senior-full-stack-engineer",
         dept: "Engineering",
         loc: "Remote",
         type: "Full-time"
     },
     {
         title: "Product Designer (UI/UX)",
+        slug: "product-designer",
         dept: "Design",
         loc: "Remote (APAC)",
         type: "Full-time"
     },
     {
         title: "Growth Marketing Lead",
+        slug: "growth-marketing-lead",
         dept: "Marketing",
         loc: "London / Remote",
         type: "Contract"
     },
     {
         title: "AI Research Scientist",
+        slug: "ai-research-scientist",
         dept: "R&D",
         loc: "San Francisco",
         type: "Full-time"
@@ -72,7 +83,13 @@ export default function Careers() {
                                 className="group bg-white border border-[#122a46]/5 p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 hover:border-green-500/50 transition-all hover:bg-[#122a46]/5"
                             >
                                 <div>
-                                    <h3 className="text-2xl font-bold text-[#122a46] mb-2 group-hover:text-green-400 transition-colors">{job.title}</h3>
+                                    <Link href={`/careers/${job.slug}`} legacyBehavior>
+                                        <a className="block">
+                                            <h3 className="text-2xl font-bold text-[#122a46] mb-2 group-hover:text-green-400 transition-colors">
+                                                {job.title}
+                                            </h3>
+                                        </a>
+                                    </Link>
                                     <div className="flex gap-4 text-sm text-slate-500 md:hidden">
                                         <span>{job.dept}</span>
                                         <span>•</span>
@@ -86,13 +103,24 @@ export default function Careers() {
                                     <span className="w-24 text-right">{job.type}</span>
                                 </div>
 
-                                <Link href={`/careers-apply?role=${encodeURIComponent(job.title)}`}>
-                                    <button className="px-8 py-3 rounded-full border border-[#122a46]/20 hover:bg-green-500 hover:text-black hover:border-green-500 font-bold transition-all whitespace-nowrap">
+                                <Link href={`/careers/${job.slug}`} legacyBehavior>
+                                    <a className="px-8 py-3 rounded-full border border-[#122a46]/20 hover:bg-green-500 hover:text-black hover:border-green-500 font-bold transition-all whitespace-nowrap inline-block text-center">
                                         Apply Now
-                                    </button>
+                                    </a>
                                 </Link>
                             </motion.div>
                         ))}
+
+                        {/* Direct Email Callout Banner */}
+                        <div className="mt-8 p-6 bg-slate-50 border border-[#122a46]/10 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                            <div>
+                                <h4 className="font-bold text-[#122a46] text-base">Don't see your role open right now?</h4>
+                                <p className="text-slate-500 text-sm mt-0.5">We are always looking for extraordinary talent. Email your resume directly to us.</p>
+                            </div>
+                            <a href="mailto:career@codioratech.com" className="px-6 py-2.5 rounded-full bg-teal-500 text-white font-bold text-sm hover:bg-teal-400 transition-colors whitespace-nowrap shadow-sm">
+                                Email career@codioratech.com
+                            </a>
+                        </div>
                     </div>
 
                     {/* Perks Grid */}

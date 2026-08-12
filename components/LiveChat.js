@@ -94,28 +94,28 @@ const KNOWLEDGE_BASE = [
         id: 'frontend_intern',
         patterns: ['frontend intern', 'frontend job', 'react job', 'hiring frontend'],
         response: "💻 **Frontend Engineering Requirements**:\n\n• **Core:** Mastery of **React.js** & **Next.js** 14+.\n• **Styling:** Deep knowledge of **Tailwind CSS**.\n• **State:** Redux or Zustand.\n\n*Ready to build pixel-perfect interfaces?*",
-        action: { label: 'Apply for Frontend', url: '/careers-apply' },
+        action: { label: 'Apply for Frontend', url: '/careers-apply?role=Frontend%20Engineering%20Intern' },
         score: 10
     },
     {
         id: 'backend_intern',
         patterns: ['backend intern', 'backend job', 'node job', 'hiring backend'],
         response: "⚙️ **Backend Engineering Requirements**:\n\n• **Runtime:** Expert in **Node.js** & Express.\n• **Database:** MongoDB (Aggregations) & PostgreSQL.\n• **Architecture:** Microservices & REST/GraphQL APIs.\n\n*Ready to architect scalable systems?*",
-        action: { label: 'Apply for Backend', url: '/careers-apply' },
+        action: { label: 'Apply for Backend', url: '/careers-apply?role=Backend%20Systems%20Intern' },
         score: 10
     },
     {
         id: 'ui_ux_intern',
         patterns: ['ui/ux intern', 'design intern', 'designer job'],
         response: "🎨 **UI/UX Design Requirements**:\n\n• **Tools:** Mastery of **Figma** (Auto-layout, Components).\n• **Skills:** User Research, Wireframing, & Prototyping.\n• **Bonus:** Basic HTML/CSS understanding.\n\n*Ready to design the future?*",
-        action: { label: 'Apply for Design', url: '/careers-apply' },
+        action: { label: 'Apply for Design', url: '/careers-apply?role=Product%20Designer%20(UI%2FUX)' },
         score: 10
     },
     {
         id: 'careers_general',
         patterns: ['intern', 'internship', 'job', 'career', 'apply', 'hiring', 'vacancy', 'join team', 'work with you'],
         response: "🎓 **General Application Roadmap**:\n\n1. **Prepare:** Polish your Portfolio.\n2. **Apply:** Click the button below.\n3. **Challenge:** Complete our coding task.\n\n*Select a specific role (Frontend, Backend) for detailed requirements.*",
-        action: { label: 'Start Application', url: '/careers-apply' },
+        action: { label: 'Explore Careers', url: '/careers' },
         score: 5
     },
 
@@ -125,14 +125,14 @@ const KNOWLEDGE_BASE = [
     {
         id: 'greetings',
         patterns: ['hello', 'hi', 'hey', 'start', 'greetings', 'morning', 'evening', 'yo'],
-        response: "Greetings. 👋 I am **Codi**, the premier AI Assistant for Codiora Tech.\n\nI am equipped to provide detailed consultations on:\n\n• **Enterprise Engineering Services**\n• **Strategic Partnerships & Quotes**\n• **Career Opportunities**\n\nHow may I facilitate your digital transformation today?",
+        response: "Hi there! 👋 I am **Codi**, AI Assistant at Codiora Tech. How can I help you today?",
         action: { label: 'Explore Our Expertise', url: '/services' },
         score: 1
     },
     {
         id: 'budget_flexible',
         patterns: ['budget', 'price', 'cost', 'pricing', 'rate', 'how much', 'quote', 'money', 'expensive', 'cheap'],
-        response: "💰 **Premium Consulting & Pricing**: We do not operate within rigid budget constraints. We invite you to **contact our consulting team**. We will meticulously analyze your strategic objectives and architect a bespoke solution tailored to maximize your investment ROI.",
+        response: "💰 **Pricing & Quotes**: We offer custom pricing tailored to your project requirements. Contact us for a free quote!",
         action: { label: 'Get a Quote', url: '/contact' },
         score: 5
     },
@@ -161,9 +161,8 @@ const KNOWLEDGE_BASE = [
 
 // Fallback logic
 const FALLBACK_RESPONSES = [
-    { text: "My expertise centers around **Enterprise Engineering & Premium Design**. How may we assist in architecting your next visionary project?", action: { label: 'View Portfolio', url: '/portfolio' } },
-    { text: "I am currently focused on **Strategic Technological Solutions**. Would you like to schedule a consultation regarding a specific initiative?", action: { label: 'Contact Consulting Team', url: '/contact' } },
-    { text: "While that falls outside my immediate scope, if your inquiry involves **Enterprise Web Architecture**, **Mobile Solutions**, or **Advanced AI**, I am fully equipped to assist.", action: { label: 'Our Expertise', url: '/services' } }
+    { text: "I am specialized specifically to assist with **Codiora Tech's services**. How can we help build your web, mobile, or AI project today?", action: { label: 'Explore Services', url: '/services' } },
+    { text: "I only answer queries regarding **Codiora Tech's software engineering & AI services**. Would you like to schedule a free consultation?", action: { label: 'Contact Us', url: '/contact' } }
 ];
 
 export default function LiveChat() {
@@ -172,7 +171,7 @@ export default function LiveChat() {
         {
             id: 1,
             sender: 'bot',
-            text: "Welcome to **Codiora Tech**. I am **Codi**, your Executive AI Assistant. 🤖\n\nI am here to provide strategic insights regarding our **Enterprise Engineering Services**, **Case Studies**, and **Development Architecture**.\n\nHow may we facilitate your digital transformation today?"
+            text: "Hi there! 👋 I'm **Codi** from Codiora Tech. How can I help you today?"
         }
     ]);
     const [inputValue, setInputValue] = useState("");
@@ -305,7 +304,7 @@ export default function LiveChat() {
             {
                 id: 1,
                 sender: 'bot',
-                text: "Welcome to **Codiora Tech**. I am **Codi**, your Executive AI Assistant. 🤖\n\nI am here to provide strategic insights regarding our **Enterprise Engineering Services**, **Case Studies**, and **Development Architecture**.\n\nHow may we facilitate your digital transformation today?"
+                text: "Hi there! 👋 I'm **Codi** from Codiora Tech. How can I help you today?"
             }
         ]);
         setInputValue("");

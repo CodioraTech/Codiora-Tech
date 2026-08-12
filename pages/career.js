@@ -41,7 +41,7 @@ export default function Career() {
     return (
         <PageLayout title="Join Our Team" subtitle="Build the future with the world's best engineering team.">
             <div className="grid gap-6 max-w-4xl mx-auto">
-                {['Senior Full Stack Engineer', 'AI Research Scientist', 'Product Designer'].map((job, i) => (
+                {['AI-Integrated Full-Stack Engineer', 'Senior Full Stack Engineer', 'AI Research Scientist', 'Product Designer'].map((job, i) => (
                     <motion.div
                         key={i}
                         initial={{ opacity: 0, x: -20 }}
