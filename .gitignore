@@ -36,4 +36,7 @@ playwright-report/
 *.json.bak
 baseline-*.json
 post-lh*.json
+desktop-lh.json
+mobile-lh.json
+
 

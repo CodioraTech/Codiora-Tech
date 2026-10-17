@@ -20,9 +20,15 @@ export default function Counseling() {
 
         setStatus('submitting');
 
-        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'bxENHLdnTzL4xGOEr';
-        const SERVICE_ID = 'service_h0rja9o';
-        const TEMPLATE_ID = 'template_cxzgkj3';
+        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+        const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_COUNSELING_SERVICE_ID || process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+        const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_COUNSELING_TEMPLATE_ID || process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+
+        if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
+            console.warn("EmailJS environment variables not configured for counseling form.");
+            setStatus('error');
+            return;
+        }
 
         // Dynamically inject form field aliases into HTML form so emailjs.sendForm succeeds with all template variable names
         const aliases = {

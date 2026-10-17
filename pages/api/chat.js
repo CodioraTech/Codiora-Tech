@@ -1,16 +1,38 @@
-// In-memory rate limiting map: ip -> { count, resetTime }
-const rateLimitMap = new Map();
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+
+// Upstash Redis sliding-window rate limiter
+// Required Environment Variables:
+// - UPSTASH_REDIS_REST_URL: The REST URL from Upstash Console
+// - UPSTASH_REDIS_REST_TOKEN: The REST Token from Upstash Console
+let upstashRatelimit = null;
+
+if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+    const redis = new Redis({
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    });
+    upstashRatelimit = new Ratelimit({
+        redis,
+        limiter: Ratelimit.slidingWindow(15, '60 s'),
+        analytics: true,
+        prefix: 'codiora:ratelimit:chat',
+    });
+}
+
+// Fallback in-memory rate limiting map: ip -> { count, resetTime }
+const memoryRateLimitMap = new Map();
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 const MAX_REQUESTS_PER_WINDOW = 15;
 
-function isRateLimited(ip) {
+function isMemoryRateLimited(ip) {
     const now = Date.now();
-    const record = rateLimitMap.get(ip) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW };
+    const record = memoryRateLimitMap.get(ip) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW };
 
     if (now > record.resetTime) {
         record.count = 1;
         record.resetTime = now + RATE_LIMIT_WINDOW;
-        rateLimitMap.set(ip, record);
+        memoryRateLimitMap.set(ip, record);
         return false;
     }
 
@@ -19,8 +41,24 @@ function isRateLimited(ip) {
     }
 
     record.count++;
-    rateLimitMap.set(ip, record);
+    memoryRateLimitMap.set(ip, record);
     return false;
+}
+
+// Extract client IP from trusted proxy headers (Cloudflare, Vercel, Reverse Proxy)
+function getTrustedClientIp(req) {
+    const cfIp = req.headers['cf-connecting-ip'];
+    if (typeof cfIp === 'string' && cfIp.trim()) return cfIp.trim();
+
+    const realIp = req.headers['x-real-ip'];
+    if (typeof realIp === 'string' && realIp.trim()) return realIp.trim();
+
+    const forwarded = req.headers['x-forwarded-for'];
+    if (typeof forwarded === 'string' && forwarded.trim()) {
+        return forwarded.split(',')[0].trim();
+    }
+
+    return req.socket.remoteAddress || '127.0.0.1';
 }
 
 export default async function handler(req, res) {
@@ -29,13 +67,32 @@ export default async function handler(req, res) {
         return res.status(405).json({ message: 'Method Not Allowed' });
     }
 
-    // IP Extraction for Rate Limiting
-    const forwarded = req.headers['x-forwarded-for'];
-    const ip = typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : req.socket.remoteAddress || 'unknown';
+    // IP Extraction for Rate Limiting via trusted headers
+    const ip = getTrustedClientIp(req);
 
-    if (isRateLimited(ip)) {
-        return res.status(429).json({ message: 'Too many requests. Please wait a moment before sending another message.' });
+    if (upstashRatelimit) {
+        try {
+            const { success, limit, remaining, reset } = await upstashRatelimit.limit(ip);
+            res.setHeader('X-RateLimit-Limit', limit.toString());
+            res.setHeader('X-RateLimit-Remaining', remaining.toString());
+            res.setHeader('X-RateLimit-Reset', reset.toString());
+
+            if (!success) {
+                return res.status(429).json({ message: 'Too many requests. Please wait a moment before sending another message.' });
+            }
+        } catch (error) {
+            console.error('Upstash rate limit check error:', error);
+            // Fall back to memory limiter on network error
+            if (isMemoryRateLimited(ip)) {
+                return res.status(429).json({ message: 'Too many requests. Please wait a moment before sending another message.' });
+            }
+        }
+    } else {
+        if (isMemoryRateLimited(ip)) {
+            return res.status(429).json({ message: 'Too many requests. Please wait a moment before sending another message.' });
+        }
     }
+
 
     const { messages } = req.body || {};
 

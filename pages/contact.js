@@ -86,9 +86,16 @@ export default function Contact() {
         setStatus('submitting');
         setErrorMessage('');
 
-        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'hZTzq_6Nf7MBfsPYt';
-        const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_0d54igh';
-        const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_v3zts87';
+        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+        const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+        const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+
+        if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
+            console.warn("EmailJS environment variables not configured.");
+            setStatus('error');
+            setErrorMessage('Email service is currently offline. Please email us directly at contact@codioratech.com.');
+            return;
+        }
 
         // Inject template alias fields for EmailJS template variable compatibility
         const templateParams = {

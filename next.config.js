@@ -50,7 +50,7 @@ const nextConfig = {
     async headers() {
         const cspHeader = `
             default-src 'self';
-            script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://challenges.cloudflare.com https://*.sentry.io;
+            script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://challenges.cloudflare.com https://*.sentry.io;
             style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
             img-src 'self' data: https: blob:;
             font-src 'self' https://fonts.gstatic.com data:;
