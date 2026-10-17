@@ -1,13 +1,16 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function PrivacyPolicy() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Privacy Policy</title>
-            </Head>
+            <SEO
+                title="Privacy Policy | Codiora Tech"
+                description="Review the official Privacy Policy of Codiora Tech to understand our data protection, storage, and processing standards."
+                canonicalPath="/privacy-policy"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-slate-600 font-sans selection:bg-blue-500/30 overflow-hidden relative">
 
@@ -18,14 +21,15 @@ export default function PrivacyPolicy() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 py-44 max-w-4xl relative z-10">
+                <div className="container mx-auto px-6 pt-32 pb-44 max-w-4xl relative z-10">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Privacy Policy', href: '/privacy-policy' }]} />
 
                     {/* Header */}
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="mb-16 border-b border-[#122a46]/10 pb-8 text-center md:text-left"
+                        className="mb-16 border-b border-[#122a46]/10 pb-8 text-center md:text-left mt-8"
                     >
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
@@ -125,14 +129,35 @@ export default function PrivacyPolicy() {
                             transition={{ duration: 0.5 }}
                         >
                             <h2 className="text-2xl font-bold text-[#122a46] mb-4 flex items-center gap-3">
-                                <span className="text-blue-500">04.</span> Cookies & Tracking
+                                <span className="text-teal-600">04.</span> Cookies & Analytics Consent
                             </h2>
                             <p className="text-lg leading-relaxed text-slate-500 mb-4">
-                                We use cookies and similar tracking technologies to track the activity on our Request Service and hold certain information. Cookies are files with small amount of data which may include an anonymous unique identifier.
+                                Codiora Tech adheres to privacy-by-design principles. We distinguish between strictly necessary technical cookies and optional analytics technologies (such as Google Tag Manager):
                             </p>
-                            <p className="text-lg leading-relaxed text-slate-500 border-l-2 border-blue-500/50 pl-4 py-1 bg-blue-500/5 rounded-r-lg">
-                                You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.
-                            </p>
+                            <div className="space-y-4 mb-6">
+                                <div className="p-4 rounded-xl bg-white border border-[#122a46]/10">
+                                    <h4 className="font-bold text-[#122a46] text-sm mb-1">Strictly Necessary Cookies</h4>
+                                    <p className="text-xs text-slate-500">Essential for core security, CSRF protection, and storing your consent preferences. These cannot be disabled.</p>
+                                </div>
+                                <div className="p-4 rounded-xl bg-white border border-[#122a46]/10">
+                                    <h4 className="font-bold text-[#122a46] text-sm mb-1">Analytics & Measurement Cookies (Gated)</h4>
+                                    <p className="text-xs text-slate-500">Google Tag Manager and telemetry scripts are completely blocked from loading until you explicitly choose "Accept All" in our Cookie Consent Banner.</p>
+                                </div>
+                            </div>
+                            <div className="p-4 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 text-sm">
+                                <p className="mb-2 font-medium">
+                                    <strong>Managing Your Preferences:</strong> You may change or revoke your cookie choices at any time. Clicking "Reset Cookie Preferences" below will clear your saved preferences and allow you to make a new selection upon your next page view.
+                                </p>
+                                <button
+                                    onClick={() => {
+                                        localStorage.removeItem('codiora_cookie_consent');
+                                        window.location.reload();
+                                    }}
+                                    className="px-4 py-1.5 bg-teal-600 text-white rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-teal-700 transition-colors"
+                                >
+                                    Reset Cookie Preferences
+                                </button>
+                            </div>
                         </motion.section>
 
                         {/* Section 5 & 6 */}

@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -156,9 +157,11 @@ export default function CareerApply() {
 
     return (
         <>
-            <Head>
-                <title>Apply for Careers | Codiora Tech</title>
-            </Head>
+            <SEO
+                title="Apply for Careers | Codiora Tech"
+                description="Apply for open engineering, design, and growth positions at Codiora Tech."
+                canonicalPath="/careers-apply"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30">
                 <div className="fixed inset-0 pointer-events-none">
@@ -168,7 +171,15 @@ export default function CareerApply() {
 
                 <div className="container mx-auto px-6 pt-32 pb-20 relative z-10 transition-all duration-500">
                     <div className="max-w-7xl mx-auto">
-                        <div className="mb-8">
+                        <Breadcrumbs
+                            items={[
+                                { label: 'Home', href: '/' },
+                                { label: 'Careers', href: '/careers' },
+                                { label: 'Apply', href: '/careers-apply' }
+                            ]}
+                        />
+
+                        <div className="mb-8 mt-4">
                             <Link href="/careers" legacyBehavior>
                                 <a className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-600 hover:text-teal-700 transition-colors">
                                     ← Back to Careers

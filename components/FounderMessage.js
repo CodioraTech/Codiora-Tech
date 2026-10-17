@@ -24,7 +24,7 @@ export default function FounderMessage() {
 
                         {/* Quote Text */}
                         <blockquote className="text-xl md:text-3xl font-medium text-slate-600 leading-relaxed max-w-3xl mx-auto mb-10">
-                            "We started Codiora Tech with one goal — to build <span className="text-[#122a46] font-semibold">reliable technology</span> that truly helps businesses grow. Not just code, but solutions that matter."
+                            "We started Codiora Tech with one goal, to build <span className="text-[#122a46] font-semibold">reliable technology</span> that truly helps businesses grow. Not just code, but solutions that matter."
                         </blockquote>
 
                         {/* Profiles */}

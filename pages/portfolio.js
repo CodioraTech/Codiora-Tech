@@ -1,7 +1,8 @@
-import Head from 'next/head';
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const projects = [
     { id: 1, title: "NeonMarket", slug: "neonmarket", category: "Solutions", image: "/images/portfolio/neonmarket.png", description: "Next-gen crypto marketplace." },
@@ -19,17 +20,17 @@ export default function Portfolio() {
 
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Portfolio</title>
-                <meta name="description" content="Check out our latest projects and success stories." />
-            </Head>
+            <SEO
+                title="Our Work & Portfolio | Codiora Tech"
+                description="Explore Codiora Tech's portfolio of custom web architecture, AI chatbots, SaaS platforms, and enterprise applications."
+                canonicalPath="/portfolio"
+            />
 
-            <section className="min-h-screen bg-gray-50 dark:bg-[#f8fafc] pt-44 pb-20 relative transition-colors duration-300">
-                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[150px] pointer-events-none" />
-
+            <section className="min-h-screen bg-gray-50 dark:bg-[#f8fafc] pt-32 pb-20 relative transition-colors duration-300">
                 <div className="container mx-auto px-6 relative z-10">
-
-
+                    <div className="mb-8">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Portfolio', href: '/portfolio' }]} />
+                    </div>
 
                     <div className="text-center mb-16">
                         <motion.h1
@@ -37,10 +38,10 @@ export default function Portfolio() {
                             animate={{ opacity: 1, scale: 1 }}
                             className="text-6xl font-bold mb-6"
                         >
-                            <span className="text-gray-900 dark:text-[#122a46] transition-colors">Selected </span>
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary">Works</span>
+                            <span className="text-[#122a46]">Selected </span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500">Works</span>
                         </motion.h1>
-                        <p className="text-xl text-gray-600 dark:text-slate-500 transition-colors">Digital experiences that set new standards.</p>
+                        <p className="text-xl text-slate-500">Digital experiences that set new standards.</p>
                     </div>
 
                     {/* Filters */}
@@ -48,10 +49,11 @@ export default function Portfolio() {
                         {["All", "Solutions", "AI", "Labs"].map((cat) => (
                             <button
                                 key={cat}
+                                type="button"
                                 onClick={() => setFilter(cat)}
                                 className={`px-8 py-2 rounded-full border transition-all duration-300 ${filter === cat
-                                    ? 'bg-accent border-accent text-dark font-bold shadow-[0_0_20px_rgba(0,229,255,0.4)]'
-                                    : 'bg-transparent border-gray-300 dark:border-[#122a46]/10 text-gray-600 dark:text-slate-500 hover:border-gray-400 dark:hover:border-[#122a46]/50 hover:text-gray-900 dark:hover:text-[#122a46]'
+                                    ? 'bg-teal-500 border-teal-500 text-black font-bold shadow-[0_0_20px_rgba(20,184,166,0.4)]'
+                                    : 'bg-transparent border-[#122a46]/10 text-slate-500 hover:border-[#122a46]/30 hover:text-[#122a46]'
                                     }`}
                             >
                                 {cat}

@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -38,9 +39,11 @@ const tracks = [
 export default function Internship() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Intership Program</title>
-            </Head>
+            <SEO
+                title="Engineering Internship Program | Codiora Tech"
+                description="Launch your engineering career with Codiora Tech's internship program in frontend, backend, AI data science, and cloud DevOps."
+                canonicalPath="/internship"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30">
                 <div className="fixed inset-0 pointer-events-none">
@@ -49,7 +52,9 @@ export default function Internship() {
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
-                    <div className="flex flex-col md:flex-row items-center justify-between mb-32">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Internship', href: '/internship' }]} />
+
+                    <div className="flex flex-col md:flex-row items-center justify-between mb-32 mt-8">
                         <div className="max-w-2xl">
                             <div className="inline-block px-4 py-1.5 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-400 text-xs font-bold uppercase tracking-widest mb-6">
                                 Next Gen Talent

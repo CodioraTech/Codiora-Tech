@@ -23,7 +23,7 @@ export default function PricingModels() {
         <section className="py-24 bg-white dark:bg-[#f8fafc] relative">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold text-gray-900 dark:text-[#122a46] mb-4">Flexible Pricing Models</h2>
+                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-[#122a46] mb-4">Flexible Pricing Models</h1>
                     <p className="text-gray-600 dark:text-slate-500">Choose the engagement model that fits your business needs.</p>
                 </div>
 

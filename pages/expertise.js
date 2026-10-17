@@ -1,6 +1,7 @@
-import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const domains = [
     {
@@ -13,46 +14,51 @@ const domains = [
         title: "Backend Architecture",
         desc: "Robust, scalable server-side systems designed to handle millions of requests.",
         stack: ["Node.js", "Python", "Go", "PostgreSQL", "Redis", "GraphQL"],
-        gradient: "from-green-500 to-emerald-500"
+        gradient: "from-teal-600 to-emerald-500"
     },
     {
         title: "Cloud & DevOps",
         desc: "Infrastructure as code. We build self-healing, auto-scaling deployment pipelines.",
         stack: ["AWS", "Google Cloud", "Docker", "Kubernetes", "Terraform", "CI/CD"],
-        gradient: "from-orange-500 to-red-500"
+        gradient: "from-slate-700 to-teal-500"
     },
     {
         title: "Artificial Intelligence",
         desc: "Integrating cutting-edge ML models to automate workflows and generate insights.",
         stack: ["PyTorch", "TensorFlow", "OpenAI API", "Hugging Face", "Pinecone", "LangChain"],
-        gradient: "from-purple-500 to-pink-500"
+        gradient: "from-teal-500 to-cyan-500"
     }
 ];
 
 export default function Expertise() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Expertise</title>
-            </Head>
+            <SEO
+                title="Technical Expertise & Stack | Codiora Tech"
+                description="Explore Codiora Tech's engineering domains: frontend engineering, backend architecture, cloud DevOps, and AI automation."
+                canonicalPath="/expertise"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/10">
                 <div className="fixed inset-0 pointer-events-none">
-                    <div className="absolute top-[-10%] opacity-30 left-[-10%] w-[800px] h-[800px] bg-gradient-to-r from-blue-900 via-purple-900 to-pink-900 rounded-full blur-[150px] animate-pulse-slow" />
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+                    <div className="absolute top-[-10%] opacity-20 left-[-10%] w-[800px] h-[800px] bg-gradient-to-r from-blue-900 via-teal-900 to-slate-900 rounded-full blur-[150px] animate-pulse-slow" />
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
-                    <div className="text-center mb-32">
+                    <div className="mb-8">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Expertise', href: '/expertise' }]} />
+                    </div>
+
+                    <div className="text-center mb-24">
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="text-5xl md:text-8xl font-black tracking-tighter mb-8"
                         >
-                            TECHNICAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#122a46] to-gray-500">MASTERY</span>
+                            TECHNICAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#122a46] to-teal-600">MASTERY</span>
                         </motion.h1>
                         <p className="text-xl text-slate-500 max-w-3xl mx-auto">
-                            We don't just use tools; we master them. Our stack is curated for speed, security, and scalability.
+                            We do not just use tools; we master them. Our stack is curated for speed, security, and scalability.
                         </p>
                     </div>
 

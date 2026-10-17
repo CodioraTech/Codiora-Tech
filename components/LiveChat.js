@@ -461,12 +461,14 @@ export default function LiveChat() {
                                             value={inputValue}
                                             onChange={(e) => setInputValue(e.target.value)}
                                             placeholder="Ask Codi..."
+                                            aria-label="Type your message for Codi AI"
                                             className="w-full bg-white border border-[#122a46]/20 rounded-xl pl-4 pr-4 py-3 text-sm text-[#0f172a] focus:border-teal-500/50 focus:ring-1 focus:ring-cyan-500/20 outline-none transition-all placeholder:text-slate-500 resize-none h-[46px] shadow-sm font-medium"
                                         />
                                     </div>
 
                                     <button
                                         type="submit"
+                                        aria-label="Send message"
                                         disabled={!inputValue.trim() || isTyping}
                                         className="h-[46px] w-[46px] flex-shrink-0 flex items-center justify-center bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-xl hover:shadow-lg hover:shadow-cyan-500/20 disabled:opacity-30 disabled:scale-95 transition-all transform active:scale-90"
                                     >
@@ -496,6 +498,7 @@ export default function LiveChat() {
                     onClick={() => setIsOpen(!isOpen)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    aria-label={isOpen ? "Close live chat" : "Open live chat"}
                     className="pointer-events-auto w-14 h-14 md:w-16 md:h-16 rounded-full bg-white border border-teal-500/50 text-teal-600 shadow-2xl flex items-center justify-center relative z-20 overflow-hidden group-hover:border-cyan-400 transition-colors"
                 >
                     {/* Inner Gradient Shine */}

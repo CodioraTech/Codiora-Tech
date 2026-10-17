@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CaseStudyCard from '@/components/CaseStudyCard';
@@ -32,7 +33,7 @@ const studies = [
         client: "FashionNova",
         category: "SaaS",
         icon: "🛍️",
-        color: "from-purple-500 to-pink-600",
+        color: "from-teal-500 to-cyan-600",
         problem: "Server crashes during Black Friday sales due to traffic spikes.",
         solution: "Migrated to AWS serverless architecture with auto-scaling capabilities.",
         result: "📈 99.99% Uptime During Peak Sales"
@@ -56,20 +57,23 @@ export default function CaseStudies() {
 
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Case Studies</title>
-                <meta name="description" content="See how we've transformed businesses with technology." />
-            </Head>
+            <SEO
+                title="Client Case Studies | Codiora Tech"
+                description="Explore client case studies and digital transformation stories delivered by Codiora Tech across web, SaaS, and AI automation."
+                canonicalPath="/case-studies"
+            />
 
             <section className="min-h-screen bg-gray-50 dark:bg-[#f8fafc] pt-32 pb-20 transition-colors duration-300">
                 <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Case Studies', href: '/case-studies' }]} />
+
+                    <div className="text-center mb-16 mt-8">
                         <motion.h1
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="text-5xl md:text-7xl font-bold mb-6 text-gray-900 dark:text-[#122a46]"
                         >
-                            Success <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Stories</span>
+                            Success <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-600">Stories</span>
                         </motion.h1>
                         <p className="text-xl text-gray-600 dark:text-slate-500 max-w-2xl mx-auto">
                             Real problems. Real solutions. Real results.

@@ -6,7 +6,7 @@ import logo from '../public/Codiora Tech logo.png';
 const ServiceNetwork = () => {
     const servicesLeft = [
         { title: "Web Architecture", slug: "web-architecture", color: "#22d3ee" }, // Cyan
-        { title: "Mobile Innovation", slug: "mobile-innovation", color: "#a855f7" }, // Purple
+        { title: "Mobile Innovation", slug: "mobile-innovation", color: "#0ea5e9" }, // Sky
         { title: "Immersive UI/UX", slug: "immersive-ui-ux", color: "#f472b6" } // Pink
     ];
 

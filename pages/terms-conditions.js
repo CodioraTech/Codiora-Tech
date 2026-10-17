@@ -1,13 +1,16 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function TermsConditions() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Terms & Conditions</title>
-            </Head>
+            <SEO
+                title="Terms and Conditions | Codiora Tech"
+                description="Review the terms and conditions governing software development services and digital product engagements with Codiora Tech."
+                canonicalPath="/terms-conditions"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-slate-600 font-sans selection:bg-teal-500/10 overflow-hidden relative">
 
@@ -18,25 +21,26 @@ export default function TermsConditions() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 py-44 max-w-4xl relative z-10">
+                <div className="container mx-auto px-6 pt-32 pb-44 max-w-4xl relative z-10">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Terms & Conditions', href: '/terms-conditions' }]} />
 
                     {/* Header */}
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="mb-16 border-b border-[#122a46]/10 pb-8 text-center md:text-left"
+                        className="mb-16 border-b border-[#122a46]/10 pb-8 text-center md:text-left mt-8"
                     >
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.2 }}
-                            className="inline-block px-4 py-1 rounded-full bg-[#122a46]/5 border border-[#122a46]/10 text-purple-400 text-xs font-bold uppercase tracking-widest mb-6"
+                            className="inline-block px-4 py-1 rounded-full bg-[#122a46]/5 border border-[#122a46]/10 text-teal-600 text-xs font-bold uppercase tracking-widest mb-6"
                         >
                             User Agreement
                         </motion.div>
                         <h1 className="text-5xl md:text-7xl font-black text-[#122a46] tracking-tighter mb-4">
-                            TERMS & <br className="md:hidden" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">CONDITIONS</span>
+                            TERMS & <br className="md:hidden" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-600">CONDITIONS</span>
                         </h1>
                         <p className="text-slate-500 font-mono text-sm">Last Updated: January 14, 2026</p>
                     </motion.div>
@@ -128,7 +132,7 @@ export default function TermsConditions() {
                                 <div className="w-full h-px bg-[#122a46]/10"></div>
 
                                 <div className="flex flex-col md:flex-row gap-6 items-start md:items-center relative z-10 group-hover:translate-x-1 transition-transform duration-300 delay-75">
-                                    <div className="w-20 h-20 rounded-2xl bg-white text-purple-400 flex items-center justify-center font-black text-2xl border border-[#122a46]/10 shadow-lg shadow-purple-900/20">
+                                    <div className="w-20 h-20 rounded-2xl bg-white text-cyan-600 flex items-center justify-center font-black text-2xl border border-[#122a46]/10 shadow-lg shadow-cyan-900/10">
                                         30%
                                     </div>
                                     <div>

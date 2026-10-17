@@ -1,13 +1,16 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 export default function PartnerProgram() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Partner Program</title>
-            </Head>
+            <SEO
+                title="Partner Program & Alliances | Codiora Tech"
+                description="Join the Codiora Tech partner network. Earn revenue shares, collaborate on enterprise client projects, and co-develop software systems."
+                canonicalPath="/partner-program"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/10">
                 <div className="fixed inset-0 pointer-events-none">
@@ -17,14 +20,16 @@ export default function PartnerProgram() {
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Partners', href: '/partners' }, { label: 'Partner Program', href: '/partner-program' }]} />
+
                     {/* Header */}
-                    <div className="text-center mb-24">
+                    <div className="text-center mb-24 mt-8">
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="text-4xl md:text-7xl font-black tracking-tighter mb-8"
                         >
-                            PARTNER <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">PROTOCOLS</span>
+                            PARTNER <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500">PROTOCOLS</span>
                         </motion.h1>
                         <p className="text-xl text-slate-500 max-w-4xl mx-auto leading-relaxed">
                             Join a coalition of elite technology firms and consultants. We don't just sign contracts; we build integrated ecosystems that dominate markets.
@@ -35,7 +40,7 @@ export default function PartnerProgram() {
                     <div className="mb-32">
                         <div className="text-center mb-16">
                             <h2 className="text-3xl font-bold mb-4">The Competitive Edge</h2>
-                            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-transparent mx-auto rounded-full"></div>
+                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-transparent mx-auto rounded-full"></div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {[
@@ -51,7 +56,7 @@ export default function PartnerProgram() {
                                     transition={{ delay: i * 0.1 }}
                                     className="bg-[#122a46]/5 border border-[#122a46]/5 p-8 rounded-3xl hover:bg-[#122a46]/10 transition-colors group"
                                 >
-                                    <h3 className="text-purple-400 font-bold uppercase tracking-widest text-xs mb-3">{item.title}</h3>
+                                    <h3 className="text-teal-600 font-bold uppercase tracking-widest text-xs mb-3">{item.title}</h3>
                                     <div className="text-4xl font-black text-[#122a46] mb-3">{item.val}</div>
                                     <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
                                 </motion.div>
@@ -71,14 +76,14 @@ export default function PartnerProgram() {
                                 { name: "Solutions", icon: "🛠️", fit: "For Agencies", feats: ["Dev Sandbox", "20% Commission", "Co-Selling Support", "Certifications"] },
                                 { name: "Strategic", icon: "👑", fit: "For Enterprise", feats: ["Custom Integration", "30% Commission", "Executive Access", "Joint Roadmap"] }
                             ].map((tier, i) => (
-                                <div key={i} className={`relative p-10 rounded-[2rem] border ${i === 1 ? 'bg-[#122a46]/10 border-purple-500/50 shadow-[0_0_50px_rgba(168,85,247,0.1)]' : 'bg-[#122a46]/5 border-[#122a46]/5'} overflow-hidden`}>
+                                <div key={i} className={`relative p-10 rounded-[2rem] border ${i === 1 ? 'bg-[#122a46]/10 border-teal-500/50 shadow-[0_0_50px_rgba(20,184,166,0.1)]' : 'bg-[#122a46]/5 border-[#122a46]/5'} overflow-hidden`}>
                                     <div className="text-5xl mb-6">{tier.icon}</div>
                                     <h3 className="text-2xl font-bold text-[#122a46] mb-2">{tier.name}</h3>
-                                    <p className="text-purple-400 text-sm font-bold uppercase tracking-widest mb-8">{tier.fit}</p>
+                                    <p className="text-teal-600 text-sm font-bold uppercase tracking-widest mb-8">{tier.fit}</p>
                                     <ul className="space-y-4">
                                         {tier.feats.map((feat, j) => (
                                             <li key={j} className="flex items-center gap-3 text-slate-600">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
+                                                <div className="w-1.5 h-1.5 rounded-full bg-teal-500"></div>
                                                 {feat}
                                             </li>
                                         ))}
@@ -100,8 +105,8 @@ export default function PartnerProgram() {
                                     "Ability to undergo technical vetting."
                                 ].map((req, i) => (
                                     <div key={i} className="flex items-start gap-4">
-                                        <div className="mt-1 min-w-[20px] h-5 rounded-full border border-purple-500/50 flex items-center justify-center">
-                                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                                        <div className="mt-1 min-w-[20px] h-5 rounded-full border border-teal-500/50 flex items-center justify-center">
+                                            <div className="w-2 h-2 rounded-full bg-teal-500"></div>
                                         </div>
                                         <p className="text-slate-600">{req}</p>
                                     </div>
@@ -117,8 +122,8 @@ export default function PartnerProgram() {
                                     { time: "Day 14", title: "Launch", text: "Portal access & marketing kick-off." }
                                 ].map((step, i) => (
                                     <div key={i} className="relative">
-                                        <div className="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-purple-900 border border-purple-500"></div>
-                                        <span className="text-xs font-bold text-purple-400 uppercase tracking-widest">{step.time}</span>
+                                        <div className="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-teal-900 border border-teal-500"></div>
+                                        <span className="text-xs font-bold text-teal-600 uppercase tracking-widest">{step.time}</span>
                                         <h4 className="text-xl font-bold text-[#122a46] mt-1">{step.title}</h4>
                                         <p className="text-slate-500 text-sm">{step.text}</p>
                                     </div>
@@ -146,10 +151,8 @@ export default function PartnerProgram() {
 
                     {/* CTA */}
                     <div className="text-center">
-                        <Link href="/partner-apply">
-                            <button className="px-12 py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-[#122a46] font-bold rounded-full text-lg hover:shadow-[0_0_50px_rgba(168,85,247,0.4)] hover:scale-105 transition-all">
-                                INITIATE APPLICATION
-                            </button>
+                        <Link href="/partner-apply" className="inline-block px-12 py-5 bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-bold rounded-full text-lg hover:shadow-[0_0_50px_rgba(20,184,166,0.4)] hover:scale-105 transition-all">
+                            INITIATE APPLICATION
                         </Link>
                         <p className="text-slate-500 text-xs mt-6 uppercase tracking-widest">Limited slots available for Q1 2026</p>
                     </div>
@@ -158,3 +161,4 @@ export default function PartnerProgram() {
         </>
     );
 }
+

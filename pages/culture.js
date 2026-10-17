@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
 
@@ -17,24 +18,28 @@ export default function Culture() {
 
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Culture</title>
-            </Head>
+            <SEO
+                title="Our Culture & Values | Codiora Tech"
+                description="Explore the engineering culture, values, and operating philosophy driving digital excellence at Codiora Tech."
+                canonicalPath="/culture"
+            />
 
-            <div ref={containerRef} className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-pink-500/30">
+            <div ref={containerRef} className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/20">
                 <div className="fixed inset-0 pointer-events-none">
-                    <div className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[1000px] h-[1000px] bg-gradient-to-b from-pink-900/10 to-purple-900/10 rounded-full blur-[150px]" />
+                    <div className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[1000px] h-[1000px] bg-gradient-to-b from-teal-900/10 to-cyan-900/10 rounded-full blur-[150px]" />
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
-                    <div className="text-center mb-32">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Culture', href: '/culture' }]} />
+
+                    <div className="text-center mb-32 mt-8">
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="text-6xl md:text-9xl font-black tracking-tighter mb-8"
                         >
-                            THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">DNA</span>
+                            THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-600">DNA</span>
                         </motion.h1>
                         <p className="text-xl text-slate-500 max-w-2xl mx-auto">
                             Culture isn't a ping-pong table. It's how we make decisions when no one is watching. It's the operating system of our company.
@@ -51,8 +56,8 @@ export default function Culture() {
                                 transition={{ delay: i * 0.1 }}
                                 className="bg-white border border-[#122a46]/5 p-16 rounded-[3rem] hover:bg-[#122a46]/5 transition-colors group"
                             >
-                                <div className="text-pink-500 text-sm font-bold uppercase tracking-widest mb-6">0{i + 1}</div>
-                                <h3 className="text-4xl font-bold text-[#122a46] mb-6 group-hover:text-pink-400 transition-colors">{v.title}</h3>
+                                <div className="text-teal-600 text-sm font-bold uppercase tracking-widest mb-6">0{i + 1}</div>
+                                <h3 className="text-4xl font-bold text-[#122a46] mb-6 group-hover:text-teal-600 transition-colors">{v.title}</h3>
                                 <p className="text-slate-500 text-lg leading-relaxed max-w-md">{v.desc}</p>
                             </motion.div>
                         ))}

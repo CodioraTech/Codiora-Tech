@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -17,9 +18,11 @@ const plans = [
 export default function CodeCamp() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | CodeCamp</title>
-            </Head>
+            <SEO
+                title="CodeCamp Engineering Bootcamp | Codiora Tech"
+                description="Join Codiora Tech's intensive software engineering bootcamp to master modern full-stack web development and cloud architectures."
+                canonicalPath="/codecamp"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-indigo-500/30">
                 <div className="fixed inset-0 pointer-events-none">
@@ -28,7 +31,9 @@ export default function CodeCamp() {
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
-                    <div className="text-center mb-32">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'CodeCamp', href: '/codecamp' }]} />
+
+                    <div className="text-center mb-32 mt-8">
                         <div className="inline-block px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-6">
                             Zero to Engineer
                         </div>

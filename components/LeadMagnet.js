@@ -43,7 +43,7 @@ export default function LeadMagnet() {
                     className="max-w-5xl mx-auto relative group w-full"
                 >
                     {/* Glowing Border Gradient */}
-                    <div className="absolute -inset-[2px] bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-500 rounded-[2.5rem] opacity-30 group-hover:opacity-60 blur-md transition-opacity duration-500" />
+                    <div className="absolute -inset-[2px] bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500 rounded-[2.5rem] opacity-30 group-hover:opacity-60 blur-md transition-opacity duration-500" />
 
                     <div className="relative bg-white border border-[#122a46]/10 p-6 md:p-16 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden w-full max-w-full">
                         {/* Subtle inner gloss */}
@@ -66,7 +66,7 @@ export default function LeadMagnet() {
                                     className="text-4xl md:text-5xl font-black mb-6 leading-tight"
                                 >
                                     How to Choose the <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Right Software Partner</span>
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-600">Right Software Partner</span>
                                 </motion.h2>
                                 <motion.p
                                     initial={{ opacity: 0 }}
@@ -139,7 +139,7 @@ export default function LeadMagnet() {
                                             <motion.button
                                                 whileHover={{ scale: 1.02 }}
                                                 whileTap={{ scale: 0.98 }}
-                                                className="w-full py-5 rounded-xl bg-gradient-to-r from-cyan-600 to-purple-600 text-[#122a46] font-bold text-lg tracking-wide shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all group relative overflow-hidden"
+                                                className="w-full py-5 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-bold text-lg tracking-wide shadow-lg shadow-teal-500/20 hover:shadow-teal-500/40 transition-all group relative overflow-hidden"
                                             >
                                                 <span className="relative z-10 flex items-center justify-center gap-2">
                                                     {status === 'loading' ? 'Sending...' : 'Get Instant Access'}

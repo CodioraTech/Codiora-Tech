@@ -7,7 +7,7 @@ const testimonials = [
         author: "Alex Rivera",
         role: "CTO, FinTech Global",
         logo: "AR",
-        src: "https://randomuser.me/api/portraits/men/32.jpg",
+        src: "/images/avatars/avatar-1.svg",
         color: "from-blue-500 to-cyan-500",
         shadow: "shadow-cyan-500/20"
     },
@@ -16,36 +16,36 @@ const testimonials = [
         author: "Sarah Wu",
         role: "Director of Product, Nexus AI",
         logo: "SW",
-        src: "https://randomuser.me/api/portraits/women/44.jpg",
-        color: "from-purple-500 to-pink-500",
-        shadow: "shadow-purple-500/20"
+        src: "/images/avatars/avatar-2.svg",
+        color: "from-teal-500 to-cyan-500",
+        shadow: "shadow-teal-500/20"
     },
     {
         quote: "No matter what situation I'm in, they're always there for me! Truly a partner, not a vendor.",
         author: "James Peterson",
         role: "CEO, LogiChain",
         logo: "JP",
-        src: "https://randomuser.me/api/portraits/men/86.jpg",
-        color: "from-orange-500 to-yellow-500",
-        shadow: "shadow-orange-500/20"
+        src: "/images/avatars/avatar-3.svg",
+        color: "from-slate-600 to-teal-500",
+        shadow: "shadow-teal-500/20"
     },
     {
         quote: "They are fast, efficient, completely resourceful and most importantly, trustworthy!",
         author: "Maria Gonzalez",
         role: "VP Engineering, HealthPlus",
         logo: "MG",
-        src: "https://randomuser.me/api/portraits/women/68.jpg",
-        color: "from-green-500 to-emerald-500",
-        shadow: "shadow-green-500/20"
+        src: "/images/avatars/avatar-4.svg",
+        color: "from-teal-600 to-emerald-500",
+        shadow: "shadow-emerald-500/20"
     },
     {
-        quote: "The redesign completely transformed our brand perception. We look like a billion dollar company now.",
+        quote: "The redesign completely transformed our brand perception. We look like a high-growth tech leader now.",
         author: "David Chen",
         role: "Founder, Stealth Startup",
         logo: "DC",
-        src: "https://randomuser.me/api/portraits/men/11.jpg",
-        color: "from-red-500 to-rose-500",
-        shadow: "shadow-red-500/20"
+        src: "/images/avatars/avatar-5.svg",
+        color: "from-cyan-600 to-blue-500",
+        shadow: "shadow-blue-500/20"
     }
 ];
 

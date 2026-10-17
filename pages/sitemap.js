@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -10,7 +11,25 @@ const map = [
             { name: "Expertise", href: "/expertise" },
             { name: "Platform", href: "/platform" },
             { name: "Process", href: "/process" },
+            { name: "Portfolio", href: "/portfolio" },
+            { name: "Case Studies", href: "/case-studies" },
+            { name: "Pricing", href: "/pricing" },
+            { name: "Why Us", href: "/why-us" },
+            { name: "Skills", href: "/skills" },
             { name: "Contact", href: "/contact" }
+        ]
+    },
+    {
+        category: "Core Services",
+        links: [
+            { name: "AI & Automation", href: "/services/ai-automation" },
+            { name: "Enterprise Apps", href: "/services/enterprise-apps" },
+            { name: "Web Architecture", href: "/services/web-architecture" },
+            { name: "Mobile Innovation", href: "/services/mobile-innovation" },
+            { name: "Immersive UI/UX", href: "/services/immersive-ui-ux" },
+            { name: "DevOps & Cloud", href: "/services/devops-cloud" },
+            { name: "Web Scraping", href: "/services/web-scraping" },
+            { name: "Growth Marketing", href: "/services/growth-marketing" }
         ]
     },
     {
@@ -20,26 +39,23 @@ const map = [
             { name: "Leadership", href: "/leadership" },
             { name: "Team", href: "/team" },
             { name: "Culture", href: "/culture" },
+            { name: "History", href: "/history" },
             { name: "Testimonials", href: "/testimonials" },
             { name: "Partners", href: "/partners" },
             { name: "Partner Program", href: "/partner-program" }
         ]
     },
     {
-        category: "Resources",
+        category: "Resources & Legal",
         links: [
             { name: "Blog", href: "/blog" },
             { name: "FAQ", href: "/faq" },
             { name: "CodeCamp", href: "/codecamp" },
             { name: "Internship", href: "/internship" },
-            { name: "Careers", href: "/careers" }
-        ]
-    },
-    {
-        category: "Legal",
-        links: [
+            { name: "Careers", href: "/careers" },
             { name: "Privacy Policy", href: "/privacy-policy" },
-            { name: "Terms & Conditions", href: "/terms-conditions" }
+            { name: "Terms & Conditions", href: "/terms-conditions" },
+            { name: "Refund Policy", href: "/refund-policy" }
         ]
     }
 ];
@@ -47,9 +63,11 @@ const map = [
 export default function Sitemap() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Sitemap</title>
-            </Head>
+            <SEO
+                title="HTML Sitemap | Codiora Tech"
+                description="Explore the complete site map and architecture of all services, case studies, company profiles, and resources at Codiora Tech."
+                canonicalPath="/sitemap"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-emerald-500/30">
                 <div className="fixed inset-0 pointer-events-none">
@@ -58,6 +76,7 @@ export default function Sitemap() {
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Sitemap', href: '/sitemap' }]} />
                     <div className="text-center mb-24">
                         <div className="inline-block px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-6">
                             Architecture

@@ -6,7 +6,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "eslint pages components lib",
+        "test:smoke": "playwright test"
     },
     "dependencies": {
         "@emailjs/browser": "^4.4.1",
@@ -24,6 +25,8 @@
         "three": "^0.160.0"
     },
     "devDependencies": {
+        "@axe-core/playwright": "^4.14.0",
+        "@playwright/test": "^1.64.1",
         "autoprefixer": "^10.4.23",
         "eslint": "latest",
         "eslint-config-next": "latest",

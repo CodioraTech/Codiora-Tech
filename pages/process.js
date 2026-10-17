@@ -1,7 +1,8 @@
 import { useRef } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const steps = [
     {
@@ -16,21 +17,21 @@ const steps = [
         title: "Architectural Blueprint",
         desc: "Day 3-5. We map out a custom database schema, proxy rotation layout, or LLM system prompt blueprint before writing any production code.",
         icon: "📐",
-        color: "from-purple-500 to-pink-400"
+        color: "from-teal-500 to-cyan-400"
     },
     {
         id: "03",
         title: "Agile Development & Testing",
         desc: "Sprint-based. Fast and secure iterations using Next.js/Python, integrated with regression testing and real-world high-volume load testing.",
         icon: "⚡",
-        color: "from-yellow-500 to-orange-400"
+        color: "from-teal-600 to-emerald-500"
     },
     {
         id: "04",
         title: "Deployment & Maintenance",
         desc: "Post-Launch. Complete cloud infrastructure integration with automated performance monitoring, error logging, and 24/7 crawler/bot maintenance.",
         icon: "🚀",
-        color: "from-green-500 to-emerald-400"
+        color: "from-slate-700 to-teal-500"
     }
 ];
 
@@ -41,22 +42,26 @@ export default function Process() {
 
     return (
         <>
-            <Head>
-                <title>Our Engineering Methodology & Delivery Process | Codiora Tech</title>
-                <meta name="description" content="Discover our 4-step agile methodology: Deep-Dive Discovery, Architectural Blueprint, Agile Development, and cloud-automated Deployment & Maintenance." />
-            </Head>
+            <SEO
+                title="Our Engineering Process | Codiora Tech"
+                description="Learn about Codiora Tech's 4-step engineering process: deep-dive discovery, architecture blueprints, agile dev sprints, and automated cloud deployments."
+                canonicalPath="/process"
+            />
 
             <div ref={containerRef} className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30">
                 {/* Background Details */}
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[10%] left-[20%] w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px]" />
                     <div className="absolute bottom-[10%] right-[20%] w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px]" />
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
+                    <div className="mb-8">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Process', href: '/process' }]} />
+                    </div>
+
                     <div className="text-center mb-32">
-                        <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="inline-block mb-4 px-4 py-1.5 rounded-full border border-gray-700 bg-gray-800/50 text-slate-600 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
+                        <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="inline-block mb-4 px-4 py-1.5 rounded-full border border-[#122a46]/10 bg-[#122a46]/5 text-teal-600 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
                             The Codiora Method
                         </motion.div>
                         <motion.h1
@@ -64,17 +69,17 @@ export default function Process() {
                             animate={{ opacity: 1, y: 0 }}
                             className="text-5xl md:text-8xl font-black tracking-tighter mb-8"
                         >
-                            ENGINEERING <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-500">EXCELLENCE</span>
+                            ENGINEERING <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500">EXCELLENCE</span>
                         </motion.h1>
                         <p className="text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed">
-                            We have killed the chaos of traditional development. Our process is a linear accelerator for your product, moving from concept to code with surgical precision.
+                            We have removed the chaos of traditional development. Our process moves from concept to production code with surgical precision.
                         </p>
                     </div>
 
                     <div className="relative max-w-5xl mx-auto">
                         {/* Timeline Line */}
                         <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-1 bg-[#122a46]/5 md:-translate-x-1/2 h-full rounded-full"></div>
-                        <motion.div style={{ height: lineHeight }} className="absolute left-[28px] md:left-1/2 top-0 w-1 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 md:-translate-x-1/2 rounded-full box-shadow-[0_0_20px_rgba(6,182,212,0.5)]"></motion.div>
+                        <motion.div style={{ height: lineHeight }} className="absolute left-[28px] md:left-1/2 top-0 w-1 bg-gradient-to-b from-teal-500 via-cyan-500 to-slate-700 md:-translate-x-1/2 rounded-full"></motion.div>
 
                         <div className="space-y-24">
                             {steps.map((step, i) => (

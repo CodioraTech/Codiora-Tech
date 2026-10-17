@@ -54,7 +54,6 @@ export function ElasticStack({
             }}
           >
             {item.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
               <img 
                 src={item.image} 
                 alt={item.name || `Avatar ${i}`}

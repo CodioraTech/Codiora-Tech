@@ -1,25 +1,31 @@
-import Head from 'next/head';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export default function Partners() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Partners</title>
-            </Head>
+            <SEO
+                title="Strategic Partnerships & Alliances | Codiora Tech"
+                description="Partner with Codiora Tech for high-scale software engineering, white-label delivery, and AI automation collaboration."
+                canonicalPath="/partners"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/10">
                 {/* Premium Background */}
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-teal-500/10 rounded-full blur-[150px] animate-pulse-slow" />
                     <div className="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] bg-blue-900/10 rounded-full blur-[150px] animate-pulse-slow delay-1000" />
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
+                    <div className="mb-8">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Partners', href: '/partners' }]} />
+                    </div>
+
                     <div className="text-center mb-20">
-                        <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="inline-block mb-4 px-4 py-1.5 rounded-full border border-purple-500/30 bg-teal-500/10 text-purple-400 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
+                        <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="inline-block mb-4 px-4 py-1.5 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-600 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
                             Get Connected
                         </motion.div>
                         <motion.h1
@@ -27,7 +33,7 @@ export default function Partners() {
                             animate={{ opacity: 1, y: 0 }}
                             className="text-5xl md:text-8xl font-black tracking-tighter mb-6"
                         >
-                            STRATEGIC <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">ALLIANCES</span>
+                            STRATEGIC <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500">ALLIANCES</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0 }}
@@ -53,7 +59,7 @@ export default function Partners() {
                             <motion.div
                                 animate={{ rotate: [0, 10, 0, -10, 0] }}
                                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                                className="text-8xl mb-8 filter drop-shadow-[0_0_30px_rgba(168,85,247,0.3)] inline-block"
+                                className="text-8xl mb-8 filter drop-shadow-[0_0_30px_rgba(20,184,166,0.3)] inline-block"
                             >
                                 🤝
                             </motion.div>

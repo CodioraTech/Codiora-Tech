@@ -1,23 +1,30 @@
-import Head from 'next/head';
 import { motion } from 'framer-motion';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export default function History() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | History</title>
-            </Head>
+            <SEO
+                title="Our History & Origins | Codiora Tech"
+                description="Learn about the journey and growth of Codiora Tech from its founding in Dhaka to engineering solutions globally."
+                canonicalPath="/history"
+            />
             <section className="min-h-screen bg-[#f8fafc] text-[#122a46] pt-32 pb-20 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-teal-500/10 rounded-full blur-[150px] pointer-events-none" />
 
                 <div className="container mx-auto px-6 relative z-10">
+                    <div className="mb-8">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'History', href: '/history' }]} />
+                    </div>
+
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="text-center mb-20"
                     >
                         <h1 className="text-5xl md:text-7xl font-bold mb-6">Origins</h1>
-                        <p className="text-xl text-slate-500">From a dorm room idea to a global digital powerhouse.</p>
+                        <p className="text-xl text-slate-500">From a small engineering team to a global digital technology partner.</p>
                     </motion.div>
 
                     <div className="max-w-4xl mx-auto border-l-2 border-[#122a46]/10 ml-4 md:ml-auto pl-8 md:pl-0 space-y-16">

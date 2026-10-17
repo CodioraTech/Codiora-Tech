@@ -1,7 +1,8 @@
-import Head from 'next/head';
 import ServiceCard from '@/components/ServiceCard';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export default function Services() {
     const services = [
@@ -17,25 +18,28 @@ export default function Services() {
 
     return (
         <>
-            <Head>
-                <title>Enterprise Technology Services & AI Automation | Codiora Tech</title>
-                <meta name="description" content="Explore Codiora Tech's enterprise-grade services: custom AI agents, high-scale web scraping crawlers, and full-stack SaaS platform engineering built to drive ROI." />
-            </Head>
+            <SEO
+                title="Enterprise Technology & AI Services | Codiora Tech"
+                description="Explore Codiora Tech's custom AI agents, web scraping, and full-stack SaaS platform engineering built to drive ROI."
+                canonicalPath="/services"
+            />
 
-            <section className="min-h-screen bg-gray-50 dark:bg-[#f8fafc] pt-44 pb-20 relative transition-colors duration-300">
-                <div className="absolute top-1/4 left-0 w-96 h-96 bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
-
+            <section className="min-h-screen bg-gray-50 dark:bg-[#f8fafc] pt-32 pb-20 relative transition-colors duration-300">
                 <div className="container mx-auto px-6 relative z-10">
+                    <div className="mb-8">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }]} />
+                    </div>
+
                     <div className="text-center mb-24 max-w-4xl mx-auto">
                         <motion.h1
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl md:text-7xl font-bold mb-8 text-gray-900 dark:text-[#122a46] transition-colors"
+                            className="text-5xl md:text-7xl font-bold mb-8 text-[#122a46]"
                         >
                             Our Expertise
                         </motion.h1>
-                        <p className="text-xl text-gray-600 dark:text-slate-500 transition-colors">
-                            We don't offer generic services. We provide tailored digital weaponry to help you conquer your market.
+                        <p className="text-xl text-slate-500">
+                            We don't offer generic services. We provide tailored digital engineering to help you conquer your market.
                         </p>
                     </div>
 

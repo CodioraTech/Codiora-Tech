@@ -1,5 +1,7 @@
-import Head from 'next/head';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const philosophy = [
     {
@@ -26,34 +28,35 @@ const leaders = [
         role: "Founder & CEO",
         bio: "The visionary architect of the Codiora ecosystem. Asif combines deep technical prowess with a relentless drive for perfection. He leads by code, ensuring every system is scalable, secure, and aesthetic.",
         superpower: "System Architecture",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#", twitter: "#" }
+        image: "/images/team/founder.svg",
+        socials: { linkedin: "https://www.linkedin.com/company/codioratech", twitter: "https://x.com/codioratech" }
     },
     {
         name: "Sarah Jenkins",
         role: "Head of Engineering",
         bio: "An engineering leader who treats code as art. Sarah empowers autonomy, pushing her team to solve impossible problems with elegant, simple solutions.",
         superpower: "Distributed Systems",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#" }
+        image: "/images/avatars/avatar-2.svg",
+        socials: { linkedin: "https://www.linkedin.com/company/codioratech" }
     },
     {
         name: "David Chen",
         role: "Lead Product Designer",
         bio: "David translates complex logic into intuitive emotions. He believes that if a user needs a manual, the design is broken.",
         superpower: "User Empathy",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#", twitter: "#" }
+        image: "/images/avatars/avatar-3.svg",
+        socials: { linkedin: "https://www.linkedin.com/company/codioratech", twitter: "https://x.com/codioratech" }
     }
 ];
 
 export default function Leadership() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Leadership & Philosophy</title>
-                <meta name="description" content="How we lead, how we work, and the minds behind the machine." />
-            </Head>
+            <SEO
+                title="Codiora Tech Leadership & Philosophy | Dhaka, BD"
+                description="Meet the engineering leadership behind Codiora Tech and explore our core principles in scalable software design, autonomy, and speed."
+                canonicalPath="/leadership"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/10">
                 <div className="fixed inset-0 pointer-events-none">
@@ -63,10 +66,13 @@ export default function Leadership() {
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
+                    <div className="mb-8">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Leadership', href: '/leadership' }]} />
+                    </div>
 
                     {/* Hero Section */}
                     <section className="text-center mb-40">
-                        <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="inline-block mb-6 px-4 py-1.5 rounded-full border border-purple-500/30 bg-teal-500/10 text-purple-400 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
+                        <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="inline-block mb-6 px-4 py-1.5 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-600 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
                             The Operating System
                         </motion.div>
                         <motion.h1
@@ -74,7 +80,7 @@ export default function Leadership() {
                             animate={{ opacity: 1, y: 0 }}
                             className="text-5xl md:text-8xl font-black tracking-tighter mb-8"
                         >
-                            ENGINEERING <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">LEADERSHIP</span>
+                            ENGINEERING <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-600">LEADERSHIP</span>
                         </motion.h1>
                         <div className="max-w-4xl mx-auto space-y-6 text-xl text-slate-500 leading-relaxed font-light">
                             <p>
@@ -101,9 +107,9 @@ export default function Leadership() {
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="group p-10 rounded-3xl bg-[#122a46]/5 border border-[#122a46]/5 hover:bg-white/[0.07] hover:border-purple-500/30 transition-all duration-500"
+                                    className="group p-10 rounded-3xl bg-[#122a46]/5 border border-[#122a46]/5 hover:bg-white/[0.07] hover:border-teal-500/30 transition-all duration-500"
                                 >
-                                    <h3 className="text-2xl font-bold text-[#122a46] mb-4 group-hover:text-purple-400 transition-colors">{item.title}</h3>
+                                    <h3 className="text-2xl font-bold text-[#122a46] mb-4 group-hover:text-teal-600 transition-colors">{item.title}</h3>
                                     <p className="text-slate-500 leading-relaxed group-hover:text-slate-600">
                                         {item.desc}
                                     </p>
@@ -114,7 +120,7 @@ export default function Leadership() {
 
                     {/* Operational Model (How It Happens) */}
                     <section className="mb-40 relative rounded-[3rem] overflow-hidden bg-white border border-[#122a46]/10 p-12 md:p-24">
-                        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-cyan-900/10 pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#122a46]/5 to-cyan-500/10 pointer-events-none" />
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
                             <div>
@@ -143,7 +149,7 @@ export default function Leadership() {
                                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay" />
                                 <div className="text-center">
                                     <div className="text-6xl font-black text-[#122a46]/10 group-hover:text-teal-600/20 transition-colors duration-500">FLOW</div>
-                                    <div className="text-6xl font-black text-[#122a46]/10 group-hover:text-purple-500/20 transition-colors duration-500 delay-100">STATE</div>
+                                    <div className="text-6xl font-black text-[#122a46]/10 group-hover:text-cyan-600/20 transition-colors duration-500 delay-100">STATE</div>
                                 </div>
                             </div>
                         </div>
@@ -164,7 +170,7 @@ export default function Leadership() {
                                     transition={{ delay: i * 0.1 }}
                                     className="group relative"
                                 >
-                                    <div className="relative bg-white border border-[#122a46]/5 rounded-3xl overflow-hidden hover:translate-y-[-10px] transition-transform duration-500 flex flex-col h-full hover:shadow-2xl hover:shadow-purple-900/20">
+                                    <div className="relative bg-white border border-[#122a46]/5 rounded-3xl overflow-hidden hover:translate-y-[-10px] transition-transform duration-500 flex flex-col h-full hover:shadow-2xl hover:shadow-cyan-500/10">
                                         <div className="h-[400px] overflow-hidden relative">
                                             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-10 opacity-80" />
                                             <div
@@ -172,8 +178,8 @@ export default function Leadership() {
                                                 style={{ backgroundImage: `url(${leader.image})` }}
                                             />
                                             <div className="absolute bottom-6 left-6 z-20">
-                                                <h3 className="text-3xl font-bold text-[#122a46] mb-1">{leader.name}</h3>
-                                                <div className="text-teal-600 text-xs font-bold uppercase tracking-widest">{leader.role}</div>
+                                                <h3 className="text-3xl font-bold text-white mb-1">{leader.name}</h3>
+                                                <div className="text-teal-400 text-xs font-bold uppercase tracking-widest">{leader.role}</div>
                                             </div>
                                         </div>
                                         <div className="p-8 flex-1 bg-white relative z-20 border-t border-[#122a46]/5">
@@ -182,12 +188,12 @@ export default function Leadership() {
                                             </p>
                                             <div className="flex gap-4">
                                                 {/* LinkedIn */}
-                                                <a href={leader.socials.linkedin} className="w-10 h-10 rounded-full bg-[#122a46]/5 border border-[#122a46]/10 flex items-center justify-center text-slate-500 hover:text-[#122a46] hover:bg-[#0077b5] hover:border-[#0077b5] transition-all">
+                                                <a href={leader.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#122a46]/5 border border-[#122a46]/10 flex items-center justify-center text-slate-500 hover:text-white hover:bg-[#0077b5] hover:border-[#0077b5] transition-all" aria-label={`${leader.name} LinkedIn`}>
                                                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
                                                 </a>
                                                 {/* Twitter */}
                                                 {leader.socials.twitter && (
-                                                    <a href={leader.socials.twitter} className="w-10 h-10 rounded-full bg-[#122a46]/5 border border-[#122a46]/10 flex items-center justify-center text-slate-500 hover:text-[#122a46] hover:bg-[#f8fafc] hover:border-gray-500 transition-all">
+                                                    <a href={leader.socials.twitter} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#122a46]/5 border border-[#122a46]/10 flex items-center justify-center text-slate-500 hover:text-white hover:bg-black hover:border-black transition-all" aria-label={`${leader.name} X Profile`}>
                                                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                                                     </a>
                                                 )}
@@ -203,9 +209,9 @@ export default function Leadership() {
                     <div className="mt-40 text-center">
                         <p className="text-slate-500 text-sm uppercase tracking-widest mb-6">Join the Revolution</p>
                         <h2 className="text-3xl font-bold text-[#122a46] mb-8">Lead from where you are.</h2>
-                        <button onClick={() => window.location.href = '/careers'} className="px-10 py-4 border border-white/30 rounded-full font-bold hover:bg-white hover:text-black transition-all">
+                        <Link href="/careers" className="inline-block px-10 py-4 bg-[#122a46] text-white rounded-full font-bold hover:bg-teal-600 transition-all shadow-md">
                             View Open Roles
-                        </button>
+                        </Link>
                     </div>
 
                 </div>

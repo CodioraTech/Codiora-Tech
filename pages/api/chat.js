@@ -1,17 +1,72 @@
+// In-memory rate limiting map: ip -> { count, resetTime }
+const rateLimitMap = new Map();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 15;
+
+function isRateLimited(ip) {
+    const now = Date.now();
+    const record = rateLimitMap.get(ip) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW };
+
+    if (now > record.resetTime) {
+        record.count = 1;
+        record.resetTime = now + RATE_LIMIT_WINDOW;
+        rateLimitMap.set(ip, record);
+        return false;
+    }
+
+    if (record.count >= MAX_REQUESTS_PER_WINDOW) {
+        return true;
+    }
+
+    record.count++;
+    rateLimitMap.set(ip, record);
+    return false;
+}
+
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
+        res.setHeader('Allow', ['POST']);
         return res.status(405).json({ message: 'Method Not Allowed' });
     }
 
-    const { messages } = req.body;
+    // IP Extraction for Rate Limiting
+    const forwarded = req.headers['x-forwarded-for'];
+    const ip = typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : req.socket.remoteAddress || 'unknown';
+
+    if (isRateLimited(ip)) {
+        return res.status(429).json({ message: 'Too many requests. Please wait a moment before sending another message.' });
+    }
+
+    const { messages } = req.body || {};
+
+    // Input Validation
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+        return res.status(400).json({ message: 'Invalid request: "messages" must be a non-empty array.' });
+    }
+
+    if (messages.length > 20) {
+        return res.status(400).json({ message: 'Conversation history exceeds maximum limit (20 messages).' });
+    }
+
+    for (const msg of messages) {
+        if (!msg || typeof msg.text !== 'string' || msg.text.trim().length === 0) {
+            return res.status(400).json({ message: 'Each message must have a non-empty text string.' });
+        }
+        if (msg.text.length > 2000) {
+            return res.status(400).json({ message: 'Message length exceeds maximum allowable limit (2000 chars).' });
+        }
+    }
     
     // Gemini API Key from environment variables
     const API_KEY = process.env.GEMINI_API_KEY;
+    if (!API_KEY) {
+        return res.status(500).json({ text: "AI service is currently not configured. Please contact contact@codioratech.com." });
+    }
     
     const systemPrompt = `You are Codi AI, the executive artificial intelligence assistant for Codiora Tech.
 
     PRIMARY ROLE & TONE:
-    - You represent Codiora Tech — an elite software engineering, AI automation, and web development agency.
+    - You represent Codiora Tech, an elite software engineering, AI automation, and web development agency.
     - Your tone must be warm, highly professional, articulate, and enterprise-grade.
     - Provide medium-length, well-structured, and comprehensive answers (typically 2 to 4 clear sentences or neat bullet points when explaining services, pricing, or technical processes).
     - NEVER give ultra-short 1-sentence answers (unless it's a simple greeting), but avoid overwhelming walls of text.

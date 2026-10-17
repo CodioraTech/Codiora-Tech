@@ -1,6 +1,8 @@
-import Head from 'next/head';
+import Link from 'next/link';
 import { useScroll, useTransform, motion } from 'framer-motion';
 import { useRef } from 'react';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const testimonials = [
     {
@@ -8,7 +10,7 @@ const testimonials = [
         author: "Alex Rivera",
         role: "CTO, FinTech Global",
         logo: "AR",
-        src: "https://randomuser.me/api/portraits/men/32.jpg",
+        src: "/images/avatars/avatar-1.svg",
         color: "from-blue-500 to-cyan-500",
         shadow: "shadow-cyan-500/20"
     },
@@ -17,36 +19,36 @@ const testimonials = [
         author: "Sarah Wu",
         role: "Director of Product, Nexus AI",
         logo: "SW",
-        src: "https://randomuser.me/api/portraits/women/44.jpg",
-        color: "from-purple-500 to-pink-500",
-        shadow: "shadow-purple-500/20"
+        src: "/images/avatars/avatar-2.svg",
+        color: "from-teal-500 to-cyan-500",
+        shadow: "shadow-teal-500/20"
     },
     {
         quote: "No matter what situation I'm in, they're always there for me! Truly a partner, not a vendor.",
         author: "James Peterson",
         role: "CEO, LogiChain",
         logo: "JP",
-        src: "https://randomuser.me/api/portraits/men/86.jpg",
-        color: "from-orange-500 to-yellow-500",
-        shadow: "shadow-orange-500/20"
+        src: "/images/avatars/avatar-3.svg",
+        color: "from-slate-600 to-teal-500",
+        shadow: "shadow-teal-500/20"
     },
     {
         quote: "They are fast, efficient, completely resourceful and most importantly, trustworthy!",
         author: "Maria Gonzalez",
         role: "VP Engineering, HealthPlus",
         logo: "MG",
-        src: "https://randomuser.me/api/portraits/women/68.jpg",
-        color: "from-green-500 to-emerald-500",
-        shadow: "shadow-green-500/20"
+        src: "/images/avatars/avatar-4.svg",
+        color: "from-teal-600 to-emerald-500",
+        shadow: "shadow-emerald-500/20"
     },
     {
-        quote: "The redesign completely transformed our brand perception. We look like a billion dollar company now.",
+        quote: "The redesign completely transformed our brand perception. We look like a high-growth tech leader now.",
         author: "David Chen",
         role: "Founder, Stealth Startup",
         logo: "DC",
-        src: "https://randomuser.me/api/portraits/men/11.jpg",
-        color: "from-red-500 to-rose-500",
-        shadow: "shadow-red-500/20"
+        src: "/images/avatars/avatar-5.svg",
+        color: "from-cyan-600 to-blue-500",
+        shadow: "shadow-blue-500/20"
     }
 ];
 
@@ -119,21 +121,25 @@ export default function Testimonials() {
 
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Client Stories</title>
-            </Head>
+            <SEO
+                title="Client Stories & Reviews | Codiora Tech"
+                description="Read real client testimonials and reviews about Codiora Tech's custom software development, AI automation, and engineering sprints."
+                canonicalPath="/testimonials"
+            />
 
             <main ref={container} className="bg-[#f8fafc] relative min-h-[300vh]">
 
                 {/* Header Section */}
                 <div className="h-[70vh] flex flex-col items-center justify-center sticky top-0 bg-[#f8fafc] z-0 px-6">
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+                    <div className="w-full max-w-4xl mx-auto mb-4">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Testimonials', href: '/testimonials' }]} />
+                    </div>
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="text-center"
                     >
-                        <h3 className="text-slate-500 font-bold uppercase tracking-[0.3em] text-sm mb-6">Trusted by Visionaries</h3>
+                        <p className="text-slate-500 font-bold uppercase tracking-[0.3em] text-sm mb-6">Trusted by Visionaries</p>
                         <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 text-[#122a46]">
                             STORIES
                         </h1>
@@ -166,9 +172,9 @@ export default function Testimonials() {
                     <div className="text-center px-6">
                         <p className="text-slate-500 mb-6 uppercase tracking-widest text-sm font-bold">Ready to Scale?</p>
                         <h2 className="text-5xl md:text-7xl font-bold text-[#122a46] mb-10">Your Story <br /> Starts Here.</h2>
-                        <a href="/contact" className="inline-block px-12 py-5 bg-[#122a46] text-white text-lg font-bold rounded-full hover:bg-teal-500 hover:scale-105 transition-all shadow-[0_0_40px_rgba(18,42,70,0.2)]">
+                        <Link href="/contact" className="inline-block px-12 py-5 bg-[#122a46] text-white text-lg font-bold rounded-full hover:bg-teal-500 hover:text-[#0f172a] hover:scale-105 transition-all shadow-[0_0_40px_rgba(18,42,70,0.2)]">
                             Start Project
-                        </a>
+                        </Link>
                     </div>
                 </div>
 

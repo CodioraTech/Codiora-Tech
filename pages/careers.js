@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -43,9 +44,11 @@ const jobs = [
 export default function Careers() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Careers</title>
-            </Head>
+            <SEO
+                title="Careers & Engineering Roles | Codiora Tech"
+                description="Explore open engineering, design, and AI automation roles at Codiora Tech. Join our modern software engineering team."
+                canonicalPath="/careers"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-green-500/30">
                 <div className="fixed inset-0 pointer-events-none">
@@ -53,8 +56,10 @@ export default function Careers() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-44 pb-40 relative z-10">
-                    <div className="text-center mb-24">
+                <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Careers', href: '/careers' }]} />
+
+                    <div className="text-center mb-24 mt-8">
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}

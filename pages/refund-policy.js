@@ -1,14 +1,16 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function RefundPolicy() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Comprehensive Refund Policy</title>
-                <meta name="description" content="Detailed Refund, Cancellation, and Service Policies of Codiora Tech." />
-            </Head>
+            <SEO
+                title="Refund and Cancellation Policy | Codiora Tech"
+                description="Comprehensive details on billing integrity, cancellation procedures, and refund policies for Codiora Tech clients."
+                canonicalPath="/refund-policy"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-slate-600 font-sans selection:bg-teal-500/10 overflow-hidden relative">
 
@@ -19,25 +21,26 @@ export default function RefundPolicy() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 py-44 max-w-5xl relative z-10">
+                <div className="container mx-auto px-6 pt-32 pb-44 max-w-5xl relative z-10">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Refund Policy', href: '/refund-policy' }]} />
 
                     {/* Header */}
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="mb-20 border-b border-[#122a46]/10 pb-10 text-center"
+                        className="mb-20 border-b border-[#122a46]/10 pb-10 text-center mt-8"
                     >
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.2 }}
-                            className="inline-block px-4 py-1 rounded-full bg-[#122a46]/5 border border-[#122a46]/10 text-purple-400 text-xs font-bold uppercase tracking-widest mb-6"
+                            className="inline-block px-4 py-1 rounded-full bg-[#122a46]/5 border border-[#122a46]/10 text-teal-600 text-xs font-bold uppercase tracking-widest mb-6"
                         >
                             Legal Framework
                         </motion.div>
                         <h1 className="text-5xl md:text-7xl font-black text-[#122a46] tracking-tighter mb-6">
-                            REFUND & <br className="md:hidden" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">CANCELLATION</span>
+                            REFUND & <br className="md:hidden" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-600">CANCELLATION</span>
                         </h1>
                         <p className="text-xl text-slate-500 max-w-2xl mx-auto">
                             Comprehensive details on our billing integrity, transparency, and refund procedures.
@@ -55,7 +58,7 @@ export default function RefundPolicy() {
                             transition={{ duration: 0.5 }}
                         >
                             <h2 className="text-3xl font-bold text-[#122a46] mb-6 flex items-center gap-3">
-                                <span className="text-purple-500">01.</span> Commitment to Satisfaction
+                                <span className="text-teal-600">01.</span> Commitment to Satisfaction
                             </h2>
                             <div className="prose prose-invert max-w-none text-slate-500 text-lg leading-relaxed">
                                 <p>
@@ -75,7 +78,7 @@ export default function RefundPolicy() {
                             transition={{ duration: 0.5 }}
                         >
                             <h2 className="text-3xl font-bold text-[#122a46] mb-8 flex items-center gap-3">
-                                <span className="text-purple-500">02.</span> General Refund Guidelines
+                                <span className="text-teal-600">02.</span> General Refund Guidelines
                             </h2>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -83,11 +86,11 @@ export default function RefundPolicy() {
                                     <h3 className="text-xl font-bold text-[#122a46] mb-4">Refund Window</h3>
                                     <ul className="space-y-3 text-slate-500">
                                         <li className="flex items-start gap-3">
-                                            <span className="text-purple-400 mt-1">▹</span>
+                                            <span className="text-teal-600 mt-1">▹</span>
                                             <span><strong>7 Days:</strong> Full refund for project deposits if no work has commenced.</span>
                                         </li>
                                         <li className="flex items-start gap-3">
-                                            <span className="text-purple-400 mt-1">▹</span>
+                                            <span className="text-teal-600 mt-1">▹</span>
                                             <span><strong>14 Days:</strong> Money-back guarantee for qualifying standard packages or SaaS subscriptions.</span>
                                         </li>
                                     </ul>
@@ -96,11 +99,11 @@ export default function RefundPolicy() {
                                     <h3 className="text-xl font-bold text-[#122a46] mb-4">Processing Time</h3>
                                     <ul className="space-y-3 text-slate-500">
                                         <li className="flex items-start gap-3">
-                                            <span className="text-purple-400 mt-1">▹</span>
+                                            <span className="text-teal-600 mt-1">▹</span>
                                             <span>Refunds are processed within <strong>5-10 business days</strong> after approval.</span>
                                         </li>
                                         <li className="flex items-start gap-3">
-                                            <span className="text-purple-400 mt-1">▹</span>
+                                            <span className="text-teal-600 mt-1">▹</span>
                                             <span>The exact time for funds to appear depends on your bank or payment provider.</span>
                                         </li>
                                     </ul>
@@ -116,7 +119,7 @@ export default function RefundPolicy() {
                             transition={{ duration: 0.5 }}
                         >
                             <h2 className="text-3xl font-bold text-[#122a46] mb-8 flex items-center gap-3">
-                                <span className="text-purple-500">03.</span> Service-Specific Policies
+                                <span className="text-teal-600">03.</span> Service-Specific Policies
                             </h2>
 
                             <div className="space-y-8">
@@ -139,11 +142,11 @@ export default function RefundPolicy() {
                                 {/* UI/UX Design */}
                                 <div className="bg-white border border-[#122a46]/10 rounded-2xl overflow-hidden">
                                     <div className="bg-[#122a46]/5 px-8 py-4 border-b border-[#122a46]/10">
-                                        <h3 className="text-xl font-bold text-purple-400">B. UI/UX Design Services</h3>
+                                        <h3 className="text-xl font-bold text-teal-600">B. UI/UX Design Services</h3>
                                     </div>
                                     <div className="p-8 space-y-4 text-slate-500">
                                         <p>Design is subjective, and we offer revisions to ensure satisfaction. Refund rules are as follows:</p>
-                                        <ul className="list-disc pl-5 space-y-2 marker:text-purple-500">
+                                        <ul className="list-disc pl-5 space-y-2 marker:text-teal-600">
                                             <li><strong>Before First Draft:</strong> Full refund minus a 10% administration fee if cancelled before any concepts are presented.</li>
                                             <li><strong>After First Draft:</strong> If you are unhappy with the initial concepts and choose to terminate immediately, a 50% refund is available.</li>
                                             <li><strong>After Revisions:</strong> Once you have requested revisions or changes to a design, it is considered that you have accepted the creative direction. No refunds are available after the revision process starts.</li>
@@ -176,7 +179,7 @@ export default function RefundPolicy() {
                             transition={{ duration: 0.5 }}
                         >
                             <h2 className="text-3xl font-bold text-[#122a46] mb-8 flex items-center gap-3">
-                                <span className="text-purple-500">04.</span> Non-Refundable Items
+                                <span className="text-teal-600">04.</span> Non-Refundable Items
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[
@@ -200,9 +203,9 @@ export default function RefundPolicy() {
                             transition={{ duration: 0.5 }}
                         >
                             <h2 className="text-3xl font-bold text-[#122a46] mb-6 flex items-center gap-3">
-                                <span className="text-purple-500">05.</span> How to Cancel
+                                <span className="text-teal-600">05.</span> How to Cancel
                             </h2>
-                            <div className="bg-gradient-to-r from-[#122a46]/5 to-transparent border-l-4 border-purple-500 p-8">
+                            <div className="bg-gradient-to-r from-[#122a46]/5 to-transparent border-l-4 border-teal-500 p-8">
                                 <p className="text-lg text-slate-600 mb-4">
                                     To cancel a service, you must submit a formal request via email. Verbal cancellations over the phone or chat are not considered valid until confirmed in writing.
                                 </p>
@@ -223,7 +226,7 @@ export default function RefundPolicy() {
                             transition={{ duration: 0.5 }}
                         >
                             <h2 className="text-3xl font-bold text-[#122a46] mb-6 flex items-center gap-3">
-                                <span className="text-purple-500">06.</span> Billing Disputes
+                                <span className="text-teal-600">06.</span> Billing Disputes
                             </h2>
                             <p className="text-slate-500 mb-8">If you believe there has been a billing error, please contact us immediately. We operate in good faith and will work quickly to resolve any genuine mistakes.</p>
 
@@ -232,7 +235,7 @@ export default function RefundPolicy() {
 
                                 <div className="relative z-10 flex flex-col items-center">
                                     <div className="w-16 h-16 bg-[#122a46]/5 rounded-full flex items-center justify-center mb-6">
-                                        <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                        <svg className="w-8 h-8 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                                     </div>
                                     <h3 className="text-[#122a46] font-bold text-2xl mb-2">
                                         Codiora Tech Billing Support
@@ -240,7 +243,7 @@ export default function RefundPolicy() {
                                     <p className="text-slate-500 mb-6">We are here to help you.</p>
 
                                     <div className="space-y-2 text-lg">
-                                        <p className="text-[#122a46] hover:text-purple-400 transition-colors cursor-pointer">contact@codioratech.com</p>
+                                        <p className="text-[#122a46] hover:text-teal-600 transition-colors cursor-pointer">contact@codioratech.com</p>
                                         <p className="text-slate-500 text-sm">Gulshan Lake Drive Road, Dhaka, Bangladesh, 1212</p>
                                     </div>
                                 </div>
@@ -250,10 +253,10 @@ export default function RefundPolicy() {
                     </div>
 
                     <div className="mt-24 pt-10 border-t border-[#122a46]/10 flex justify-between text-sm text-slate-500 font-medium tracking-wide">
-                        <Link href="/" className="hover:text-purple-400 transition-colors flex items-center gap-2">
+                        <Link href="/" className="hover:text-teal-600 transition-colors flex items-center gap-2">
                             <span>←</span> Back to Home
                         </Link>
-                        <Link href="/contact" className="hover:text-purple-400 transition-colors flex items-center gap-2">
+                        <Link href="/contact" className="hover:text-teal-600 transition-colors flex items-center gap-2">
                             Contact Us <span>→</span>
                         </Link>
                     </div>

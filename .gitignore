@@ -31,3 +31,9 @@ Thumbs.db
 # Misc
 *.tsbuildinfo
 coverage/
+test-results/
+playwright-report/
+*.json.bak
+baseline-*.json
+post-lh*.json
+

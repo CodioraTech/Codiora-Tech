@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -171,9 +172,11 @@ export default function CareerJobPage({ slug, roleName, details }) {
 
     return (
         <>
-            <Head>
-                <title>{`Codiora Tech | ${roleName || 'Job Detail'}`}</title>
-            </Head>
+            <SEO
+                title={`${roleName || 'Job Details'} | Codiora Tech`}
+                description={`Apply for ${roleName || 'a position'} at Codiora Tech. Join our modern engineering and AI development agency in Dhaka.`}
+                canonicalPath={`/careers/${slug}`}
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30">
                 <div className="fixed inset-0 pointer-events-none">
@@ -183,8 +186,16 @@ export default function CareerJobPage({ slug, roleName, details }) {
 
                 <div className="container mx-auto px-6 pt-32 pb-20 relative z-10 transition-all duration-500">
                     <div className="max-w-7xl mx-auto">
+                        <Breadcrumbs
+                            items={[
+                                { label: 'Home', href: '/' },
+                                { label: 'Careers', href: '/careers' },
+                                { label: roleName || slug, href: `/careers/${slug}` }
+                            ]}
+                        />
+
                         {/* Back Button */}
-                        <div className="mb-8">
+                        <div className="mb-8 mt-4">
                             <Link href="/careers" legacyBehavior>
                                 <a className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-600 hover:text-teal-700 transition-colors">
                                     ← Back to Careers

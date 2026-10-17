@@ -130,7 +130,7 @@ const Navbar = () => {
                     {/* Left: Logo */}
                     <Link href="/" onClick={() => setIsMegaMenuOpen(false)} className="relative z-10 flex items-center gap-3 pl-4 pr-6 py-1 border-r border-[#122a46]/5 mr-2 group/logo shrink-0">
                         <div className="overflow-hidden rounded-md flex items-center justify-center bg-transparent w-12 h-12">
-                            <img src={logo.src} alt="Codiora Tech Logo" className="h-full w-full object-contain scale-[1.3] transform origin-center transition-transform group-hover/logo:scale-[1.4]" />
+                            <img src={logo.src} alt="Codiora Tech Logo" width="48" height="48" fetchPriority="high" className="h-full w-full object-contain scale-[1.3] transform origin-center transition-transform group-hover/logo:scale-[1.4]" />
                         </div>
                         <div className="font-serif font-black tracking-widest text-xl sm:text-2xl uppercase">
                             <span className="text-[#122a46]">CODIORA</span>
@@ -138,7 +138,7 @@ const Navbar = () => {
                         </div>
                     </Link>
 
-                    {/* Center: Menu Items — inside bordered pill */}
+                    {/* Center: Menu Items - inside bordered pill */}
                     <div className="hidden lg:flex items-center shrink-0">
                         <div className="flex items-center gap-1 bg-slate-50/80 border border-[#122a46]/10 rounded-full px-4 py-2 shadow-sm">
                             {['Home', 'Services', 'Portfolio', 'Contact'].map((item) => {

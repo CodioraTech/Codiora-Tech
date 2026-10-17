@@ -1,7 +1,8 @@
-import Head from 'next/head';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 // Helper component to render SVG icons safely without JSON serialization error
 function TrackIcon({ icon }) {
@@ -28,7 +29,7 @@ const positionData = {
         track: "Frontend Track",
         color: "teal",
         icon: "frontend",
-        description: "Join our dynamic design and frontend engineering team to construct robust, high-performance, and visually stunning user interfaces. As a Frontend Engineering Intern, you won't just be fixing minor bugs—you'll be architecting responsive web applications used by enterprise clients. We leverage a modern tech stack consisting of React, Next.js, and TailwindCSS.",
+        description: "Join our dynamic design and frontend engineering team to construct robust, high-performance, and visually stunning user interfaces. As a Frontend Engineering Intern, you won't just be fixing minor bugs, you'll be architecting responsive web applications used by enterprise clients. We leverage a modern tech stack consisting of React, Next.js, and TailwindCSS.",
         learnings: [
             "Collaborate with UI/UX designers to implement scalable component libraries.",
             "Build complex, buttery-smooth animations using Framer Motion.",
@@ -161,24 +162,27 @@ export default function InternshipPost({ slug, post }) {
 
     return (
         <>
-            <Head>
-                <title>{`${post.title} | Codiora Tech Internship`}</title>
-            </Head>
+            <SEO
+                title={`${post.title} | Codiora Tech`.slice(0, 58)}
+                description={(post.description || `Apply for ${post.title} at Codiora Tech in Dhaka.`).slice(0, 155)}
+                canonicalPath={`/internship/${slug}`}
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30 font-sans">
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[0%] left-[50%] -translate-x-1/2 w-[800px] h-[800px] bg-teal-900/10 rounded-full blur-[150px] animate-pulse-slow" />
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
                 <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
                     <div className="max-w-7xl mx-auto">
                         <div className="mb-8">
-                            <Link href="/internship" legacyBehavior>
-                                <a className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-600 hover:text-teal-700 transition-colors">
-                                    ← Back to Internship Tracks
-                                </a>
-                            </Link>
+                            <Breadcrumbs
+                                items={[
+                                    { label: 'Home', href: '/' },
+                                    { label: 'Internship', href: '/internship' },
+                                    { label: post.title, href: `/internship/${post.slug || ''}` }
+                                ]}
+                            />
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
