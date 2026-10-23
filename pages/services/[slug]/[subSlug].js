@@ -1,8 +1,9 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { servicesData } from '../../../lib/services';
 import TechMarquee from '@/components/TechMarquee';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export async function getStaticPaths() {
     let paths = [];
@@ -30,36 +31,36 @@ export default function SubServicePage({ service, subService, slug }) {
     if (!subService) return <div>Loading...</div>;
 
     const { details } = subService;
+    const pageTitle = `${subService.name} | Codiora Tech`.slice(0, 58);
+    const pageDesc = (subService.desc || `Expert ${subService.name} solutions by Codiora Tech in Dhaka.`).slice(0, 155);
 
     return (
         <>
-            <Head>
-                <title>{`${subService.name} | ${service.title} | Codiora Tech`}</title>
-                <meta name="description" content={subService.desc} />
-            </Head>
+            <SEO
+                title={pageTitle}
+                description={pageDesc}
+                canonicalPath={`/services/${slug}/${subService.id}`}
+                schemaType="Service"
+            />
 
-            <div className="min-h-screen bg-[#f8fafc] text-[#122a46] pt-24 pb-20 relative overflow-hidden">
+            <div className="min-h-screen bg-[#f8fafc] text-[#122a46] pt-36 sm:pt-40 md:pt-44 pb-20 relative overflow-hidden">
                 {/* Background ambient lighting */}
                 <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
                     <div className="absolute top-[-20%] right-[-20%] w-[60%] h-[60%] bg-accent/5 rounded-full blur-[150px]" />
                     <div className="absolute bottom-[-20%] left-[-20%] w-[60%] h-[60%] bg-secondary/5 rounded-full blur-[150px]" />
                 </div>
 
-                {/* Fixed Background Pattern */}
-                <div className="fixed inset-0 bg-[url('/grid.svg')] z-0 opacity-10 pointer-events-none" />
-
                 <div className="container mx-auto px-6 relative z-10">
-                    {/* Breadcrumb */}
-                    <div className="text-sm text-slate-500 mb-8 font-mono flex items-center flex-wrap gap-2 pt-8">
-                        <Link href="/" className="hover:text-accent transition-colors">HOME</Link>
-                        <span>/</span>
-                        <Link href="/services" className="hover:text-accent transition-colors">SERVICES</Link>
-                        <span>/</span>
-                        <Link href={`/services/${slug}`} className="hover:text-accent transition-colors">
-                            {service.title.toUpperCase()}
-                        </Link>
-                        <span>/</span>
-                        <span className="text-accent font-bold">{subService.name.toUpperCase()}</span>
+                    {/* Breadcrumbs */}
+                    <div className="mb-6">
+                        <Breadcrumbs
+                            items={[
+                                { label: 'Home', href: '/' },
+                                { label: 'Services', href: '/services' },
+                                { label: service.title, href: `/services/${slug}` },
+                                { label: subService.name, href: `/services/${slug}/${subService.id}` }
+                            ]}
+                        />
                     </div>
 
                     <div className="max-w-5xl mx-auto">

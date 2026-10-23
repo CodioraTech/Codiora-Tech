@@ -1,63 +1,92 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import ElasticStack from '@/components/ElasticStack';
+import SEO from '@/components/SEO';
 
 const trustItems = [
-    { id: 1, image: "https://randomuser.me/api/portraits/men/32.jpg", name: "Client 1" },
-    { id: 2, image: "https://randomuser.me/api/portraits/women/44.jpg", name: "Client 2" },
-    { id: 3, image: "https://randomuser.me/api/portraits/men/86.jpg", name: "Client 3" },
-    { id: 4, image: "https://randomuser.me/api/portraits/women/68.jpg", name: "Client 4" },
-    { id: 5, image: "https://randomuser.me/api/portraits/men/22.jpg", name: "Client 5" },
-    { id: 6, image: "https://randomuser.me/api/portraits/women/12.jpg", name: "Client 6" }
+    { id: 1, image: "/images/avatars/avatar-1.webp", name: "Rafiq A., CTO at HealthOS" },
+    { id: 2, image: "/images/avatars/avatar-2.webp", name: "Sophia L., Founder at UrbanCart" },
+    { id: 3, image: "/images/avatars/avatar-3.webp", name: "Mohammed K., CEO at Finvault" },
+    { id: 4, image: "/images/avatars/avatar-4.webp", name: "Elena R., Head of Tech at NexaCorp" },
+    { id: 5, image: "/images/avatars/avatar-5.webp", name: "David C., Lead Architect at LogiTrack" },
+    { id: 6, image: "/images/avatars/avatar-6.webp", name: "Amara O., Product Lead at AeroBase" }
+];
+
+const FAQ_ITEMS = [
+    { q: "How long does a typical project take?", a: "Most web projects take 4-12 weeks depending on scope. A simple landing page or MVP can be ready in 2-3 weeks. Enterprise platforms take 2-6 months. During discovery, we give you a precise timeline. We don't pad estimates." },
+    { q: "What happens if we're not happy with the work?", a: "We have a structured revision process built into every project. If something isn't right, we fix it, included. We also offer a satisfaction guarantee: if you're not happy after the first sprint, you can cancel with a full refund of any unused prepayment." },
+    { q: "Do you sign NDAs?", a: "Yes, absolutely. We sign NDAs before any detailed project discussion for all clients. Confidentiality is a baseline expectation, not an add-on. We also offer IP assignment agreements where all code belongs entirely to you." },
+    { q: "We have an existing codebase, can you work with it?", a: "Yes, and this is one of our strengths. We do thorough code audits before joining any existing project. We'll give you an honest technical assessment and a clear plan for extending or refactoring. No sugarcoating." },
+    { q: "What's your timezone and communication style?", a: "We're based in Dhaka (GMT+6) but work overlap hours with EU and US clients. You get daily Slack/email updates, weekly video demos, and a live Notion/Linear board showing every task in real-time. No chasing required." },
+    { q: "Who owns the code after the project?", a: "You do. 100%. On final payment, all IP, code, assets, and documentation transfer to you. We provide full Git repository access and thorough handover documentation so your team can continue independently." }
 ];
 
 const FAQItem = ({ q, a, isOpen, onToggle }) => {
     return (
         <div className={`faq-item ${isOpen ? 'open' : ''}`}>
-            <button className="faq-q" onClick={onToggle}>
-                <span>{q}</span><div className="faq-icon">+</div>
+            <button className="faq-q" onClick={onToggle} type="button" aria-expanded={isOpen}>
+                <span>{q}</span><div className="faq-icon" aria-hidden="true">+</div>
             </button>
-            {isOpen && <div className="faq-a">{a}</div>}
+            <div className="faq-a">{a}</div>
         </div>
     );
 };
 
-const CountUpAnimation = ({ start = 0, end, suffix = "", prefix = "", duration = 4, isKilo = false }) => {
-    const [count, setCount] = useState(start);
-    const ref = useRef(null);
-    const inView = useInView(ref, { once: true });
+const CountUpAnimation = ({ start = 0, end, suffix = "", prefix = "", duration = 1.4, isKilo = false }) => {
+    const spanRef = useRef(null);
+    const containerRef = useRef(null);
+    const inView = useInView(containerRef, { once: true });
 
     useEffect(() => {
-        if (inView) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
-                
-                // easeOutQuad
-                const easeOut = progress * (2 - progress);
-                const currentVal = start + (end - start) * easeOut;
-                setCount(Math.floor(currentVal));
-                
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
-    }, [inView, start, end, duration]);
+        if (!inView) return;
 
-    let displayStr = count;
-    if (isKilo) {
-        if (count >= 1000) displayStr = `1M`;
-        else displayStr = `${count}k`;
-    }
+        let startTimestamp = null;
+        let animationFrameId = null;
+
+        const formatVal = (val) => {
+            let str = val;
+            if (isKilo) {
+                if (val >= 1000) str = `1M`;
+                else str = `${val}k`;
+            }
+            return `${prefix}${str}${suffix}`;
+        };
+
+        if (spanRef.current) {
+            spanRef.current.textContent = formatVal(start);
+        }
+
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+            
+            // easeOutQuad for silky smooth easing
+            const easeOut = progress * (2 - progress);
+            const currentVal = Math.floor(start + (end - start) * easeOut);
+            
+            if (spanRef.current) {
+                spanRef.current.textContent = formatVal(currentVal);
+            }
+            
+            if (progress < 1) {
+                animationFrameId = window.requestAnimationFrame(step);
+            } else if (spanRef.current) {
+                spanRef.current.textContent = formatVal(end);
+            }
+        };
+
+        animationFrameId = window.requestAnimationFrame(step);
+        return () => {
+            if (animationFrameId) window.cancelAnimationFrame(animationFrameId);
+        };
+    }, [inView, start, end, duration, prefix, suffix, isKilo]);
+
+    const initialDisplay = isKilo ? (end >= 1000 ? '1M' : `${end}k`) : end;
 
     return (
-        <span ref={ref}>
-            {prefix}{displayStr}{suffix}
+        <span ref={containerRef}>
+            <span ref={spanRef}>{prefix}{initialDisplay}{suffix}</span>
         </span>
     );
 };
@@ -80,10 +109,15 @@ export default function Home() {
 
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Custom AI Automation & System Engineering</title>
-                <meta name="description" content="From intelligent knowledge-base chatbots to high-scale web scraping solutions, Codiora Tech automates your workflows so your business can scale without the headcount." />
-            </Head>
+            <SEO
+                title="Codiora Tech | Custom AI Automation & System Engineering"
+                description="Codiora Tech builds custom AI automation, intelligent web scraping, and scalable enterprise applications from Dhaka to accelerate global business workflows."
+                canonicalPath="/"
+                schemaType="WebSite"
+                schemaData={{
+                    faqItems: FAQ_ITEMS
+                }}
+            />
 
             <div className="landing-wrapper">
                 
@@ -96,11 +130,11 @@ export default function Home() {
                     </div>
                     <div className="hero-grid"></div>
                     <div className="hero-inner">
-                        <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.5, delay:0.1}} className="hero-badge">
+                        <div className="hero-badge">
                             <span className="badge-dot"></span>
                             <span className="badge-text">Currently accepting new clients for Q3 2026</span>
-                        </motion.div>
-                        <motion.h1 initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.2}}>
+                        </div>
+                        <h1>
                             We Build Custom<br/>
                             {!mounted ? (
                                 <span className="hl">AI Automation</span>
@@ -125,14 +159,14 @@ export default function Home() {
                                 </span>
                             )}
                             <br/>& System Engineering.
-                        </motion.h1>
-                        <motion.p initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.35}} className="hero-sub">
+                        </h1>
+                        <p className="hero-sub">
                             From intelligent knowledge-base chatbots to high-scale web scraping solutions, <strong>Codiora Tech automates your workflows</strong> so your business can scale without the headcount.
-                        </motion.p>
-                        <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.5}} className="hero-actions">
+                        </p>
+                        <div className="hero-actions">
                             <Link href="/contact?subject=Automation%20Audit" className="cta-main">Book a Free Automation Audit <span style={{opacity:0.8}}>→</span></Link>
                             <Link href="/portfolio" className="cta-sec">See Our Work <span style={{color:'var(--text3)'}}>↗</span></Link>
-                        </motion.div>
+                        </div>
                         <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.6, delay:0.65}} className="hero-trust">
                             <ElasticStack items={trustItems} itemSize={32} overlap={8} pushForce={8} className="trust-avatars" />
                             <div className="trust-text"><strong>Trusted by 60+ clients</strong>across 12 countries</div>
@@ -196,7 +230,7 @@ export default function Home() {
                         <Link href="/services/ai-automation" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
-                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">01</div>
+                                    <div className="text-sm font-bold text-teal-800 font-serif tracking-widest uppercase">01</div>
                                     <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
@@ -210,7 +244,7 @@ export default function Home() {
                         <Link href="/services/enterprise-apps" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
-                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">02</div>
+                                    <div className="text-sm font-bold text-teal-800 font-serif tracking-widest uppercase">02</div>
                                     <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
@@ -224,7 +258,7 @@ export default function Home() {
                         <Link href="/services/web-architecture" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
-                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">03</div>
+                                    <div className="text-sm font-bold text-teal-800 font-serif tracking-widest uppercase">03</div>
                                     <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
@@ -238,7 +272,7 @@ export default function Home() {
                         <Link href="/services/mobile-innovation" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
-                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">04</div>
+                                    <div className="text-sm font-bold text-teal-800 font-serif tracking-widest uppercase">04</div>
                                     <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
@@ -252,7 +286,7 @@ export default function Home() {
                         <Link href="/services/immersive-ui-ux" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
-                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">05</div>
+                                    <div className="text-sm font-bold text-teal-800 font-serif tracking-widest uppercase">05</div>
                                     <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
@@ -266,7 +300,7 @@ export default function Home() {
                         <Link href="/services/devops-cloud" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
-                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">06</div>
+                                    <div className="text-sm font-bold text-teal-800 font-serif tracking-widest uppercase">06</div>
                                     <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
@@ -280,7 +314,7 @@ export default function Home() {
                         <Link href="/services/web-scraping" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
-                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">07</div>
+                                    <div className="text-sm font-bold text-teal-800 font-serif tracking-widest uppercase">07</div>
                                     <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
@@ -294,7 +328,7 @@ export default function Home() {
                         <Link href="/services/growth-marketing" className="block outline-none">
                             <motion.div className="group/svc relative h-full bg-[#f8fafc] border border-[#122a46]/5 rounded-2xl p-8 transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/5 hover:border-teal-500/20">
                                 <div className="flex justify-between items-start mb-10">
-                                    <div className="text-sm font-bold text-teal-600 font-serif tracking-widest uppercase">08</div>
+                                    <div className="text-sm font-bold text-teal-800 font-serif tracking-widest uppercase">08</div>
                                     <div className="text-[#122a46]/30 group-hover/svc:text-teal-500 group-hover/svc:-rotate-45 transition-all duration-300">
                                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
@@ -361,10 +395,10 @@ export default function Home() {
                     <div className="pf-grid">
                         <Link href="/portfolio/medibot-ai" className="pf-card pf-main">
                             <div className="pf-thumb" style={{background:'linear-gradient(135deg,#070d1a,#0a1828)'}}>
-                                <img src="/images/portfolio/medibot-ai.png" alt="MediBot AI" className="pf-image-overlay" />
+                                <img src="/images/portfolio/medibot-ai.webp" alt="MediBot AI" className="pf-image-overlay" loading="lazy" decoding="async" />
                                 <div className="pf-thumb-label">Healthcare · SaaS · AI</div>
                                 <div className="pf-thumb-center">
-                                    <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'38px',fontWeight:800,color:'rgba(79,142,247,0.7)',letterSpacing:'-0.03em'}}>MediBot AI</div>
+                                     <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'38px',fontWeight:800,color:'rgba(79,142,247,0.7)',letterSpacing:'-0.03em'}}>MediBot AI</div>
                                     <div style={{fontSize:'12px',color:'var(--text3)',marginTop:'8px',letterSpacing:'.15em'}}>AI DIAGNOSTIC ASSISTANT</div>
                                 </div>
                             </div>
@@ -380,7 +414,7 @@ export default function Home() {
                         </Link>
                         <Link href="/portfolio/explorer-nature" className="pf-card">
                             <div className="pf-thumb" style={{background:'linear-gradient(135deg,#110d07,#1a1207)'}}>
-                                <img src="/images/portfolio/explorer-nature.png" alt="Explorer Nature" className="pf-image-overlay" />
+                                <img src="/images/portfolio/explorer-nature.webp" alt="Explorer Nature" className="pf-image-overlay" loading="lazy" decoding="async" />
                                 <div className="pf-thumb-label">Tourism · Platform</div>
                                 <div className="pf-thumb-center">
                                     <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'28px',fontWeight:800,color:'rgba(245,158,11,0.65)',letterSpacing:'.12em'}}>Explorer Nature</div>
@@ -399,7 +433,7 @@ export default function Home() {
                         </Link>
                         <Link href="/portfolio/neonmarket" className="pf-card">
                             <div className="pf-thumb" style={{background:'linear-gradient(135deg,#0a0a18,#0e0e22)'}}>
-                                <img src="/images/portfolio/neonmarket.png" alt="NeonMarket" className="pf-image-overlay" />
+                                <img src="/images/portfolio/neonmarket.webp" alt="NeonMarket" className="pf-image-overlay" loading="lazy" decoding="async" />
                                 <div className="pf-thumb-label">Web3 · Marketplace</div>
                                 <div className="pf-thumb-center">
                                     <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'24px',fontWeight:800,color:'rgba(167,139,250,0.65)',letterSpacing:'.08em'}}>NeonMarket</div>
@@ -432,7 +466,7 @@ export default function Home() {
                                 <div className="testi-text">Codiora delivered our MVP in 6 weeks when other agencies quoted 4 months. The code quality was production-ready from day one.</div>
                                 <div className="testi-divider"></div>
                                 <div className="testi-author">
-                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rafiq A." className="testi-avatar" />
+                                    <img src="/images/avatars/avatar-1.webp" alt="Rafiq A., CTO at HealthOS" width={44} height={44} loading="lazy" decoding="async" className="testi-avatar" />
                                     <div><div className="testi-name">Rafiq A.</div><div className="testi-role">CTO, HealthOS</div></div>
                                 </div>
                             </motion.div>
@@ -441,7 +475,7 @@ export default function Home() {
                                 <div className="testi-text">We tried 3 agencies before Codiora. The difference? They actually understood our business, not just the tech requirements.</div>
                                 <div className="testi-divider"></div>
                                 <div className="testi-author">
-                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophia L." className="testi-avatar" />
+                                    <img src="/images/avatars/avatar-2.webp" alt="Sophia L., Founder at UrbanCart" width={44} height={44} loading="lazy" decoding="async" className="testi-avatar" />
                                     <div><div className="testi-name">Sophia L.</div><div className="testi-role">Founder, UrbanCart</div></div>
                                 </div>
                             </motion.div>
@@ -450,7 +484,7 @@ export default function Home() {
                                 <div className="testi-text">Communication was flawless. Daily updates, weekly demos, zero surprises at launch. Will definitely work with them again.</div>
                                 <div className="testi-divider"></div>
                                 <div className="testi-author">
-                                    <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="Mohammed K." className="testi-avatar" />
+                                    <img src="/images/avatars/avatar-3.webp" alt="Mohammed K., CEO at Finvault" width={44} height={44} loading="lazy" decoding="async" className="testi-avatar" />
                                     <div><div className="testi-name">Mohammed K.</div><div className="testi-role">CEO, Finvault</div></div>
                                 </div>
                             </motion.div>
@@ -530,7 +564,7 @@ export default function Home() {
                                 
                                 <Link href="/contact" className="mt-auto block">
                                     <button className="w-full bg-white border border-slate-200 hover:bg-teal-500 hover:border-teal-500 text-[#0f172a] hover:text-white font-bold text-[11px] tracking-widest uppercase py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-teal-500/20">
-                                        Engage Tier <span className="text-lg leading-none transition-transform group-hover:translate-x-1">→</span>
+                                        Get Started <span className="text-lg leading-none transition-transform group-hover:translate-x-1">→</span>
                                     </button>
                                 </Link>
                             </motion.div>
@@ -559,7 +593,7 @@ export default function Home() {
                                 
                                 <Link href="/contact" className="mt-auto block">
                                     <button className="w-full bg-white hover:bg-teal-50 text-teal-600 font-bold text-[11px] tracking-widest uppercase py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-black/10">
-                                        Engage Tier <span className="text-lg leading-none transition-transform hover:translate-x-1">→</span>
+                                        Get Started <span className="text-lg leading-none transition-transform hover:translate-x-1">→</span>
                                     </button>
                                 </Link>
                             </motion.div>
@@ -574,12 +608,12 @@ export default function Home() {
                                     <span className="text-[10px] font-bold text-teal-600 tracking-widest uppercase">Model</span>
                                 </div>
                                 <div className="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-6">Strategic Partner</div>
-                                <p className="text-slate-500 text-sm leading-relaxed mb-10 flex-grow pr-4">Mission-critical architectural sovereignty and full lifecycle product ownership.</p>
+                                <p className="text-slate-500 text-sm leading-relaxed mb-10 flex-grow pr-4">Enterprise cloud architecture, independent system control, and end-to-end product delivery.</p>
                                 
                                 <ul className="space-y-4 mb-10">
                                     <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Autonomous Squad</span></li>
                                     <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Custom LLMs</span></li>
-                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">H-F Infrastructure</span></li>
+                                    <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">High-Availability Cloud</span></li>
                                     <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Enterprise Sec</span></li>
                                     <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">Global Compliance</span></li>
                                     <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0"></div><span className="text-[11px] font-bold tracking-widest text-[#0f172a] uppercase">24/7 SLA Support</span></li>
@@ -587,7 +621,7 @@ export default function Home() {
                                 
                                 <Link href="/contact" className="mt-auto block">
                                     <button className="w-full bg-white border border-slate-200 hover:bg-teal-500 hover:border-teal-500 text-[#0f172a] hover:text-white font-bold text-[11px] tracking-widest uppercase py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-teal-500/20">
-                                        Engage Tier <span className="text-lg leading-none transition-transform group-hover:translate-x-1">→</span>
+                                        Get Started <span className="text-lg leading-none transition-transform group-hover:translate-x-1">→</span>
                                     </button>
                                 </Link>
                             </motion.div>

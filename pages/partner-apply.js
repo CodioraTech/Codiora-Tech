@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { motion } from 'framer-motion';
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
@@ -11,9 +12,16 @@ export default function PartnerApply() {
         e.preventDefault();
         setStatus('submitting');
 
-        const PUBLIC_KEY = 'r5FRZ6PBbEXsb074d';
-        const SERVICE_ID = 'service_6hxh39r';
-        const TEMPLATE_ID = 'template_6hm18xl';
+        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'hZTzq_6Nf7MBfsPYt';
+        const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_PARTNER_SERVICE_ID || process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_0d54igh';
+        const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_PARTNER_TEMPLATE_ID || process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_v3zts87';
+
+        if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
+            console.warn("EmailJS environment variables not configured for partner application.");
+            alert("Partner application service is currently offline. Please contact us directly at contact@codioratech.com.");
+            setStatus('idle');
+            return;
+        }
 
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
             .then((result) => {
@@ -21,35 +29,39 @@ export default function PartnerApply() {
                 setStatus('success');
             }, (error) => {
                 console.log(error.text);
-                alert("Submission failed. Please try again or contact us directly.");
+                alert("Submission failed. Please try again or contact us directly at contact@codioratech.com.");
                 setStatus('idle');
             });
     };
 
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Initiate Alliance</title>
-            </Head>
+            <SEO
+                title="Partner Application | Codiora Tech"
+                description="Apply to join the Codiora Tech partner network to deliver joint engineering and digital solutions."
+                canonicalPath="/partner-apply"
+                noindex={true}
+            />
 
-            <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-pink-500/30">
+            <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/10">
                 {/* 1. Global Ambient Background */}
                 <div className="fixed inset-0 pointer-events-none">
-                    <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-pink-900/10 rounded-full blur-[150px] animate-pulse-slow" />
+                    <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-teal-900/10 rounded-full blur-[150px] animate-pulse-slow" />
                     <div className="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] bg-teal-500/10 rounded-full blur-[150px] animate-pulse-slow delay-1000" />
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 py-28 relative z-10 max-w-3xl">
+                <div className="container mx-auto px-6 pt-36 sm:pt-40 md:pt-44 pb-28 relative z-10 max-w-3xl">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Partners', href: '/partners' }, { label: 'Partner Application', href: '/partner-apply' }]} />
 
                     {/* Header */}
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-16 mt-8">
                         <motion.h1
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="text-5xl md:text-7xl font-black tracking-tighter mb-6"
                         >
-                            INITIATE <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">ALLIANCE</span>
+                            INITIATE <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500">ALLIANCE</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0 }}
@@ -88,55 +100,60 @@ export default function PartnerApply() {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-3">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Organization Name</label>
+                                        <label htmlFor="partner_org_name" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Organization Name</label>
                                         <input
+                                            id="partner_org_name"
                                             type="text"
                                             name="organization_name"
                                             required
                                             placeholder="Acme Corp"
-                                            className="w-full bg-white shadow-sm border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-pink-500 focus:bg-[#f8fafc] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-slate-400 font-medium"
+                                            className="w-full bg-white shadow-sm border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc] focus:ring-2 focus:ring-teal-500/20 transition-all outline-none placeholder:text-slate-400 font-medium"
                                         />
                                     </div>
                                     <div className="space-y-3">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Website / Portfolio</label>
+                                        <label htmlFor="partner_website" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Website / Portfolio</label>
                                         <input
+                                            id="partner_website"
                                             type="url"
                                             name="website_link"
                                             required
                                             placeholder="https://"
-                                            className="w-full bg-white shadow-sm border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-pink-500 focus:bg-[#f8fafc] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-slate-400 font-medium"
+                                            className="w-full bg-white shadow-sm border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc] focus:ring-2 focus:ring-teal-500/20 transition-all outline-none placeholder:text-slate-400 font-medium"
                                         />
                                     </div>
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Contact Person</label>
+                                    <label htmlFor="partner_contact_person" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Contact Person</label>
                                     <input
+                                        id="partner_contact_person"
                                         type="text"
                                         name="contact_person"
                                         required
                                         placeholder="Your Name & Role"
-                                        className="w-full bg-white shadow-sm border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-pink-500 focus:bg-[#f8fafc] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-slate-400 font-medium"
+                                        className="w-full bg-white shadow-sm border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc] focus:ring-2 focus:ring-teal-500/20 transition-all outline-none placeholder:text-slate-400 font-medium"
                                     />
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Alignment Strategy</label>
+                                    <label htmlFor="partner_alignment_strategy" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Alignment Strategy</label>
                                     <textarea
+                                        id="partner_alignment_strategy"
                                         name="alignment_strategy"
                                         required
                                         placeholder="What is your core proposal for this alliance?"
-                                        className="w-full bg-white shadow-sm border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-pink-500 focus:bg-[#f8fafc] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-slate-400 font-medium h-32 resize-none"
+                                        className="w-full bg-white shadow-sm border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc] focus:ring-2 focus:ring-teal-500/20 transition-all outline-none placeholder:text-slate-400 font-medium h-32 resize-none"
                                     ></textarea>
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Market Vision</label>
+                                    <label htmlFor="partner_market_vision" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Market Vision</label>
                                     <textarea
+                                        id="partner_market_vision"
                                         name="market_vision"
                                         required
-                                        placeholder="Why Codiora? How do you see us dominating the market together?"
-                                        className="w-full bg-white shadow-sm border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-pink-500 focus:bg-[#f8fafc] focus:ring-1 focus:ring-pink-500 transition-all outline-none placeholder:text-slate-400 font-medium h-32 resize-none"
+                                        placeholder="Why Codiora Tech? How do you see us dominating the market together?"
+                                        className="w-full bg-white shadow-sm border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc] focus:ring-2 focus:ring-teal-500/20 transition-all outline-none placeholder:text-slate-400 font-medium h-32 resize-none"
                                     ></textarea>
                                 </div>
 
@@ -145,7 +162,7 @@ export default function PartnerApply() {
                                     whileTap={{ scale: 0.98 }}
                                     type="submit"
                                     disabled={status === 'submitting'}
-                                    className="w-full py-5 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-[#122a46] font-bold text-lg tracking-wide shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                                    className="w-full py-5 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-bold text-lg tracking-wide shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
                                     {status === 'submitting' ? (
                                         <span className="flex items-center gap-2">

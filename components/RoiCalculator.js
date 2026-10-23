@@ -64,7 +64,7 @@ export default function RoiCalculator() {
         <section className="py-24 relative overflow-hidden bg-white dark:bg-[#f8fafc] text-[#122a46]">
             {/* Ambient Background Glow */}
             <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-teal-500/5 rounded-full blur-[150px] pointer-events-none" />
-            <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none"></div>
 
             <div className="container mx-auto px-6 relative z-10">
@@ -73,7 +73,7 @@ export default function RoiCalculator() {
                         Interactive ROI Calculator
                     </span>
                     <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
-                        Calculate Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-purple-600">Automation Savings</span>
+                        Calculate Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600">Automation Savings</span>
                     </h2>
                     <p className="text-lg text-slate-500">
                         See exactly how much time and money you can reclaim by automating manual processes and data workflows.
@@ -179,12 +179,12 @@ export default function RoiCalculator() {
 
                     {/* Right: Dashboard (5 Columns) */}
                     <div className="lg:col-span-5 relative group">
-                        <div className="absolute -inset-[2px] bg-gradient-to-r from-teal-500 via-purple-500 to-teal-500 rounded-[2.5rem] opacity-35 group-hover:opacity-60 blur-md transition-all duration-500" />
+                        <div className="absolute -inset-[2px] bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500 rounded-[2.5rem] opacity-35 group-hover:opacity-60 blur-md transition-all duration-500" />
                         
                         <div className="relative bg-[#122a46] text-white p-8 md:p-10 rounded-[2.5rem] h-full flex flex-col justify-between overflow-hidden shadow-2xl">
                             {/* Ambient Light Inside Dashboard */}
                             <div className="absolute top-[-20%] right-[-20%] w-[60%] h-[60%] bg-teal-500/20 rounded-full blur-[100px] pointer-events-none" />
-                            <div className="absolute bottom-[-20%] left-[-20%] w-[60%] h-[60%] bg-purple-500/20 rounded-full blur-[100px] pointer-events-none" />
+                            <div className="absolute bottom-[-20%] left-[-20%] w-[60%] h-[60%] bg-cyan-500/20 rounded-full blur-[100px] pointer-events-none" />
 
                             <div className="relative z-10">
                                 <h3 className="text-lg font-bold tracking-wider text-teal-300 uppercase mb-8 flex items-center gap-2">
@@ -231,7 +231,7 @@ export default function RoiCalculator() {
                                                 key={yearlyAutomationCost}
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
-                                                className="text-xl md:text-2xl font-black font-mono text-purple-300"
+                                                className="text-xl md:text-2xl font-black font-mono text-cyan-300"
                                             >
                                                 {formatCurrency(yearlyAutomationCost)}
                                             </motion.div>

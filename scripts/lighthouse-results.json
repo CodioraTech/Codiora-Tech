@@ -1,0 +1,114 @@
+{
+  "/": {
+    "runs": [
+      {
+        "score": 79,
+        "lcp": 5.57,
+        "tbt": 68,
+        "cls": 0
+      },
+      {
+        "score": 80,
+        "lcp": 5.27,
+        "tbt": 85,
+        "cls": 0
+      },
+      {
+        "score": 79,
+        "lcp": 5.49,
+        "tbt": 87,
+        "cls": 0
+      }
+    ],
+    "median": {
+      "score": 79,
+      "lcp": 5.49,
+      "tbt": 85,
+      "cls": 0
+    }
+  },
+  "/services/ai-automation": {
+    "runs": [
+      {
+        "score": 86,
+        "lcp": 4.23,
+        "tbt": 66,
+        "cls": 0
+      },
+      {
+        "score": 86,
+        "lcp": 4.22,
+        "tbt": 68,
+        "cls": 0
+      },
+      {
+        "score": 85,
+        "lcp": 4.22,
+        "tbt": 103,
+        "cls": 0
+      }
+    ],
+    "median": {
+      "score": 86,
+      "lcp": 4.22,
+      "tbt": 68,
+      "cls": 0
+    }
+  },
+  "/portfolio": {
+    "runs": [
+      {
+        "score": 89,
+        "lcp": 3.63,
+        "tbt": 109,
+        "cls": 0
+      },
+      {
+        "score": 85,
+        "lcp": 4.37,
+        "tbt": 52,
+        "cls": 0
+      },
+      {
+        "score": 86,
+        "lcp": 4.3,
+        "tbt": 54,
+        "cls": 0
+      }
+    ],
+    "median": {
+      "score": 86,
+      "lcp": 4.3,
+      "tbt": 54,
+      "cls": 0
+    }
+  },
+  "/contact": {
+    "runs": [
+      {
+        "score": 85,
+        "lcp": 4.29,
+        "tbt": 74,
+        "cls": 0
+      },
+      {
+        "score": 85,
+        "lcp": 4.29,
+        "tbt": 89,
+        "cls": 0
+      },
+      {
+        "score": 85,
+        "lcp": 4.29,
+        "tbt": 94,
+        "cls": 0
+      }
+    ],
+    "median": {
+      "score": 85,
+      "lcp": 4.29,
+      "tbt": 89,
+      "cls": 0
+    }
+  }
+}

@@ -1,158 +1,312 @@
-import Head from 'next/head';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
+const tiers = [
+    {
+        name: "Connector",
+        fit: "For Independent Consultants & Advisors",
+        commission: "10% - 15%",
+        commitment: "Referral-based • No quota",
+        features: [
+            "Unique referral link & partner tracking portal",
+            "10% - 15% revenue share on closed client contracts",
+            "Co-branded sales one-pagers and pitch deck templates",
+            "Monthly deal status updates & Net-30 payouts",
+            "Direct referral introduction to Codiora tech leads"
+        ],
+        highlight: false,
+        badge: "Referral Partner"
+    },
+    {
+        name: "Solutions Partner",
+        fit: "For Agencies, Studios & IT Consultancies",
+        commission: "20% - 25%",
+        commitment: "Project-based • Joint Delivery",
+        features: [
+            "Full white-label engineering delivery under your brand",
+            "Dedicated engineering pod with senior tech leads",
+            "Direct Slack channel bridge for real-time collaboration",
+            "20% - 25% revenue margin or wholesale sprint pricing",
+            "Priority engineering capacity reservation",
+            "Joint case study co-authorship and technical PR"
+        ],
+        highlight: true,
+        badge: "Most Popular"
+    },
+    {
+        name: "Strategic Alliance",
+        fit: "For Enterprise Integrators & Venture Groups",
+        commission: "Up to 30%",
+        commitment: "Annual Agreement • Custom Roadmap",
+        features: [
+            "Co-developed intellectual property and custom middleware",
+            "Up to 30% revenue share with custom milestone tiers",
+            "Quarterly executive roadmap sync with Codiora founder",
+            "Early access to internal AI & web scraping tooling sandboxes",
+            "24/7 priority SLA support with guaranteed 2-hour response",
+            "Global client co-selling and keynote collaboration"
+        ],
+        highlight: false,
+        badge: "Enterprise"
+    }
+];
+
+const faqs = [
+    {
+        q: "How does the partner commission payout structure work?",
+        a: "Commissions are calculated as a percentage of the gross contract value invoiced and collected. Payouts are distributed Net-30 following client invoice settlement via direct international wire transfer or Stripe."
+    },
+    {
+        q: "Can Codiora Tech deliver 100% white-label projects?",
+        a: "Yes. For our Solutions and Strategic Partners, our software architects and engineers can work seamlessly behind your brand name, adhering to your communication channels, email domains, and sprint reporting standards."
+    },
+    {
+        q: "What technical due diligence does Codiora conduct before partnering?",
+        a: "We evaluate prospective partners based on business legitimacy, shared commitment to engineering excellence, client satisfaction records, and mutual non-solicitation alignment."
+    },
+    {
+        q: "Are there any fees or upfront costs to join the partner program?",
+        a: "No. There are zero upfront fees, annual dues, or certification charges to join the Codiora Partner Program. We invest our engineering time and resources directly into our partner relationships."
+    }
+];
+
 export default function PartnerProgram() {
+    const [openFaq, setOpenFaq] = useState(null);
+
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Partner Program</title>
-            </Head>
+            <SEO
+                title="Partner Program Protocols & Commission Tiers | Codiora Tech"
+                description="Join the Codiora Tech partner program. Earn up to 30% commissions, deliver white-label enterprise software, and expand client capabilities."
+                canonicalPath="/partner-program"
+            />
 
-            <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/10">
+            <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/20">
+                {/* Ambient Background */}
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-teal-500/10 rounded-full blur-[150px] animate-pulse-slow" />
                     <div className="absolute bottom-[-20%] right-[-10%] w-[800px] h-[800px] bg-indigo-900/10 rounded-full blur-[150px] animate-pulse-slow delay-1000" />
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-32 pb-40 relative z-10">
+                <div className="container mx-auto px-6 pt-36 sm:pt-40 md:pt-44 pb-32 relative z-10">
+                    <div className="mb-6">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Partners', href: '/partners' }, { label: 'Partner Program', href: '/partner-program' }]} />
+                    </div>
+
                     {/* Header */}
                     <div className="text-center mb-24">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="inline-block mb-4 px-4 py-1.5 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-600 text-xs font-bold uppercase tracking-widest backdrop-blur-sm"
+                        >
+                            Alliance Architecture & Protocols
+                        </motion.div>
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-4xl md:text-7xl font-black tracking-tighter mb-8"
+                            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 text-[#122a46]"
                         >
-                            PARTNER <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">PROTOCOLS</span>
+                            PARTNER <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500">PROGRAM</span>
                         </motion.h1>
-                        <p className="text-xl text-slate-500 max-w-4xl mx-auto leading-relaxed">
-                            Join a coalition of elite technology firms and consultants. We don't just sign contracts; we build integrated ecosystems that dominate markets.
+                        <p className="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed">
+                            A high-trust coalition of software agencies, consultants, and enterprise integrators. Earn industry-leading margins while offering your clients world-class web systems, AI, and automation.
                         </p>
                     </div>
 
-                    {/* Section 1: The Advantage */}
-                    <div className="mb-32">
+                    {/* Advantage Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-28">
+                        {[
+                            { title: "Revenue Share", val: "Up to 30%", desc: "Generous recurring commissions paid transparently on every referred or co-delivered contract." },
+                            { title: "Co-Marketing", val: "Global PR", desc: "Featured case studies, joint technical teardowns, and international press distribution." },
+                            { title: "Tech Sandbox", val: "Beta Access", desc: "Pre-release sandbox access to our proprietary web scrapers, AI pipelines, and internal tools." },
+                            { title: "Direct SLA", val: "24/7 Bridge", desc: "Dedicated partner engineering pod and private Slack channel with leadership." },
+                        ].map((item, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-white border border-[#122a46]/10 p-8 rounded-3xl hover:shadow-xl hover:border-teal-500/30 transition-all group"
+                            >
+                                <span className="text-teal-600 font-bold uppercase tracking-widest text-[11px] block mb-2">{item.title}</span>
+                                <div className="text-3xl sm:text-4xl font-black text-[#122a46] mb-3">{item.val}</div>
+                                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Tiers Section */}
+                    <div className="mb-28">
                         <div className="text-center mb-16">
-                            <h2 className="text-3xl font-bold mb-4">The Competitive Edge</h2>
-                            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-transparent mx-auto rounded-full"></div>
+                            <span className="text-xs font-bold text-teal-600 uppercase tracking-widest">Select Your Engagement Level</span>
+                            <h2 className="text-3xl md:text-5xl font-black text-[#122a46] mt-2 tracking-tight">
+                                Partnership Tiers & Compensation
+                            </h2>
+                            <p className="text-slate-500 text-sm md:text-base max-w-2xl mx-auto mt-3">
+                                Transparent commission schedules and clear operational agreements tailored to your business model.
+                            </p>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {[
-                                { title: "Revenue Share", val: "30%", desc: "Industry-leading commissions on every deal referred or closed." },
-                                { title: "Co-Marketing", val: "Global", desc: "Featured case studies, joint webinars, and PR campaigns." },
-                                { title: "Tech Access", val: "Beta", desc: "Sandbox access to our APIs and unreleased features." },
-                                { title: "Support", val: "24/7", desc: "Dedicated partner manager and slack channel access." },
-                            ].map((item, i) => (
+
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            {tiers.map((tier, i) => (
                                 <motion.div
                                     key={i}
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="bg-[#122a46]/5 border border-[#122a46]/5 p-8 rounded-3xl hover:bg-[#122a46]/10 transition-colors group"
+                                    className={`relative p-8 sm:p-10 rounded-3xl border flex flex-col justify-between transition-all duration-300 ${tier.highlight
+                                        ? 'bg-[#122a46] text-white border-teal-500/50 shadow-2xl scale-[1.02]'
+                                        : 'bg-white text-[#122a46] border-[#122a46]/10 hover:shadow-xl'
+                                        }`}
                                 >
-                                    <h3 className="text-purple-400 font-bold uppercase tracking-widest text-xs mb-3">{item.title}</h3>
-                                    <div className="text-4xl font-black text-[#122a46] mb-3">{item.val}</div>
-                                    <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                                    <div>
+                                        <div className="flex items-center justify-between mb-4">
+                                            <span className={`text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full ${tier.highlight
+                                                ? 'bg-teal-500 text-slate-950'
+                                                : 'bg-teal-500/10 text-teal-600'
+                                                }`}>
+                                                {tier.badge}
+                                            </span>
+                                        </div>
+
+                                        <h3 className="text-2xl font-black mb-1">{tier.name}</h3>
+                                        <p className={`text-xs mb-6 ${tier.highlight ? 'text-slate-300' : 'text-slate-500'}`}>
+                                            {tier.fit}
+                                        </p>
+
+                                        {/* Commission Highlight */}
+                                        <div className={`p-4 rounded-2xl mb-8 ${tier.highlight ? 'bg-slate-900/60 border border-slate-700' : 'bg-slate-50 border border-slate-200'}`}>
+                                            <div className="text-xs uppercase tracking-wider text-teal-500 font-semibold mb-1">Commission Share</div>
+                                            <div className="text-3xl font-black">{tier.commission}</div>
+                                            <div className={`text-[11px] mt-1 ${tier.highlight ? 'text-slate-400' : 'text-slate-500'}`}>{tier.commitment}</div>
+                                        </div>
+
+                                        {/* Features List */}
+                                        <ul className="space-y-3.5 mb-8">
+                                            {tier.features.map((feat, j) => (
+                                                <li key={j} className="flex items-start gap-3 text-xs sm:text-sm">
+                                                    <span className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${tier.highlight ? 'bg-teal-400' : 'bg-teal-500'}`}></span>
+                                                    <span className={tier.highlight ? 'text-slate-200' : 'text-slate-600'}>{feat}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    <Link
+                                        href="/partner-apply"
+                                        className={`w-full py-4 rounded-full font-bold text-center text-sm transition-all block ${tier.highlight
+                                            ? 'bg-teal-500 text-slate-950 hover:bg-teal-400'
+                                            : 'bg-[#122a46] text-white hover:bg-teal-500 hover:text-slate-950'
+                                            }`}
+                                    >
+                                        Apply for {tier.name}
+                                    </Link>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
 
-                    {/* Section 2: Tiers */}
-                    <div className="mb-32">
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl font-bold mb-4">Partnership Tiers</h2>
-                            <p className="text-slate-500">Choose your level of engagement.</p>
+                    {/* Onboarding Timeline */}
+                    <div className="mb-28 p-10 md:p-14 rounded-3xl bg-white border border-[#122a46]/10 shadow-xl">
+                        <div className="text-center mb-14">
+                            <span className="text-xs font-bold text-teal-600 uppercase tracking-widest">Rapid Integration</span>
+                            <h2 className="text-3xl md:text-4xl font-black text-[#122a46] mt-2">
+                                14-Day Partner Onboarding Cadence
+                            </h2>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
                             {[
-                                { name: "Connector", icon: "🔗", fit: "For Consultants", feats: ["Referral Link", "10% Commission", "Marketing Kit"] },
-                                { name: "Solutions", icon: "🛠️", fit: "For Agencies", feats: ["Dev Sandbox", "20% Commission", "Co-Selling Support", "Certifications"] },
-                                { name: "Strategic", icon: "👑", fit: "For Enterprise", feats: ["Custom Integration", "30% Commission", "Executive Access", "Joint Roadmap"] }
-                            ].map((tier, i) => (
-                                <div key={i} className={`relative p-10 rounded-[2rem] border ${i === 1 ? 'bg-[#122a46]/10 border-purple-500/50 shadow-[0_0_50px_rgba(168,85,247,0.1)]' : 'bg-[#122a46]/5 border-[#122a46]/5'} overflow-hidden`}>
-                                    <div className="text-5xl mb-6">{tier.icon}</div>
-                                    <h3 className="text-2xl font-bold text-[#122a46] mb-2">{tier.name}</h3>
-                                    <p className="text-purple-400 text-sm font-bold uppercase tracking-widest mb-8">{tier.fit}</p>
-                                    <ul className="space-y-4">
-                                        {tier.feats.map((feat, j) => (
-                                            <li key={j} className="flex items-center gap-3 text-slate-600">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-                                                {feat}
-                                            </li>
-                                        ))}
-                                    </ul>
+                                { step: "Step 01", time: "Days 1 - 2", title: "Application Review", text: "We review your company profile, focus domains, and client service requirements." },
+                                { step: "Step 02", time: "Day 5", title: "Leadership Sync", text: "Introductory 30-minute technical sync with our founder and strategic alliance director." },
+                                { step: "Step 03", time: "Day 8", title: "Mutual NDA & SLA", text: "Execution of bilateral non-solicitation agreement, IP safeguards, and commission schedule." },
+                                { step: "Step 04", time: "Day 14", title: "Launch & Co-Selling", text: "Partner portal credentials issued, Slack bridge activated, and co-pitch materials deployed." }
+                            ].map((item, idx) => (
+                                <div key={idx} className="p-6 rounded-2xl bg-slate-50 border border-slate-200 relative">
+                                    <span className="text-[10px] font-mono font-bold text-teal-600 bg-teal-500/10 px-2 py-0.5 rounded uppercase">
+                                        {item.time}
+                                    </span>
+                                    <h4 className="text-lg font-bold text-[#122a46] mt-3 mb-2">{item.title}</h4>
+                                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">{item.text}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* Section 3: The Process & Requirements */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start mb-32">
-                        <div>
-                            <h2 className="text-3xl font-bold mb-8">Base Requirements</h2>
-                            <div className="space-y-6">
-                                {[
-                                    "Documented expertise in modern web technologies.",
-                                    "Active client base with consistent deal flow.",
-                                    "Alignment with our design-first philosophy.",
-                                    "Ability to undergo technical vetting."
-                                ].map((req, i) => (
-                                    <div key={i} className="flex items-start gap-4">
-                                        <div className="mt-1 min-w-[20px] h-5 rounded-full border border-purple-500/50 flex items-center justify-center">
-                                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                                        </div>
-                                        <p className="text-slate-600">{req}</p>
-                                    </div>
-                                ))}
-                            </div>
+                    {/* Interactive FAQ Accordion */}
+                    <div className="max-w-3xl mx-auto mb-28">
+                        <div className="text-center mb-12">
+                            <span className="text-xs font-bold text-teal-600 uppercase tracking-widest">Got Questions?</span>
+                            <h2 className="text-3xl md:text-4xl font-black text-[#122a46] mt-2">
+                                Program F.A.Q.
+                            </h2>
                         </div>
-                        <div>
-                            <h2 className="text-3xl font-bold mb-8">Onboarding Timeline</h2>
-                            <div className="space-y-8 border-l border-[#122a46]/10 pl-8 relative">
-                                {[
-                                    { time: "Day 1-3", title: "Application Review", text: "We analyze your dossier." },
-                                    { time: "Day 7", title: "Strategic Sync", text: "Intro call with our Partner Lead." },
-                                    { time: "Day 14", title: "Launch", text: "Portal access & marketing kick-off." }
-                                ].map((step, i) => (
-                                    <div key={i} className="relative">
-                                        <div className="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-purple-900 border border-purple-500"></div>
-                                        <span className="text-xs font-bold text-purple-400 uppercase tracking-widest">{step.time}</span>
-                                        <h4 className="text-xl font-bold text-[#122a46] mt-1">{step.title}</h4>
-                                        <p className="text-slate-500 text-sm">{step.text}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
 
-                    {/* Section 4: FAQ */}
-                    <div className="max-w-3xl mx-auto mb-24">
-                        <h2 className="text-3xl font-bold text-center mb-12">Program F.A.Q.</h2>
-                        <div className="space-y-6">
-                            {[
-                                { q: "Is there a cost to join?", a: "No. Our partner program is free. We invest in you." },
-                                { q: "Do you provide white-label options?", a: "Yes. Strategic partners can white-label our entire tech stack." },
-                                { q: "What is the payout schedule?", a: "Commissions are paid out Net-30 via Stripe or Wire Transfer." }
-                            ].map((faq, i) => (
-                                <div key={i} className="bg-[#122a46]/5 border border-[#122a46]/5 p-6 rounded-2xl">
-                                    <h4 className="font-bold text-[#122a46] mb-2">{faq.q}</h4>
-                                    <p className="text-slate-500 text-sm">{faq.a}</p>
+                        <div className="space-y-4">
+                            {faqs.map((faq, i) => (
+                                <div
+                                    key={i}
+                                    className="bg-white border border-[#122a46]/10 rounded-2xl overflow-hidden transition-all shadow-sm"
+                                >
+                                    <button
+                                        type="button"
+                                        onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                        className="w-full text-left p-6 flex justify-between items-center gap-4 text-base font-bold text-[#122a46] hover:text-teal-600 transition-colors"
+                                    >
+                                        <span>{faq.q}</span>
+                                        <span className={`text-xl transition-transform duration-300 ${openFaq === i ? 'rotate-180 text-teal-600' : 'text-slate-400'}`}>
+                                            ▾
+                                        </span>
+                                    </button>
+                                    <AnimatePresence>
+                                        {openFaq === i && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                className="px-6 pb-6 text-slate-500 text-sm leading-relaxed"
+                                            >
+                                                {faq.a}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* CTA */}
-                    <div className="text-center">
-                        <Link href="/partner-apply">
-                            <button className="px-12 py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-[#122a46] font-bold rounded-full text-lg hover:shadow-[0_0_50px_rgba(168,85,247,0.4)] hover:scale-105 transition-all">
-                                INITIATE APPLICATION
-                            </button>
-                        </Link>
-                        <p className="text-slate-500 text-xs mt-6 uppercase tracking-widest">Limited slots available for Q1 2026</p>
-                    </div>
+                    {/* Conversion CTA Box */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="rounded-3xl bg-[#0f172a] text-white p-10 md:p-16 relative overflow-hidden shadow-2xl border border-slate-800 text-center"
+                    >
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-teal-500/10 rounded-full blur-[150px] pointer-events-none" />
+                        <div className="relative z-10 max-w-2xl mx-auto">
+                            <span className="text-xs font-mono text-teal-400 uppercase tracking-widest bg-teal-950/80 border border-teal-800 px-3 py-1 rounded-full inline-block mb-6">
+                                Limited Q1 2026 Partner Slots
+                            </span>
+                            <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-6">
+                                Expand your service offerings with Codiora Tech.
+                            </h2>
+                            <p className="text-slate-300 text-base md:text-lg mb-8 leading-relaxed">
+                                Join our partner ecosystem and start collaborating on enterprise software, AI integrations, and web platforms today.
+                            </p>
+                            <Link
+                                href="/partner-apply"
+                                className="px-10 py-4 bg-teal-500 text-slate-950 font-bold rounded-full hover:bg-teal-400 hover:scale-105 transition-all shadow-lg text-base inline-block"
+                            >
+                                Initiate Partner Application
+                            </Link>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </>

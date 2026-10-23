@@ -25,7 +25,7 @@ export default function ProcessTimeline() {
                 {/* Desktop Timeline */}
                 <div className="hidden lg:flex justify-center items-center w-full relative">
                     {/* Connecting Line */}
-                    <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-cyan-500/20 -translate-y-1/2 rounded-full"></div>
+                    <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-cyan-500/20 via-teal-500/20 to-cyan-500/20 -translate-y-1/2 rounded-full"></div>
 
                     {steps.map((step, i) => (
                         <motion.div

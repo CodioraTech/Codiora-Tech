@@ -4,8 +4,14 @@
 @tailwind utilities;
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
     @apply bg-dark text-primary transition-colors duration-300;
+}
+
+/* Accessible Keyboard Focus Indicators */
+:focus-visible {
+    outline: 2px solid #0d9488 !important;
+    outline-offset: 2px !important;
 }
 
 /* Dark Mode Overrides - Forced to Light Theme logic */
@@ -64,3 +70,19 @@ html.dark body {
     z-index: 0;
     pointer-events: none;
 }
+
+/* 120 FPS High-Refresh Rate Hardware Compositor Acceleration */
+html {
+    scroll-behavior: smooth;
+}
+
+.mesh-blob,
+[class*="blur-"],
+.animate-pulse-slow {
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform, opacity;
+    contain: layout paint style;
+}

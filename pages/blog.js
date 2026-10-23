@@ -1,6 +1,7 @@
-import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const posts = [
     {
@@ -53,9 +54,11 @@ const posts = [
 export default function Blog() {
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Engineering Blog</title>
-            </Head>
+            <SEO
+                title="Engineering Blog & Technical Insights | Codiora Tech"
+                description="Deep dives into scalable systems, WebSockets, AI agent pipelines, state management, and modern cloud DevOps by Codiora Tech engineers."
+                canonicalPath="/blog"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-orange-500/30">
                 <div className="fixed inset-0 pointer-events-none">
@@ -63,7 +66,11 @@ export default function Blog() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-44 pb-40 relative z-10">
+                <div className="container mx-auto px-6 pt-36 sm:pt-40 md:pt-44 pb-40 relative z-10">
+                    <div className="mb-6">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }]} />
+                    </div>
+
                     <div className="text-center mb-32">
                         <div className="inline-block px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
                             Insights & Rants
@@ -137,9 +144,10 @@ export default function Blog() {
                     <div className="mt-40 p-12 bg-[#122a46]/5 border border-[#122a46]/5 rounded-[2.5rem] text-center">
                         <h3 className="text-3xl font-bold mb-4">Stay in the Loop</h3>
                         <p className="text-slate-500 mb-8">Get the latest engineering deep dives delivered to your inbox.</p>
-                        <form className="max-w-md mx-auto flex gap-4">
-                            <input type="email" placeholder="email@address.com" className="flex-1 bg-[#f8fafc] border border-[#122a46]/20 rounded-full px-6 py-4 text-[#122a46] outline-none focus:border-orange-500 transition-colors" />
-                            <button className="bg-orange-600 text-[#122a46] font-bold px-8 py-4 rounded-full hover:bg-orange-500 transition-colors">Subscribe</button>
+                        <form className="max-w-md mx-auto flex gap-4" onSubmit={(e) => { e.preventDefault(); alert('Thank you for subscribing to Codiora Tech insights!'); }}>
+                            <label htmlFor="newsletter_email" className="sr-only">Email address</label>
+                            <input id="newsletter_email" type="email" required placeholder="email@address.com" className="flex-1 bg-[#f8fafc] border border-[#122a46]/20 rounded-full px-6 py-4 text-[#122a46] outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 transition-all" />
+                            <button type="submit" className="bg-teal-600 text-white font-bold px-8 py-4 rounded-full hover:bg-teal-500 transition-colors shadow-lg shadow-teal-500/20">Subscribe</button>
                         </form>
                     </div>
                 </div>

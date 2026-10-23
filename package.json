@@ -6,12 +6,16 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "eslint pages components lib",
+        "test:smoke": "playwright test",
+        "validate:sitemap": "node scripts/validate-sitemap.js"
     },
     "dependencies": {
         "@emailjs/browser": "^4.4.1",
         "@react-three/drei": "latest",
         "@react-three/fiber": "latest",
+        "@upstash/ratelimit": "^2.2.0",
+        "@upstash/redis": "^1.39.0",
         "@vercel/speed-insights": "^2.0.0",
         "clsx": "latest",
         "daisyui": "latest",
@@ -24,10 +28,17 @@
         "three": "^0.160.0"
     },
     "devDependencies": {
+        "@axe-core/playwright": "^4.14.0",
+        "@next/bundle-analyzer": "^16.4.2",
+        "@playwright/test": "^1.64.1",
         "autoprefixer": "^10.4.23",
         "eslint": "latest",
         "eslint-config-next": "latest",
         "postcss": "^8.5.6",
         "tailwindcss": "^3.4.17"
+    },
+    "overrides": {
+        "chokidar": "^4.0.3",
+        "postcss-selector-parser": "^7.1.6"
     }
 }

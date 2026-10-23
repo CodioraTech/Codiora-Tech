@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
@@ -20,8 +21,14 @@ export default function Counseling() {
         setStatus('submitting');
 
         const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'bxENHLdnTzL4xGOEr';
-        const SERVICE_ID = 'service_h0rja9o';
-        const TEMPLATE_ID = 'template_cxzgkj3';
+        const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_COUNSELING_SERVICE_ID || process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_h0rja9o';
+        const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_COUNSELING_TEMPLATE_ID || process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_cxzgkj3';
+
+        if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
+            console.warn("EmailJS environment variables not configured for counseling form.");
+            setStatus('error');
+            return;
+        }
 
         // Dynamically inject form field aliases into HTML form so emailjs.sendForm succeeds with all template variable names
         const aliases = {
@@ -88,9 +95,12 @@ export default function Counseling() {
 
     return (
         <>
-            <Head>
-                <title>Codiora Tech | Admission Counseling</title>
-            </Head>
+            <SEO
+                title="Career Counseling Session | Codiora Tech"
+                description="Book a free 1-on-1 career counseling session with senior engineers at Codiora Tech to discuss your software engineering goals."
+                canonicalPath="/counseling"
+                noindex={true}
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-indigo-500/30">
                 {/* Premium Background Ambience */}
@@ -100,9 +110,11 @@ export default function Counseling() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
+                <div className="container mx-auto px-6 pt-36 sm:pt-40 md:pt-44 pb-20 relative z-10">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Counseling', href: '/counseling' }]} className="mb-6" />
+
                     {/* Header */}
-                    <div className="max-w-4xl mx-auto text-center mb-16">
+                    <div className="max-w-4xl mx-auto text-center mb-16 mt-8">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -155,7 +167,7 @@ export default function Counseling() {
                             <div className="bg-white border border-[#122a46]/5 p-6 rounded-3xl flex items-center gap-4">
                                 <div className="flex -space-x-4">
                                     {[1, 2, 3].map(i => (
-                                        <div key={i} className={`w-10 h-10 rounded-full border-2 border-[#0a0a0a] bg-gray-700 bg-cover`} style={{ backgroundImage: `url('https://i.pravatar.cc/100?img=${i + 10}')` }}></div>
+                                        <img key={i} src={`/images/avatars/avatar-${i}.jpg`} alt={`Graduate ${i}`} width={40} height={40} className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" />
                                     ))}
                                 </div>
                                 <div className="text-sm">
@@ -191,18 +203,27 @@ export default function Counseling() {
                                         </motion.div>
                                     ) : (
                                         <form ref={form} onSubmit={handleSubmit} className="space-y-6 relative z-10">
-                                            <div className="space-y-2">
-                                                <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Your Details</label>
+                                            <div className="space-y-3">
+                                                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Your Details</div>
                                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                                    <input name="full_name" type="text" required placeholder="Full Name" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-indigo-500 focus:bg-[#f8fafc]/60 transition-all outline-none" />
-                                                    <input name="email" type="email" required placeholder="Email Address" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-indigo-500 focus:bg-[#f8fafc]/60 transition-all outline-none" />
-                                                    <input name="phone" type="tel" required placeholder="Phone Number" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-indigo-500 focus:bg-[#f8fafc]/60 transition-all outline-none" />
+                                                    <div>
+                                                        <label htmlFor="counsel_name" className="sr-only">Full Name</label>
+                                                        <input id="counsel_name" name="full_name" type="text" required placeholder="Full Name" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-2 focus:ring-teal-500/20 transition-all outline-none" />
+                                                    </div>
+                                                    <div>
+                                                        <label htmlFor="counsel_email" className="sr-only">Email Address</label>
+                                                        <input id="counsel_email" name="email" type="email" required placeholder="Email Address" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-2 focus:ring-teal-500/20 transition-all outline-none" />
+                                                    </div>
+                                                    <div>
+                                                        <label htmlFor="counsel_phone" className="sr-only">Phone Number</label>
+                                                        <input id="counsel_phone" name="phone" type="tel" required placeholder="Phone Number" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-2 focus:ring-teal-500/20 transition-all outline-none" />
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <div className="space-y-2">
-                                                <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Current Status</label>
-                                                <select name="status" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-indigo-500 focus:bg-[#f8fafc]/60 transition-all outline-none appearance-none cursor-pointer">
+                                                <label htmlFor="counsel_status" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Current Status</label>
+                                                <select id="counsel_status" name="status" className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-2 focus:ring-teal-500/20 transition-all outline-none appearance-none cursor-pointer">
                                                     <option value="Student" className="bg-[#f8fafc]">Student</option>
                                                     <option value="Working Professional" className="bg-[#f8fafc]">Working Professional</option>
                                                     <option value="Freelancer" className="bg-[#f8fafc]">Freelancer</option>
@@ -211,12 +232,12 @@ export default function Counseling() {
                                             </div>
 
                                             <div className="space-y-2">
-                                                <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Preferred Time Check</label>
+                                                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Preferred Time Check</div>
                                                 <div className="grid grid-cols-3 gap-3">
-                                                    {['Morning (9am-12pm)', 'Afternoon (1pm-5pm)', 'Evening (6pm-9pm)'].map((slot) => (
-                                                        <label key={slot} className="cursor-pointer">
-                                                            <input type="radio" name="time_slot" value={slot} className="peer sr-only" required />
-                                                            <div className="border border-[#122a46]/10 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 text-center hover:bg-[#122a46]/5 peer-checked:bg-indigo-600 peer-checked:text-white peer-checked:border-indigo-600 shadow-sm transition-all">
+                                                    {['Morning (9am-12pm)', 'Afternoon (1pm-5pm)', 'Evening (6pm-9pm)'].map((slot, idx) => (
+                                                        <label key={slot} htmlFor={`slot_${idx}`} className="cursor-pointer">
+                                                            <input id={`slot_${idx}`} type="radio" name="time_slot" value={slot} className="peer sr-only" required />
+                                                            <div className="border border-[#122a46]/10 rounded-xl px-3 py-3 text-sm font-semibold text-slate-600 text-center hover:bg-[#122a46]/5 peer-checked:bg-teal-600 peer-checked:text-white peer-checked:border-teal-600 shadow-sm transition-all">
                                                                 {slot.split(' ')[0]}
                                                             </div>
                                                         </label>
@@ -225,22 +246,22 @@ export default function Counseling() {
                                             </div>
 
                                             <div className="space-y-2">
-                                                <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Questions / Goals</label>
-                                                <textarea name="message" required placeholder="e.g. I want to switch from marketing to dev..." className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-indigo-500 focus:bg-[#f8fafc]/60 transition-all outline-none h-32 resize-none"></textarea>
+                                                <label htmlFor="counsel_message" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Questions / Goals</label>
+                                                <textarea id="counsel_message" name="message" required placeholder="e.g. I want to switch from marketing to dev..." className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-4 py-3 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-2 focus:ring-teal-500/20 transition-all outline-none h-32 resize-none"></textarea>
                                             </div>
 
                                             {/* Honeypot */}
-                                            <input type="text" name="bot_check" style={{ display: 'none' }} autoComplete="off" />
+                                            <input type="text" name="bot_check" style={{ display: 'none' }} autoComplete="off" tabIndex="-1" aria-hidden="true" />
 
                                             {status === 'error' && (
-                                                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 text-sm font-medium text-center">
+                                                <div role="alert" className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 text-sm font-medium text-center">
                                                     Submission failed. Please try again or email us directly at <a href="mailto:contact@codioratech.com" className="font-bold underline">contact@codioratech.com</a>.
                                                 </div>
                                             )}
 
                                             <button
                                                 disabled={status === 'submitting'}
-                                                className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-bold text-lg tracking-wide shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/40 transition-all"
+                                                className="w-full py-4 rounded-xl bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-500 hover:to-teal-600 text-white font-bold text-lg tracking-wide shadow-lg shadow-teal-600/20 hover:shadow-teal-600/40 transition-all"
                                             >
                                                 {status === 'submitting' ? 'Scheduling...' : 'Schedule Call'}
                                             </button>

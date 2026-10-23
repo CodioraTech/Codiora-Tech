@@ -24,19 +24,22 @@ export default function FounderMessage() {
 
                         {/* Quote Text */}
                         <blockquote className="text-xl md:text-3xl font-medium text-slate-600 leading-relaxed max-w-3xl mx-auto mb-10">
-                            "We started Codiora Tech with one goal — to build <span className="text-[#122a46] font-semibold">reliable technology</span> that truly helps businesses grow. Not just code, but solutions that matter."
+                            "We started Codiora Tech with one goal, to build <span className="text-[#122a46] font-semibold">reliable technology</span> that truly helps businesses grow. Not just code, but solutions that matter."
                         </blockquote>
 
                         {/* Profiles */}
                         <div className="flex flex-col items-center justify-center gap-4">
-                            <div className="relative w-16 h-16 rounded-full p-1 bg-gradient-to-br from-gray-700 to-[#f8fafc] border border-[#122a46]/10">
+                            <div className="relative w-20 h-20 rounded-full p-1 bg-gradient-to-br from-teal-500/20 via-[#122a46]/10 to-transparent border border-teal-500/30 shadow-lg">
                                 <img
-                                    src="/images/team/founder.jpg"
+                                    src="/images/founder/founder.webp"
                                     alt="Asif Mahamud Shaon"
-                                    className="w-full h-full rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                                    width={80}
+                                    height={80}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="w-full h-full rounded-full object-cover object-top hover:scale-105 transition-all duration-300"
                                     onError={(e) => {
-                                        e.target.style.display = 'none';
-                                        e.target.parentElement.innerHTML = '<span class="flex items-center justify-center w-full h-full text-2xl">👨‍💻</span>';
+                                        e.target.src = '/images/founder/founder.png';
                                     }}
                                 />
                             </div>

@@ -31,7 +31,7 @@ export default function CaseStudyCard({ study }) {
                         <p className="text-sm text-gray-600 dark:text-slate-500 leading-relaxed">{study.problem}</p>
                     </div>
                     <div>
-                        <h4 className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-1">Solution</h4>
+                        <h4 className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wide mb-1">Solution</h4>
                         <p className="text-sm text-gray-600 dark:text-slate-500 leading-relaxed">{study.solution}</p>
                     </div>
                 </div>

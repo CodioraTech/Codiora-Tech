@@ -20,6 +20,8 @@ const ServiceCard = ({ title, description, icon, image, slug }) => {
                             <img
                                 src={image}
                                 alt={title}
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"
                                 onError={(e) => e.target.style.display = 'none'}
                             />
@@ -38,7 +40,7 @@ const ServiceCard = ({ title, description, icon, image, slug }) => {
                 {/* 2. Bottom Content Area */}
                 <div className="p-8 relative min-h-[220px] flex flex-col">
                     {/* Title */}
-                    <h3 className="text-2xl font-bold text-[#122a46] mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-200 group-hover:to-purple-200 transition-all duration-300">
+                    <h3 className="text-2xl font-bold text-[#122a46] mb-3 group-hover:text-teal-600 transition-all duration-300">
                         {title}
                     </h3>
 

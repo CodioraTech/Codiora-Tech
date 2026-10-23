@@ -48,16 +48,20 @@ export function ElasticStack({
               width: itemSize,
               height: itemSize,
               marginLeft: i === 0 ? 0 : -overlap,
-              transform: `translateX(${translateX}px) scale(${scale})`,
+              transform: `translate3d(${translateX}px, 0, 0) scale(${scale})`,
               transitionTimingFunction: springEasing,
+              willChange: "transform",
               zIndex,
             }}
           >
             {item.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
               <img 
                 src={item.image} 
                 alt={item.name || `Avatar ${i}`}
+                width={itemSize}
+                height={itemSize}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover rounded-full pointer-events-none"
               />
             ) : (

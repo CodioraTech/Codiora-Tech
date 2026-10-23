@@ -1,12 +1,11 @@
 import { useRef } from 'react';
-import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRouter } from 'next/router';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
-
-// Dummy Data Repository associated with slugs
-const portfolioData = {
+export const portfolioData = {
     'neonmarket': {
         title: "NeonMarket",
         category: "Solutions",
@@ -18,7 +17,12 @@ const portfolioData = {
         technologies: ["Next.js", "Solidity", "Rust/WASM", "Web3.js", "Tailwind CSS", "Redis"],
         stat1: "0.05s", stat1Label: "Latency",
         stat2: "150K+", stat2Label: "Active Traders",
-        image: "/images/portfolio/neonmarket.png"
+        image: "/images/portfolio/neonmarket.webp",
+        relatedService: {
+            title: "Full-Stack Enterprise Applications",
+            url: "/services/enterprise-apps",
+            desc: "Explore how we engineer multi-tenant, high-throughput enterprise platforms."
+        }
     },
     'medibot-ai': {
         title: "MediBot AI",
@@ -31,20 +35,30 @@ const portfolioData = {
         technologies: ["Python", "PyTorch", "Llama-2", "FastAPI", "React", "Docker"],
         stat1: "99.9%", stat1Label: "Uptime",
         stat2: "9X", stat2Label: "Faster Triage",
-        image: "/images/portfolio/medibot-ai.png"
+        image: "/images/portfolio/medibot-ai.webp",
+        relatedService: {
+            title: "AI Automation & Intelligent Agents",
+            url: "/services/ai-automation",
+            desc: "Discover our custom RAG pipelines, neural chatbots, and autonomous workflows."
+        }
     },
     'explorer-nature': {
         title: "Explorer Nature",
         category: "Solutions",
         tagline: "Discover the unseen beauty of the world.",
-        description: "Explorer Nature represents the future of experiential tourism—a premium digital platform meticulously crafted to bridge the gap between wanderlust and authentic discovery. Designed to redefine adventure, it offers exclusively curated journeys ranging from the pristine beaches of Cox's Bazar to the mystical hills of Bandarban, extending to international frontiers including India, Nepal, Bhutan, Thailand, and Malaysia.",
+        description: "Explorer Nature represents the future of experiential tourism, a premium digital platform meticulously crafted to bridge the gap between wanderlust and authentic discovery. Designed to redefine adventure, it offers exclusively curated journeys ranging from the pristine beaches of Cox's Bazar to the mystical hills of Bandarban, extending to international frontiers including India, Nepal, Bhutan, Thailand, and Malaysia.",
         challenges: "Integrating multi-currency payment gateways and real-time booking availability across borders. Ensuring a seamless user experience for booking complex multi-leg trips while maintaining high performance on mobile devices for travelers on the go.",
         solution: "We built a robust booking engine capable of handling dynamic pricing and real-time inventory management. The platform features an immersive UI that showcases destinations with high-quality media, inspiring wanderlust while providing a secure and effortless booking process.",
         results: "Successfully expanded dynamic bookings across 5 international destinations and boosted overall mobile conversion rates by 40%.",
         technologies: ["Next.js", "React", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
         stat1: "50+", stat1Label: "Destinations",
         stat2: "2025", stat2Label: "Founded",
-        image: "/images/portfolio/explorer-nature.png"
+        image: "/images/portfolio/explorer-nature.webp",
+        relatedService: {
+            title: "Mobile Innovation",
+            url: "/services/mobile-innovation",
+            desc: "Learn about our responsive cross-platform architectures and mobile booking solutions."
+        }
     },
     'orbital-agency': {
         title: "Orbital Agency",
@@ -57,7 +71,12 @@ const portfolioData = {
         technologies: ["Three.js", "React Three Fiber", "GSAP", "Blender", "WebGL"],
         stat1: "60fps", stat1Label: "Smoothness",
         stat2: "3D", stat2Label: "Native Web",
-        image: "/images/portfolio/orbital-agency.png"
+        image: "/images/portfolio/orbital-agency.webp",
+        relatedService: {
+            title: "Immersive UI/UX",
+            url: "/services/immersive-ui-ux",
+            desc: "See how we design WebGL animations and award-winning interactive design systems."
+        }
     },
     'smartsync': {
         title: "SmartSync",
@@ -70,7 +89,12 @@ const portfolioData = {
         technologies: ["Rust", "React Native", "MQTT", "GraphQL", "TimescaleDB"],
         stat1: "<10ms", stat1Label: "Response Time",
         stat2: "50+", stat2Label: "Device Types",
-        image: "/images/portfolio/smartsync.png"
+        image: "/images/portfolio/smartsync.webp",
+        relatedService: {
+            title: "DevOps & Cloud",
+            url: "/services/devops-cloud",
+            desc: "Explore our low-latency distributed systems and IoT microservice infrastructure."
+        }
     },
     'autosupport': {
         title: "AutoSupport",
@@ -83,178 +107,184 @@ const portfolioData = {
         technologies: ["OpenAI API", "Node.js", "Redis", "Pinecone", "Socket.io"],
         stat1: "95%", stat1Label: "Resolution Rate",
         stat2: "24/7", stat2Label: "Availability",
-        image: "/images/portfolio/autosupport.png"
+        image: "/images/portfolio/autosupport.webp",
+        relatedService: {
+            title: "AI Automation & Intelligent Agents",
+            url: "/services/ai-automation",
+            desc: "Discover how autonomous support agents eliminate ticket backlogs and scale customer care."
+        }
     }
 };
 
-export default function ProjectPage() {
-    const router = useRouter();
-    const { slug } = router.query;
-    const project = portfolioData[slug];
+export default function ProjectPage({ project, slug }) {
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({ target: containerRef });
     const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
-    // Handle loading or invalid slug
-    // Ensure the hook doesn't fail by always rendering the container
-
-    const content = () => {
-        if (!slug) return <div className="min-h-screen bg-[#050505]" />;
-        if (!project) return (
-            <div className="min-h-screen bg-[#050505] flex items-center justify-center text-[#122a46]">
+    if (!project) {
+        return (
+            <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center text-[#122a46]">
                 <div className="text-center">
                     <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
-                    <button onClick={() => router.push('/portfolio')} className="text-teal-600 hover:underline">Back to Portfolio</button>
+                    <Link href="/portfolio" className="text-teal-600 hover:underline">Back to Portfolio</Link>
                 </div>
             </div>
         );
+    }
 
-        return (
-            <>
-                <Head>
-                    <title>{project.title} | Codiora Tech</title>
-                    <meta name="description" content={project.description} />
-                </Head>
-
-                {/* Hero Section */}
-                <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 bg-[#f8fafc] z-0">
-                        {/* Background Noise & Gradient */}
-                        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none"></div>
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/10 rounded-full blur-[120px]" />
-                    </div>
-
-                    <div className="container mx-auto px-6 relative z-10 text-center">
-                        <motion.span
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="inline-block py-1 px-3 rounded-full border border-[#122a46]/10 bg-[#122a46]/5 text-teal-600 text-sm font-bold tracking-widest uppercase mb-6"
-                        >
-                            {project.category}
-                        </motion.span>
-                        <motion.h1
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.1, duration: 0.8 }}
-                            className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-br from-[#122a46] via-slate-500 to-teal-500"
-                        >
-                            {project.title}
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.3 }}
-                            className="text-xl md:text-2xl text-slate-500 max-w-2xl mx-auto"
-                        >
-                            {project.tagline}
-                        </motion.p>
-                    </div>
-                </section>
-
-                {/* Stats & Overview */}
-                <section className="py-20 border-y border-[#122a46]/5 bg-white/[0.02]">
-                    <div className="container mx-auto px-6">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                            {/* Technologies */}
-                            <div>
-                                <h3 className="text-sm font-bold text-slate-500 tracking-widest uppercase mb-4">Tech Stack</h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {project.technologies.map(tech => (
-                                        <span key={tech} className="bg-[#122a46]/10 px-3 py-1 rounded-md text-sm border border-[#122a46]/5 hover:border-purple-500/50 transition-colors cursor-default">
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                            {/* Stat 1 */}
-                            <div className="text-center md:text-left">
-                                <h3 className="text-sm font-bold text-slate-500 tracking-widest uppercase mb-2">{project.stat1Label}</h3>
-                                <p className="text-5xl font-mono font-bold text-teal-600">{project.stat1}</p>
-                            </div>
-                            {/* Stat 2 */}
-                            <div className="text-center md:text-left">
-                                <h3 className="text-sm font-bold text-slate-500 tracking-widest uppercase mb-2">{project.stat2Label}</h3>
-                                <p className="text-5xl font-mono font-bold text-purple-400">{project.stat2}</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Deep Dive Content */}
-                <section className="py-32 relative">
-                    <div className="container mx-auto px-6 max-w-4xl">
-                        <motion.div
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="space-y-20"
-                        >
-                            {/* Image Placeholder */}
-                            <div className="aspect-video w-full bg-[#111] rounded-3xl border border-[#122a46]/10 relative overflow-hidden group shadow-[0_0_50px_rgba(168,85,247,0.15)]">
-                                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay z-10 pointer-events-none"></div>
-
-                                <motion.div style={{ scale }} className="relative w-full h-full">
-                                    {project.image && project.image.startsWith('/') ? (
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            className="transition-transform duration-700 hover:scale-105 object-cover"
-                                        />
-                                    ) : (
-                                        /* Fallback for safety if image is still text/emoji */
-                                        <div className="w-full h-full flex items-center justify-center text-9xl">{project.image}</div>
-                                    )}
-                                </motion.div>
-
-                                {/* Glare effect */}
-                                <div className="absolute inset-0 bg-gradient-to-tr from-[#122a46]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-20"></div>
-                            </div>
-
-                            {/* Description */}
-                            <div>
-                                <h2 className="text-3xl font-bold mb-6 text-[#122a46]">The Vision</h2>
-                                <p className="text-lg text-slate-500 leading-relaxed">
-                                    {project.description}
-                                </p>
-                            </div>
-
-                            {/* Challenges, Solutions & Results */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                <div className="bg-white p-8 rounded-2xl border border-[#122a46]/5 hover:border-red-500/30 transition-colors duration-500 group">
-                                    <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">⚠️</div>
-                                    <h3 className="text-xl font-bold mb-4 text-[#122a46]">The Problem</h3>
-                                    <p className="text-slate-500 text-sm leading-relaxed">{project.challenges}</p>
-                                </div>
-                                <div className="bg-white p-8 rounded-2xl border border-[#122a46]/5 hover:border-emerald-500/30 transition-colors duration-500 group">
-                                    <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-6 group-hover:scale-110 transition-transform">💡</div>
-                                    <h3 className="text-xl font-bold mb-4 text-[#122a46]">The Solution</h3>
-                                    <p className="text-slate-500 text-sm leading-relaxed">{project.solution}</p>
-                                </div>
-                                <div className="bg-white p-8 rounded-2xl border border-[#122a46]/5 hover:border-purple-500/30 transition-colors duration-500 group">
-                                    <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500 mb-6 group-hover:scale-110 transition-transform">📈</div>
-                                    <h3 className="text-xl font-bold mb-4 text-[#122a46]">The Results</h3>
-                                    <p className="text-slate-500 text-sm leading-relaxed">{project.results}</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-                </section>
-
-                {/* Next Project Nav */}
-                <div className="py-20 text-center">
-                    <button onClick={() => router.push('/portfolio')} className="px-8 py-3 rounded-full bg-white text-black font-bold hover:scale-105 transition-transform">
-                        View All Projects
-                    </button>
-                </div>
-            </>
-        );
-    };
+    const breadcrumbs = [
+        { name: 'Portfolio', url: '/portfolio' },
+        { name: project.title, url: `/portfolio/${slug}` }
+    ];
 
     return (
-        <div className="bg-[#f8fafc] text-[#122a46] min-h-screen selection:bg-teal-500/10 selection:text-[#122a46]" ref={containerRef}>
-            {content()}
+        <div className="bg-[#f8fafc] text-[#122a46] min-h-screen selection:bg-teal-500/10 selection:text-[#122a46] pt-32 sm:pt-36 md:pt-40" ref={containerRef}>
+            <SEO
+                title={`${project.title} Case Study | Codiora Tech`}
+                description={project.tagline ? `${project.title} - ${project.tagline} Case study and engineering outcomes by Codiora Tech.` : project.description.slice(0, 140)}
+                canonicalPath={`/portfolio/${slug}`}
+                ogImage={project.image}
+                breadcrumbs={breadcrumbs}
+            />
+
+            <Breadcrumbs items={breadcrumbs} />
+
+            {/* Hero Section */}
+            <section className="relative pt-12 pb-20 flex items-center justify-center overflow-hidden">
+                <div className="container mx-auto px-6 relative z-10 text-center">
+                    <span className="inline-block py-1 px-3 rounded-full border border-[#122a46]/10 bg-[#122a46]/5 text-teal-600 text-sm font-bold tracking-widest uppercase mb-6">
+                        {project.category}
+                    </span>
+                    <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-br from-[#122a46] via-slate-600 to-teal-600">
+                        {project.title}
+                    </h1>
+                    <p className="text-xl md:text-2xl text-slate-500 max-w-2xl mx-auto">
+                        {project.tagline}
+                    </p>
+                </div>
+            </section>
+
+            {/* Stats & Overview */}
+            <section className="py-16 border-y border-[#122a46]/10 bg-white">
+                <div className="container mx-auto px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        {/* Technologies */}
+                        <div>
+                            <h2 className="text-xs font-bold text-slate-500 tracking-widest uppercase mb-4">Tech Stack</h2>
+                            <div className="flex flex-wrap gap-2">
+                                {project.technologies.map(tech => (
+                                    <span key={tech} className="bg-[#122a46]/5 px-3 py-1 rounded-md text-sm border border-[#122a46]/10 hover:border-teal-500/50 transition-colors cursor-default">
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                        {/* Stat 1 */}
+                        <div className="text-center md:text-left">
+                            <h2 className="text-xs font-bold text-slate-500 tracking-widest uppercase mb-4">{project.stat1Label}</h2>
+                            <p className="text-5xl font-mono font-bold text-teal-600">{project.stat1}</p>
+                        </div>
+                        {/* Stat 2 */}
+                        <div className="text-center md:text-left">
+                            <h2 className="text-xs font-bold text-slate-500 tracking-widest uppercase mb-4">{project.stat2Label}</h2>
+                            <p className="text-5xl font-mono font-bold text-cyan-600">{project.stat2}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Visual Showcase & Narrative */}
+            <section className="py-24">
+                <div className="container mx-auto px-6 max-w-5xl">
+                    <div className="space-y-16">
+                        {/* Project Image */}
+                        <div className="relative aspect-video rounded-3xl overflow-hidden border border-[#122a46]/10 bg-slate-100 group shadow-lg">
+                            <Image
+                                src={project.image}
+                                alt={`${project.title} - ${project.tagline}`}
+                                fill
+                                sizes="(max-width: 1200px) 100vw, 1200px"
+                                className="transition-transform duration-700 hover:scale-105 object-cover"
+                                priority
+                            />
+                        </div>
+
+                        {/* Description */}
+                        <div>
+                            <h2 className="text-3xl font-bold mb-6 text-[#122a46]">The Vision</h2>
+                            <p className="text-lg text-slate-600 leading-relaxed">
+                                {project.description}
+                            </p>
+                        </div>
+
+                        {/* Challenges, Solutions & Results */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div className="bg-white p-8 rounded-2xl border border-[#122a46]/10 shadow-sm">
+                                <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 mb-6">⚠️</div>
+                                <h3 className="text-xl font-bold mb-4 text-[#122a46]">The Problem</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed">{project.challenges}</p>
+                            </div>
+                            <div className="bg-white p-8 rounded-2xl border border-[#122a46]/10 shadow-sm">
+                                <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 mb-6">💡</div>
+                                <h3 className="text-xl font-bold mb-4 text-[#122a46]">The Solution</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed">{project.solution}</p>
+                            </div>
+                            <div className="bg-white p-8 rounded-2xl border border-[#122a46]/10 shadow-sm">
+                                <div className="w-12 h-12 rounded-full bg-teal-500/10 flex items-center justify-center text-teal-600 mb-6">📈</div>
+                                <h3 className="text-xl font-bold mb-4 text-[#122a46]">The Results</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed">{project.results}</p>
+                            </div>
+                        </div>
+
+                        {/* Internal Link to Related Service (Requirement 7) */}
+                        {project.relatedService && (
+                            <div className="p-8 rounded-2xl bg-teal-500/5 border border-teal-500/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                                <div>
+                                    <span className="text-xs font-bold tracking-widest uppercase text-teal-600">Engineered with our service</span>
+                                    <h3 className="text-2xl font-bold text-[#122a46] mt-1">{project.relatedService.title}</h3>
+                                    <p className="text-slate-600 text-sm mt-1">{project.relatedService.desc}</p>
+                                </div>
+                                <Link
+                                    href={project.relatedService.url}
+                                    className="px-6 py-3 rounded-full bg-[#122a46] text-white font-bold text-sm hover:bg-teal-600 transition-colors shrink-0"
+                                >
+                                    Explore Service Details →
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </section>
+
+            {/* Next Project Nav */}
+            <div className="py-16 text-center border-t border-[#122a46]/10">
+                <Link
+                    href="/portfolio"
+                    className="inline-block px-8 py-3 rounded-full bg-[#122a46] text-white font-bold hover:bg-teal-600 transition-colors shadow-md"
+                >
+                    View All Portfolio Works
+                </Link>
+            </div>
         </div>
     );
+}
+
+export async function getStaticPaths() {
+    const paths = Object.keys(portfolioData).map((slug) => ({
+        params: { slug }
+    }));
+    return {
+        paths,
+        fallback: false
+    };
+}
+
+export async function getStaticProps({ params }) {
+    const project = portfolioData[params.slug] || null;
+    return {
+        props: {
+            project,
+            slug: params.slug
+        }
+    };
 }

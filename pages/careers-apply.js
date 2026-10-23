@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -156,9 +157,12 @@ export default function CareerApply() {
 
     return (
         <>
-            <Head>
-                <title>Apply for Careers | Codiora Tech</title>
-            </Head>
+            <SEO
+                title="Apply for Careers | Codiora Tech"
+                description="Apply for open engineering, design, and growth positions at Codiora Tech."
+                canonicalPath="/careers-apply"
+                noindex={true}
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30">
                 <div className="fixed inset-0 pointer-events-none">
@@ -166,9 +170,17 @@ export default function CareerApply() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-32 pb-20 relative z-10 transition-all duration-500">
+                <div className="container mx-auto px-6 pt-36 sm:pt-40 md:pt-44 pb-20 relative z-10 transition-all duration-500">
                     <div className="max-w-7xl mx-auto">
-                        <div className="mb-8">
+                        <Breadcrumbs
+                            items={[
+                                { label: 'Home', href: '/' },
+                                { label: 'Careers', href: '/careers' },
+                                { label: 'Apply', href: '/careers-apply' }
+                            ]}
+                        />
+
+                        <div className="mb-8 mt-4">
                             <Link href="/careers" legacyBehavior>
                                 <a className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-600 hover:text-teal-700 transition-colors">
                                     ← Back to Careers
@@ -341,13 +353,10 @@ export default function CareerApply() {
 
                                     {/* Actions */}
                                     <div className="space-y-3 pt-2">
-                                        <a
-                                            href={`mailto:career@codioratech.com?subject=${encodeURIComponent(`Application for ${role || 'Open Position'}`)}`}
-                                            className="w-full py-4 rounded-2xl bg-teal-500 text-white hover:bg-teal-400 font-bold text-base tracking-wide shadow-[0_10px_25px_rgba(20,184,166,0.35)] hover:shadow-[0_15px_35px_rgba(20,184,166,0.5)] hover:scale-[1.01] transition-all duration-300 flex items-center justify-center gap-3"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                            Apply via Email
-                                        </a>
+                                        <div className="w-full py-4 rounded-2xl bg-slate-100 border border-slate-200 text-slate-400 font-bold text-base tracking-wide flex items-center justify-center gap-2.5 cursor-not-allowed">
+                                            <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                            Applications Closed
+                                        </div>
 
                                         <div className="flex items-center justify-between gap-3 p-4 bg-slate-50 border border-[#122a46]/10 rounded-2xl text-xs">
                                             <div className="truncate">

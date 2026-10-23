@@ -18,9 +18,9 @@ export default function WhyCodiora() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600 mb-4">
+                    <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-cyan-600 mb-4">
                         Why Codiora Tech?
-                    </h2>
+                    </h1>
                     <p className="text-gray-600 dark:text-slate-500 max-w-2xl mx-auto">
                         We define excellence in digital engineering.
                     </p>

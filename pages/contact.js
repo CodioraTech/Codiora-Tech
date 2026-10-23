@@ -1,9 +1,11 @@
-import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import emailjs from '@emailjs/browser';
+import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import StaticWorldMap from '@/components/StaticWorldMap';
 
 const Globe3D = dynamic(() => import('@/components/Globe3D'), {
     ssr: false,
@@ -12,13 +14,31 @@ const Globe3D = dynamic(() => import('@/components/Globe3D'), {
 
 export default function Contact() {
     const router = useRouter();
-    const [status, setStatus] = useState('idle'); // idle, clicking, submitting, success, error
+    const [status, setStatus] = useState('idle'); // idle, submitting, success, error
     const [errorMessage, setErrorMessage] = useState('');
     const [ripple, setRipple] = useState(null);
     const [btnHovered, setBtnHovered] = useState(false);
     const [selectedService, setSelectedService] = useState('');
+    const [isDesktop3DAllowed, setIsDesktop3DAllowed] = useState(false);
     const form = useRef();
     const btnRef = useRef();
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const isMobile = window.innerWidth < 768;
+        const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const saveData = Boolean(navigator.connection && navigator.connection.saveData);
+
+        if (!isMobile && !prefersReducedMotion && !saveData) {
+            if ('requestIdleCallback' in window) {
+                const idleId = window.requestIdleCallback(() => setIsDesktop3DAllowed(true), { timeout: 2500 });
+                return () => window.cancelIdleCallback && window.cancelIdleCallback(idleId);
+            } else {
+                const timer = setTimeout(() => setIsDesktop3DAllowed(true), 1500);
+                return () => clearTimeout(timer);
+            }
+        }
+    }, []);
 
     const serviceMapping = {
         'Web Architecture': 'Web Development',
@@ -57,7 +77,6 @@ export default function Contact() {
         }
 
         // 2. Validation: Strict Input Sanitization
-        // Email Regex
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(data.email)) {
             setStatus('error');
@@ -85,9 +104,16 @@ export default function Contact() {
         setStatus('submitting');
         setErrorMessage('');
 
-        const PUBLIC_KEY = 'hZTzq_6Nf7MBfsPYt';
-        const SERVICE_ID = 'service_0d54igh';
-        const TEMPLATE_ID = 'template_v3zts87';
+        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'hZTzq_6Nf7MBfsPYt';
+        const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_0d54igh';
+        const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_v3zts87';
+
+        if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
+            console.warn("EmailJS environment variables not configured.");
+            setStatus('error');
+            setErrorMessage('Email service is currently offline. Please email us directly at contact@codioratech.com.');
+            return;
+        }
 
         // Inject template alias fields for EmailJS template variable compatibility
         const templateParams = {
@@ -119,8 +145,7 @@ export default function Contact() {
         });
 
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
-            .then((result) => {
-                console.log(result.text);
+            .then(() => {
                 setStatus('success');
             }, (error) => {
                 console.log("sendForm error, attempting fallback send():", error);
@@ -136,28 +161,28 @@ export default function Contact() {
 
     return (
         <>
-            <Head>
-                <title>Book a Free Consultation & Technical Audit | Codiora Tech</title>
-                <meta name="description" content="Request a consultation with our technology team. Discuss your AI automation, custom scraping, or enterprise SaaS engineering needs today." />
-            </Head>
+            <SEO
+                title="Contact Us | Book a Free Audit | Codiora Tech"
+                description="Get in touch with Codiora Tech in Dhaka for custom web development, AI automation, and cloud engineering consultations."
+                canonicalPath="/contact"
+            />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/30">
-                {/* Ambient Background - Reusing the premium look */}
+                {/* Ambient Background */}
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-teal-500/10 rounded-full blur-[120px] animate-pulse-slow" />
                     <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-[#122a46]/5 rounded-full blur-[120px] animate-pulse-slow delay-1000" />
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-44 pb-20 relative z-10">
-                    <div className="text-center mb-16">
-                        <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-6xl md:text-8xl font-black tracking-tighter mb-4"
-                        >
-                            LET'S <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">COLLABORATE</span>
-                        </motion.h1>
+                <div className="container mx-auto px-6 pt-36 sm:pt-40 md:pt-44 pb-20 relative z-10">
+                    <div className="mb-6">
+                        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contact', href: '/contact' }]} />
+                    </div>
+
+                    <div className="text-center mb-12">
+                        <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-4">
+                            LET'S <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500">COLLABORATE</span>
+                        </h1>
                         <motion.p
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -173,10 +198,26 @@ export default function Contact() {
                             transition={{ delay: 0.3 }}
                             className="inline-block"
                         >
-                            <span className="px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-teal-500/30 text-teal-600 font-bold uppercase tracking-[0.2em] text-sm shadow-[0_0_20px_rgba(34,211,238,0.15)] backdrop-blur-md">
+                            <span className="px-6 py-3 rounded-full bg-gradient-to-r from-teal-500/10 to-cyan-500/10 border border-teal-500/30 text-teal-600 font-bold uppercase tracking-[0.2em] text-sm shadow-[0_0_20px_rgba(34,211,238,0.15)] backdrop-blur-md">
                                 Premium Web & Mobile Development Services
                             </span>
                         </motion.div>
+                    </div>
+
+                    {/* Trust Guarantees */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-16 text-center">
+                        <div className="p-4 rounded-2xl bg-white border border-[#122a46]/10 shadow-sm flex items-center justify-center gap-3">
+                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 flex-shrink-0 animate-pulse"></span>
+                            <span className="text-xs font-bold text-[#122a46] uppercase tracking-wider">24h Guaranteed Response</span>
+                        </div>
+                        <div className="p-4 rounded-2xl bg-white border border-[#122a46]/10 shadow-sm flex items-center justify-center gap-3">
+                            <span className="w-2.5 h-2.5 rounded-full bg-teal-500 flex-shrink-0"></span>
+                            <span className="text-xs font-bold text-[#122a46] uppercase tracking-wider">Direct Architect Review</span>
+                        </div>
+                        <div className="p-4 rounded-2xl bg-white border border-[#122a46]/10 shadow-sm flex items-center justify-center gap-3">
+                            <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 flex-shrink-0"></span>
+                            <span className="text-xs font-bold text-[#122a46] uppercase tracking-wider">100% NDA Protection</span>
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
@@ -296,25 +337,25 @@ export default function Contact() {
                                         className="space-y-6 relative z-10"
                                     >
                                         <div className="space-y-2">
-                                            <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Full Name <span className="text-teal-600">*</span></label>
-                                            <input name="full_name" type="text" required className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="Your full name" />
+                                            <label htmlFor="contact_full_name" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Full Name <span className="text-teal-600">*</span></label>
+                                            <input id="contact_full_name" name="full_name" type="text" required className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-2 focus:ring-teal-500/20 transition-all outline-none placeholder:text-gray-500 font-medium" placeholder="Your full name" />
                                         </div>
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="space-y-2">
-                                                <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Email Address <span className="text-teal-600">*</span></label>
-                                                <input name="email" type="email" required className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="your@email.com" />
+                                                <label htmlFor="contact_email" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Email Address <span className="text-teal-600">*</span></label>
+                                                <input id="contact_email" name="email" type="email" required className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-2 focus:ring-teal-500/20 transition-all outline-none placeholder:text-gray-500 font-medium" placeholder="your@email.com" />
                                             </div>
                                             <div className="space-y-2">
-                                                <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Phone Number <span className="text-teal-600">*</span></label>
-                                                <input name="phone" type="tel" required className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium" placeholder="+880 9611 317 892" />
+                                                <label htmlFor="contact_phone" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Phone Number <span className="text-teal-600">*</span></label>
+                                                <input id="contact_phone" name="phone" type="tel" required className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-2 focus:ring-teal-500/20 transition-all outline-none placeholder:text-gray-500 font-medium" placeholder="+880 9611 317 892" />
                                             </div>
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Project Type <span className="text-teal-600">*</span></label>
+                                            <label htmlFor="contact_project_type" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Project Type <span className="text-teal-600">*</span></label>
                                             <div className="relative">
-                                                <select name="project_type" value={selectedService} onChange={(e) => setSelectedService(e.target.value)} className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none appearance-none font-medium cursor-pointer">
+                                                <select id="contact_project_type" name="project_type" value={selectedService} onChange={(e) => setSelectedService(e.target.value)} className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-2 focus:ring-teal-500/20 transition-all outline-none appearance-none font-medium cursor-pointer">
                                                     <option value="" className="bg-white">Select project type</option>
                                                     <option value="AI Automation & Intelligent Agents" className="bg-white">AI Automation & Intelligent Agents</option>
                                                     <option value="Full-Stack Enterprise Applications" className="bg-white">Full-Stack Enterprise Applications</option>
@@ -326,26 +367,29 @@ export default function Contact() {
                                                     <option value="Growth Marketing" className="bg-white">Growth Marketing</option>
                                                     <option value="Other" className="bg-white">Other</option>
                                                 </select>
-                                                <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">▼</div>
+                                                <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500" aria-hidden="true">▼</div>
                                             </div>
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Project Details <span className="text-teal-600">*</span></label>
-                                            <textarea name="message" required className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder:text-gray-700 font-medium h-40 resize-none" placeholder="Tell us about your project requirements, goals, and timeline..."></textarea>
+                                            <label htmlFor="contact_message" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Project Details <span className="text-teal-600">*</span></label>
+                                            <textarea id="contact_message" name="message" required className="w-full bg-[#f8fafc]/40 border border-[#122a46]/10 rounded-xl px-5 py-4 text-[#122a46] focus:border-teal-500 focus:bg-[#f8fafc]/60 focus:ring-2 focus:ring-teal-500/20 transition-all outline-none placeholder:text-gray-500 font-medium h-40 resize-none" placeholder="Tell us about your project requirements, goals, and timeline..."></textarea>
                                         </div>
 
-                                        {/* Honeypot Field for Security */}
-                                        <input
-                                            type="text"
-                                            name="website_check"
-                                            style={{ display: 'none', visibility: 'hidden', height: 0, width: 0, position: 'absolute' }}
-                                            tabIndex="-1"
-                                            autoComplete="off"
-                                        />
+                                        {/* Honeypot Field for Security & Spam Protection */}
+                                        <div className="sr-only" aria-hidden="true">
+                                            <label htmlFor="website_check">Leave this field blank</label>
+                                            <input
+                                                id="website_check"
+                                                type="text"
+                                                name="website_check"
+                                                tabIndex="-1"
+                                                autoComplete="off"
+                                            />
+                                        </div>
 
                                         {status === 'error' && (
-                                            <div className="text-red-500 text-sm text-center font-bold">
+                                            <div role="alert" className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm text-center font-bold">
                                                 {errorMessage}
                                             </div>
                                         )}
@@ -386,7 +430,6 @@ export default function Contact() {
                                                 <span className="relative z-20 flex items-center justify-center gap-3 transition-colors duration-300" style={{color: btnHovered ? 'white' : '#0f172a'}}>
                                                     {status === 'submitting' ? (
                                                         <span className="flex items-center gap-3">
-                                                            {/* Fancy pulsing rings */}
                                                             <span className="relative flex h-5 w-5">
                                                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                                                                 <span className="relative inline-flex rounded-full h-5 w-5 bg-white/90"></span>
@@ -428,10 +471,10 @@ export default function Contact() {
 
                                 <div className="bg-white border border-[#122a46]/5 p-8 rounded-3xl hover:border-[#122a46]/10 transition-colors group">
                                     <div className="w-12 h-12 bg-[#122a46]/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-teal-500/10 transition-colors">
-                                        <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                        <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                                     </div>
                                     <h3 className="text-slate-500 text-xs font-bold uppercase tracking-widest mb-2">Call Us</h3>
-                                    <a href="tel:+8809611317892" className="text-[#122a46] font-bold text-lg hover:text-purple-400 transition-colors">+880 9611 317 892</a>
+                                    <a href="tel:+8809611317892" className="text-[#122a46] font-bold text-lg hover:text-teal-600 transition-colors">+880 9611 317 892</a>
                                 </div>
 
                                 <div className="bg-white border border-[#122a46]/5 p-8 rounded-3xl hover:border-[#122a46]/10 transition-colors group">
@@ -458,14 +501,12 @@ export default function Contact() {
                                 transition={{ duration: 0.8, delay: 0.3 }}
                                 className="flex-grow w-full min-h-[400px] bg-[#f8fafc]/40 rounded-3xl border border-[#122a46]/10 relative overflow-hidden group"
                             >
-                                {/* Glowing backdrop for globe */}
                                 <div className="absolute inset-0 bg-radial-gradient from-cyan-900/20 to-transparent opacity-50" />
 
                                 <div className="absolute inset-0 z-10 p-2">
-                                    <Globe3D />
+                                    {isDesktop3DAllowed ? <Globe3D /> : <StaticWorldMap />}
                                 </div>
 
-                                {/* Overlay Text */}
                                 <div className="absolute bottom-6 left-8 z-20 pointer-events-none">
                                     <div className="flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
