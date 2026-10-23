@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function Breadcrumbs({ items = [] }) {
+export default function Breadcrumbs({ items = [], className = '' }) {
     if (!items || items.length === 0) return null;
 
     // Normalize items to { label, href } and filter out root Home if already present
@@ -17,7 +17,7 @@ export default function Breadcrumbs({ items = [] }) {
         });
 
     return (
-        <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-6 pt-28 pb-4 text-xs font-medium text-slate-500">
+        <nav aria-label="Breadcrumb" className={`w-full max-w-7xl mx-auto px-6 pt-2 pb-4 text-xs font-medium text-slate-500 ${className}`}>
             <ol className="flex items-center flex-wrap gap-2">
                 <li>
                     <Link href="/" className="hover:text-teal-600 transition-colors flex items-center gap-1">

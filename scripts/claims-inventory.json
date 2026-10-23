@@ -1,0 +1,644 @@
+[
+  {
+    "category": "Client / Country Stat",
+    "file": "components/CaseStudyCard.js",
+    "line": 26,
+    "raw": "<p className=\"text-sm text-slate-500 mb-6\">{study.client}</p>"
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "components/FounderMessage.js",
+    "line": 35,
+    "raw": "alt=\"Asif Mahamud Shaon\""
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "components/FounderMessage.js",
+    "line": 44,
+    "raw": "<h4 className=\"text-lg font-bold text-[#122a46]\">Asif Mahamud Shaon</h4>"
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "components/FounderMessage.js",
+    "line": 45,
+    "raw": "<p className=\"text-xs font-bold text-teal-600 uppercase tracking-widest mt-1\">Founder & CEO</p>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "components/Hero3D.js",
+    "line": 171,
+    "raw": "eventPrefix=\"client\""
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "components/WhyCodiora.js",
+    "line": 7,
+    "raw": "{ title: \"99.9% Crawler Uptime\", icon: \"📊\", desc: \"Resilient web scraping pipelines with dynamic proxy rotation and captcha bypassing bu..."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/about.js",
+    "line": 67,
+    "raw": "{ label: \"Client Satisfaction\", value: \"98%\" },"
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/about.js",
+    "line": 69,
+    "raw": "{ label: \"First Response\", value: \"24h\" }"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/api/chat.js",
+    "line": 186,
+    "raw": "- Clients can request a **Free Technical Audit & Consultation** via our Contact page."
+  },
+  {
+    "category": "Stat / Metric",
+    "file": "pages/blog/[slug].js",
+    "line": 21,
+    "raw": "heading: \"The Challenge: Breaking the 50k Barrier\","
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/blog/[slug].js",
+    "line": 142,
+    "raw": "body: \"Async coordination fosters deliberate thinking, transparent archives, and respect for global time zones. Discover how we manage cl..."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/case-studies.js",
+    "line": 11,
+    "raw": "client: \"NeoBank Corp\","
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/case-studies.js",
+    "line": 22,
+    "raw": "client: \"HealthPlus\","
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/case-studies.js",
+    "line": 33,
+    "raw": "client: \"FashionNova\","
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/case-studies.js",
+    "line": 39,
+    "raw": "result: \"📈 99.99% Uptime During Peak Sales\""
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/case-studies.js",
+    "line": 44,
+    "raw": "client: \"GlobalShip\","
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/case-studies.js",
+    "line": 61,
+    "raw": "title=\"Client Case Studies | Codiora Tech\""
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/case-studies.js",
+    "line": 62,
+    "raw": "description=\"Explore client case studies and digital transformation stories delivered by Codiora Tech across web, SaaS, and AI automation.\""
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/codecamp.js",
+    "line": 15,
+    "raw": "{ name: \"1-on-1\", price: \"$1499\", perks: [\"Daily Standups\", \"Unlimited Code Review\", \"Guaranteed Internship Interview\", \"Resume Rewrite\"] }"
+  },
+  {
+    "category": "Testimonial",
+    "file": "pages/counseling.js",
+    "line": 150,
+    "raw": "{ title: \"Career Roadmap\", desc: \"We'll review your background and map out a realistic timeline to getting hired.\" },"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/culture.js",
+    "line": 102,
+    "raw": "{ lbl: \"Countries\", val: \"12\" },"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/faq.js",
+    "line": 15,
+    "raw": "{ q: \"Do you have a referral program?\", a: \"Yes. We offer generous commissions for successful client referrals. Many of our partners are ..."
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 14,
+    "raw": "{ id: 1, image: \"/images/avatars/avatar-1.svg\", name: \"Rafiq A., CTO at HealthOS\" },"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 15,
+    "raw": "{ id: 2, image: \"/images/avatars/avatar-2.svg\", name: \"Sophia L., Founder at UrbanCart\" },"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 16,
+    "raw": "{ id: 3, image: \"/images/avatars/avatar-3.svg\", name: \"Mohammed K., CEO at Finvault\" },"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 17,
+    "raw": "{ id: 4, image: \"/images/avatars/avatar-4.svg\", name: \"Elena R., Head of Tech at NexaCorp\" },"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 18,
+    "raw": "{ id: 5, image: \"/images/avatars/avatar-5.svg\", name: \"David C., Lead Architect at LogiTrack\" },"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 19,
+    "raw": "{ id: 6, image: \"/images/avatars/avatar-6.svg\", name: \"Amara O., Product Lead at AeroBase\" }"
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/index.js",
+    "line": 24,
+    "raw": "{ q: \"What happens if we're not happy with the work?\", a: \"We have a structured revision process built into every project. If something i..."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 25,
+    "raw": "{ q: \"Do you sign NDAs?\", a: \"Yes, absolutely. We sign NDAs before any detailed project discussion for all clients. Confidentiality is a ..."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 27,
+    "raw": "{ q: \"What's your timezone and communication style?\", a: \"We're based in Dhaka (GMT+6) but work overlap hours with EU and US clients. You..."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 152,
+    "raw": "<span className=\"badge-text\">Currently accepting new clients for Q3 2026</span>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 168,
+    "raw": "<div className=\"trust-text\"><strong>Trusted by 60+ clients</strong>across 12 countries</div>"
+  },
+  {
+    "category": "Testimonial",
+    "file": "pages/index.js",
+    "line": 180,
+    "raw": "<div className=\"logo-bar-label\">Trusted by teams at</div>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 181,
+    "raw": "<div className=\"client-logos\">"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 182,
+    "raw": "<div className=\"client-logo\">NexaCorp</div>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 183,
+    "raw": "<div className=\"client-logo\">BrightMed</div>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 184,
+    "raw": "<div className=\"client-logo\">UrbanCart</div>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 185,
+    "raw": "<div className=\"client-logo\">Finvault</div>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 186,
+    "raw": "<div className=\"client-logo\">HealthOS</div>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 187,
+    "raw": "<div className=\"client-logo\">LogiTrack</div>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 188,
+    "raw": "<div className=\"client-logo\">AeroBase</div>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 202,
+    "raw": "<div className=\"stat-label\">Client satisfaction rate</div>"
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/index.js",
+    "line": 210,
+    "raw": "<div className=\"stat-label\">Guaranteed first response</div>"
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/index.js",
+    "line": 443,
+    "raw": "<span>📈</span> <strong>Outcome: 15,000+ active concurrent traders | 99.99% system uptime</strong>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 456,
+    "raw": "<div className=\"chip\">Client Stories</div>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 457,
+    "raw": "<h2 className=\"s-title\">What Our Clients Say</h2>"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 465,
+    "raw": "<img src=\"/images/avatars/avatar-1.svg\" alt=\"Rafiq A., CTO at HealthOS\" width={44} height={44} className=\"testi-avatar\" />"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 466,
+    "raw": "<div><div className=\"testi-name\">Rafiq A.</div><div className=\"testi-role\">CTO, HealthOS</div></div>"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 474,
+    "raw": "<img src=\"/images/avatars/avatar-2.svg\" alt=\"Sophia L., Founder at UrbanCart\" width={44} height={44} className=\"testi-avatar\" />"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 475,
+    "raw": "<div><div className=\"testi-name\">Sophia L.</div><div className=\"testi-role\">Founder, UrbanCart</div></div>"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 483,
+    "raw": "<img src=\"/images/avatars/avatar-3.svg\" alt=\"Mohammed K., CEO at Finvault\" width={44} height={44} className=\"testi-avatar\" />"
+  },
+  {
+    "category": "Company Name",
+    "file": "pages/index.js",
+    "line": 484,
+    "raw": "<div><div className=\"testi-name\">Mohammed K.</div><div className=\"testi-role\">CEO, Finvault</div></div>"
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/index.js",
+    "line": 643,
+    "raw": "<FAQItem isOpen={openFaq === 1} onToggle={() => setOpenFaq(openFaq === 1 ? null : 1)} q=\"What happens if we're not happy with the work?\" ..."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 644,
+    "raw": "<FAQItem isOpen={openFaq === 2} onToggle={() => setOpenFaq(openFaq === 2 ? null : 2)} q=\"Do you sign NDAs?\" a=\"Yes, absolutely. We sign N..."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/index.js",
+    "line": 646,
+    "raw": "<FAQItem isOpen={openFaq === 4} onToggle={() => setOpenFaq(openFaq === 4 ? null : 4)} q=\"What's your timezone and communication style?\" a..."
+  },
+  {
+    "category": "Testimonial",
+    "file": "pages/index.js",
+    "line": 677,
+    "raw": "Book a free 30-minute call. We'll discuss your project, give honest feedback, and outline exactly how we'd approach it."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/internship/[slug].js",
+    "line": 32,
+    "raw": "description: \"Join our dynamic design and frontend engineering team to construct robust, high-performance, and visually stunning user int..."
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/internship/[slug].js",
+    "line": 37,
+    "raw": "\"Optimize Core Web Vitals to guarantee blazing fast load times.\""
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "pages/leadership.js",
+    "line": 27,
+    "raw": "name: \"Asif Mahamud Shaon\","
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "pages/leadership.js",
+    "line": 28,
+    "raw": "role: \"Founder & CEO\","
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "pages/leadership.js",
+    "line": 35,
+    "raw": "name: \"Sarah Jenkins\","
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "pages/leadership.js",
+    "line": 36,
+    "raw": "role: \"Head of Engineering\","
+  },
+  {
+    "category": "Testimonial",
+    "file": "pages/leadership.js",
+    "line": 137,
+    "raw": "\"Strategic Alignment: Thursday (Review & Plan)\","
+  },
+  {
+    "category": "Testimonial",
+    "file": "pages/partner-apply.js",
+    "line": 72,
+    "raw": "Complete the dossier below. We review every application personally."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/partner-program.js",
+    "line": 11,
+    "raw": "description=\"Join the Codiora Tech partner network. Earn revenue shares, collaborate on enterprise client projects, and co-develop softwa..."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/partner-program.js",
+    "line": 103,
+    "raw": "\"Active client base with consistent deal flow.\","
+  },
+  {
+    "category": "Testimonial",
+    "file": "pages/partner-program.js",
+    "line": 120,
+    "raw": "{ time: \"Day 1-3\", title: \"Application Review\", text: \"We analyze your dossier.\" },"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/partners.js",
+    "line": 69,
+    "raw": "Join our ecosystem of technology leaders, consultants, and industry experts. Together, we can deliver unparalleled value to clients world..."
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/platform.js",
+    "line": 61,
+    "raw": "<div className=\"text-xs text-slate-500 uppercase\">Uptime Target</div>"
+  },
+  {
+    "category": "Stat / Metric",
+    "file": "pages/portfolio/[slug].js",
+    "line": 14,
+    "raw": "challenges: \"Managing over 100k concurrent WebSocket connections for real-time order book updates without causing interface lag or browse..."
+  },
+  {
+    "category": "Stat / Metric",
+    "file": "pages/portfolio/[slug].js",
+    "line": 16,
+    "raw": "results: \"Achieved sub-millisecond order matching latency, grew active trader base to 150k+, and reduced transaction friction by 90% by a..."
+  },
+  {
+    "category": "Stat / Metric",
+    "file": "pages/portfolio/[slug].js",
+    "line": 19,
+    "raw": "stat2: \"150K+\", stat2Label: \"Active Traders\","
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/portfolio/[slug].js",
+    "line": 34,
+    "raw": "results: \"Triage processing times dropped by 9x, patient satisfaction ratings reached 98%, and clinical diagnostics achieved a 0% halluci..."
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/portfolio/[slug].js",
+    "line": 36,
+    "raw": "stat1: \"99.9%\", stat1Label: \"Uptime\","
+  },
+  {
+    "category": "Testimonial",
+    "file": "pages/privacy-policy.js",
+    "line": 11,
+    "raw": "description=\"Review the official Privacy Policy of Codiora Tech to understand our data protection, storage, and processing standards.\""
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/refund-policy.js",
+    "line": 11,
+    "raw": "description=\"Comprehensive details on billing integrity, cancellation procedures, and refund policies for Codiora Tech clients.\""
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/refund-policy.js",
+    "line": 61,
+    "raw": "<span className=\"text-teal-600\">01.</span> Commitment to Satisfaction"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/refund-policy.js",
+    "line": 65,
+    "raw": "At <strong>Codiora Tech</strong>, our primary goal is to provide exceptional software solutions that drive value for our clients. We beli..."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/refund-policy.js",
+    "line": 68,
+    "raw": "We encourage all clients to read this policy carefully before starting any project. By ensuring a clear understanding of our terms, we ca..."
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/refund-policy.js",
+    "line": 94,
+    "raw": "<span><strong>14 Days:</strong> Money-back guarantee for qualifying standard packages or SaaS subscriptions.</span>"
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/refund-policy.js",
+    "line": 136,
+    "raw": "<li><strong>Milestone Payments:</strong> Payments made upon the completion and approval of specific milestones (e.g., Alpha Release, Beta..."
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/refund-policy.js",
+    "line": 148,
+    "raw": "<p>Design is subjective, and we offer revisions to ensure satisfaction. Refund rules are as follows:</p>"
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/refund-policy.js",
+    "line": 167,
+    "raw": "<li><strong>SEO Services:</strong> SEO is a long-term process. We do not guarantee specific rankings due to search engine algorithm updat..."
+  },
+  {
+    "category": "Testimonial",
+    "file": "pages/refund-policy.js",
+    "line": 216,
+    "raw": "<li><strong>4.</strong> Our team will review your request and contract terms within 48 hours.</li>"
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "pages/services.js",
+    "line": 13,
+    "raw": "{ title: \"Immersive UI/UX\", description: \"User-centric design that drives engagement and satisfaction.\", icon: \"✨\", image: \"/images/servi..."
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "pages/team.js",
+    "line": 8,
+    "raw": "name: \"Asif Mahamud Shaon\","
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "pages/team.js",
+    "line": 9,
+    "raw": "role: \"Founder & CEO\","
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "pages/team.js",
+    "line": 14,
+    "raw": "name: \"Sarah Jenkins\","
+  },
+  {
+    "category": "Leadership Claim",
+    "file": "pages/team.js",
+    "line": 15,
+    "raw": "role: \"Head of Engineering\","
+  },
+  {
+    "category": "Testimonial",
+    "file": "pages/terms-conditions.js",
+    "line": 11,
+    "raw": "description=\"Review the terms and conditions governing software development services and digital product engagements with Codiora Tech.\""
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/terms-conditions.js",
+    "line": 76,
+    "raw": "The Service and its original content, features, and functionality are and will remain the exclusive property of Codiora Tech and its lice..."
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/testimonials.js",
+    "line": 125,
+    "raw": "title=\"Client Stories & Reviews | Codiora Tech\""
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/testimonials.js",
+    "line": 126,
+    "raw": "description=\"Read real client testimonials and reviews about Codiora Tech's custom software development, AI automation, and engineering s..."
+  },
+  {
+    "category": "Testimonial",
+    "file": "pages/testimonials.js",
+    "line": 142,
+    "raw": "<p className=\"text-slate-500 font-bold uppercase tracking-[0.3em] text-sm mb-6\">Trusted by Visionaries</p>"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/_app.js",
+    "line": 72,
+    "raw": "{ '@type': 'Country', 'name': 'Bangladesh' },"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/_app.js",
+    "line": 73,
+    "raw": "{ '@type': 'Country', 'name': 'United States' },"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "pages/_app.js",
+    "line": 74,
+    "raw": "{ '@type': 'Country', 'name': 'United Kingdom' },"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "lib/errorMonitoring.js",
+    "line": 37,
+    "raw": "console.error('[Codiora Client Telemetry]', errorPayload);"
+  },
+  {
+    "category": "Testimonial",
+    "file": "lib/services.js",
+    "line": 23,
+    "raw": "{ title: \"Knowledge Auditing\", desc: \"We review and sanitize your documentation, FAQs, and data logs.\" },"
+  },
+  {
+    "category": "Client / Country Stat",
+    "file": "lib/services.js",
+    "line": 63,
+    "raw": "desc: \"Harvest business directories, maps, and social platforms to compile targeted client databases using Custom target-based lead gener..."
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "lib/services.js",
+    "line": 144,
+    "raw": "benefits: [\"99.99% Uptime\", \"Lightning Fast Load Times\", \"Global Scalability\", \"Future-Proof Tech Stack\"],"
+  },
+  {
+    "category": "Testimonial",
+    "file": "lib/services.js",
+    "line": 160,
+    "raw": "{ title: \"Development\", desc: \"Agile sprints with regular updates and feedback loops.\" },"
+  },
+  {
+    "category": "Testimonial",
+    "file": "lib/services.js",
+    "line": 235,
+    "raw": "{ title: \"Beta Testing\", desc: \"TestFlight distribution for feedback.\" },"
+  },
+  {
+    "category": "Testimonial",
+    "file": "lib/services.js",
+    "line": 236,
+    "raw": "{ title: \"App Store Launch\", desc: \"Handling the review and submission process.\" }"
+  },
+  {
+    "category": "Testimonial",
+    "file": "lib/services.js",
+    "line": 311,
+    "raw": "{ title: \"Validation\", desc: \"Stakeholder review and approval.\" }"
+  },
+  {
+    "category": "SLA / Guarantee",
+    "file": "lib/services.js",
+    "line": 372,
+    "raw": "{ title: \"AutoSupport\", slug: \"autosupport\", desc: \"Automated support workflows increasing organic retention and user satisfaction.\" }"
+  }
+]

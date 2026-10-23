@@ -8,7 +8,8 @@ export default function SEO({
     ogImage = '/images/og-image.png',
     breadcrumbs,
     faqSchema,
-    articleSchema
+    articleSchema,
+    noindex = false
 }) {
     // Strip query string and trailing slash (except root)
     const cleanPath = (canonicalPath || '/').split('?')[0].replace(/\/+$/, '') || '/';
@@ -61,6 +62,7 @@ export default function SEO({
         <Head>
             <title>{finalTitle}</title>
             <meta name="description" content={finalDesc} />
+            <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
             <link rel="canonical" href={canonicalUrl} />
 
             {/* Open Graph */}

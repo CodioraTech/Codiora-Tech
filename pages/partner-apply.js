@@ -12,9 +12,16 @@ export default function PartnerApply() {
         e.preventDefault();
         setStatus('submitting');
 
-        const PUBLIC_KEY = 'r5FRZ6PBbEXsb074d';
-        const SERVICE_ID = 'service_6hxh39r';
-        const TEMPLATE_ID = 'template_6hm18xl';
+        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'hZTzq_6Nf7MBfsPYt';
+        const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_PARTNER_SERVICE_ID || process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_0d54igh';
+        const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_PARTNER_TEMPLATE_ID || process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_v3zts87';
+
+        if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
+            console.warn("EmailJS environment variables not configured for partner application.");
+            alert("Partner application service is currently offline. Please contact us directly at contact@codioratech.com.");
+            setStatus('idle');
+            return;
+        }
 
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
             .then((result) => {
@@ -22,7 +29,7 @@ export default function PartnerApply() {
                 setStatus('success');
             }, (error) => {
                 console.log(error.text);
-                alert("Submission failed. Please try again or contact us directly.");
+                alert("Submission failed. Please try again or contact us directly at contact@codioratech.com.");
                 setStatus('idle');
             });
     };
@@ -33,6 +40,7 @@ export default function PartnerApply() {
                 title="Partner Application | Codiora Tech"
                 description="Apply to join the Codiora Tech partner network to deliver joint engineering and digital solutions."
                 canonicalPath="/partner-apply"
+                noindex={true}
             />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-teal-500/10">
@@ -43,7 +51,7 @@ export default function PartnerApply() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-32 pb-28 relative z-10 max-w-3xl">
+                <div className="container mx-auto px-6 pt-36 sm:pt-40 md:pt-44 pb-28 relative z-10 max-w-3xl">
                     <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Partners', href: '/partners' }, { label: 'Partner Application', href: '/partner-apply' }]} />
 
                     {/* Header */}

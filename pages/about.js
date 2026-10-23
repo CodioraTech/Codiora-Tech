@@ -22,9 +22,9 @@ export default function About() {
 
                 <div className="relative z-10">
                     {/* 1. Hero Manifesto */}
-                    <section className="pt-32 pb-24 px-6">
+                    <section className="pt-36 sm:pt-40 md:pt-44 pb-24 px-6">
                         <div className="container mx-auto max-w-5xl text-center">
-                            <div className="mb-8 flex justify-center">
+                            <div className="mb-6 flex justify-center">
                                 <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About', href: '/about' }]} />
                             </div>
 
@@ -130,18 +130,52 @@ export default function About() {
                                 </div>
 
                                 <motion.div
-                                    initial={{ opacity: 0, rotate: 5 }}
-                                    whileInView={{ opacity: 1, rotate: 0 }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 1 }}
-                                    className="relative h-[600px] w-full rounded-3xl overflow-hidden border border-[#122a46]/10 bg-gradient-to-br from-[#122a46]/5 to-[#f8fafc] group flex items-center justify-center p-8"
+                                    transition={{ duration: 0.8 }}
+                                    className="relative w-full rounded-3xl overflow-hidden border border-[#122a46]/10 bg-[#0f172a] text-slate-300 shadow-2xl p-6 sm:p-8 flex flex-col justify-between"
                                 >
-                                    <div className="text-center">
-                                        <div className="text-7xl mb-6">🏛️</div>
-                                        <div className="text-2xl font-bold text-[#122a46] mb-3">Engineered for Scale</div>
-                                        <p className="text-slate-500 max-w-sm mx-auto text-sm leading-relaxed">
-                                            From architecture blueprints to zero-downtime deployments, we build for long-term maintainability.
-                                        </p>
+                                    {/* Terminal Title Bar */}
+                                    <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+                                        <div className="flex items-center gap-2">
+                                            <span className="w-3 h-3 rounded-full bg-rose-500"></span>
+                                            <span className="w-3 h-3 rounded-full bg-amber-500"></span>
+                                            <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                            <span className="text-xs font-mono text-slate-400 ml-2">architecture-spec.ts</span>
+                                        </div>
+                                        <span className="text-[10px] font-mono text-teal-400 bg-teal-950/80 border border-teal-800 px-2 py-0.5 rounded">
+                                            Production Cluster • Dhaka
+                                        </span>
+                                    </div>
+
+                                    {/* Code snippet */}
+                                    <div className="font-mono text-xs sm:text-sm leading-relaxed space-y-2 text-slate-300 overflow-x-auto">
+                                        <div className="text-teal-400">// Codiora High-Availability Service Mesh</div>
+                                        <div><span className="text-purple-400">export const</span> systemArchitecture = &#123;</div>
+                                        <div className="pl-4">engine: <span className="text-emerald-400">'Next.js + Python FastAPI'</span>,</div>
+                                        <div className="pl-4">database: <span className="text-emerald-400">'PostgreSQL + Redis Layer'</span>,</div>
+                                        <div className="pl-4">crawlers: <span className="text-emerald-400">'Playwright Cluster (Rotating IP)'</span>,</div>
+                                        <div className="pl-4">telemetry: <span className="text-emerald-400">'Sentry 24/7 + Datadog'</span>,</div>
+                                        <div className="pl-4">uptimeGuarantee: <span className="text-cyan-400">99.9</span>,</div>
+                                        <div className="pl-4">ownership: <span className="text-emerald-400">'100% Client IP Transfer'</span></div>
+                                        <div>&#125;;</div>
+                                    </div>
+
+                                    {/* Telemetry Status Bar */}
+                                    <div className="mt-8 pt-6 border-t border-slate-800 grid grid-cols-3 gap-2 text-center">
+                                        <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                                            <div className="text-xs font-mono text-emerald-400">● 42ms</div>
+                                            <div className="text-[10px] text-slate-400 uppercase font-semibold">p99 Latency</div>
+                                        </div>
+                                        <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                                            <div className="text-xs font-mono text-teal-400">98.4%</div>
+                                            <div className="text-[10px] text-slate-400 uppercase font-semibold">Test Coverage</div>
+                                        </div>
+                                        <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                                            <div className="text-xs font-mono text-cyan-400">0%</div>
+                                            <div className="text-[10px] text-slate-400 uppercase font-semibold">Lock-In</div>
+                                        </div>
                                     </div>
                                 </motion.div>
                             </div>

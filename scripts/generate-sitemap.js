@@ -23,6 +23,11 @@ const mainRoutes = [
     { loc: '/codecamp', priority: '0.7', changefreq: 'monthly' },
     { loc: '/internship', priority: '0.8', changefreq: 'weekly' },
     { loc: '/faq', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/pricing', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/leadership', priority: '0.7', changefreq: 'monthly' },
+    { loc: '/why-us', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/skills', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/partner-program', priority: '0.7', changefreq: 'monthly' },
     { loc: '/privacy-policy', priority: '0.5', changefreq: 'yearly' },
     { loc: '/terms-conditions', priority: '0.5', changefreq: 'yearly' },
     { loc: '/refund-policy', priority: '0.5', changefreq: 'yearly' },
@@ -75,27 +80,27 @@ const blogRoutes = [
     changefreq: 'monthly'
 }));
 
-// Career Slugs
+// Career Slugs (exact match with pages/careers/[slug].js getStaticPaths)
 const careerRoutes = [
     'ai-integrated-full-stack-engineer',
     'senior-full-stack-engineer',
     'product-designer',
-    'lead-devops-engineer',
-    'growth-marketer',
-    'client-partner'
+    'product-designer-ui-ux',
+    'growth-marketing-lead',
+    'ai-research-scientist'
 ].map(slug => ({
     loc: `/careers/${slug}`,
     priority: '0.7',
     changefreq: 'monthly'
 }));
 
-// Internship Slugs
+// Internship Slugs (exact match with pages/internship/[slug].js getStaticPaths)
 const internshipRoutes = [
     'frontend-engineering',
     'backend-systems',
     'ai-data-science',
-    'ui-ux-design',
-    'growth-marketing'
+    'devops-engineer',
+    'full-stack-developer'
 ].map(slug => ({
     loc: `/internship/${slug}`,
     priority: '0.7',

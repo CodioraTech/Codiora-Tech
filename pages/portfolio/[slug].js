@@ -17,7 +17,7 @@ export const portfolioData = {
         technologies: ["Next.js", "Solidity", "Rust/WASM", "Web3.js", "Tailwind CSS", "Redis"],
         stat1: "0.05s", stat1Label: "Latency",
         stat2: "150K+", stat2Label: "Active Traders",
-        image: "/images/portfolio/neonmarket.png",
+        image: "/images/portfolio/neonmarket.webp",
         relatedService: {
             title: "Full-Stack Enterprise Applications",
             url: "/services/enterprise-apps",
@@ -35,7 +35,7 @@ export const portfolioData = {
         technologies: ["Python", "PyTorch", "Llama-2", "FastAPI", "React", "Docker"],
         stat1: "99.9%", stat1Label: "Uptime",
         stat2: "9X", stat2Label: "Faster Triage",
-        image: "/images/portfolio/medibot-ai.png",
+        image: "/images/portfolio/medibot-ai.webp",
         relatedService: {
             title: "AI Automation & Intelligent Agents",
             url: "/services/ai-automation",
@@ -53,7 +53,7 @@ export const portfolioData = {
         technologies: ["Next.js", "React", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
         stat1: "50+", stat1Label: "Destinations",
         stat2: "2025", stat2Label: "Founded",
-        image: "/images/portfolio/explorer-nature.png",
+        image: "/images/portfolio/explorer-nature.webp",
         relatedService: {
             title: "Mobile Innovation",
             url: "/services/mobile-innovation",
@@ -71,7 +71,7 @@ export const portfolioData = {
         technologies: ["Three.js", "React Three Fiber", "GSAP", "Blender", "WebGL"],
         stat1: "60fps", stat1Label: "Smoothness",
         stat2: "3D", stat2Label: "Native Web",
-        image: "/images/portfolio/orbital-agency.png",
+        image: "/images/portfolio/orbital-agency.webp",
         relatedService: {
             title: "Immersive UI/UX",
             url: "/services/immersive-ui-ux",
@@ -89,7 +89,7 @@ export const portfolioData = {
         technologies: ["Rust", "React Native", "MQTT", "GraphQL", "TimescaleDB"],
         stat1: "<10ms", stat1Label: "Response Time",
         stat2: "50+", stat2Label: "Device Types",
-        image: "/images/portfolio/smartsync.png",
+        image: "/images/portfolio/smartsync.webp",
         relatedService: {
             title: "DevOps & Cloud",
             url: "/services/devops-cloud",
@@ -107,7 +107,7 @@ export const portfolioData = {
         technologies: ["OpenAI API", "Node.js", "Redis", "Pinecone", "Socket.io"],
         stat1: "95%", stat1Label: "Resolution Rate",
         stat2: "24/7", stat2Label: "Availability",
-        image: "/images/portfolio/autosupport.png",
+        image: "/images/portfolio/autosupport.webp",
         relatedService: {
             title: "AI Automation & Intelligent Agents",
             url: "/services/ai-automation",
@@ -138,7 +138,7 @@ export default function ProjectPage({ project, slug }) {
     ];
 
     return (
-        <div className="bg-[#f8fafc] text-[#122a46] min-h-screen selection:bg-teal-500/10 selection:text-[#122a46]" ref={containerRef}>
+        <div className="bg-[#f8fafc] text-[#122a46] min-h-screen selection:bg-teal-500/10 selection:text-[#122a46] pt-32 sm:pt-36 md:pt-40" ref={containerRef}>
             <SEO
                 title={`${project.title} Case Study | Codiora Tech`}
                 description={project.tagline ? `${project.title} - ${project.tagline} Case study and engineering outcomes by Codiora Tech.` : project.description.slice(0, 140)}

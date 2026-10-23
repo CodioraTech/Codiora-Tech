@@ -20,6 +20,8 @@ const ServiceCard = ({ title, description, icon, image, slug }) => {
                             <img
                                 src={image}
                                 alt={title}
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"
                                 onError={(e) => e.target.style.display = 'none'}
                             />

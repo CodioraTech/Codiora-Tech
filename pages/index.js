@@ -5,12 +5,12 @@ import ElasticStack from '@/components/ElasticStack';
 import SEO from '@/components/SEO';
 
 const trustItems = [
-    { id: 1, image: "/images/avatars/avatar-1.svg", name: "Rafiq A., CTO at HealthOS" },
-    { id: 2, image: "/images/avatars/avatar-2.svg", name: "Sophia L., Founder at UrbanCart" },
-    { id: 3, image: "/images/avatars/avatar-3.svg", name: "Mohammed K., CEO at Finvault" },
-    { id: 4, image: "/images/avatars/avatar-4.svg", name: "Elena R., Head of Tech at NexaCorp" },
-    { id: 5, image: "/images/avatars/avatar-5.svg", name: "David C., Lead Architect at LogiTrack" },
-    { id: 6, image: "/images/avatars/avatar-6.svg", name: "Amara O., Product Lead at AeroBase" }
+    { id: 1, image: "/images/avatars/avatar-1.webp", name: "Rafiq A., CTO at HealthOS" },
+    { id: 2, image: "/images/avatars/avatar-2.webp", name: "Sophia L., Founder at UrbanCart" },
+    { id: 3, image: "/images/avatars/avatar-3.webp", name: "Mohammed K., CEO at Finvault" },
+    { id: 4, image: "/images/avatars/avatar-4.webp", name: "Elena R., Head of Tech at NexaCorp" },
+    { id: 5, image: "/images/avatars/avatar-5.webp", name: "David C., Lead Architect at LogiTrack" },
+    { id: 6, image: "/images/avatars/avatar-6.webp", name: "Amara O., Product Lead at AeroBase" }
 ];
 
 const FAQ_ITEMS = [
@@ -33,46 +33,60 @@ const FAQItem = ({ q, a, isOpen, onToggle }) => {
     );
 };
 
-const CountUpAnimation = ({ start = 0, end, suffix = "", prefix = "", duration = 4, isKilo = false }) => {
-    const [count, setCount] = useState(end);
-    const [hydrated, setHydrated] = useState(false);
-    const ref = useRef(null);
-    const inView = useInView(ref, { once: true });
+const CountUpAnimation = ({ start = 0, end, suffix = "", prefix = "", duration = 1.4, isKilo = false }) => {
+    const spanRef = useRef(null);
+    const containerRef = useRef(null);
+    const inView = useInView(containerRef, { once: true });
 
     useEffect(() => {
-        setHydrated(true);
-        setCount(start);
-    }, [start]);
+        if (!inView) return;
 
-    useEffect(() => {
-        if (hydrated && inView) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
-                
-                // easeOutQuad
-                const easeOut = progress * (2 - progress);
-                const currentVal = start + (end - start) * easeOut;
-                setCount(Math.floor(currentVal));
-                
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
+        let startTimestamp = null;
+        let animationFrameId = null;
+
+        const formatVal = (val) => {
+            let str = val;
+            if (isKilo) {
+                if (val >= 1000) str = `1M`;
+                else str = `${val}k`;
+            }
+            return `${prefix}${str}${suffix}`;
+        };
+
+        if (spanRef.current) {
+            spanRef.current.textContent = formatVal(start);
         }
-    }, [hydrated, inView, start, end, duration]);
 
-    let displayStr = count;
-    if (isKilo) {
-        if (count >= 1000) displayStr = `1M`;
-        else displayStr = `${count}k`;
-    }
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+            
+            // easeOutQuad for silky smooth easing
+            const easeOut = progress * (2 - progress);
+            const currentVal = Math.floor(start + (end - start) * easeOut);
+            
+            if (spanRef.current) {
+                spanRef.current.textContent = formatVal(currentVal);
+            }
+            
+            if (progress < 1) {
+                animationFrameId = window.requestAnimationFrame(step);
+            } else if (spanRef.current) {
+                spanRef.current.textContent = formatVal(end);
+            }
+        };
+
+        animationFrameId = window.requestAnimationFrame(step);
+        return () => {
+            if (animationFrameId) window.cancelAnimationFrame(animationFrameId);
+        };
+    }, [inView, start, end, duration, prefix, suffix, isKilo]);
+
+    const initialDisplay = isKilo ? (end >= 1000 ? '1M' : `${end}k`) : end;
 
     return (
-        <span ref={ref}>
-            {prefix}{displayStr}{suffix}
+        <span ref={containerRef}>
+            <span ref={spanRef}>{prefix}{initialDisplay}{suffix}</span>
         </span>
     );
 };
@@ -381,10 +395,10 @@ export default function Home() {
                     <div className="pf-grid">
                         <Link href="/portfolio/medibot-ai" className="pf-card pf-main">
                             <div className="pf-thumb" style={{background:'linear-gradient(135deg,#070d1a,#0a1828)'}}>
-                                <img src="/images/portfolio/medibot-ai.png" alt="MediBot AI" className="pf-image-overlay" />
+                                <img src="/images/portfolio/medibot-ai.webp" alt="MediBot AI" className="pf-image-overlay" loading="lazy" decoding="async" />
                                 <div className="pf-thumb-label">Healthcare · SaaS · AI</div>
                                 <div className="pf-thumb-center">
-                                    <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'38px',fontWeight:800,color:'rgba(79,142,247,0.7)',letterSpacing:'-0.03em'}}>MediBot AI</div>
+                                     <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'38px',fontWeight:800,color:'rgba(79,142,247,0.7)',letterSpacing:'-0.03em'}}>MediBot AI</div>
                                     <div style={{fontSize:'12px',color:'var(--text3)',marginTop:'8px',letterSpacing:'.15em'}}>AI DIAGNOSTIC ASSISTANT</div>
                                 </div>
                             </div>
@@ -400,7 +414,7 @@ export default function Home() {
                         </Link>
                         <Link href="/portfolio/explorer-nature" className="pf-card">
                             <div className="pf-thumb" style={{background:'linear-gradient(135deg,#110d07,#1a1207)'}}>
-                                <img src="/images/portfolio/explorer-nature.png" alt="Explorer Nature" className="pf-image-overlay" />
+                                <img src="/images/portfolio/explorer-nature.webp" alt="Explorer Nature" className="pf-image-overlay" loading="lazy" decoding="async" />
                                 <div className="pf-thumb-label">Tourism · Platform</div>
                                 <div className="pf-thumb-center">
                                     <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'28px',fontWeight:800,color:'rgba(245,158,11,0.65)',letterSpacing:'.12em'}}>Explorer Nature</div>
@@ -419,7 +433,7 @@ export default function Home() {
                         </Link>
                         <Link href="/portfolio/neonmarket" className="pf-card">
                             <div className="pf-thumb" style={{background:'linear-gradient(135deg,#0a0a18,#0e0e22)'}}>
-                                <img src="/images/portfolio/neonmarket.png" alt="NeonMarket" className="pf-image-overlay" />
+                                <img src="/images/portfolio/neonmarket.webp" alt="NeonMarket" className="pf-image-overlay" loading="lazy" decoding="async" />
                                 <div className="pf-thumb-label">Web3 · Marketplace</div>
                                 <div className="pf-thumb-center">
                                     <div style={{fontFamily:"'Bricolage Grotesque',sans-serif",fontSize:'24px',fontWeight:800,color:'rgba(167,139,250,0.65)',letterSpacing:'.08em'}}>NeonMarket</div>
@@ -452,7 +466,7 @@ export default function Home() {
                                 <div className="testi-text">Codiora delivered our MVP in 6 weeks when other agencies quoted 4 months. The code quality was production-ready from day one.</div>
                                 <div className="testi-divider"></div>
                                 <div className="testi-author">
-                                    <img src="/images/avatars/avatar-1.svg" alt="Rafiq A., CTO at HealthOS" width={44} height={44} className="testi-avatar" />
+                                    <img src="/images/avatars/avatar-1.webp" alt="Rafiq A., CTO at HealthOS" width={44} height={44} loading="lazy" decoding="async" className="testi-avatar" />
                                     <div><div className="testi-name">Rafiq A.</div><div className="testi-role">CTO, HealthOS</div></div>
                                 </div>
                             </motion.div>
@@ -461,7 +475,7 @@ export default function Home() {
                                 <div className="testi-text">We tried 3 agencies before Codiora. The difference? They actually understood our business, not just the tech requirements.</div>
                                 <div className="testi-divider"></div>
                                 <div className="testi-author">
-                                    <img src="/images/avatars/avatar-2.svg" alt="Sophia L., Founder at UrbanCart" width={44} height={44} className="testi-avatar" />
+                                    <img src="/images/avatars/avatar-2.webp" alt="Sophia L., Founder at UrbanCart" width={44} height={44} loading="lazy" decoding="async" className="testi-avatar" />
                                     <div><div className="testi-name">Sophia L.</div><div className="testi-role">Founder, UrbanCart</div></div>
                                 </div>
                             </motion.div>
@@ -470,7 +484,7 @@ export default function Home() {
                                 <div className="testi-text">Communication was flawless. Daily updates, weekly demos, zero surprises at launch. Will definitely work with them again.</div>
                                 <div className="testi-divider"></div>
                                 <div className="testi-author">
-                                    <img src="/images/avatars/avatar-3.svg" alt="Mohammed K., CEO at Finvault" width={44} height={44} className="testi-avatar" />
+                                    <img src="/images/avatars/avatar-3.webp" alt="Mohammed K., CEO at Finvault" width={44} height={44} loading="lazy" decoding="async" className="testi-avatar" />
                                     <div><div className="testi-name">Mohammed K.</div><div className="testi-role">CEO, Finvault</div></div>
                                 </div>
                             </motion.div>

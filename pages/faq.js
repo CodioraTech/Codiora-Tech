@@ -70,8 +70,8 @@ export default function FAQ() {
                     <div className="absolute top-[20%] right-[10%] w-[600px] h-[600px] bg-[#122a46]/5 rounded-full blur-[150px] animate-pulse-slow" />
                 </div>
 
-                <div className="container mx-auto px-6 pt-32 pb-40 relative z-10 max-w-4xl">
-                    <div className="mb-8">
+                <div className="container mx-auto px-6 pt-36 sm:pt-40 md:pt-44 pb-40 relative z-10 max-w-4xl">
+                    <div className="mb-6">
                         <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'FAQ', href: '/faq' }]} />
                     </div>
 

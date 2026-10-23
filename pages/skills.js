@@ -71,7 +71,7 @@ export default function Skills() {
             />
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden">
+            <section className="relative pt-36 sm:pt-40 md:pt-44 pb-20 overflow-hidden">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-teal-500/10 rounded-full blur-[150px] pointer-events-none" />
 
                 <div className="container mx-auto px-6 relative z-10 text-center">

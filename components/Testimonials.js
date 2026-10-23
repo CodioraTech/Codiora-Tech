@@ -7,7 +7,7 @@ const testimonials = [
         author: "Alex Rivera",
         role: "CTO, FinTech Global",
         logo: "AR",
-        src: "/images/avatars/avatar-1.svg",
+        src: "/images/avatars/avatar-1.jpg",
         color: "from-blue-500 to-cyan-500",
         shadow: "shadow-cyan-500/20"
     },
@@ -16,7 +16,7 @@ const testimonials = [
         author: "Sarah Wu",
         role: "Director of Product, Nexus AI",
         logo: "SW",
-        src: "/images/avatars/avatar-2.svg",
+        src: "/images/avatars/avatar-2.jpg",
         color: "from-teal-500 to-cyan-500",
         shadow: "shadow-teal-500/20"
     },
@@ -25,7 +25,7 @@ const testimonials = [
         author: "James Peterson",
         role: "CEO, LogiChain",
         logo: "JP",
-        src: "/images/avatars/avatar-3.svg",
+        src: "/images/avatars/avatar-3.jpg",
         color: "from-slate-600 to-teal-500",
         shadow: "shadow-teal-500/20"
     },
@@ -34,7 +34,7 @@ const testimonials = [
         author: "Maria Gonzalez",
         role: "VP Engineering, HealthPlus",
         logo: "MG",
-        src: "/images/avatars/avatar-4.svg",
+        src: "/images/avatars/avatar-4.jpg",
         color: "from-teal-600 to-emerald-500",
         shadow: "shadow-emerald-500/20"
     },
@@ -43,7 +43,7 @@ const testimonials = [
         author: "David Chen",
         role: "Founder, Stealth Startup",
         logo: "DC",
-        src: "/images/avatars/avatar-5.svg",
+        src: "/images/avatars/avatar-5.jpg",
         color: "from-cyan-600 to-blue-500",
         shadow: "shadow-blue-500/20"
     }

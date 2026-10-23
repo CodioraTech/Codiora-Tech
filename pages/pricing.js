@@ -10,8 +10,8 @@ export default function Pricing() {
                 description="Explore transparent, flexible pricing models tailored to your software engineering, web development, and AI project needs."
                 canonicalPath="/pricing"
             />
-            <div className="pt-32 min-h-screen bg-gray-50 dark:bg-[#f8fafc]">
-                <div className="container mx-auto px-6">
+            <div className="pt-36 sm:pt-40 md:pt-44 min-h-screen bg-gray-50 dark:bg-[#f8fafc]">
+                <div className="container mx-auto px-6 mb-6">
                     <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Pricing', href: '/pricing' }]} />
                 </div>
                 <PricingModels />

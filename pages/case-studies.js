@@ -63,7 +63,7 @@ export default function CaseStudies() {
                 canonicalPath="/case-studies"
             />
 
-            <section className="min-h-screen bg-gray-50 dark:bg-[#f8fafc] pt-32 pb-20 transition-colors duration-300">
+            <section className="min-h-screen bg-gray-50 dark:bg-[#f8fafc] pt-36 sm:pt-40 md:pt-44 pb-20 transition-colors duration-300">
                 <div className="container mx-auto px-6">
                     <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Case Studies', href: '/case-studies' }]} />
 

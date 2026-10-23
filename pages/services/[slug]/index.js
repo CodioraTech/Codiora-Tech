@@ -27,7 +27,7 @@ export default function ServicePage({ service, slug }) {
     ];
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] text-[#122a46] relative overflow-hidden">
+        <div className="min-h-screen bg-[#f8fafc] text-[#122a46] relative overflow-hidden pt-32 sm:pt-36 md:pt-40">
             <SEO
                 title={service.seoTitle}
                 description={service.metaDescription}
@@ -40,11 +40,7 @@ export default function ServicePage({ service, slug }) {
             <div className="container mx-auto px-6 relative z-10 pt-4 pb-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
                     {/* Left Column: Title & Intro */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
+                    <div>
                         <h1 className="text-4xl md:text-6xl font-black mb-8 text-[#122a46] tracking-tight">
                             {service.title}
                         </h1>
@@ -62,7 +58,7 @@ export default function ServicePage({ service, slug }) {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                             </svg>
                         </Link>
-                    </motion.div>
+                    </div>
 
                     {/* Right Column: Sub-Services List */}
                     <motion.div

@@ -20,35 +20,61 @@ if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) 
     });
 }
 
-// Fallback in-memory rate limiting map: ip -> { count, resetTime }
-const memoryRateLimitMap = new Map();
-const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
-const MAX_REQUESTS_PER_WINDOW = 15;
+// Strict fail-closed rate limit when Redis is unavailable: max 3 requests per minute per IP
+const FAIL_CLOSED_RATE_LIMIT = 3;
+const STRICT_WINDOW_MS = 60 * 1000;
+const failClosedMap = new Map();
 
-function isMemoryRateLimited(ip) {
+// Daily Global Cap: max 500 total requests / 24 hours across all users to protect API quota
+const DAILY_GLOBAL_CAP = 500;
+let globalDailyCount = 0;
+let globalDailyReset = Date.now() + 24 * 60 * 60 * 1000;
+
+function checkDailyGlobalCap() {
     const now = Date.now();
-    const record = memoryRateLimitMap.get(ip) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW };
+    if (now > globalDailyReset) {
+        globalDailyCount = 0;
+        globalDailyReset = now + 24 * 60 * 60 * 1000;
+    }
+    if (globalDailyCount >= DAILY_GLOBAL_CAP) {
+        return false;
+    }
+    globalDailyCount++;
+    return true;
+}
+
+function isFailClosedRateLimited(ip) {
+    const now = Date.now();
+    const record = failClosedMap.get(ip) || { count: 0, resetTime: now + STRICT_WINDOW_MS };
 
     if (now > record.resetTime) {
         record.count = 1;
-        record.resetTime = now + RATE_LIMIT_WINDOW;
-        memoryRateLimitMap.set(ip, record);
+        record.resetTime = now + STRICT_WINDOW_MS;
+        failClosedMap.set(ip, record);
         return false;
     }
 
-    if (record.count >= MAX_REQUESTS_PER_WINDOW) {
+    if (record.count >= FAIL_CLOSED_RATE_LIMIT) {
         return true;
     }
 
     record.count++;
-    memoryRateLimitMap.set(ip, record);
+    failClosedMap.set(ip, record);
     return false;
 }
 
-// Extract client IP from trusted proxy headers (Cloudflare, Vercel, Reverse Proxy)
+// Trusted IP extraction: On Vercel, trust ONLY x-vercel-forwarded-for or x-real-ip
+// Ignore cf-connecting-ip unless BEHIND_CLOUDFLARE env flag is explicitly set to 'true'
 function getTrustedClientIp(req) {
-    const cfIp = req.headers['cf-connecting-ip'];
-    if (typeof cfIp === 'string' && cfIp.trim()) return cfIp.trim();
+    if (process.env.BEHIND_CLOUDFLARE === 'true') {
+        const cfIp = req.headers['cf-connecting-ip'];
+        if (typeof cfIp === 'string' && cfIp.trim()) return cfIp.trim();
+    }
+
+    const vercelForwarded = req.headers['x-vercel-forwarded-for'];
+    if (typeof vercelForwarded === 'string' && vercelForwarded.trim()) {
+        return vercelForwarded.split(',')[0].trim();
+    }
 
     const realIp = req.headers['x-real-ip'];
     if (typeof realIp === 'string' && realIp.trim()) return realIp.trim();
@@ -67,9 +93,17 @@ export default async function handler(req, res) {
         return res.status(405).json({ message: 'Method Not Allowed' });
     }
 
-    // IP Extraction for Rate Limiting via trusted headers
+    // 1. Enforce Daily Global Cap
+    if (!checkDailyGlobalCap()) {
+        return res.status(429).json({ 
+            message: 'Daily AI assistant quota reached. Please email us directly at contact@codioratech.com.' 
+        });
+    }
+
+    // 2. Extract trusted IP
     const ip = getTrustedClientIp(req);
 
+    // 3. Rate Limit Enforcement
     if (upstashRatelimit) {
         try {
             const { success, limit, remaining, reset } = await upstashRatelimit.limit(ip);
@@ -81,15 +115,16 @@ export default async function handler(req, res) {
                 return res.status(429).json({ message: 'Too many requests. Please wait a moment before sending another message.' });
             }
         } catch (error) {
-            console.error('Upstash rate limit check error:', error);
-            // Fall back to memory limiter on network error
-            if (isMemoryRateLimited(ip)) {
-                return res.status(429).json({ message: 'Too many requests. Please wait a moment before sending another message.' });
+            console.error('Upstash rate limit check error (failing closed):', error);
+            // Strict fail-closed fallback on Redis network error: 3 req/min
+            if (isFailClosedRateLimited(ip)) {
+                return res.status(429).json({ message: 'Rate limit service offline. Strict limit (3/min) exceeded. Please wait a moment.' });
             }
         }
     } else {
-        if (isMemoryRateLimited(ip)) {
-            return res.status(429).json({ message: 'Too many requests. Please wait a moment before sending another message.' });
+        // Strict fail-closed mode when Redis credentials not configured: 3 req/min
+        if (isFailClosedRateLimited(ip)) {
+            return res.status(429).json({ message: 'Too many requests. Strict limit (3/min) reached. Please wait a moment.' });
         }
     }
 
@@ -191,7 +226,7 @@ export default async function handler(req, res) {
                     contents: structuredMessages,
                     generationConfig: {
                         temperature: 0.5,
-                        maxOutputTokens: 800,
+                        maxOutputTokens: 500,
                     }
                 })
             });

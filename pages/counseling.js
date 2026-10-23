@@ -20,9 +20,9 @@ export default function Counseling() {
 
         setStatus('submitting');
 
-        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-        const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_COUNSELING_SERVICE_ID || process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-        const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_COUNSELING_TEMPLATE_ID || process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'bxENHLdnTzL4xGOEr';
+        const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_COUNSELING_SERVICE_ID || process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_h0rja9o';
+        const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_COUNSELING_TEMPLATE_ID || process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_cxzgkj3';
 
         if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
             console.warn("EmailJS environment variables not configured for counseling form.");
@@ -99,6 +99,7 @@ export default function Counseling() {
                 title="Career Counseling Session | Codiora Tech"
                 description="Book a free 1-on-1 career counseling session with senior engineers at Codiora Tech to discuss your software engineering goals."
                 canonicalPath="/counseling"
+                noindex={true}
             />
 
             <div className="bg-[#f8fafc] min-h-screen text-[#122a46] overflow-hidden selection:bg-indigo-500/30">
@@ -109,8 +110,8 @@ export default function Counseling() {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
-                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Counseling', href: '/counseling' }]} />
+                <div className="container mx-auto px-6 pt-36 sm:pt-40 md:pt-44 pb-20 relative z-10">
+                    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Counseling', href: '/counseling' }]} className="mb-6" />
 
                     {/* Header */}
                     <div className="max-w-4xl mx-auto text-center mb-16 mt-8">
@@ -166,7 +167,7 @@ export default function Counseling() {
                             <div className="bg-white border border-[#122a46]/5 p-6 rounded-3xl flex items-center gap-4">
                                 <div className="flex -space-x-4">
                                     {[1, 2, 3].map(i => (
-                                        <img key={i} src={`/images/avatars/avatar-${i}.svg`} alt={`Graduate ${i}`} width={40} height={40} className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" />
+                                        <img key={i} src={`/images/avatars/avatar-${i}.jpg`} alt={`Graduate ${i}`} width={40} height={40} className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" />
                                     ))}
                                 </div>
                                 <div className="text-sm">

@@ -5,7 +5,30 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { LazyMotion, domAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { Poppins, DM_Sans, Bricolage_Grotesque } from 'next/font/google';
+
+const poppins = Poppins({
+    weight: ['400', '600', '700'],
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-poppins',
+});
+
+const dmSans = DM_Sans({
+    weight: ['400', '500', '600'],
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-dm-sans',
+});
+
+const bricolage = Bricolage_Grotesque({
+    weight: ['700', '800'],
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-bricolage',
+});
 
 const organizationSchema = {
     '@context': 'https://schema.org',
@@ -98,20 +121,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 />
             )}
 
-            <Layout>
-                <Head>
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-                    />
-                </Head>
-                <ErrorBoundary>
-                    <Component {...pageProps} />
-                </ErrorBoundary>
-                {mounted && <SpeedInsights />}
-                <CookieConsent />
-            </Layout>
+            <div className={`${poppins.variable} ${dmSans.variable} ${bricolage.variable}`}>
+                <Layout>
+                    <Head>
+                        <meta name="viewport" content="width=device-width, initial-scale=1" />
+                        <script
+                            type="application/ld+json"
+                            dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+                        />
+                    </Head>
+                    <ErrorBoundary>
+                        <LazyMotion features={domAnimation} strict={false}>
+                            <Component {...pageProps} />
+                        </LazyMotion>
+                    </ErrorBoundary>
+                    {mounted && <SpeedInsights />}
+                    <CookieConsent />
+                </Layout>
+            </div>
         </ThemeProvider>
     );
 }

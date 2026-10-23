@@ -7,6 +7,10 @@ const nextConfig = {
     poweredByHeader: false, // Hide X-Powered-By: Next.js for security obscurity
     trailingSlash: false,
     productionBrowserSourceMaps: false,
+    images: {
+        formats: ['image/avif', 'image/webp'],
+        minimumCacheTTL: 31536000,
+    },
     async redirects() {
         return [
             {
@@ -45,17 +49,22 @@ const nextConfig = {
                 destination: '/portfolio',
                 permanent: true,
             },
+            {
+                source: '/case-studies',
+                destination: '/portfolio',
+                permanent: true,
+            },
         ];
     },
     async headers() {
         const cspHeader = `
             default-src 'self';
-            script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://challenges.cloudflare.com https://*.sentry.io;
+            script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.sentry.io;
             style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
             img-src 'self' data: https: blob:;
             font-src 'self' https://fonts.gstatic.com data:;
-            connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://api.emailjs.com https://*.sentry.io https://api.web3forms.com;
-            frame-src 'self' https://challenges.cloudflare.com;
+            connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://api.emailjs.com https://*.sentry.io;
+            frame-src 'self';
             frame-ancestors 'self';
             object-src 'none';
             base-uri 'self';
@@ -80,7 +89,7 @@ const nextConfig = {
                     },
                     {
                         key: 'X-XSS-Protection',
-                        value: '1; mode=block',
+                        value: '0',
                     },
                     {
                         key: 'X-Frame-Options',
@@ -108,18 +117,17 @@ const nextConfig = {
                         value: 'public, max-age=31536000, immutable'
                     }
                 ]
-            },
-            {
-                source: '/_next/static/:path*',
-                headers: [
-                    {
-                        key: 'Cache-Control',
-                        value: 'public, max-age=31536000, immutable'
-                    }
-                ]
             }
         ];
+    },
+    experimental: {
+        optimizePackageImports: ['framer-motion', 'lucide-react']
     }
 };
 
-module.exports = nextConfig;
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer(nextConfig);
+

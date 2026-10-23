@@ -185,7 +185,7 @@ export default function BlogPost({ post, slug }) {
     };
 
     return (
-        <div className="bg-[#f8fafc] min-h-screen text-[#122a46]">
+        <div className="bg-[#f8fafc] min-h-screen text-[#122a46] pt-32 sm:pt-36 md:pt-40">
             <SEO
                 title={`${post.title} | Codiora Tech`}
                 description={post.metaDesc}
@@ -198,7 +198,7 @@ export default function BlogPost({ post, slug }) {
 
             <Breadcrumbs items={breadcrumbs} />
 
-            <article className="max-w-4xl mx-auto px-6 py-12">
+            <article className="max-w-4xl mx-auto px-6 py-8">
                 <header className="mb-12">
                     <div className="flex items-center gap-3 mb-4">
                         <span className="px-3 py-1 rounded-full bg-teal-500/10 text-teal-600 text-xs font-bold uppercase tracking-widest">

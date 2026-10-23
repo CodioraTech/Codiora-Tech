@@ -46,12 +46,12 @@ function Earth() {
     const earthRef = useRef();
     const cloudsRef = useRef();
 
-    // Load Textures
+    // Load Textures locally for instant 120 FPS render without GitHub network lag
     const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(THREE.TextureLoader, [
-        'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg',
-        'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_normal_2048.jpg',
-        'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_specular_2048.jpg',
-        'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_clouds_1024.png'
+        '/images/textures/earth_atmos_2048.jpg',
+        '/images/textures/earth_normal_2048.jpg',
+        '/images/textures/earth_specular_2048.jpg',
+        '/images/textures/earth_clouds_1024.png'
     ]);
 
     useFrame(({ clock }) => {

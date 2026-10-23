@@ -8,10 +8,10 @@ import logo from '../public/Codiora Tech logo.png';
 
 
 const FEATURED_PROJECTS = [
-    { title: "NeonMarket", category: "Next-gen Crypto Exchange", image: "/images/portfolio/neonmarket.png", href: "/portfolio/neonmarket" },
-    { title: "MediBot AI", category: "AI Diagnostic Assistant", image: "/images/portfolio/medibot-ai.png", href: "/portfolio/medibot-ai" },
-    { title: "Explorer Nature", category: "Premium Tourism Platform", image: "/images/portfolio/explorer-nature.png", href: "/portfolio/explorer-nature" },
-    { title: "Orbital Agency", category: "3D Immersive Portfolio", image: "/images/portfolio/orbital-agency.png", href: "/portfolio/orbital-agency" }
+    { title: "NeonMarket", category: "Next-gen Crypto Exchange", image: "/images/portfolio/neonmarket.webp", href: "/portfolio/neonmarket" },
+    { title: "MediBot AI", category: "AI Diagnostic Assistant", image: "/images/portfolio/medibot-ai.webp", href: "/portfolio/medibot-ai" },
+    { title: "Explorer Nature", category: "Premium Tourism Platform", image: "/images/portfolio/explorer-nature.webp", href: "/portfolio/explorer-nature" },
+    { title: "Orbital Agency", category: "3D Immersive Portfolio", image: "/images/portfolio/orbital-agency.webp", href: "/portfolio/orbital-agency" }
 ];
 
 const FeaturedProjectCarousel = ({ setIsMegaMenuOpen }) => {
@@ -84,21 +84,40 @@ const FeaturedProjectCarousel = ({ setIsMegaMenuOpen }) => {
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
-    const [isOpen, setIsOpen] = useState(false); // Mobile menu
     const [mounted, setMounted] = useState(false);
+    const [isOpen, setIsOpen] = useState(false); // Mobile menu
     const router = useRouter();
 
     useEffect(() => {
         setMounted(true);
-        const handleScroll = () => setScrolled(window.scrollY > 50);
-        window.addEventListener('scroll', handleScroll);
+        let ticking = false;
+        let lastScrolled = false;
+
+        const handleScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const isNowScrolled = window.scrollY > 50;
+                    if (isNowScrolled !== lastScrolled) {
+                        lastScrolled = isNowScrolled;
+                        setScrolled(isNowScrolled);
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const isScrolled = mounted && scrolled;
 
     const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
     const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
 
-    const isActive = (path) => mounted && router.pathname === path;
+    const isActive = (path) => router?.pathname === path;
 
     // Toggle Mega Menu
     const toggleMegaMenu = () => setIsMegaMenuOpen(!isMegaMenuOpen);
@@ -109,18 +128,28 @@ const Navbar = () => {
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="fixed top-6 left-0 right-0 z-50 flex justify-center w-full pointer-events-none"
+                className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center w-full pointer-events-none"
             >
-                <div className={`
-                relative pointer-events-auto flex items-center justify-between 
-                bg-white/95 backdrop-blur-2xl border 
-                rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
-                group hover:border-teal-500/40 hover:shadow-teal-500/15
-                ${scrolled 
-                    ? 'w-[90%] sm:w-[92%] max-w-6xl py-1.5 sm:py-2 px-3 sm:px-4 border-teal-500/30 shadow-2xl shadow-teal-900/10 bg-white/98' 
-                    : 'w-[95%] max-w-7xl py-2.5 sm:py-3.5 px-4 sm:px-5 border-[#122a46]/10 shadow-xl shadow-[#122a46]/5'
-                }
-            `}>
+                {/* Header Backdrop Mask - only active when scrolled */}
+                <div 
+                    className={`absolute inset-x-0 top-0 transition-opacity duration-300 pointer-events-none -z-10 ${
+                        isScrolled 
+                            ? 'h-24 bg-white/95 backdrop-blur-xl border-b border-[#122a46]/8 shadow-sm opacity-100' 
+                            : 'opacity-0'
+                    }`} 
+                />
+
+                <div className={`w-full flex justify-center transition-all duration-300 ${isScrolled ? 'pt-2 sm:pt-2.5' : 'pt-4 sm:pt-6'}`}>
+                    <div className={`
+                    relative pointer-events-auto flex items-center justify-between 
+                    bg-white/98 backdrop-blur-2xl border 
+                    rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+                    group hover:border-teal-500/40 hover:shadow-teal-500/15
+                    ${isScrolled 
+                        ? 'w-[90%] sm:w-[92%] max-w-6xl py-1.5 sm:py-2 px-3 sm:px-4 border-teal-500/30 shadow-2xl shadow-teal-900/10 bg-white' 
+                        : 'w-[95%] max-w-7xl py-2.5 sm:py-3.5 px-4 sm:px-5 border-[#122a46]/10 shadow-xl shadow-[#122a46]/5 bg-white/98'
+                    }
+                `}>
                     {/* Glowing Background Blob */}
                     <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
                         <div className="absolute -top-10 -left-10 w-40 h-40 bg-teal-500/5 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
@@ -196,6 +225,7 @@ const Navbar = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
                     </div>
+                    </div>
                 </div>
 
                 {/* Mobile Menu Dropdown */}
@@ -205,7 +235,7 @@ const Navbar = () => {
                             initial={{ opacity: 0, y: -20, scale: 0.95, height: 0 }}
                             animate={{ opacity: 1, y: 0, scale: 1, height: 'auto' }}
                             exit={{ opacity: 0, y: -20, scale: 0.95, height: 0 }}
-                            className="pointer-events-auto fixed top-28 left-4 right-4 bg-white/95 backdrop-blur-xl rounded-2xl p-6 z-40 shadow-2xl overflow-y-auto border border-[#122a46]/10 max-h-[70vh]"
+                            className="pointer-events-auto fixed top-24 left-4 right-4 bg-white/98 backdrop-blur-xl rounded-2xl p-6 z-40 shadow-2xl overflow-y-auto border border-[#122a46]/10 max-h-[70vh]"
                         >
                             <div className="flex flex-col items-center gap-3">
                                 {['Home', 'Services', 'Portfolio', 'Contact'].map((item) => {

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -5,6 +6,18 @@ import Footer from './Footer';
 const LiveChat = dynamic(() => import('./LiveChat'), { ssr: false });
 
 const Layout = ({ children }) => {
+    const [shouldLoadChat, setShouldLoadChat] = useState(false);
+
+    useEffect(() => {
+        if ('requestIdleCallback' in window) {
+            const idleId = window.requestIdleCallback(() => setShouldLoadChat(true), { timeout: 2500 });
+            return () => window.cancelIdleCallback(idleId);
+        } else {
+            const timer = setTimeout(() => setShouldLoadChat(true), 1200);
+            return () => clearTimeout(timer);
+        }
+    }, []);
+
     return (
         <div className="flex flex-col min-h-screen">
             <a
@@ -17,7 +30,7 @@ const Layout = ({ children }) => {
             <main id="main-content" className="flex-grow">
                 {children}
             </main>
-            <LiveChat />
+            {shouldLoadChat && <LiveChat />}
             <Footer />
         </div>
     );

@@ -7,7 +7,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint pages components lib",
-        "test:smoke": "playwright test"
+        "test:smoke": "playwright test",
+        "validate:sitemap": "node scripts/validate-sitemap.js"
     },
     "dependencies": {
         "@emailjs/browser": "^4.4.1",
@@ -28,6 +29,7 @@
     },
     "devDependencies": {
         "@axe-core/playwright": "^4.14.0",
+        "@next/bundle-analyzer": "^16.4.2",
         "@playwright/test": "^1.64.1",
         "autoprefixer": "^10.4.23",
         "eslint": "latest",

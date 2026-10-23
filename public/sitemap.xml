@@ -109,6 +109,36 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://codioratech.com/pricing</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codioratech.com/leadership</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://codioratech.com/why-us</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codioratech.com/skills</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codioratech.com/partner-program</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://codioratech.com/privacy-policy</loc>
     <lastmod>2026-10-17</lastmod>
     <changefreq>yearly</changefreq>
@@ -379,19 +409,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://codioratech.com/careers/lead-devops-engineer</loc>
+    <loc>https://codioratech.com/careers/product-designer-ui-ux</loc>
     <lastmod>2026-10-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://codioratech.com/careers/growth-marketer</loc>
+    <loc>https://codioratech.com/careers/growth-marketing-lead</loc>
     <lastmod>2026-10-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://codioratech.com/careers/client-partner</loc>
+    <loc>https://codioratech.com/careers/ai-research-scientist</loc>
     <lastmod>2026-10-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -415,13 +445,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://codioratech.com/internship/ui-ux-design</loc>
+    <loc>https://codioratech.com/internship/devops-engineer</loc>
     <lastmod>2026-10-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://codioratech.com/internship/growth-marketing</loc>
+    <loc>https://codioratech.com/internship/full-stack-developer</loc>
     <lastmod>2026-10-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

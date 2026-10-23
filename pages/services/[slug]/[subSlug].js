@@ -43,7 +43,7 @@ export default function SubServicePage({ service, subService, slug }) {
                 schemaType="Service"
             />
 
-            <div className="min-h-screen bg-[#f8fafc] text-[#122a46] pt-24 pb-20 relative overflow-hidden">
+            <div className="min-h-screen bg-[#f8fafc] text-[#122a46] pt-36 sm:pt-40 md:pt-44 pb-20 relative overflow-hidden">
                 {/* Background ambient lighting */}
                 <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
                     <div className="absolute top-[-20%] right-[-20%] w-[60%] h-[60%] bg-accent/5 rounded-full blur-[150px]" />
@@ -52,7 +52,7 @@ export default function SubServicePage({ service, subService, slug }) {
 
                 <div className="container mx-auto px-6 relative z-10">
                     {/* Breadcrumbs */}
-                    <div className="pt-8 mb-8">
+                    <div className="mb-6">
                         <Breadcrumbs
                             items={[
                                 { label: 'Home', href: '/' },
